@@ -30,7 +30,7 @@ const Layout = () => {
   return(
     <>
       <Navbar expand = "md" bg = "dark" variant = "dark">
-        <Container>
+        <Container fluid>
           <Navbar.Brand onClick = {()=>navigate("/")}>Cool Logo</Navbar.Brand>
           <Navbar.Toggle aria-controls="response-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">

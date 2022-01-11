@@ -36,6 +36,10 @@ const Layout = () => {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto" onSelect = {handleSelect}>
               <Nav.Link eventKey = "/">Home</Nav.Link>
+              <Nav.Link eventKey = "/recordings">Timeline</Nav.Link>
+              <Nav.Link eventKey = "/mood">Mood</Nav.Link>
+              <Nav.Link eventKey = "/activities">Activities</Nav.Link>
+              <Nav.Link eventKey = "/aboutus">About Us</Nav.Link>
               <Nav.Link eventKey = "/protected">Protected</Nav.Link>
             </Nav>
             <Nav className="justify-content-end" onSelect = {handleSelect}>

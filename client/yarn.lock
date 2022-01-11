@@ -7282,6 +7282,11 @@ readdirp@~3.6.0:
   dependencies:
     picomatch "^2.2.1"
 
+recorderjs@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/recorderjs/-/recorderjs-1.0.1.tgz#f8211a0f90bdcdcfa2f431a597b6cb94a1b93571"
+  integrity sha1-+CEaD5C9zc+i9DGll7bLlKG5NXE=
+
 recursive-readdir@^2.2.2:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/recursive-readdir/-/recursive-readdir-2.2.2.tgz#9946fb3274e1628de6e36b2f6714953b4845094f"

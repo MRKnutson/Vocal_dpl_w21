@@ -20,9 +20,9 @@ const RecordTest = () => {
     }
     
     function handleReset() {
-        console.log("reset!!")
+
         const reset = {
-          url: './recordings/test.webm',
+          url: null,
           blob: null,
           chunks: null,
           duration: {
@@ -39,7 +39,6 @@ const RecordTest = () => {
             record={true}
             title={"New recording"}
             audioURL={audioDetails.url}
-            showUIAudio
             handleAudioStop={data => handleAudioStop(data)}
             handleAudioUpload={data => handleAudioUpload(data)}
             handleCountDown={data => handleCountDown(data)}

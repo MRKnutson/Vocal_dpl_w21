@@ -6,6 +6,10 @@ import Login from './pages/Login';
 import Layout from './components/Layout';
 import Protected from './pages/Protected';
 import RequireAuth from './components/RequireAuth';
+import Timeline from './pages/Timeline';
+import Mood from './pages/Mood';
+import Activities from './pages/Activities';
+import AboutUs from './pages/AboutUs';
 
 function App() {
   return (
@@ -14,8 +18,12 @@ function App() {
         <Route path = "/" element = {<Home />} />
         <Route path = "/register" element = {<Register />} />
         <Route path = "/login" element = {<Login />} />
+        <Route path = "/aboutus" element = {<AboutUs/>} />
         <Route element = {<RequireAuth />}>
-          <Route path = "/protected" element = {<Protected />} />
+        <Route path = "/recordings" element = {<Timeline/>} />
+        <Route path = "/activities" element = {<Activities/>} />
+        <Route path = "/mood" element = {<Mood/>} />
+        <Route path = "/protected" element = {<Protected />} />
         </Route>
       </Route>
     </Routes>

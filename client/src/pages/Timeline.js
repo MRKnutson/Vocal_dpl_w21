@@ -23,22 +23,20 @@ const Timeline = () => {
   };
 
   const renderRecordings = () => {
-    return recordings.map((recording) => {
-      return (
-      <Table striped bordered hover key = {recording.id} style={{margin:"20px"}}>
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Pointer</th>
-          </tr>
-          </thead>
-          <tbody>
-          {renderRow(recording)}
-          </tbody>
-      </Table>
-      );
-    });
-    };
+    return (
+    <Table striped bordered hover style={{margin:"20px"}}>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Pointer</th>
+        </tr>
+        </thead>
+        <tbody>
+        {renderRow()}
+        </tbody>
+    </Table>
+    );
+  };
 
   const renderRow = () => {
     return recordings.map((recording) => {

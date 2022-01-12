@@ -4,7 +4,6 @@ import Home from './pages/Home';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Layout from './components/Layout';
-import Protected from './pages/Protected';
 import RequireAuth from './components/RequireAuth';
 import Timeline from './pages/Timeline';
 import Mood from './pages/Mood';
@@ -23,7 +22,6 @@ function App() {
         <Route path = "/recordings" element = {<Timeline/>} />
         <Route path = "/activities" element = {<Activities/>} />
         <Route path = "/mood" element = {<Mood/>} />
-        <Route path = "/protected" element = {<Protected />} />
         </Route>
       </Route>
     </Routes>

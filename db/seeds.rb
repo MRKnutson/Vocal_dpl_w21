@@ -11,6 +11,14 @@ require "faker"
 u1 = User.create(email:"test@test.com", password: 123456)
 
 5.times do
+  Recording.create(
+    title: "a title", 
+      pointer: "This is a test URL",
+      user_id: u1.id
+  )
+end
+
+5.times do
   user = User.create(
     first_name:Faker::Name.first_name,
     last_name:Faker::Name.last_name,

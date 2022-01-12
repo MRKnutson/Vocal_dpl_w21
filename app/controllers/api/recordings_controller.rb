@@ -1,17 +1,29 @@
 class Api::RecordingsController < ApplicationController
   before_action :authenticate_user!
-  # before_action :set_recording, only: [:show, :update, :destroy]
+  before_action :set_recording
 
   
   def index
-  render json: current_user.recordings.all
+  render json: @recording.all
   end
 
-  # private
+  def update
+    if (@recording.update)
+      render json: @recording
+     else
+      render json: { errors: @recording.errors }, status: :unprocessable_entity
+     end 
+  end
 
-  # def set_recording
-  #   @recording=Recording.find(params[:id])
-  # end
+  def destroy
+    render json: @recording.destroy
+  end
+
+  private
+
+  def set_recording
+    @recording = current_user.recordings
+  end
 
   # def recording_params
   #   params.require(:recording).permit(:title, :pointer)

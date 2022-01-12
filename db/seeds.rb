@@ -11,11 +11,18 @@ require "faker"
 u1 = User.create(email:"test@test.com", password: 123456)
 
 5.times do
-  Recording.create(
+  rec = Recording.create(
     title: "a title", 
       pointer: "This is a test URL",
       user_id: u1.id
   )
+  thisTag = Tag.create(
+    text: "This is a tag"
+    )
+  RecordingTag.create(
+    recording_id: rec.id,
+    tag_id: thisTag.id
+    )
 end
 
 5.times do

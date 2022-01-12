@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import {Card, CardGroup, Col, Container, Nav, Row} from 'react-bootstrap'
+import EntryModal from "../components/EntryModal";
 
 const programmers = [
   {
@@ -41,6 +42,19 @@ const programmers = [
 ]
 
 const AboutUs = () => {
+  const [show,setShow] = useState(false)
+
+  const handleClose = () => {
+    setShow(false)
+  };
+
+  const handleShow =()=>{
+    setShow(true)
+  };
+
+  const handleSave = () => {
+    setShow(false)
+  };
 
   const renderProgrammers = () =>{
     return programmers.map((developer)=>{
@@ -84,6 +98,9 @@ const AboutUs = () => {
   return (
     <Container>
       <h1>About Us</h1>
+      <EntryModal handleClose = {handleClose} handleSave = {handleSave} show = {show} />
+      <button onClick = {handleShow}>ShowModal</button>
+
       <Row md = {1} lg = {2}>
         {renderProgrammers()}
       </Row>

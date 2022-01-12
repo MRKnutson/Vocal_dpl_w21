@@ -40,7 +40,6 @@ const Layout = () => {
               <Nav.Link eventKey = "/mood">Mood</Nav.Link>
               <Nav.Link eventKey = "/activities">Activities</Nav.Link>
               <Nav.Link eventKey = "/aboutus">About Us</Nav.Link>
-              <Nav.Link eventKey = "/protected">Protected</Nav.Link>
             </Nav>
             <Nav className="justify-content-end" onSelect = {handleSelect}>
               {renderUILinks()}

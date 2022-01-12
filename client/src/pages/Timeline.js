@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import RenderJson from "../components/RenderJson";
+import { Table, Button, ButtonToolbar, InputGroup, FormControl } from "react-bootstrap";
 
 
 const Timeline = () => {
@@ -25,40 +25,41 @@ const Timeline = () => {
   const renderRecordings = () => {
     return recordings.map((recording) => {
       return (
-      <>
-        <table>
+      <Table striped bordered hover key = {recording.id} style={{margin:"20px"}}>
+        <thead>
           <tr>
-            <tr>
-              <td>Title</td>
-              <td>Pointer</td>
-            </tr>
+            <th>Title</th>
+            <th>Pointer</th>
           </tr>
-    <tr>
-      {renderRow(recording)}
-    </tr>
-  </table>
-  <divider/>
-      </>
+          </thead>
+          <tbody>
+          {renderRow(recording)}
+          </tbody>
+      </Table>
       );
     });
     };
 
-  const renderRow = (recording) => {
+  const renderRow = () => {
     return recordings.map((recording) => {
       return(
-      <tr>
-        {/* <td>{recording.title}</td>
-        <td>{recording.pointer}</td> */}
-        <td>Title</td>
-        <td>Pointer</td>
+      <tr key = {recording.id}>
+        <td>{recording.title}</td>
+        <td>{recording.pointer}</td>
       </tr> )
     })
   }
 
   return (
     <div>
-      <RenderJson json = {recordings}/>
-    <h1>Timeline</h1>
+    <h1 style={{margin:"20px", textAlign:"center"}}>Timeline</h1>
+    <InputGroup style={{width:"200px", float:"right", marginBottom:"10px"}}>
+      <Button>Search</Button>{' '}
+      <FormControl
+        type="text"
+        placeholder="..."
+      />
+    </InputGroup>
     {renderRecordings()}
     </div>
   )

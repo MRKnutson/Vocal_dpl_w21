@@ -1,6 +1,7 @@
 import * as React from "react";
 import useRecorder from "./useRecorder";
 import {useState, useEffect} from 'react'
+import axios from "axios";
 
 function Recorder() {
     let [audioURL, isRecording, startRecording, stopRecording, clearRecording] = useRecorder();
@@ -29,11 +30,21 @@ function Recorder() {
         else if(e.target.name==="notes"){setNotes(val)}
     }
 
-    const handleSubmit = (e) => {
-        //post recording to database
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        let data = new FormData()
+        if (audioURL){
+          data.append('file', audioURL)
+        }
+        try{
+          let res = await axios.post('/api/recordings', data)
+          console.log("url: ", audioURL)
+        } catch(err){
+            console.log(err)
+        }
         console.log("submitted")
     }
-  console.log("url: ", audioURL)
+
   return (
     <div style={{display: "flex", margin: "10px"}}>
         {!audioURL ? 

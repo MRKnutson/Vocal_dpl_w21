@@ -23,6 +23,10 @@ u1 = User.create(email:"test@test.com", password: 123456)
     recording_id: rec.id,
     tag_id: thisTag.id
     )
+    Mood.create(
+      value: rand(1..5),
+      recording_id: rec.id
+    )
 end
 
 5.times do
@@ -45,7 +49,10 @@ end
       recording_id: rec.id,
       tag_id: thisTag.id
       )
-
+      Mood.create(
+        value: rand(1..5),
+        recording_id: rec.id
+      )
       2.times do 
         Comment.create(
         text: "This is a comment",

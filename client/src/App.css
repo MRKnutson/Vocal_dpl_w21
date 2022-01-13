@@ -40,3 +40,10 @@
 .card{
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
+
+.link{
+  padding:5px;
+  background-color: rgb(188, 188, 188);
+  color:rgb(6, 255, 159);
+  text-decoration: none;
+}

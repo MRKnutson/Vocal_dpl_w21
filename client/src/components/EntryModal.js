@@ -1,19 +1,56 @@
 import React from 'react'
 import { Button, Modal } from 'react-bootstrap';
+import useRecorder from "./useRecorder";
+import {useState, useEffect} from 'react'
+import axios from "axios";
+const EntryModal = ({handleClose, handleSave, show, audioURL, duration}) => {
+    const [title, setTitle] = useState("")
+    const [mood, setMood] = useState("")
+    const [notes, setNotes] = useState("") 
 
-const EntryModal = ({handleClose, handleSave, show}) => {
+    const handleChange = (e) => {
+      e.preventDefault()
+      let val = e.target.value
+      if(e.target.name==="title"){setTitle(val)}
+      else if(e.target.name==="mood"){setMood(val)}
+      else if(e.target.name==="notes"){setNotes(val)}
+  }
   return(
     <Modal
       show = {show}
       onHide = {handleClose}
       backdrop = "static"
       keyboard = {false}
+      style={{width: "400px", margin: "auto"}}
     >
       <Modal.Header closeButton>
-        <Modal.Title>Journal Entry Details</Modal.Title>
+        <Modal.Title style={{textAlign: "center"}}>Journal Entry Details</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        This is where we are going to have our entry details form
+        <div > 
+          <audio src={audioURL} controls style={{height: "35px", margin: "auto"}}/>
+          <div style={{margin: "auto", marginTop: "15px"}}>
+              <div style={{margin: "auto"}}>
+                  <h6 >{duration}</h6>
+                  <h6>today's date</h6>
+              </div>
+              <h6>Title: <input style={{marginLeft: "10px", width: "250px"}} name="title" onChange={handleChange}></input></h6>
+              <h6>Mood:
+                <select style={{marginLeft: "5px"}} name="mood" onChange={handleChange}>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </h6> 
+              <div style={{display: "flex"}}>
+                <h6 >Notes: <textarea style={{verticalAlign: "top", height: "100px", width: "250px"}} name="notes" onChange={handleChange}></textarea></h6> 
+              </div>
+              <h6>Tags: <select name="notes" onChange={handleChange}></select></h6>
+          </div>
+        </div>
+  
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick = {handleClose}>

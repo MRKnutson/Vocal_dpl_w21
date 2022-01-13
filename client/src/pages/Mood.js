@@ -1,4 +1,4 @@
-import React,{FunctionComponent} from "react";
+import React,{FunctionComponent, useState, useEffect} from "react";
 import {LineChart,
   Line,
   XAxis,
@@ -6,96 +6,101 @@ import {LineChart,
   CartesianGrid,
   Tooltip,
   Legend} from "recharts";
-  import {Card, Container} from "react-bootstrap";
-  import {ResponsiveCalendar} from "@nivo/calendar";
-
-
-
-  const data = [
-    //we can add the average for each month here, or maybe use a map for each day? 
-    //used random month values for dummy example
-    {
-      name: "January",
-      uv: 5,
-      "value": 5,
-      "day": "2022-01-01"
-    },
-    {
-      name: "February",
-      uv: 2,
-      "value": 2,
-      "day": "2022-02-01"
-    },
-    {
-      name: "March",
-      uv: 2,
-      "value": 2,
-      "day": "2022-03-01"
-    },
-    {
-      name: "April",
-      uv: 3,
-      "value": 3,
-      "day": "2022-04-01"
-    },
-    {
-      name: "May",
-      uv: 5,
-      "value": 5,
-      "day": "2022-05-01"
-    },
-    {
-      name: "June",
-      uv: 5,
-      "value": 5,
-      "day": "2022-06-01"
-    },
-    {
-      name: "July",
-      uv: 4,
-      "value": 4,
-      "day": "2022-07-01"
-    },
-    {
-      name: "August",
-      uv: 4,
-      "value": 4,
-      "day": "2022-08-01"
-    },
-    {
-      name: "September",
-      uv: 3,
-      "value": 3,
-      "day": "2022-09-01"
-    },
-    {
-      name: "October",
-      uv: 2,
-      "value": 2,
-      "day": "2022-10-01"
-    },
-    {
-      name: "November",
-      uv: 3,
-      "value": 3,
-      "day": "2022-11-01"
-    },
-    {
-      name: "December",
-      uv: 2,
-      "value": 2,
-      "day": "2022-12-01"
-    }
-  ];
+import {Card, Container} from "react-bootstrap";
+import {ResponsiveCalendar} from "@nivo/calendar";
+import axios from "axios";
 
 const Mood = () => {
 
- //add in function to find average of all moods
+  const [moods, setMoods] = useState([]);
+
+  useEffect(() => {
+    console.log("moods mounted");
+    getMoods();
+  },[])
+
+  const getMoods = async () => {
+    try { 
+      let response = await axios.get("/api/moods");
+    console.log(response.data)
+      setMoods(response.data) }
+    catch (error){
+      alert ("error at getMoods")
+    }
+  }
+
+  const changeData = () => {
+    return moods.map((mood) => {
+      return (
+        {value:mood.value, day:formatDate(mood.created_at)}
+      )})
+  }
+
+  function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+
+  // const averageMood = (recordings) => {
+  //  return (recordings.reduce((a,b) => {a + b, 0}) / recordings.length
+  // }}
+
 
  const CustomizedDot: FunctionComponent<any> = (props: any) => {
   const { cx, cy, value } = props;
 
-  if (value > 2) {
+  if (value == 5) {
+    return (
+      <svg
+        x={cx - 10}
+        y={cy - 10}
+        width={20}
+        height={20}
+        fill="lightGreen"
+        viewBox="0 0 1024 1024"
+      >
+        <path d="M512 1009.984c-274.912 0-497.76-222.848-497.76-497.76s222.848-497.76 497.76-497.76c274.912 0 497.76 222.848 497.76 497.76s-222.848 497.76-497.76 497.76zM340.768 295.936c-39.488 0-71.52 32.8-71.52 73.248s32.032 73.248 71.52 73.248c39.488 0 71.52-32.8 71.52-73.248s-32.032-73.248-71.52-73.248zM686.176 296.704c-39.488 0-71.52 32.8-71.52 73.248s32.032 73.248 71.52 73.248c39.488 0 71.52-32.8 71.52-73.248s-32.032-73.248-71.52-73.248zM772.928 555.392c-18.752-8.864-40.928-0.576-49.632 18.528-40.224 88.576-120.256 143.552-208.832 143.552-85.952 0-164.864-52.64-205.952-137.376-9.184-18.912-31.648-26.592-50.08-17.28-18.464 9.408-21.216 21.472-15.936 32.64 52.8 111.424 155.232 186.784 269.76 186.784 117.984 0 217.12-70.944 269.76-186.784 8.672-19.136 9.568-31.2-9.12-40.096z" />
+      </svg>
+    );
+  }
+  if (value == 4) {
+    return (
+      <svg
+        x={cx - 10}
+        y={cy - 10}
+        width={20}
+        height={20}
+        fill="lightPurple"
+        viewBox="0 0 1024 1024"
+      >
+        <path d="M512 1009.984c-274.912 0-497.76-222.848-497.76-497.76s222.848-497.76 497.76-497.76c274.912 0 497.76 222.848 497.76 497.76s-222.848 497.76-497.76 497.76zM340.768 295.936c-39.488 0-71.52 32.8-71.52 73.248s32.032 73.248 71.52 73.248c39.488 0 71.52-32.8 71.52-73.248s-32.032-73.248-71.52-73.248zM686.176 296.704c-39.488 0-71.52 32.8-71.52 73.248s32.032 73.248 71.52 73.248c39.488 0 71.52-32.8 71.52-73.248s-32.032-73.248-71.52-73.248zM772.928 555.392c-18.752-8.864-40.928-0.576-49.632 18.528-40.224 88.576-120.256 143.552-208.832 143.552-85.952 0-164.864-52.64-205.952-137.376-9.184-18.912-31.648-26.592-50.08-17.28-18.464 9.408-21.216 21.472-15.936 32.64 52.8 111.424 155.232 186.784 269.76 186.784 117.984 0 217.12-70.944 269.76-186.784 8.672-19.136 9.568-31.2-9.12-40.096z" />
+      </svg>
+    );
+  }
+  if (value == 3) {
+    return (
+      <svg
+        x={cx - 10}
+        y={cy - 10}
+        width={20}
+        height={20}
+        fill="purple"
+        viewBox="0 0 1024 1024"
+      >
+        <path d="M512 1009.984c-274.912 0-497.76-222.848-497.76-497.76s222.848-497.76 497.76-497.76c274.912 0 497.76 222.848 497.76 497.76s-222.848 497.76-497.76 497.76zM340.768 295.936c-39.488 0-71.52 32.8-71.52 73.248s32.032 73.248 71.52 73.248c39.488 0 71.52-32.8 71.52-73.248s-32.032-73.248-71.52-73.248zM686.176 296.704c-39.488 0-71.52 32.8-71.52 73.248s32.032 73.248 71.52 73.248c39.488 0 71.52-32.8 71.52-73.248s-32.032-73.248-71.52-73.248zM772.928 555.392c-18.752-8.864-40.928-0.576-49.632 18.528-40.224 88.576-120.256 143.552-208.832 143.552-85.952 0-164.864-52.64-205.952-137.376-9.184-18.912-31.648-26.592-50.08-17.28-18.464 9.408-21.216 21.472-15.936 32.64 52.8 111.424 155.232 186.784 269.76 186.784 117.984 0 217.12-70.944 269.76-186.784 8.672-19.136 9.568-31.2-9.12-40.096z" />
+      </svg>
+    );
+  }
+  if (value == 2) {
     return (
       <svg
         x={cx - 10}
@@ -134,7 +139,7 @@ const Mood = () => {
         <Card.Body>
           <Card.Title style={{textAlign:"center"}}>Average Mood</Card.Title>
           <Card.Text style={{textAlign:"center"}}>This is your average mood this year!</Card.Text>
-    {/* <Button variant="primary">Go somewhere</Button> */}
+          {averageMood()}
         </Card.Body>
       </Card>
       <div style={{ width: "100%", height: 500, marginBottom:"50px" }}>
@@ -142,7 +147,7 @@ const Mood = () => {
       <LineChart
         width= {1300}
         height={700}
-        data={data}
+        data={changeData()}
         margin={{
           top: 5,
           right: 30,
@@ -150,15 +155,15 @@ const Mood = () => {
           bottom: 5
         }}>
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
+        <XAxis dataKey="created_at" />
         <YAxis />
         <Tooltip />
         <Legend />
-        <Line type="monotone" dataKey="uv" stroke="#82ca9d" dot={<CustomizedDot/>}/>
+        <Line type="monotone" dataKey="value" stroke="#82ca9d" dot={<CustomizedDot/>}/>
       </LineChart>
     {/* to work on this calendar use: https://nivo.rocks/calendar/ */}
         <ResponsiveCalendar
-          data={data}
+          data={changeData()}
           from={new Date(new Date().getFullYear(), 0, 1)}
           to="2022-12-31"
           emptyColor="#eeeeee"
@@ -185,7 +190,7 @@ const Mood = () => {
         <h3>Helpful Resources</h3>
         <a className = "link" href="https://www.happybrainscience.com/resources/">Happy Brain Science</a>
           <br/>
-        <a className = "link" href="https://www.unh.edu/pacs/positive-psychology-strategies-increased-happiness">Positice Psychology Strategies</a>
+        <a className = "link" href="https://www.unh.edu/pacs/positive-psychology-strategies-increased-happiness">Positive Psychology Strategies</a>
           <br/>
         <a className = "link" href="https://projecthappiness.org/">Project Happiness</a>
       </div>

@@ -15,22 +15,6 @@ ActiveRecord::Schema.define(version: 2022_01_13_225915) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "comments", force: :cascade do |t|
-    t.string "text"
-    t.bigint "recording_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["recording_id"], name: "index_comments_on_recording_id"
-  end
-
-  create_table "moods", force: :cascade do |t|
-    t.integer "value"
-    t.bigint "recording_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["recording_id"], name: "index_moods_on_recording_id"
-  end
-
   create_table "photos", force: :cascade do |t|
     t.string "pointer"
     t.bigint "recording_id", null: false
@@ -56,7 +40,6 @@ ActiveRecord::Schema.define(version: 2022_01_13_225915) do
     t.datetime "updated_at", precision: 6, null: false
     t.text "notes"
     t.integer "mood"
-    t.integer "note"
     t.index ["user_id"], name: "index_recordings_on_user_id"
   end
 
@@ -98,8 +81,6 @@ ActiveRecord::Schema.define(version: 2022_01_13_225915) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
-  add_foreign_key "comments", "recordings"
-  add_foreign_key "moods", "recordings"
   add_foreign_key "photos", "recordings"
   add_foreign_key "recording_tags", "recordings"
   add_foreign_key "recording_tags", "tags"

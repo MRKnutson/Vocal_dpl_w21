@@ -139,7 +139,7 @@ const Mood = () => {
         <Card.Body>
           <Card.Title style={{textAlign:"center"}}>Average Mood</Card.Title>
           <Card.Text style={{textAlign:"center"}}>This is your average mood this year!</Card.Text>
-          {averageMood()}
+          {/* {averageMood()} */}
         </Card.Body>
       </Card>
       <div style={{ width: "100%", height: 500, marginBottom:"50px" }}>

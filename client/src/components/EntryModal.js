@@ -35,7 +35,15 @@ const EntryModal = ({handleClose, handleSave, show, audioURL, duration}) => {
                   <h6>today's date</h6>
               </div>
               <h6>Title: <input style={{marginLeft: "10px", width: "250px"}} name="title" onChange={handleChange}></input></h6>
-              <h6>Mood: </h6> 
+              <h6>Mood:
+                <select style={{marginLeft: "5px"}} name="mood" onChange={handleChange}>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </h6> 
               <div style={{display: "flex"}}>
                 <h6 >Notes: <textarea style={{verticalAlign: "top", height: "100px", width: "250px"}} name="notes" onChange={handleChange}></textarea></h6> 
               </div>

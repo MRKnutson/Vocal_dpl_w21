@@ -11,11 +11,20 @@ require "faker"
 u1 = User.create(email:"test@test.com", password: 123456)
 
 5.times do
-  Recording.create(
+  rec = Recording.create(
     title: "a title", 
       pointer: "This is a test URL",
+      notes: "this is a test note",
+      mood: rand(1..5),
       user_id: u1.id
   )
+  thisTag = Tag.create(
+    text: "This is a tag"
+    )
+  RecordingTag.create(
+    recording_id: rec.id,
+    tag_id: thisTag.id
+    )
 end
 
 5.times do
@@ -29,6 +38,8 @@ end
     rec = Recording.create(
       title: "#{user.first_name} and a title", 
       pointer: "This is a test URL",
+      notes: "this is a test note",
+      mood: rand(1..5),
       user_id: user.id
     )
     thisTag = Tag.create(
@@ -38,20 +49,13 @@ end
       recording_id: rec.id,
       tag_id: thisTag.id
       )
-
-      2.times do 
-        Comment.create(
-        text: "This is a comment",
-        recording_id: rec.id
-      )
-    end
       2.times do 
         Photo.create(
         pointer: "random",
         recording_id: rec.id
       )
       end
-  end
+    end
 end
 
 puts "seeded complete"

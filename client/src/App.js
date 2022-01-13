@@ -9,6 +9,7 @@ import Timeline from './pages/Timeline';
 import Mood from './pages/Mood';
 import Activities from './pages/Activities';
 import AboutUs from './pages/AboutUs';
+import BackEndTestPage from './pages/BackEndTestPage';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path = "/login" element = {<Login />} />
         <Route path = "/aboutus" element = {<AboutUs/>} />
         <Route element = {<RequireAuth />}>
+        <Route path = "/backend" element = {<BackEndTestPage />} />
         <Route path = "/recordings" element = {<Timeline/>} />
         <Route path = "/activities" element = {<Activities/>} />
         <Route path = "/mood" element = {<Mood/>} />

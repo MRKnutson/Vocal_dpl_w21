@@ -37,12 +37,12 @@ function Recorder() {
           data.append('file', audioURL)
         }
         try{
+            console.log("url: ", audioURL)
           let res = await axios.post('/api/recordings', data)
-          console.log("url: ", audioURL)
         } catch(err){
             console.log(err)
         }
-        console.log("submitted")
+        console.log("submitted to controller")
     }
 
   return (

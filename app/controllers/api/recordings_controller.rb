@@ -1,17 +1,61 @@
 class Api::RecordingsController < ApplicationController
   before_action :authenticate_user!
-  # before_action :set_recording, only: [:show, :update, :destroy]
+  before_action :set_recording
 
   
   def index
-  render json: current_user.recordings.all
+  render json: @recording.all
   end
 
-  # private
-
-  # def set_recording
-  #   @recording=Recording.find(params[:id])
+  # def create
+  #     file = params[:file]
+  
+  #     # is trying trying to save the image to cloudinary
+  #     if file
+  #         begin
+  #           # ext = File.extname(file.tempfile)
+  #           puts 'Trying to save to cloudinary'
+  #           cloud_image = Cloudinary::Uploader.upload(file, public_id: file.original_filename, secure: true, resource_type: :auto)
+  #         rescue => e
+  #           puts "error"
+  #           puts e  
+  #           render json: { errors: e }, status: 422
+  #           return
+  #         end
+  #     end
+  
+  #     # save/update to database
+  #     if cloud_image && cloud_image['secure_url'] 
+  #       current_user.image = cloud_image['secure_url']
+  #     end
+  
+  #     current_user.nickname = params[:nickname]
+  #     if current_user.save
+  #       render json: current_user
+  #     else
+  #       render json: { errors: e }, status: 422
+  #     end
+  
+  #   end
   # end
+
+  def update
+    if (@recording.update)
+      render json: @recording
+     else
+      render json: { errors: @recording.errors }, status: :unprocessable_entity
+     end 
+  end
+
+  def destroy
+    render json: @recording.destroy
+  end
+
+  private
+
+  def set_recording
+    @recording = current_user.recordings
+  end
 
   # def recording_params
   #   params.require(:recording).permit(:title, :pointer)

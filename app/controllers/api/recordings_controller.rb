@@ -15,7 +15,7 @@ class Api::RecordingsController < ApplicationController
           # ext = File.extname(file.tempfile)
           puts 'Trying to save to cloudinary'
          recording = Cloudinary::Uploader.upload(file.tempfile,  secure: true, resource_type: :auto)
-         binding.pry
+        #  binding.pry
         rescue => e
           # binding.pry
           puts "error"

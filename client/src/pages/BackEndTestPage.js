@@ -9,7 +9,7 @@ const RenderSomething = () => {
   }, []);
 
   const getStuff = async () => {
-  let res = await axios.get('/api/tags')
+  let res = await axios.get('/api/moods')
     console.log(res.data)
     setData(res.data)
   }

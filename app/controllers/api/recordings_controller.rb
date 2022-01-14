@@ -15,7 +15,8 @@ class Api::RecordingsController < ApplicationController
           # ext = File.extname(file.tempfile)
           puts 'Trying to save to cloudinary'
          recording = Cloudinary::Uploader.upload(file.tempfile,  secure: true, resource_type: :auto)
-         binding.pry
+         puts recording
+        #  binding.pry
         rescue => e
           # binding.pry
           puts "error"
@@ -23,8 +24,16 @@ class Api::RecordingsController < ApplicationController
           render json: { errors: e }, status: 422
           return
         end
-    end
-    render json: recording
+      end
+        if recording && recording['secure_url']
+            @recording = current_user.recordings.new
+            @recording.pointer = recording['secure_url']
+            if @recording.save
+              render json: @recording
+            else
+              render json: { errors: @recording.errors}, status: 422
+            end
+        end 
 end
 
 
@@ -36,9 +45,9 @@ end
   #    end 
   # end
 
-  def destroy
-    render json: @recording.destroy
-  end
+  # def destroy
+  #   render json: @recording.destroy
+  # end
 
   private
 

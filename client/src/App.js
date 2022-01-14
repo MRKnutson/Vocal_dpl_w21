@@ -15,11 +15,11 @@ function App() {
   return (
     <Routes>
       <Route element ={<Layout />}>
-        <Route path = "/" element = {<Home />} />
         <Route path = "/register" element = {<Register />} />
         <Route path = "/login" element = {<Login />} />
         <Route path = "/aboutus" element = {<AboutUs/>} />
         <Route element = {<RequireAuth />}>
+        <Route path = "/" element = {<Home />} />
         <Route path = "/backend" element = {<BackEndTestPage />} />
         <Route path = "/recordings" element = {<Timeline/>} />
         <Route path = "/activities" element = {<Activities/>} />

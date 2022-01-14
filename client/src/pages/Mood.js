@@ -12,27 +12,27 @@ import axios from "axios";
 
 const Mood = () => {
 
-  const [moods, setMoods] = useState([]);
+  const [recordings, setRecordings] = useState([]);
 
   useEffect(() => {
-    console.log("moods mounted");
-    getMoods();
+    console.log("recordings mounted");
+    getRecordings();
   },[])
 
-  const getMoods = async () => {
+  const getRecordings = async () => {
     try { 
-      let response = await axios.get("/api/moods");
+      let response = await axios.get("/api/recordings");
     console.log(response.data)
-      setMoods(response.data) }
+      setRecordings(response.data) }
     catch (error){
-      alert ("error at getMoods")
+      alert ("error at getRecordings")
     }
   }
 
   const changeData = () => {
-    return moods.map((mood) => {
+    return recordings.map((recording) => {
       return (
-        {value:mood.value, day:formatDate(mood.created_at)}
+        {value:recording.mood, day:formatDate(recording.created_at)}
       )})
   }
 
@@ -50,9 +50,17 @@ const Mood = () => {
     return [year, month, day].join('-');
 }
 
-  // const averageMood = (recordings) => {
-  //  return (recordings.reduce((a,b) => {a + b, 0}) / recordings.length
-  // }}
+  const moodArray = () => {
+    return recordings.map((recording) => {
+      return recording.mood
+    })
+  }
+
+  const averageMood = (recordings) => {
+    let temp = moodArray()
+   let average = ((temp.reduce((a,b) => a + b, 0)) / temp.length)
+  return average
+  }
 
 
  const CustomizedDot: FunctionComponent<any> = (props: any) => {
@@ -139,7 +147,7 @@ const Mood = () => {
         <Card.Body>
           <Card.Title style={{textAlign:"center"}}>Average Mood</Card.Title>
           <Card.Text style={{textAlign:"center"}}>This is your average mood this year!</Card.Text>
-          {averageMood()}
+          <Card.Text style={{textAlign:"center"}}>{averageMood()}</Card.Text>
         </Card.Body>
       </Card>
       <div style={{ width: "100%", height: 500, marginBottom:"50px" }}>

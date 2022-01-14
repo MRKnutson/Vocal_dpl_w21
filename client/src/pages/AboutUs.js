@@ -33,10 +33,10 @@ const programmers = [
 {
   name: "Ruby Reed", 
   image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLUVMJmyhlMPJX3aFZNuDmwVleT9XAQb7Sdw&usqp=CAU",
-  GitHub: "https://github.com/MRKnutson/",
-  LinkedIn: "www.linkedin.com/in/michaelrknutson",
-  email: "mrknutson44@gmail.com",
-  blurb: "Some stuff about Ruby and how great she is at Coding!"
+  GitHub: "https://github.com/rubyreed/",
+  LinkedIn: "https://www.linkedin.com/in/ruby-reed-454844134/",
+  email: "rubysreed@gmail.com",
+  blurb: "After earning a Bachelor's in Biological Science I spent some time traveling and trying to figure out my career... I finally landed on coding! And I'm loving it. "
 
 }
 ]

@@ -15,17 +15,6 @@ ActiveRecord::Schema.define(version: 2022_01_13_225915) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-<<<<<<< HEAD
-  create_table "moods", force: :cascade do |t|
-    t.integer "value"
-    t.bigint "recording_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["recording_id"], name: "index_moods_on_recording_id"
-  end
-
-=======
->>>>>>> 37ee9d417c43bf1b4fbf68a6f2892620ec2699d8
   create_table "photos", force: :cascade do |t|
     t.string "pointer"
     t.bigint "recording_id", null: false
@@ -50,11 +39,7 @@ ActiveRecord::Schema.define(version: 2022_01_13_225915) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "notes"
-<<<<<<< HEAD
-    t.integer "note"
-=======
     t.integer "mood"
->>>>>>> 37ee9d417c43bf1b4fbf68a6f2892620ec2699d8
     t.index ["user_id"], name: "index_recordings_on_user_id"
   end
 

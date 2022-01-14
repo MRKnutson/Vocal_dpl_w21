@@ -14,7 +14,7 @@ class Api::RecordingsController < ApplicationController
         begin
           # ext = File.extname(file.tempfile)
           puts 'Trying to save to cloudinary'
-         recording = Cloudinary::Uploader.upload(file.tempfile,  secure: true, resource_type: :auto)
+         recording = Cloudinary::Uploader.upload(file.tempfile,  secure: true, resource_type: :auto, :folder=>"vocal/audio")
          puts recording
         #  binding.pry
         rescue => e

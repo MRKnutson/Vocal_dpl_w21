@@ -3,7 +3,7 @@ import { Button, Modal } from 'react-bootstrap';
 import useRecorder from "./useRecorder";
 import {useState, useEffect} from 'react'
 import axios from "axios";
-const EntryModal = ({handleClose, handleSave, show, audioURL, duration}) => {
+const EntryModal = ({handleClose, handleSave, show, blobURL, duration}) => {
     const [title, setTitle] = useState("")
     const [mood, setMood] = useState("")
     const [notes, setNotes] = useState("") 
@@ -28,7 +28,7 @@ const EntryModal = ({handleClose, handleSave, show, audioURL, duration}) => {
       </Modal.Header>
       <Modal.Body>
         <div > 
-          <audio src={audioURL} controls style={{height: "35px", margin: "auto"}}/>
+          <audio src={blobURL} controls style={{height: "35px", margin: "auto"}}/>
           <div style={{margin: "auto", marginTop: "15px"}}>
               <div style={{margin: "auto"}}>
                   <h6 >{duration}</h6>

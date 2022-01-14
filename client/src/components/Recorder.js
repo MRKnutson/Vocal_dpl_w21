@@ -5,7 +5,7 @@ import axios from "axios";
 import EntryModal from "./EntryModal";
 
 function Recorder() {
-    let [audioURL, isRecording, startRecording, stopRecording, clearRecording] = useRecorder();
+    let [audioURL, blobURL, isRecording, startRecording, stopRecording, clearRecording] = useRecorder();
     const [title, setTitle] = useState("")
     const [mood, setMood] = useState("")
     const [notes, setNotes] = useState("")
@@ -68,7 +68,7 @@ function Recorder() {
                     REC
                 </button>)
         :
-           <EntryModal audioURL={audioURL} duration={duration} handleSave={handleSubmit} show={true} handleClose={clearRecording}/>
+           <EntryModal blobURL={blobURL} duration={duration} handleSave={handleSubmit} show={true} handleClose={clearRecording}/>
         }
        
         

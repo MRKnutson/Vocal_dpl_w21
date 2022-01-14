@@ -45,9 +45,9 @@ end
   #    end 
   # end
 
-  # def destroy
-  #   render json: @recording.destroy
-  # end
+  def destroy
+    render json: @recording.find(params[:id]).destroy
+  end
 
   private
 

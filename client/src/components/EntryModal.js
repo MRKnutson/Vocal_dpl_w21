@@ -3,18 +3,17 @@ import { Button, Modal } from 'react-bootstrap';
 import useRecorder from "./useRecorder";
 import {useState, useEffect} from 'react'
 import axios from "axios";
-const EntryModal = ({handleClose, handleSave, show, blobURL, duration}) => {
+
+const EntryModal = ({handleClose, handleChange, handleSave, show, blobURL, duration}) => {
+
     const [title, setTitle] = useState("")
     const [mood, setMood] = useState("")
     const [notes, setNotes] = useState("") 
+    const currentDate = new Date();
 
-    const handleChange = (e) => {
-      e.preventDefault()
-      let val = e.target.value
-      if(e.target.name==="title"){setTitle(val)}
-      else if(e.target.name==="mood"){setMood(val)}
-      else if(e.target.name==="notes"){setNotes(val)}
-  }
+    const [date, setDate] = useState(currentDate.toLocaleDateString())
+    const [time, setTime] = useState(currentDate.toLocaleTimeString())
+
   return(
     <Modal
       show = {show}
@@ -32,7 +31,8 @@ const EntryModal = ({handleClose, handleSave, show, blobURL, duration}) => {
           <div style={{margin: "auto", marginTop: "15px"}}>
               <div style={{margin: "auto"}}>
                   <h6 >{duration}</h6>
-                  <h6>today's date</h6>
+                  <h6>{date}</h6>
+                  <h6>{time}</h6>
               </div>
               <h6>Title: <input style={{marginLeft: "10px", width: "250px"}} name="title" onChange={handleChange}></input></h6>
               <h6>Mood:

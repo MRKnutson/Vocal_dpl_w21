@@ -26,7 +26,13 @@ class Api::RecordingsController < ApplicationController
         end
       end
         if recording && recording['secure_url']
-            @recording = current_user.recordings.new
+            @recording = current_user.recordings.new(
+              title: params[:title], 
+              mood: params[:mood], 
+              notes: params[:notes], 
+              length: recording['duration'],
+              pointer: recording['secure_url']
+            )
             @recording.pointer = recording['secure_url']
             if @recording.save
               render json: @recording
@@ -51,12 +57,12 @@ end
 
   private
 
-  def set_recording
-    @recording = current_user.recordings
-  end
+   def set_recording
+     @recording = current_user.recordings
+   end
 
-  # def recording_params
-  #   params.require(:recording).permit(:title, :pointer)
-  # end
+  def recording_params
+    params.permit(:title, :notes, :mood)
+  end
 
 end

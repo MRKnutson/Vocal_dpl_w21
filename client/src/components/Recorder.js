@@ -3,20 +3,26 @@ import useRecorder from "./useRecorder";
 import {useState, useEffect} from 'react'
 import axios from "axios";
 import EntryModal from "./EntryModal";
+import { useNavigate } from "react-router-dom";
 
 function Recorder() {
+    const nav = useNavigate()
     let [audioURL, blobURL, isRecording, startRecording, stopRecording, clearRecording] = useRecorder();
     const [title, setTitle] = useState("")
     const [mood, setMood] = useState("")
     const [notes, setNotes] = useState("")
     const [duration, setDuration] = useState("")
     const [secondsElapsed, setSecondsElapsed] = useState("")
+    let timer
+    
 
     useEffect(()=>{
-        const timer = setTimeout(() => {
+        timer = setTimeout(() => {
             if(isRecording){
                 setSecondsElapsed(secondsElapsed+1)
-                setDuration(Math.floor((secondsElapsed+1)/60) + ":" + ((secondsElapsed+1)%60))
+                let secs = ((secondsElapsed+1)%60)
+                let mins = Math.floor((secondsElapsed+1)/60)
+                setDuration(mins + ":" + (secs<10 ? "0" + secs : secs))
             }
             
           }, 1000);
@@ -33,9 +39,14 @@ function Recorder() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        
         let data = new FormData()
         if (audioURL){
           data.append('file', audioURL)
+          data.append('title', title)
+          data.append('notes', notes)
+          data.append('mood', parseInt(mood))
+        
         }
         try{
             console.log("url: ", audioURL)
@@ -44,6 +55,7 @@ function Recorder() {
             console.log(err)
         }
         console.log("submitted to controller")
+        nav('/recordings')
     }
 
   return (
@@ -52,7 +64,7 @@ function Recorder() {
             (isRecording ? 
                 <div style={{display: "flex", gap: "10px"}}>
                     <button onClick={()=>{
-                    setSecondsElapsed("")
+                    clearTimeout(timer)
                     stopRecording() 
                 }} disabled={!isRecording}>
                         STOP
@@ -62,13 +74,13 @@ function Recorder() {
             :
                 <button onClick={()=>{
                     setSecondsElapsed(0)
-                    setDuration("0:0")
+                    setDuration("0:00")
                     startRecording() 
                 }} disabled={isRecording}>
                     REC
                 </button>)
         :
-           <EntryModal blobURL={blobURL} duration={duration} handleSave={handleSubmit} show={true} handleClose={clearRecording}/>
+           <EntryModal blobURL={blobURL} duration={duration} handleSave={handleSubmit} handleChange={handleChange} show={true} handleClose={clearRecording}/>
         }
        
         

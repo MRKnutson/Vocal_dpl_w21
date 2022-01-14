@@ -21,8 +21,6 @@ const Home =  () => {
   return(
     <div>
       <h1>Home</h1>
-      <EntryModal handleClose = {handleClose} handleSave = {handleSave} show = {show} />
-      <button onClick = {handleShow}>ShowModal</button>
       <Recorder />
     </div>
   )

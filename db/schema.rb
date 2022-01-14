@@ -81,6 +81,10 @@ ActiveRecord::Schema.define(version: 2022_01_13_225915) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+<<<<<<< HEAD
+  add_foreign_key "moods", "recordings"
+=======
+>>>>>>> 37ee9d417c43bf1b4fbf68a6f2892620ec2699d8
   add_foreign_key "photos", "recordings"
   add_foreign_key "recording_tags", "recordings"
   add_foreign_key "recording_tags", "tags"

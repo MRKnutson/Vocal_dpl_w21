@@ -2,9 +2,10 @@ import * as React from "react";
 import useRecorder from "./useRecorder";
 import {useState, useEffect} from 'react'
 import axios from "axios";
+import EntryModal from "./EntryModal";
 
 function Recorder() {
-    let [audioURL, isRecording, startRecording, stopRecording, clearRecording] = useRecorder();
+    let [audioURL, blobURL, isRecording, startRecording, stopRecording, clearRecording] = useRecorder();
     const [title, setTitle] = useState("")
     const [mood, setMood] = useState("")
     const [notes, setNotes] = useState("")
@@ -67,25 +68,7 @@ function Recorder() {
                     REC
                 </button>)
         :
-            <div> 
-                <audio src={audioURL} controls style={{height: "35px", marginLeft: "-15px"}}/>
-                <div style={{marginTop: "15px"}}>
-                    <div style={{margin: "auto"}}>
-                        <h5 >{duration}</h5>
-                        <h5>today's date</h5>
-                    </div>
-                    <h5>Title: <input name="title" onChange={handleChange}></input></h5>
-                    <h5>Mood: <input name="mood" onChange={handleChange}></input></h5>
-                    <h5>Notes: <input name="notes" onChange={handleChange}></input></h5>
-                    <h5>Tags: <select name="notes" onChange={handleChange}></select></h5>
-                    <div style={{display: "flex", gap: "30px", justifyContent: "center"}}>
-                        <button onClick={handleSubmit}>SAVE</button>
-                        <button onClick={clearRecording} style={{height: "30px"}}>
-                            CANCEL
-                        </button>
-                    </div>
-                </div>
-            </div>
+           <EntryModal blobURL={blobURL} duration={duration} handleSave={handleSubmit} show={true} handleClose={clearRecording}/>
         }
        
         

@@ -1,6 +1,6 @@
 class Api::RecordingsController < ApplicationController
   before_action :authenticate_user!
-  # before_action :set_recording
+  before_action :set_recording
 
   
   def index
@@ -49,11 +49,11 @@ end
   #   render json: @recording.destroy
   # end
 
-  # private
+  private
 
-  # def set_recording
-  #   @recording = current_user.recordings
-  # end
+  def set_recording
+    @recording = current_user.recordings
+  end
 
   # def recording_params
   #   params.require(:recording).permit(:title, :pointer)

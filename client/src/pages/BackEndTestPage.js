@@ -5,20 +5,28 @@ import React, { useEffect, useState } from 'react';
 const RenderSomething = () => {
   const [data, setData] = useState([])
   useEffect(()=>{
-    getStuff();
+    getAllStuff();
   }, []);
 
+  const getAllStuff = async () => {
+    let res = await axios.get('/api/recordings')
+      setData(res.data.length)
+      console.log('getAllStuff hit')
+    }
+
   const getStuff = async () => {
-  let res = await axios.get('/api/moods')
-    console.log(res.data)
-    setData(res.data)
+    console.log('getStuff hit')
+  let res = await axios.delete('/api/recordings/1')
+    getAllStuff();
   }
 
 
 return (
-  <div> 
+      <div> 
     <p>Back End Test</p>
     {JSON.stringify(data)}
+
+    <button onClick={getStuff}>Press Me</button>
      </div>
 
 )

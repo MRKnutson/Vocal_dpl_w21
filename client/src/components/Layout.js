@@ -11,7 +11,10 @@ const Layout = () => {
   const renderUILinks =()=>{
     if(authenticated){
       return(
+        <>
+        <Nav.Link eventKey = "/profile">Profile</Nav.Link>
         <Button onClick={()=>handleLogout(navigate)}>Logout</Button>
+        </>
       )
     } else {
       return(

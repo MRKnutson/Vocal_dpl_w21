@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_14_183757) do
+ActiveRecord::Schema.define(version: 2022_01_14_190015) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "moods", force: :cascade do |t|
+    t.integer "value"
+    t.bigint "recording_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["recording_id"], name: "index_moods_on_recording_id"
+  end
 
   create_table "photos", force: :cascade do |t|
     t.string "pointer"
@@ -82,6 +90,7 @@ ActiveRecord::Schema.define(version: 2022_01_14_183757) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "moods", "recordings"
   add_foreign_key "photos", "recordings"
   add_foreign_key "recording_tags", "recordings"
   add_foreign_key "recording_tags", "tags"

@@ -3,5 +3,6 @@ Rails.application.routes.draw do
   namespace :api do
     resources :recordings, only: [:index, :create, :update, :destroy]
     resources :tags, only: [:index, :destroy]
+    resources :users
   end
 end

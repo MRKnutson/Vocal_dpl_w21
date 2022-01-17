@@ -210,7 +210,7 @@ const Activities = () => {
       <div>
         <XYPlot yDomain = {[0,32]}  style={{margin:"50px"}} width={1000} height={600} stackBy="y" xType = "ordinal" >
         <DiscreteColorLegend
-            style={{position: 'relative', left: '150px', top: '-610px'}}
+            style={{position: 'relative', left: '950px', top: '-610px'}}
             orientation="horizontal"
             items={[
               {

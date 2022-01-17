@@ -16,7 +16,7 @@ const programmers = [
   name: "Michael Knutson", 
   image: "https://res.cloudinary.com/djhlv2nfc/image/upload/v1642024460/Vocal/Images/IMG_4372_qcefm7.jpg",
   GitHub: "https://github.com/MRKnutson/",
-  LinkedIn: "www.linkedin.com/in/michaelrknutson",
+  LinkedIn: "https://linkedin.com/in/michaelrknutson",
   email: "mrknutson44@gmail.com",
   blurb: "I come from a biological and statistical background. After helping to design a server that can be deployed on research vessels I realized my passion was in programming. It didn't take me long to decide to become a full-time developer!"
 

@@ -194,12 +194,12 @@ const Mood = () => {
             }
         ]}/>
       </div>
-      <div style={{marginTop:"600px", marginBottom:"50px"}}>
+      <div style={{marginTop:"700px", marginBottom:"100px"}}>
         <h3>Helpful Resources</h3>
-        <a className = "link" href="https://www.happybrainscience.com/resources/">Happy Brain Science</a>
-          <br/>
-        <a className = "link" href="https://www.unh.edu/pacs/positive-psychology-strategies-increased-happiness">Positive Psychology Strategies</a>
-          <br/>
+        <a className = "link" href="https://www.cnet.com/news/how-to-be-happy-according-to-science/">How to be Happy According to Science</a>
+        <br/>
+        <a className = "link" href="https://unh.edu/pacs/positive-psychology-strategies-increased-happiness">Positive Psychology Strategies</a>
+        <br/>
         <a className = "link" href="https://projecthappiness.org/">Project Happiness</a>
       </div>
     </Container>

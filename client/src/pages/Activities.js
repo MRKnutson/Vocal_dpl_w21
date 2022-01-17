@@ -11,6 +11,7 @@ import {
   HorizontalGridLines,
   VerticalBarSeries,
   VerticalBarSeriesCanvas,
+  DiscreteColorLegend,
 } from "react-vis";
 
 const data = [
@@ -105,18 +106,18 @@ const Activities = () => {
   };
 
   const normalizeMonthData = (mood) => {
-    let January  = {x:"1", y:0}
-    let February = {x:"2", y:0}
-    let March = {x:"3", y:0}
-    let April = {x:"4", y:0}
-    let May = {x:"5", y:0}
-    let June = {x:"6", y:0}
-    let July = {x:"7", y:0}
-    let August = {x:"8", y:0}
-    let September = {x:"9", y:0}
-    let October = {x:"10", y:0}
-    let November = {x:"11", y:0}
-    let December = {x:"12", y:0}
+    let January  = {x:"Jan", y:0}
+    let February = {x:"Feb", y:0}
+    let March = {x:"Mar", y:0}
+    let April = {x:"Apr", y:0}
+    let May = {x:"May", y:0}
+    let June = {x:"Jun", y:0}
+    let July = {x:"Jul", y:0}
+    let August = {x:"Aug", y:0}
+    let September = {x:"Sep", y:0}
+    let October = {x:"Oct", y:0}
+    let November = {x:"Nov", y:0}
+    let December = {x:"Dec", y:0}
       grabMonth().map((recording) => {
       if (recording.month == 1 && recording.mood == mood) {
         January.y = January.y + 1
@@ -207,24 +208,69 @@ const Activities = () => {
         </div>
       </Card>
       <div>
-        <XYPlot yDomain = {[0,5]} xDomain={[0, 12]} style={{margin:"50px"}} width={1000} height={600} stackBy="y">
+        <XYPlot yDomain = {[0,32]}  style={{margin:"50px"}} width={1000} height={600} stackBy="y" xType = "ordinal" >
+        <DiscreteColorLegend
+            style={{position: 'relative', left: '150px', top: '-610px'}}
+            orientation="horizontal"
+            items={[
+              {
+                title: 'Mood1',
+                color: 'red'
+              },
+              {
+                title: 'Mood2',
+                color: 'orange'
+              },
+              {
+                title: 'Mood3',
+                color: 'blue'
+              },
+              {
+                title: 'Mood4',
+                color: 'green'
+              },
+              {
+                title: 'Mood5',
+                color: 'yellow'
+              },
+            ]}
+          />
           <VerticalGridLines />
           <HorizontalGridLines />
-          <XAxis />
-          <YAxis />
+          <XAxis 
+          title = "Month"
+          />
+          <YAxis 
+          title = "Number of Entries"
+          style={{
+            line: {stroke: '#ADDDE1'},
+            ticks: {stroke: '#ADDDE1'},
+            text: {stroke: 'none', fill: '#6b6b76', fontWeight: 600}
+          }}
+            />
           <BarSeries
+            cluster = "mood1"
+            color = "red"
             data={normalizeMonthData(1)}
           />
           <BarSeries
+            cluster = "mood2"
+            color = "orange"
             data={normalizeMonthData(2)}
           />
           <BarSeries
+            cluster = "mood3"
+            color = "blue"
             data={normalizeMonthData(3)}
           />
           <BarSeries
+            cluster = "mood4"
+            color = "green"
             data={normalizeMonthData(4)}
           />
           <BarSeries
+            cluster = "mood5"
+            color = "yellow"
             data={normalizeMonthData(5)}
           />
         </XYPlot>

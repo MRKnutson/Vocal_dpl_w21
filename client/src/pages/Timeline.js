@@ -55,12 +55,12 @@ const Timeline = () => {
   }
 // if statement here checks wheather a tag has been selected or not
   const renderRow = () => {
-    if (!tagChoice){
+    if (!tagChoice || tagChoice == "All"){
     return recordings.map((recording) => {
       return(
       <tr key = {recording.id}>
         <td>{recording.title}</td>
-        <td>{recording.pointer}</td>
+        <td>{recording.pointer} --- Tag_ID: {recording.tag_id}</td>
       </tr> )
     })} else {
       let filteredRecs = recordings.filter((r)=> r.tag_id == tagChoice)
@@ -68,7 +68,7 @@ const Timeline = () => {
         return (
         <tr key = {recording.id}>
           <td>{recording.title}</td>
-          <td>{recording.pointer}</td>
+          <td>{recording.pointer} --- Tag_ID: {recording.tag_id}</td>
         </tr> 
         )});
     }
@@ -98,7 +98,7 @@ const Timeline = () => {
       <DropdownButton  onSelect={(choice)=>handleSelection(choice)} align="end" title="Search Tags" id="dropdown-menu-align-end">
         {renderSearchTags()}
       <Dropdown.Divider />
-        <Dropdown.Item eventKey="4">View All Recordings</Dropdown.Item>
+        <Dropdown.Item eventKey="All">View All Recordings</Dropdown.Item>
       </DropdownButton> 
       
       

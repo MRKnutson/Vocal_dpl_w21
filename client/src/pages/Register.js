@@ -26,7 +26,7 @@ const Register = () => {
           <Form.Label>Password</Form.Label>
           <Form.Control type="password" placeholder="Password" onChange= {(e)=>setPassword(e.target.value)}/>
         </Form.Group>
-        <Button type ="submit">Login</Button>
+        <Button type ="submit">Register</Button>
       </Form>
     </Container>
   )

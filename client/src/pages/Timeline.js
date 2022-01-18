@@ -59,21 +59,21 @@ const Timeline = () => {
 
 
 // This is triggered when the DD is selected and fiters the records to the chosen tag
-  // const renderSelectedRecordings = () => {
-  //   return (
-  //     <Table striped bordered hover style={{margin:"20px"}}>
-  //       <thead>
-  //         <tr>
-  //           <th>Title</th>
-  //           <th>Pointer</th>
-  //         </tr>
-  //         </thead>
-  //         <tbody>
-  //         {renderRow()}
-  //         </tbody>
-  //     </Table>
-  //     )
-  // }
+  const renderSelectedRecordings = () => {
+    return (
+      <Table striped bordered hover style={{margin:"20px"}}>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Pointer</th>
+          </tr>
+          </thead>
+          <tbody>
+          {renderRow()}
+          </tbody>
+      </Table>
+      )
+  }
 
 
 // if statement here checks wheather a tag has been selected or not

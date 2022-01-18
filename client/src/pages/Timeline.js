@@ -79,18 +79,15 @@ const Timeline = () => {
 
 // if statement here checks wheather a tag has been selected or not
   const renderRow = () => {
-    if (!tagChoice || tagChoice == "All"){
-      // console.log(recs)
-    return recordings.map((r) => {
-      console.log(r)
-      return (
-      <tr key = {r.id} onClick={()=>{setShowRecordingID(r.id)}}>
-        <td><a>{r.title}</a></td>
-        {/* Why is this breaking below? */}
-        <td>{r.length}</td> 
-        <td><audio src={r.pointer} controls style={{height: "35px", margin: "auto"}}/></td>
-        <td>{r.created_at}</td>
-      </tr> );
+    if (!tagChoice){
+    return recordings.map((recording) => {
+      return(
+      <tr key = {recording.id} onClick={()=>{setShowRecordingID(recording.id)}}>
+        <td><a >{recording.title}</a></td>
+        {/* <td>{recording.length.substring(0, recording.length.indexOf(".")+3)}</td> limiting to 2 decimal digits */}
+        <td><audio src={recording.pointer} controls style={{height: "35px", margin: "auto"}}/></td>
+        <td>{recording.created_at.substring(0, recording.created_at.indexOf("T"))}</td>
+      </tr> )
     })} else {
       console.log("else hit")
       let filteredRecs = recordings.filter((r)=> r.tag_id == tagChoice)

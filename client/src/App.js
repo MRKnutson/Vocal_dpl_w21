@@ -10,6 +10,7 @@ import Mood from './pages/Mood';
 import Activities from './pages/Activities';
 import AboutUs from './pages/AboutUs';
 import BackEndTestPage from './pages/BackEndTestPage';
+import Profile from './pages/Profile';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path = "/aboutus" element = {<AboutUs/>} />
         <Route element = {<RequireAuth />}>
         <Route path = "/" element = {<Home />} />
+        <Route path = "/profile" element = {<Profile />} />
         <Route path = "/backend" element = {<BackEndTestPage />} />
         <Route path = "/recordings" element = {<Timeline/>} />
         <Route path = "/activities" element = {<Activities/>} />

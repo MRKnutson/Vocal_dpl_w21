@@ -5,7 +5,6 @@ import { Table, Button, ButtonToolbar, InputGroup, FormControl, Dropdown, Dropdo
 
 
 const Timeline = () => {
-  // const [recs, setRecs] = useState([])
   const [recordings, setRecordings] = useState([]);
   const [tags, setTags] = useState([]);
   const [showRecordingID, setShowRecordingID] = useState(null)

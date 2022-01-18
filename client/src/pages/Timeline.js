@@ -88,9 +88,9 @@ const Timeline = () => {
       <tr key = {r.id} onClick={()=>{setShowRecordingID(r.id)}}>
         <td><a>{r.title}</a></td>
         {/* Why is this breaking below? */}
-        {/* <td>{r.length.substring(0, r.length.indexOf(".")+3)}</td> limiting to 2 decimal digits */}
+        <td>{r.length}</td> 
         <td><audio src={r.pointer} controls style={{height: "35px", margin: "auto"}}/></td>
-        {/* <td>{r.created_at.substring(0, r.created_at.indexOf("T"))}</td> */}
+        <td>{r.created_at}</td>
       </tr> );
     })} else {
       console.log("else hit")

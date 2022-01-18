@@ -6,6 +6,7 @@ import ShowRecording from '../components/ShowRecording'
 const Timeline = () => {
 
   const [recordings, setRecordings] = useState([]);
+  const [tags, setTags] = useState([]);
   const [showRecordingID, setShowRecordingID] = useState(null)
 
   useEffect(() => {
@@ -27,6 +28,16 @@ const Timeline = () => {
       }
     catch (error) {
     alert('error occured getRecordings')
+      }
+  };
+  
+  const getTags = async () => {
+   try { 
+     let response = await axios.get("/api/tags");
+      setTags(response.data)
+      }
+    catch (error) {
+    alert('error occured getTags')
       }
   };
 

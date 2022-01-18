@@ -4,8 +4,13 @@ import UserForm from "./UserForm";
 import { AuthContext } from "../providers/AuthProvider";
 import axios from "axios";
 import {Container} from 'react-bootstrap'
+import UserImage from '../components/UserImage';
 
 const Profile = (props) => {
+  const [showForm, setShowForm] = useState(false);
+  const [showUpload, setShowUpload] = useState(false);
+  const [users, setUsers] = useState([]);
+
 
   const {id, email, password, handleUpdateUser, image} = useContext(AuthContext);
 
@@ -14,36 +19,41 @@ const Profile = (props) => {
     getUsers();
   },[]);
   
-  const [showForm, setShowForm] = useState(false);
 
- const toggleForm = () => {
+  const toggleUpload = () => {
+    setShowUpload(!showUpload);
+  };
+
+  const toggleForm = () => {
    setShowForm(!showForm);
  };
 
- const deleteUser = async (id) => {
-  let response = await axios.delete(`/api/users/${id}`);
+  const deleteUser = async () => {
+  let response = await axios.delete(`/api/auth`);
   let filteredUsers = users.filter((user) => user.id !== id);
   setUsers(filteredUsers);
   refreshPage();
-};
+  };
 
-const getUsers = async () => {
+  const getUsers = async () => {
   let response = await axios.get("/api/users");
   setUsers(response.data)
-};
+  };
 
-const [users, setUsers] = useState([]);
-
-
-function refreshPage(){
+  function refreshPage(){
   window.location.reload(false);
-};
+  };
 
   return (
     <Container key={props.id}>
       <h1>My Profile</h1>
-      {image && image}
-      <p>ID: {id}</p>
+      {image && <img style = {{width:"300px"}} src = {image}/>}
+      {/* <p>ID: {id}</p> */}
+      <br/>
+      <div style={{margin:"20px"}}>
+      {showUpload && <UserImage toggleUpload = {toggleUpload}/>}
+      {!showUpload && <button onClick = {toggleUpload}>Change Profile Picture</button>}
+      </div>
       <p>Email: {email}</p>
       <p>Password: ****** </p>
       <button onClick = {toggleForm}>

@@ -4,5 +4,6 @@ Rails.application.routes.draw do
     resources :recordings, only: [:index, :create, :update, :destroy]
     resources :tags, only: [:index, :destroy]
     resources :users
+    post 'users/image', to: 'users#profile_image'
   end
 end

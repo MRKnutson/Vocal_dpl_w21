@@ -22,8 +22,7 @@ const Timeline = () => {
 
   const getRecordings = async () => {
    try { 
-     let response = await axios.get("/api/tags");
-      console.log(response.data)
+     let response = await axios.get("/api/recordings");
       setRecordings(response.data)
       }
     catch (error) {

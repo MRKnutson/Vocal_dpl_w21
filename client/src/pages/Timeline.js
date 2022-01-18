@@ -14,7 +14,8 @@ const Timeline = () => {
 
   const getRecordings = async () => {
    try { 
-     let response = await axios.get("/api/tags");
+     // Will need to merg tag table and recording table with this axios call
+     let response = await axios.get("/api/recordings");
       setRecordings(response.data)
       }
     catch (error) {
@@ -56,6 +57,7 @@ const Timeline = () => {
 // if statement here checks wheather a tag has been selected or not
   const renderRow = () => {
     if (!tagChoice || tagChoice == "All"){
+      console.log(recordings)
     return recordings.map((recording) => {
       return(
       <tr key = {recording.id}>
@@ -77,7 +79,7 @@ const Timeline = () => {
   const renderSearchTags = () => {
     console.log(tagChoice)
     let recs = recordings
-    let count = 1
+    let count = 0
     return recs.map((r)=>{
       // Change this to display the name of the tag once it has real data
       count++

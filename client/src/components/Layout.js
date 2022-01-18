@@ -1,7 +1,9 @@
 import React, { useContext } from 'react'
-import {Button, Container, Nav, Navbar} from 'react-bootstrap'
+import {Button, Container, Nav, NavDropdown} from 'react-bootstrap'
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
+import {VocalNavbar, PrimaryColor, SecondaryColor, ActionColor} from '../components/Styles.js'
+import logo from '../images/plain_logo.jpg'
 
 const Layout = () => {
   const navigate = useNavigate();
@@ -11,16 +13,16 @@ const Layout = () => {
   const renderUILinks =()=>{
     if(authenticated){
       return(
-        <>
-        <Nav.Link eventKey = "/profile">Profile</Nav.Link>
-        <Button onClick={()=>handleLogout(navigate)}>Logout</Button>
-        </>
+        <NavDropdown style={{color:"white"}} title = "User" id="collapsible-nav-dropdown">
+        <NavDropdown.Item eventKey = "/profile">Profile</NavDropdown.Item>
+        <NavDropdown.Item onClick={()=>handleLogout(navigate)}>Logout</NavDropdown.Item>
+        </NavDropdown>
       )
     } else {
       return(
         <>
-          <Nav.Link eventKey = "/login">Login</Nav.Link>
-          <Nav.Link eventKey = "/register">New User</Nav.Link>
+          <Nav.Link eventKey = "/login">Log In</Nav.Link>
+          <Nav.Link eventKey = "/register">Sign Up</Nav.Link>
         </>
       )
     };
@@ -32,24 +34,27 @@ const Layout = () => {
 
   return(
     <>
-      <Navbar expand = "md" bg = "dark" variant = "dark">
+      <VocalNavbar expand = "md">
         <Container fluid>
-          <Navbar.Brand onClick = {()=>navigate("/")}>Cool Logo</Navbar.Brand>
-          <Navbar.Toggle aria-controls="response-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
+          <VocalNavbar.Brand><img
+        src={logo}
+        alt="Vocal Logo"
+      /></VocalNavbar.Brand>
+          <VocalNavbar.Toggle aria-controls="response-navbar-nav" />
+          <VocalNavbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto" onSelect = {handleSelect}>
-              <Nav.Link eventKey = "/">Home</Nav.Link>
-              <Nav.Link eventKey = "/recordings">Timeline</Nav.Link>
-              <Nav.Link eventKey = "/mood">Mood</Nav.Link>
-              <Nav.Link eventKey = "/activities">Activities</Nav.Link>
-              <Nav.Link eventKey = "/aboutus">About Us</Nav.Link>
+              <Nav.Link style={{color:"white"}} eventKey = "/">Record</Nav.Link>
+              <Nav.Link style={{color:"white"}} eventKey = "/recordings">Timeline</Nav.Link>
+              <Nav.Link style={{color:"white"}} eventKey = "/mood">Mood</Nav.Link>
+              <Nav.Link style={{color:"white"}} eventKey = "/activities">Activities</Nav.Link>
+              <Nav.Link style={{color:"white"}} eventKey = "/aboutus">About Us</Nav.Link>
             </Nav>
             <Nav className="justify-content-end" onSelect = {handleSelect}>
               {renderUILinks()}
             </Nav>
-          </Navbar.Collapse>
+          </VocalNavbar.Collapse>
         </Container>
-      </Navbar>
+      </VocalNavbar>
       <Outlet />
     </>
   );

@@ -5,7 +5,6 @@ import { Table, Button, ButtonToolbar, InputGroup, FormControl, Dropdown, Dropdo
 
 
 const Timeline = () => {
-
   const [recordings, setRecordings] = useState([]);
   const [tags, setTags] = useState([]);
   const [showRecordingID, setShowRecordingID] = useState(null)
@@ -13,14 +12,12 @@ const Timeline = () => {
 
   useEffect(() => {
     getRecordings();
+    getTags();
   },[]);
-
-    useEffect(() => {
+  
+  useEffect(() => {
     console.log("showRecordingID: " + showRecordingID)
-
   },[showRecordingID]);
-
-
 
   const getRecordings = async () => {
    try { 
@@ -28,7 +25,7 @@ const Timeline = () => {
       setRecordings(response.data)
       }
     catch (error) {
-    alert('error occured getRecordings')
+    alert('error occured in getRecordings')
       }
   };
   
@@ -38,7 +35,7 @@ const Timeline = () => {
       setTags(response.data)
       }
     catch (error) {
-    alert('error occured getTags')
+    alert('error occured in getTags')
       }
   };
 
@@ -59,6 +56,8 @@ const Timeline = () => {
     </Table>
     )
   };
+
+
 // This is triggered when the DD is selected and fiters the records to the chosen tag
   const renderSelectedRecordings = () => {
     return (
@@ -75,6 +74,8 @@ const Timeline = () => {
       </Table>
       )
   }
+
+
 // if statement here checks wheather a tag has been selected or not
   const renderRow = () => {
     if (!tagChoice){
@@ -87,22 +88,21 @@ const Timeline = () => {
         <td>{recording.created_at.substring(0, recording.created_at.indexOf("T"))}</td>
       </tr> )
     })} else {
+      console.log("else hit")
       let filteredRecs = recordings.filter((r)=> r.tag_id == tagChoice)
       return filteredRecs.map((recording) => {
         return (
         <tr key = {recording.id}>
           <td>{recording.title}</td>
-          <td>{recording.pointer}</td>
+          <td>{recording.pointer} --- Tag_ID: {recording.tag_id}</td>
         </tr> 
         )});
     }
   }
 // this renders the possible tags the person has
   const renderSearchTags = () => {
-    console.log(tagChoice)
-    let recs = recordings
-    let count = 1
-    return recs.map((r)=>{
+    let count = 0
+    return recordings.map((r)=>{
       // Change this to display the name of the tag once it has real data
       count++
       return <Dropdown.Item key={r.tag_id} eventKey={`${r.tag_id}`}>{r.tag_id}</Dropdown.Item>
@@ -111,26 +111,18 @@ const Timeline = () => {
 
   const handleSelection = (e) => {
    setTagChoice(e);
-   
   }
 
   return (
     <div>
     <h1 style={{margin:"20px", textAlign:"center"}}>Timeline</h1>
-    
     <InputGroup style={{width:"200px", float:"left", marginBottom:"10px"}}>
       <DropdownButton  onSelect={(choice)=>handleSelection(choice)} align="end" title="Search Tags" id="dropdown-menu-align-end">
         {renderSearchTags()}
       <Dropdown.Divider />
-        <Dropdown.Item eventKey="4">View All Recordings</Dropdown.Item>
+        <Dropdown.Item eventKey="All">View All Recordings</Dropdown.Item>
       </DropdownButton> 
       
-      
-      {/* <Button>Search</Button>{' '} */}
-      {/* <FormControl
-        type="text"
-        placeholder="..."
-      /> */}
     </InputGroup>
     {showRecordingID && <ShowRecording recording={recordings.find((r)=>r.id===showRecordingID)} handleClose={()=>{setShowRecordingID(null)}}/>}
     {renderRecordings()}

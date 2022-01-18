@@ -5,7 +5,7 @@ import { Table, Button, ButtonToolbar, InputGroup, FormControl, Dropdown, Dropdo
 
 
 const Timeline = () => {
-
+  // const [recs, setRecs] = useState([])
   const [recordings, setRecordings] = useState([]);
   const [tags, setTags] = useState([]);
   const [showRecordingID, setShowRecordingID] = useState(null)
@@ -13,23 +13,21 @@ const Timeline = () => {
 
   useEffect(() => {
     getRecordings();
+    getTags();
   },[]);
-
-    useEffect(() => {
+  
+  useEffect(() => {
     console.log("showRecordingID: " + showRecordingID)
-
   },[showRecordingID]);
-
-
 
   const getRecordings = async () => {
    try { 
-     // Will need to merg tag table and recording table with this axios call
-     let response = await axios.get("/api/recordings");
+     let response = await axios.get("/api/tags");
+      console.log(response.data)
       setRecordings(response.data)
       }
     catch (error) {
-    alert('error occured getRecordings')
+    alert('error occured in getRecordings')
       }
   };
   
@@ -39,7 +37,7 @@ const Timeline = () => {
       setTags(response.data)
       }
     catch (error) {
-    alert('error occured getTags')
+    alert('error occured in getTags')
       }
   };
 
@@ -60,41 +58,42 @@ const Timeline = () => {
     </Table>
     )
   };
+
+
 // This is triggered when the DD is selected and fiters the records to the chosen tag
-  const renderSelectedRecordings = () => {
-    return (
-      <Table striped bordered hover style={{margin:"20px"}}>
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Pointer</th>
-          </tr>
-          </thead>
-          <tbody>
-          {renderRow()}
-          </tbody>
-      </Table>
-      )
-  }
+  // const renderSelectedRecordings = () => {
+  //   return (
+  //     <Table striped bordered hover style={{margin:"20px"}}>
+  //       <thead>
+  //         <tr>
+  //           <th>Title</th>
+  //           <th>Pointer</th>
+  //         </tr>
+  //         </thead>
+  //         <tbody>
+  //         {renderRow()}
+  //         </tbody>
+  //     </Table>
+  //     )
+  // }
+
+
 // if statement here checks wheather a tag has been selected or not
   const renderRow = () => {
     if (!tagChoice || tagChoice == "All"){
-      console.log(recordings)
-    return recordings.map((recording) => {
-      return(
-<<<<<<< HEAD
-      <tr key = {recording.id}>
-        <td>{recording.title}</td>
-        <td>{recording.pointer} --- Tag_ID: {recording.tag_id}</td>
-=======
-      <tr key = {recording.id} onClick={()=>{setShowRecordingID(recording.id)}}>
-        <td><a >{recording.title}</a></td>
-        <td>{recording.length.substring(0, recording.length.indexOf(".")+3)}</td> {/*limiting to 2 decimal digits*/}
-        <td><audio src={recording.pointer} controls style={{height: "35px", margin: "auto"}}/></td>
-        <td>{recording.created_at.substring(0, recording.created_at.indexOf("T"))}</td>
->>>>>>> 845dd2c886fd0b73183ce1d14c4f928884936b7e
-      </tr> )
+      // console.log(recs)
+    return recordings.map((r) => {
+      console.log(r)
+      return (
+      <tr key = {r.id} onClick={()=>{setShowRecordingID(r.id)}}>
+        <td><a>{r.title}</a></td>
+        {/* Why is this breaking below? */}
+        {/* <td>{r.length.substring(0, r.length.indexOf(".")+3)}</td> limiting to 2 decimal digits */}
+        <td><audio src={r.pointer} controls style={{height: "35px", margin: "auto"}}/></td>
+        {/* <td>{r.created_at.substring(0, r.created_at.indexOf("T"))}</td> */}
+      </tr> );
     })} else {
+      console.log("else hit")
       let filteredRecs = recordings.filter((r)=> r.tag_id == tagChoice)
       return filteredRecs.map((recording) => {
         return (
@@ -107,10 +106,8 @@ const Timeline = () => {
   }
 // this renders the possible tags the person has
   const renderSearchTags = () => {
-    console.log(tagChoice)
-    let recs = recordings
     let count = 0
-    return recs.map((r)=>{
+    return recordings.map((r)=>{
       // Change this to display the name of the tag once it has real data
       count++
       return <Dropdown.Item key={r.tag_id} eventKey={`${r.tag_id}`}>{r.tag_id}</Dropdown.Item>
@@ -119,13 +116,11 @@ const Timeline = () => {
 
   const handleSelection = (e) => {
    setTagChoice(e);
-   
   }
 
   return (
     <div>
     <h1 style={{margin:"20px", textAlign:"center"}}>Timeline</h1>
-    
     <InputGroup style={{width:"200px", float:"left", marginBottom:"10px"}}>
       <DropdownButton  onSelect={(choice)=>handleSelection(choice)} align="end" title="Search Tags" id="dropdown-menu-align-end">
         {renderSearchTags()}
@@ -133,12 +128,6 @@ const Timeline = () => {
         <Dropdown.Item eventKey="All">View All Recordings</Dropdown.Item>
       </DropdownButton> 
       
-      
-      {/* <Button>Search</Button>{' '} */}
-      {/* <FormControl
-        type="text"
-        placeholder="..."
-      /> */}
     </InputGroup>
     {showRecordingID && <ShowRecording recording={recordings.find((r)=>r.id===showRecordingID)} handleClose={()=>{setShowRecordingID(null)}}/>}
     {renderRecordings()}

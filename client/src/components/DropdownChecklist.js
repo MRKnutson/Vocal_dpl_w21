@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect} from 'react';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -10,18 +10,11 @@ import Checkbox from '@mui/material/Checkbox';
 const DropdownChecklist = (props) => {
     const [selItems, setSelItems] = useState([]);
     const [items, setItems] = useState(props.items);
-    const prevItems = useRef([])
     useEffect(()=>{
         props.setState(selItems)
     }, [selItems])
 
-     useEffect(() => {
-        //  console.log("prev current sel: " + prevItems.current, items, selItems)
-        let diff = items.filter(i => !prevItems.current.includes(i))
-        if(diff.length>0){setSelItems([...selItems, diff[0]])}
-        prevItems.current = items;
-        
-    }, [items]);
+
 
     return(
     <div>

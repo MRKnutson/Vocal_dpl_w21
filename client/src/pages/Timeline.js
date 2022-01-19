@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import ShowRecording from '../components/ShowRecording'
 import { Table, Button, ButtonToolbar, InputGroup, FormControl, Dropdown, DropdownButton } from "react-bootstrap";
+import Recording from '../components/Recording'
 
 
 const Timeline = () => {
@@ -40,64 +41,15 @@ const Timeline = () => {
   };
 
   const renderRecordings = () => {
-    return (
-    <Table class="table table-hover" striped bordered hover style={{margin:"20px"}}>
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Length</th>
-          <th>Audio</th>
-          <th>Date</th>
-        </tr>
-        </thead>
-        <tbody>
-          {renderRow()}
-        </tbody>
-    </Table>
-    )
-  };
-
-
-// This is triggered when the DD is selected and fiters the records to the chosen tag
-  const renderSelectedRecordings = () => {
-    return (
-      <Table striped bordered hover style={{margin:"20px"}}>
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Pointer</th>
-          </tr>
-          </thead>
-          <tbody>
-          {renderRow()}
-          </tbody>
-      </Table>
-      )
-  }
-
-
-// if statement here checks wheather a tag has been selected or not
-  const renderRow = () => {
-    if (!tagChoice){
-    return recordings.map((recording) => {
-      return(
-      <tr key = {recording.id} onClick={()=>{setShowRecordingID(recording.id)}}>
-        <td><a >{recording.title}</a></td>
-        <td>{recording.length.toString().substring(0, recording.length.toString().indexOf(".")+3)}</td> {/*limiting to 2 decimal digits */}
-        <td><audio src={recording.pointer} controls style={{height: "35px", margin: "auto"}}/></td>
-        <td>{recording.created_at.substring(0, recording.created_at.indexOf("T"))}</td>
-      </tr> )
-    })} else {
-      console.log("else hit")
-      let filteredRecs = recordings.filter((r)=> r.tag_id == tagChoice)
-      return filteredRecs.map((recording) => {
-        return (
-        <tr key = {recording.id}>
-          <td>{recording.title}</td>
-          <td>{recording.pointer} --- Tag_ID: {recording.tag_id}</td>
-        </tr> 
-        )});
+    let recs = recordings
+    if (tagChoice){
+      recs = recordings.filter((r)=> r.tag_id == tagChoice)
     }
+    return recs.map((recording) => {
+      return(
+        <Recording recording={recording} showRecording={()=>{setShowRecordingID(recording.id)}} tags={tags.filter((t)=>t.recording_id === recording.id)}/>
+      )
+    })
   }
 // this renders the possible tags the person has
   const renderSearchTags = () => {
@@ -125,6 +77,7 @@ const Timeline = () => {
       
     </InputGroup>
     {showRecordingID && <ShowRecording recording={recordings.find((r)=>r.id===showRecordingID)} handleClose={()=>{setShowRecordingID(null)}}/>}
+    <br /> <br />
     {renderRecordings()}
     </div>
   )

@@ -2,8 +2,9 @@ import React, { useContext } from 'react'
 import {Button, Container, Nav, NavDropdown} from 'react-bootstrap'
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
-import {VocalNavbar, PrimaryColor, SecondaryColor, ActionColor} from '../components/Styles.js'
+import {VocalNavbar, PrimaryColor, SecondaryColor, ActionColor, VocalButton} from '../components/Styles.js'
 import logo from '../images/plain_logo.jpg'
+import avatar from '../images/avatar.jpeg'
 
 const Layout = () => {
   const navigate = useNavigate();
@@ -13,17 +14,33 @@ const Layout = () => {
   const renderUILinks =()=>{
     if(authenticated){
       return(
-        <NavDropdown style={{color:"white"}} title = "User" id="collapsible-nav-dropdown">
-        <NavDropdown.Item eventKey = "/profile">Profile</NavDropdown.Item>
-        <NavDropdown.Item onClick={()=>handleLogout(navigate)}>Logout</NavDropdown.Item>
-        </NavDropdown>
+        <>
+          <Nav className="me-auto" onSelect = {handleSelect}>
+            <Nav.Link className="navbar-links" eventKey = "/">Record</Nav.Link>
+            <Nav.Link className="navbar-links" eventKey = "/activities">Activity</Nav.Link>
+            <Nav.Link className="navbar-links" eventKey = "/recordings">Timeline</Nav.Link>
+            <Nav.Link className="navbar-links" eventKey = "/mood">Mood</Nav.Link>
+            <Nav.Link className="navbar-links" eventKey = "/aboutus">About Us</Nav.Link>
+          </Nav>
+          <Nav>
+           <img src={avatar} alt="User Avatar" style={{height:"40px", borderRadius:"20px"}}/>
+            <NavDropdown onSelect = {handleSelect} style={{marginRight:"20px"}} id = "navdropdown-arrow" title = {<span className="navdropdown-title">User</span>}>
+              <NavDropdown.Item eventKey = "/profile">Profile</NavDropdown.Item>
+              <NavDropdown.Item onClick={()=>handleLogout(navigate)}>Logout</NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
+        </>
       )
     } else {
       return(
-        <>
-          <Nav.Link eventKey = "/login">Log In</Nav.Link>
-          <Nav.Link eventKey = "/register">Sign Up</Nav.Link>
-        </>
+        <VocalNavbar expand = "md">
+          <Container fluid>
+            <Nav onSelect = {handleSelect}>
+              <Nav.Link style = {{color:"white"}} eventKey = "/login">Log In</Nav.Link>
+              <VocalButton href = "/register">Sign Up</VocalButton>
+            </Nav>
+          </Container>
+        </VocalNavbar>
       )
     };
   };
@@ -34,28 +51,18 @@ const Layout = () => {
 
   return(
     <>
-      <VocalNavbar expand = "md">
+      <VocalNavbar style={{borderBottom:"1px solid #FFFF"}}expand = "md">
         <Container fluid>
-          <VocalNavbar.Brand><img
-        src={logo}
-        alt="Vocal Logo"
-      /></VocalNavbar.Brand>
+          <VocalNavbar.Brand href="/">
+            <img src={logo} alt="Vocal Logo"/>
+          </VocalNavbar.Brand>
           <VocalNavbar.Toggle aria-controls="response-navbar-nav" />
           <VocalNavbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-auto" onSelect = {handleSelect}>
-              <Nav.Link style={{color:"white"}} eventKey = "/">Record</Nav.Link>
-              <Nav.Link style={{color:"white"}} eventKey = "/recordings">Timeline</Nav.Link>
-              <Nav.Link style={{color:"white"}} eventKey = "/mood">Mood</Nav.Link>
-              <Nav.Link style={{color:"white"}} eventKey = "/activities">Activities</Nav.Link>
-              <Nav.Link style={{color:"white"}} eventKey = "/aboutus">About Us</Nav.Link>
-            </Nav>
-            <Nav className="justify-content-end" onSelect = {handleSelect}>
               {renderUILinks()}
-            </Nav>
           </VocalNavbar.Collapse>
         </Container>
       </VocalNavbar>
-      <Outlet />
+      <Outlet/>
     </>
   );
 };

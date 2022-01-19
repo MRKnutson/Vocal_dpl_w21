@@ -3,6 +3,7 @@ import { Button, Container, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
 import '../StylesFolder/Styles_Login.css';
+import {PrimaryColor, SecondaryColor, ActionColor, VocalHeader, VocalButton} from '../components/Styles.js'
 
 const Login = () => {
   const {handleLogin} = useContext(AuthContext);
@@ -16,22 +17,21 @@ const Login = () => {
   };
 
   return(
-    <div id="loginBody">
-    <h3 id="loginName"> 
-    {/* Change me */}
-      Login
-    </h3>
+    <div>
+    <VocalHeader style={{marginTop:"5rem", marginBottom:"2rem", marginLeft:"5rem"}}> 
+      Log In
+    </VocalHeader>
     <Container>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email Address</Form.Label>
+          <Form.Label style={{color:"white"}}>Email Address</Form.Label>
           <Form.Control type="email" value = {email} placeholder="Enter Email" onChange = {(e)=>setEmail(e.target.value)}/>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
+          <Form.Label style={{color:"white"}}>Password</Form.Label>
           <Form.Control type="password" value={password} placeholder="Password" onChange= {(e)=>setPassword(e.target.value)}/>
         </Form.Group>
-        <Button type ="submit">Login</Button>
+        <VocalButton type ="submit">Login</VocalButton>
       </Form>
     </Container>
     </div>

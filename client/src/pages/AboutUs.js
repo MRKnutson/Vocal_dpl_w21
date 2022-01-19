@@ -49,7 +49,7 @@ const AboutUs = () => {
       return(
         <Col key = {developer.name}>
         <CardGroup>
-        <Card class="shadow-none" style ={{width:"auto", border:"none", marginRight:"2em", marginBottom:"2em"}}>
+        <Card className="shadow-none" style ={{width:"auto", border:"none", marginRight:"2em", marginBottom:"2em"}}>
           <Card.Img variant = "top" src = {developer.image}/>
           <Card.Body style={{textAlign:"center", color:"white", padding:"1em"}} class = "card-block special-card">
                 <Card.Link href = {developer.GitHub}>
@@ -73,7 +73,7 @@ const AboutUs = () => {
   };
   return (
     <Container style={{marginBottom:"5rem"}}>
-      <VocalHeader>About Us</VocalHeader>
+      <VocalHeader style={{margin:"5rem"}}>About Us</VocalHeader>
 
       <Row md = {1} lg = {2}>
         {renderProgrammers()}

@@ -13,6 +13,7 @@ import {
   VerticalBarSeriesCanvas,
   DiscreteColorLegend,
 } from "react-vis";
+import {Chrono} from 'react-chrono';
 
 const data = [
   { title: "this is a recording 1", duration: 101, mood: 3 },
@@ -159,6 +160,15 @@ const Activities = () => {
     return [January, February, March, April, May, June, July, August, September, October, November, December]
   }
 
+  const normalizeLogsData = () =>{
+    return recordings.map((recording) =>{
+      return{
+        title: recording.id, cardTitle: recording.title, cardDetailedText: recording.notes
+      }
+      
+    })
+  };
+
 
   return (
     <Container>
@@ -177,7 +187,7 @@ const Activities = () => {
       <StatCard>
         <StatText as="h2">Longest entry: {longestRecording()} minutes</StatText>
       </StatCard>
-      <Card>
+      <Card style ={{marginBottom: "25px"}}>
         <h2 style={{ margin: "20px" }}>Activities Graphs</h2>
         <div style={{ width: "100%", height: 500, marginBottom: "50px" }}>
           {/* to work on this calendar use: https://nivo.rocks/calendar/ */}
@@ -207,6 +217,7 @@ const Activities = () => {
           />
         </div>
       </Card>
+      <Card style = {{paddingBottom: "75px", marginBottom: "25px"}}>
       <div>
         <XYPlot yDomain = {[0,32]}  style={{margin:"50px"}} width={1000} height={600} stackBy="y" xType = "ordinal" >
         <DiscreteColorLegend
@@ -275,6 +286,12 @@ const Activities = () => {
           />
         </XYPlot>
       </div>
+      </Card>
+      <Card style ={{marginTop: "100px", marginBottom: "25px", paddingBottom: "30px", paddingTop:"30px"}}>
+        <div style ={{height: "400px", width: "1000px"}}>
+          <Chrono items = {normalizeLogsData()} mode = "HORIZONTAL" />
+        </div>
+      </Card>
     </Container>
   );
 };

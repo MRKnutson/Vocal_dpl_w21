@@ -8,6 +8,14 @@ class Api::TagsController < ApplicationController
     render json: RecordingTag.get_recordings_through_tags(id)
   end
 
+  def create
+    @tag = Tag.new(tag_params)
+      if @tag.save
+        render json: @tag
+      else
+          render json: {error: @tag.errors}, status: 422
+      end
+  end
   # def update
   #   if (@tag.update)
   #     render json: @tag
@@ -29,4 +37,7 @@ class Api::TagsController < ApplicationController
   # def set_Rtag
   # @Rtag = current_user.
   # end
+  def tag_params
+        params.require(:tag).permit(:text)
+  end
 end

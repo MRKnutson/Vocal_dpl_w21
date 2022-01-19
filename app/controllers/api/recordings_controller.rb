@@ -30,7 +30,7 @@ class Api::RecordingsController < ApplicationController
               title: params[:title], 
               mood: params[:mood], 
               notes: params[:notes], 
-              length: recording['duration'],
+              duration: recording['duration'],
               pointer: recording['secure_url']
             )
             @recording.pointer = recording['secure_url']

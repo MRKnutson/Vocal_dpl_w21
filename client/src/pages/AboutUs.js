@@ -23,12 +23,12 @@ const programmers = [
 
 },
 {
-  name: "Denis Plank", 
+  name: "Dennis Plank", 
   image: "https://cdn10.bigcommerce.com/s-npe4l/products/1157/images/1335/B-MZ-SMSHD---HIGH__85441.1477602947.1280.1280.jpg?c=2",
-  GitHub: "https://github.com/MRKnutson/",
-  LinkedIn: "www.linkedin.com/in/michaelrknutson",
-  email: "mrknutson44@gmail.com",
-  blurb: "Some stuff about Denis and how great he is at Coding!"
+  GitHub: "https://github.com/DennyPlank/",
+  LinkedIn: "www.linkedin.com/in/dennis-plank-4b5547224",
+  email: "DennyMouzon@gmail.com",
+  blurb: "I just like thing to work right. When the button you click doesnt do anything? Yeah. Nightmare fuel."
 
 },
 {

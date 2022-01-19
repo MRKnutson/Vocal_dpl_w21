@@ -2,12 +2,12 @@ import React, { useContext, useState } from 'react'
 import { Button, Container, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
+import '../StylesFolder/Styles_Login.css';
 
 const Login = () => {
-
   const {handleLogin} = useContext(AuthContext);
-  const [email, setEmail]=useState("test@test.com")
-  const [password, setPassword]=useState(123456)
+  const [email, setEmail]=useState("")
+  const [password, setPassword]=useState()
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -16,6 +16,11 @@ const Login = () => {
   };
 
   return(
+    <div id="loginBody">
+    <h3 id="loginName"> 
+    {/* Change me */}
+      Login
+    </h3>
     <Container>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -29,6 +34,7 @@ const Login = () => {
         <Button type ="submit">Login</Button>
       </Form>
     </Container>
+    </div>
   )
 };
 

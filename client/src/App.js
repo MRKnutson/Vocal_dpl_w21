@@ -15,12 +15,12 @@ import Profile from './pages/Profile';
 function App() {
   return (
     <Routes>
-      <Route element ={<Layout />}>
+      <Route element = {<Layout />}>
         <Route path = "/register" element = {<Register />} />
         <Route path = "/login" element = {<Login />} />
+        <Route path = "/" element = {<Home />} />
         <Route element = {<RequireAuth />}>
         <Route path = "/aboutus" element = {<AboutUs/>} />
-        <Route path = "/" element = {<Home />} />
         <Route path = "/profile" element = {<Profile />} />
         <Route path = "/backend" element = {<BackEndTestPage />} />
         <Route path = "/recordings" element = {<Timeline/>} />

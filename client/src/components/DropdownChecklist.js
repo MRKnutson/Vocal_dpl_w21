@@ -16,7 +16,7 @@ const DropdownChecklist = (props) => {
     }, [selItems])
 
      useEffect(() => {
-         console.log("prev current sel: " + prevItems.current, items, selItems)
+        //  console.log("prev current sel: " + prevItems.current, items, selItems)
         let diff = items.filter(i => !prevItems.current.includes(i))
         if(diff.length>0){setSelItems([...selItems, diff[0]])}
         prevItems.current = items;

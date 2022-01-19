@@ -11,8 +11,10 @@ const Timeline = () => {
   const [tags, setTags] = useState([]);
   const [showRecordingID, setShowRecordingID] = useState(null)
   const [tagChoice, setTagChoice] = useState(null)
+  const [images, setImages] = useState(null)
 
   useEffect(() => {
+    getImages();
     getRecordings();
     getTags();
   },[]);
@@ -30,6 +32,17 @@ const Timeline = () => {
     alert('error occured in getRecordings')
       }
   };
+
+  const getImages = async () => {
+     try { 
+     let response = await axios.get("/api/images");
+     console.log(response.data)
+      setImages(response.data)
+      }
+    catch (error) {
+    alert('error occured in getImages')
+      }
+  }
   
   const getTags = async () => {
    try { 
@@ -48,7 +61,7 @@ const Timeline = () => {
     }
     return recs.map((recording) => {
       return(
-        <Recording recording={recording} showRecording={()=>{setShowRecordingID(recording.id)}} tags={tags.filter((t)=>t.recording_id === recording.id)}/>
+        <Recording images = {filterImages(recording.id)} recording={recording} showRecording={()=>{setShowRecordingID(recording.id)}} tags={tags.filter((t)=>t.recording_id === recording.id)}/>
       )
     })
   }
@@ -66,6 +79,18 @@ const Timeline = () => {
    setTagChoice(e);
   }
 
+  const filterImages = (id) => {
+    if (images)
+    { let filteredImages = images.filter((image) => {
+        return (image.recording_id == id) 
+    })
+    if (filteredImages.length > 0)
+    {return filteredImages}
+    else
+      return []}
+  return []
+  }
+
   return (
     <div>
     <VocalHeader style={{margin:"3rem"}}>My Journal Entries</VocalHeader>
@@ -77,7 +102,7 @@ const Timeline = () => {
       </DropdownButton> 
       
     </InputGroup>
-    {showRecordingID && <ShowRecording recording={recordings.find((r)=>r.id===showRecordingID)} handleClose={()=>{setShowRecordingID(null)}}/>}
+    {showRecordingID && <ShowRecording setImages = {setImages} images={filterImages(showRecordingID)} recording={recordings.find((r)=>r.id===showRecordingID)} handleClose={()=>{setShowRecordingID(null)}}/>}
     <br /> <br />
     {renderRecordings()}
     </div>

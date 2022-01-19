@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :users
     post "users/image", to: "users#profile_image"
     post "recordings/:recording_id/image", to: "recordings#recording_image"
+    get "images", to: "recordings#get_images"
   end
 
   get "*other", to: "static#index"

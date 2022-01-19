@@ -72,7 +72,7 @@ end
     end
   
     if cloud_image && cloud_image['secure_url']
-        @image = @image_path.photo.new(
+        @image = @image_path.photos.new(
           pointer: cloud_image['secure_url']
         )
         @image.pointer = cloud_image['secure_url']
@@ -86,6 +86,9 @@ end
   
   end
   
+  def get_images
+    render json: Recording.photo_index(current_user.id)
+  end
 
   private
 
@@ -94,7 +97,7 @@ end
    end
 
    def set_image_path
-    @image_path = current_user.recordings.find([:recording_id])
+    @image_path = current_user.recordings.find(params[:recording_id])
   end
 
   def recording_params

@@ -21,7 +21,7 @@ import { Alert } from "react-bootstrap";
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
 const UserImage = (props) => {
-    const {toggleUpload} = props
+    const {toggleUpload, setImages, images} = props
     const auth = useContext(AuthContext);
     const [files, setFiles] = useState([]);
     const [success, setSuccess] = useState(false);
@@ -32,6 +32,7 @@ const UserImage = (props) => {
         setFiles(files);
     };
     
+    
     const handleUpload = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -40,10 +41,11 @@ const UserImage = (props) => {
             data.append("file", files[0].file);
         };
         try {
-            let res = await axios.post("/api/recordings/image", data);
+            let res = await axios.post(`/api/recordings/${props.recording_id}/image`, data);
             setSuccess(true);
-            auth.setUser(res.data);
             setLoading(false);
+            console.log(images)
+            setImages([res.data, ...images])
             toggleUpload()
         } catch (err) {
             console.log(err);

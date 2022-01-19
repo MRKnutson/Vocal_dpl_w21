@@ -1,16 +1,18 @@
 import React, { useContext, useState, useRef } from 'react';
 import { Button, Container, Form, Overlay } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { NavigationType, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
 import {PrimaryColor, SecondaryColor, ActionColor, VocalHeader, VocalButton} from '../components/Styles.js'
 
 const Register = () => {
+  const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const target = useRef(null);
   const {handleRegister} = useContext(AuthContext);
   const [email, setEmail]=useState(null)
   const [password, setPassword]=useState(null)
-  const navigate = useNavigate();
+  const [passwordConfirmation, setPasswordConfirmation]=useState(null);
+  const [passError, setPassError] = useState([])
   
   const auth = useContext(AuthContext)
   const errors = auth.errors
@@ -18,9 +20,13 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleRegister({email, password}, navigate)  
+    if (password == passwordConfirmation){
+      handleRegister({email, password}, navigate)  
+    } else {
+      setPassError(['--Passwords do not match, please try again'])
+      // setPasswordConfirmation(null);
+    }
   };
-  console.log(errors)
   
   return (
     <Container>
@@ -35,14 +41,15 @@ const Register = () => {
           <Form.Control type="password" placeholder="Enter Password" onChange= {(e)=>setPassword(e.target.value)}/>
         </Form.Group>
         
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className="mb-3" controlId="formBasicPassword" onClick={()=>(setShow(false) & setPassError(null))}>
           <Form.Label style={{color:"white"}}>Confirm Password:</Form.Label>
-          <Form.Control type="password" placeholder="Confirm Password" onChange= {(e)=>setPassword(e.target.value)}/>
+          <Form.Control type="password" placeholder="Confirm Password" onChange= {(e)=>setPasswordConfirmation(e.target.value)}/>
         </Form.Group>
 
         <VocalButton type ="submit" onClick={()=> setShow(true)}>Register</VocalButton>
-        
-          <Overlay target={target.current} show={show} placement="right">
+      
+      {/* Backend / Frontend authentication error */}
+          <Overlay target={target.current} show={show} placement="bottom">
           {({ placement, arrowProps, show: _show, popper, ...props }) => (
             <div
               {...props}
@@ -54,10 +61,12 @@ const Register = () => {
                 ...props.style,
               }}
             >
-              {errors}
+              {errors && errors}
+              {passError && passError}
             </div>
           )}
         </Overlay>
+
       
       </Form>
     </Container>

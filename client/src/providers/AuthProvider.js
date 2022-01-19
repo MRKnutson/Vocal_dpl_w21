@@ -26,8 +26,9 @@ const AuthProvider = (props) => {
       setUser(response.data.data)
       navigate("/")
     } catch (err) {
-      console.log(err.response.data.errors.full_messages)
-      alert(err.response.data.errors.full_messages)
+      // console.log(err.response.data.errors)
+      // alert(err.response.data.errors)
+      setErrors(err.response.data.errors)
     };
   };
 
@@ -52,7 +53,7 @@ const AuthProvider = (props) => {
       alert(err.response.data.errors.full_messages)
     };
   };
-  console.log(errors)
+  // console.log(errors)
   return(
     <AuthContext.Provider value ={{
       ...user,

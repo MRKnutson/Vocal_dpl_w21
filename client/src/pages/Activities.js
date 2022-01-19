@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Card, Button } from "react-bootstrap";
 import { ResponsiveCalendar } from "@nivo/calendar";
 import axios from "axios";
-import { StatCard, StatText, VocalHeader } from "../components/Styles.js";
+import { PrimaryColor, SecondaryColor, StatCard, StatText, VocalHeader } from "../components/Styles.js";
 import {
   XYPlot,
   XAxis,
@@ -36,12 +36,12 @@ const Activities = () => {
   const getRecordings = async () => {
     try {
       let response = await axios.get("/api/recordings");
-      console.log(response.data);
+      // console.log(response.data);
       setRecordings(response.data);
       if(response.data.length>0){
         let dailyRecordings = filterDay(response.data)
         setLogData(dailyRecordings)
-        console.log(dailyRecordings)
+        // console.log(dailyRecordings)
       }
       
     } catch (error) {
@@ -60,9 +60,13 @@ const Activities = () => {
   };
 
   const changeData = () => {
-    return recordings.map((recording) => {
-      return { value: 1, day: formatDate(recording.created_at) };
-    });
+    if(recordings && recordings.length > 0){
+      return recordings.map((recording) => {
+        return { value: 1, day: formatDate(recording.created_at) };
+      });
+    } else {
+      return []
+    }
   };
 
   function formatDate(date) {
@@ -78,25 +82,35 @@ const Activities = () => {
   }
 
   const longestRecording = () => {
-    let longest = data[0].duration;
-    data.map((recording) => {
-      if (recording.duration > longest) {
-        longest = recording.duration;
-      }
-    });
-    return (longest / 60).toFixed(0);
+    if(recordings && recordings.length > 0){
+      let longest = data[0].duration;
+      data.map((recording) => {
+        if (recording.duration > longest) {
+          longest = recording.duration;
+        }
+      });
+      return (longest / 60).toFixed(0);
+    } else {
+      return 0
+    }
   };
 
   const totalTime = () => {
     let durationArray = [];
-    data.map((recording) => {
-      durationArray.push(recording.duration);
-    });
-    let total = durationArray.reduce((total, amount) => total + amount);
-    return (total / 60).toFixed(0);
+    if(recordings && recordings.length >0) {
+      data.map((recording) => {
+        durationArray.push(recording.duration);
+      });
+    }
+    if(durationArray.length >0) {
+      let total = durationArray.reduce((total, amount) => total + amount);
+      return (total / 60).toFixed(0)
+    } else {
+      return 0
+    };
   };
   const BarSeries = useCanvas ? VerticalBarSeriesCanvas : VerticalBarSeries;
-  const content = useCanvas ? "TOGGLE TO SVG" : "TOGGLE TO CANVAS";
+  // const content = useCanvas ? "TOGGLE TO SVG" : "TOGGLE TO CANVAS";
 
   function formatDate(date) {
     var d = new Date(date),
@@ -319,9 +333,20 @@ const Activities = () => {
         </XYPlot>
       </div>
       </Card>
-      {logData.length>1 && <Card className = "justify-content-center" style ={{margin: "20px", paddingBottom: "30px", paddingTop:"30px"}}>
+      {logData.length>1 && <Card className = "justify-content-center" style ={{ backgroundColor: `${SecondaryColor}`,margin: "20px", paddingBottom: "30px", paddingTop:"30px"}}>
         <div style ={{height: "400px", width: "100%"}}>
-          <Chrono items = {normalizeLogsData()} mode = "HORIZONTAL" />
+          <Chrono 
+            cardPositionHorizontal = "TOP"
+            items = {normalizeLogsData()} 
+            mode = "HORIZONTAL" 
+            theme = {{
+              primary: "lightGrey",
+              secondary: `${PrimaryColor}`,
+              cardBgColor: `${PrimaryColor}`,
+              cardForeColor: "white",
+              titleColor: "white"
+            }}
+          />
         </div>
       </Card>}
     </Container>

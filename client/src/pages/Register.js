@@ -41,7 +41,7 @@ const Register = () => {
           <Form.Control type="password" placeholder="Enter Password" onChange= {(e)=>setPassword(e.target.value)}/>
         </Form.Group>
         
-        <Form.Group className="mb-3" controlId="formBasicPassword" onClick={()=>setPassError(null)}>
+        <Form.Group className="mb-3" controlId="formBasicPassword" onClick={()=>(setShow(false) & setPassError(null))}>
           <Form.Label style={{color:"white"}}>Confirm Password:</Form.Label>
           <Form.Control type="password" placeholder="Confirm Password" onChange= {(e)=>setPasswordConfirmation(e.target.value)}/>
         </Form.Group>

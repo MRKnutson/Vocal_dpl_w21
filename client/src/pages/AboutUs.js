@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {Card, CardGroup, Col, Container, Nav, Row} from 'react-bootstrap'
 import EntryModal from "../components/EntryModal";
+import {PrimaryColor, SecondaryColor, ActionColor, VocalHeader} from '../components/Styles.js'
 
 const programmers = [
   {
@@ -83,7 +84,7 @@ const AboutUs = () => {
   };
   return (
     <Container>
-      <h1>About Us</h1>
+      <VocalHeader>About Us</VocalHeader>
 
       <Row md = {1} lg = {2}>
         {renderProgrammers()}

@@ -1,42 +1,4 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
+/* this is for the links to be happy on the moods page...delete it! */
 .card{
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
@@ -47,3 +9,33 @@
   color:rgb(6, 255, 159);
   text-decoration: none;
 }
+
+
+/* this is all navbar styling */
+.navbar-nav .dropdown-menu{
+  background-color: #3E619B;
+}
+.navbar-nav .dropdown-menu a:hover{
+  background-color: #EF4C4C;
+}
+
+.navbar-nav .dropdown-item{
+  color:white;
+}
+
+.navdropdown-title{
+  color:white;
+}
+
+#navdropdown-arrow {
+  color:white;
+}
+
+.navbar-links a:hover{
+  color:#EF4C4C !important;
+}
+
+.navbar-links {
+  color:white !important
+}
+

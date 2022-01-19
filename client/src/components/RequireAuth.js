@@ -30,7 +30,7 @@ const RequireAuth = () => {
   }
 
   if(!auth.authenticated) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/" />;
   };
 
   return <Outlet />

@@ -6,7 +6,8 @@ import EntryModal from '../components/EntryModal';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import '../StylesFolder/Styles_Landing.css';
-
+import { VocalButton } from '../components/Styles.js'
+ 
 
 const Home =  () => {
   const auth = useContext(AuthContext)
@@ -29,7 +30,7 @@ const Home =  () => {
       <div id="landingBody">
           <h2 id="landingIntro"> Your Audio Journal App built by DevPoint Labs </h2>
           <Link to="/register" id="signUpButton">
-            <Button> Sign Up </Button>
+            <VocalButton> Sign Up </VocalButton>
           </Link>
       </div>
     )

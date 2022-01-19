@@ -18,8 +18,8 @@ function App() {
       <Route element ={<Layout />}>
         <Route path = "/register" element = {<Register />} />
         <Route path = "/login" element = {<Login />} />
-        <Route path = "/aboutus" element = {<AboutUs/>} />
         <Route element = {<RequireAuth />}>
+        <Route path = "/aboutus" element = {<AboutUs/>} />
         <Route path = "/" element = {<Home />} />
         <Route path = "/profile" element = {<Profile />} />
         <Route path = "/backend" element = {<BackEndTestPage />} />

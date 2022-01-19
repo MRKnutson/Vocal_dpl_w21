@@ -34,12 +34,12 @@ const Layout = () => {
     } else {
       return(
         <VocalNavbar expand = "md">
-          <Container fluid>
+          {/* <Container fluid> */}
             <Nav onSelect = {handleSelect}>
               <Nav.Link style = {{color:"white"}} eventKey = "/login">Log In</Nav.Link>
-              <VocalButton href = "/register">Sign Up</VocalButton>
+              <VocalButton><Nav.Link href = "/register">Sign Up</Nav.Link></VocalButton>
             </Nav>
-          </Container>
+          {/* </Container> */}
         </VocalNavbar>
       )
     };

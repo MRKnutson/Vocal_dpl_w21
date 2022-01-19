@@ -27,4 +27,5 @@ border:none;
 
 export const VocalHeader = styled.h1`
 color: white;
+margin: 5rem;
 `

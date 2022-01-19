@@ -1112,6 +1112,11 @@
     "@emotion/weak-memoize" "^0.2.5"
     stylis "4.0.13"
 
+"@emotion/core@^11.0.0-next.10":
+  version "11.0.0"
+  resolved "https://registry.yarnpkg.com/@emotion/core/-/core-11.0.0.tgz#d075867e07864119de7cfd5268c15012bd2d6290"
+  integrity sha512-w4sE3AmHmyG6RDKf6mIbtHpgJUSJ2uGvPQb8VXFL7hFjMPibE8IiehG8cMX3Ztm4svfCQV6KqusQbeIOkurBcA==
+
 "@emotion/hash@^0.8.0":
   version "0.8.0"
   resolved "https://registry.yarnpkg.com/@emotion/hash/-/hash-0.8.0.tgz#bbbff68978fefdbe68ccb533bc8cbe1d1afb5413"
@@ -4874,6 +4879,11 @@ flatted@^3.1.0:
   resolved "https://registry.npmjs.org/flatted/-/flatted-3.2.4.tgz"
   integrity sha512-8/sOawo8tJ4QOBX8YlQBMxL8+RLZfxMQOif9o0KUKTNTjMYElWPE0r/m5VNFxTRd0NSw8qSy8dajrwX4RYI1Hw==
 
+focus-visible@^5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/focus-visible/-/focus-visible-5.2.0.tgz#3a9e41fccf587bd25dcc2ef045508284f0a4d6b3"
+  integrity sha512-Rwix9pBtC1Nuy5wysTmKy+UjbDJpIfg8eHjw0rjZ1mX4GNLz1Bmd16uDpI3Gk1i70Fgcs8Csg2lPm8HULFg9DQ==
+
 follow-redirects@^1.0.0, follow-redirects@^1.14.4:
   version "1.14.6"
   resolved "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.14.6.tgz"
@@ -7872,6 +7882,17 @@ react-bootstrap@^2.0.3:
     react-transition-group "^4.4.1"
     uncontrollable "^7.2.1"
     warning "^4.0.3"
+
+react-chrono@^1.13.1:
+  version "1.13.1"
+  resolved "https://registry.yarnpkg.com/react-chrono/-/react-chrono-1.13.1.tgz#727c19a687303917d71e4a5091be71ce591a8474"
+  integrity sha512-oIO3CdOJl5wBk2J7uFeLdusaoAGgE/vMSJKnn4hseMxfSqXF5p362asuPEDbeQ3L1yR7vnpbd4oVkAlDyCMizQ==
+  dependencies:
+    "@emotion/core" "^11.0.0-next.10"
+    "@emotion/react" "^11.7.1"
+    "@emotion/styled" "^11.6.0"
+    classnames "^2.3.1"
+    focus-visible "^5.2.0"
 
 react-dev-utils@^12.0.0:
   version "12.0.0"

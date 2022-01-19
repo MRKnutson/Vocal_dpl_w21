@@ -1,0 +1,17 @@
+#landingBody{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#signUpButton{
+  margin-top: 5vh;
+}
+
+#landingIntro{
+  max-width: 30vw;
+  margin-top: 10%;
+  text-align: left;
+  color: white;
+}

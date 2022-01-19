@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import {Card, CardGroup, Col, Container, Nav, Row} from 'react-bootstrap'
 import EntryModal from "../components/EntryModal";
+import {PrimaryColor, SecondaryColor, ActionColor, VocalHeader} from '../components/Styles.js'
 
 const programmers = [
   {
     name: "Asher Bay", 
-    image: "https://cdn10.bigcommerce.com/s-npe4l/products/1157/images/1335/B-MZ-SMSHD---HIGH__85441.1477602947.1280.1280.jpg?c=2",
+    image: "https://res.cloudinary.com/djhlv2nfc/image/upload/v1642617032/Vocal/Images/8AFD60E2-3407-4C00-B399-4F89AB22B67F-1000_gin2ew.jpg",
     GitHub: "https://github.com/MRKnutson/",
     LinkedIn: "www.linkedin.com/in/michaelrknutson",
     email: "mrknutson44@gmail.com",
@@ -22,12 +23,12 @@ const programmers = [
 
 },
 {
-  name: "Denis Plank", 
+  name: "Dennis Plank", 
   image: "https://cdn10.bigcommerce.com/s-npe4l/products/1157/images/1335/B-MZ-SMSHD---HIGH__85441.1477602947.1280.1280.jpg?c=2",
-  GitHub: "https://github.com/MRKnutson/",
-  LinkedIn: "www.linkedin.com/in/michaelrknutson",
-  email: "mrknutson44@gmail.com",
-  blurb: "Some stuff about Denis and how great he is at Coding!"
+  GitHub: "https://github.com/DennyPlank/",
+  LinkedIn: "www.linkedin.com/in/dennis-plank-4b5547224",
+  email: "DennyMouzon@gmail.com",
+  blurb: "I just like thing to work right. When the button you click doesnt do anything? Yeah. Nightmare fuel."
 
 },
 {
@@ -47,43 +48,32 @@ const AboutUs = () => {
     return programmers.map((developer)=>{
       return(
         <Col key = {developer.name}>
-        <Card style ={{
-          width: "25rem",
-          boxShadow: "rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px",
-          marginTop: "45px",
-          height: "45rem"
-          }}>
-          <Card.Img variant = "top" src = {developer.image} style = {{
-             maxWidth: "25rem"
-            }}/>
-          <Card.Body>
-            <Card.Title>{developer.name}</Card.Title>
-            <Card.Text>{developer.blurb}</Card.Text>
-          </Card.Body>
-          <Card.Footer>
-            <Nav>
-              <Nav.Item>
-                <Nav.Link href = {developer.GitHub}>
+        <CardGroup>
+        <Card class="shadow-none" style ={{width:"auto", border:"none", marginRight:"2em", marginBottom:"2em"}}>
+          <Card.Img variant = "top" src = {developer.image}/>
+          <Card.Body style={{textAlign:"center", color:"white", padding:"1em"}} class = "card-block special-card">
+                <Card.Link href = {developer.GitHub}>
                   <img src = "https://logos-world.net/wp-content/uploads/2020/11/GitHub-Emblem.png" 
                   style = {{height: "3rem"}}
                   />
-                </Nav.Link>
-                <Nav.Link href = {developer.LinkedIn}>
+                </Card.Link>
+                <Card.Link href = {developer.LinkedIn}>
                   <img src = "https://www.passionateinmarketing.com/wp-content/uploads/2021/11/linledin-B2Binstitute.png"
                   style = {{height: "2rem"}}
                   />
-                </Nav.Link>
-              </Nav.Item>
-            </Nav>
-          </Card.Footer>
+                </Card.Link>
+            <Card.Title>{developer.name}</Card.Title>
+            <Card.Text>{developer.blurb}</Card.Text>
+            </Card.Body>
         </Card>
+        </CardGroup>
         </Col>
       )
     })
   };
   return (
-    <Container>
-      <h1>About Us</h1>
+    <Container style={{marginBottom:"5rem"}}>
+      <VocalHeader>About Us</VocalHeader>
 
       <Row md = {1} lg = {2}>
         {renderProgrammers()}

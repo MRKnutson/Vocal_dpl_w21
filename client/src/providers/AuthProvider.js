@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import axios from 'axios'
 
 export const AuthContext = React.createContext();
-
 export const AuthConsumer = AuthContext.Consumer;
 
 const AuthProvider = (props) => {
   const [user, setUser] = useState(null);
+  const [errors, setErrors] = useState([])
 
   const handleRegister = async (user, navigate)=>{
     try {
@@ -14,8 +14,9 @@ const AuthProvider = (props) => {
       setUser(response.data.data)
       navigate('/')
     } catch (err) {
-      console.log(err.response.data.errors.full_messages)
-      alert(err.response.data.errors.full_messages)
+      // console.log(err.response.data.errors.full_messages)
+      // alert(err.response.data.errors.full_messages)
+      setErrors(err.response.data.errors.full_messages)
     }
   };
 
@@ -51,9 +52,11 @@ const AuthProvider = (props) => {
       alert(err.response.data.errors.full_messages)
     };
   };
+  console.log(errors)
   return(
     <AuthContext.Provider value ={{
       ...user,
+      errors,
       setUser,
       handleRegister,
       handleLogin,

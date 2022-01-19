@@ -12,8 +12,8 @@ const ChooseTags = () => {
     }, [])
 
     useEffect(()=>{
-        // console.log(tags)
-    })
+       console.log("sel tags: " + chosenTags)
+    }, [chosenTags])
 
     const getTags = async () => {
     try{

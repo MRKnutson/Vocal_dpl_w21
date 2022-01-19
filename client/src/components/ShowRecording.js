@@ -1,14 +1,31 @@
 import {useState, useEffect} from 'react'
 import { Button, Modal } from 'react-bootstrap';
+import RecordingImage from '../components/RecordingImage';
+import {PrimaryColor, SecondaryColor, ActionColor, VocalHeader, VocalButton} from '../components/Styles.js'
+
 const ShowRecording = (props) => {
-    const {recording, handleClose} = props
+    const {recording, handleClose, images, setImages} = props
+
+    const [image, setImage] = useState(null);
+    const [showUpload, setShowUpload] = useState(false);
+
+     const toggleUpload = () => {
+    setShowUpload(!showUpload);
+  };
+
+    const renderImages = () => {
+      console.log(images)
+      return images.map((image)=> {
+         return (<img src={image.pointer} style={{width:"100px"}} />)
+      })
+    }
 
     return (
         <Modal
         show={1}
       backdrop = "static"
       keyboard = {false}
-      style={{width: "400px", margin: "auto"}}
+      style={{width: "800px", margin: "auto"}}
     >
       <Modal.Header >
         <Modal.Title style={{textAlign: "center"}}>Journal Entry Details</Modal.Title>
@@ -24,6 +41,10 @@ const ShowRecording = (props) => {
               </div>
             <h6>Notes: </h6>
             <p style={{marginLeft: "20px"}}>{recording.notes}</p>
+            {images && renderImages()}
+            <br/>
+            {showUpload && <RecordingImage toggleUpload = {toggleUpload} setImages = {setImages} images = {images} recording_id = {recording.id}/>}
+            {!showUpload && <VocalButton onClick = {toggleUpload}>Add Image</VocalButton>}
         </div>
   
       </Modal.Body>

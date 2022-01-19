@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import ShowRecording from '../components/ShowRecording'
 import { Table, Button, ButtonToolbar, InputGroup, FormControl, Dropdown, DropdownButton } from "react-bootstrap";
+import {PrimaryColor, SecondaryColor, ActionColor, VocalHeader, VocalButton} from '../components/Styles.js'
 import Recording from '../components/Recording'
 
 
@@ -10,8 +11,10 @@ const Timeline = () => {
   const [tags, setTags] = useState([]);
   const [showRecordingID, setShowRecordingID] = useState(null)
   const [tagChoice, setTagChoice] = useState(null)
+  const [images, setImages] = useState(null)
 
   useEffect(() => {
+    getImages();
     getRecordings();
     getTags();
   },[]);
@@ -29,6 +32,17 @@ const Timeline = () => {
     alert('error occured in getRecordings')
       }
   };
+
+  const getImages = async () => {
+     try { 
+     let response = await axios.get("/api/images");
+     console.log(response.data)
+      setImages(response.data)
+      }
+    catch (error) {
+    alert('error occured in getImages')
+      }
+  }
   
   const getTags = async () => {
    try { 
@@ -47,7 +61,7 @@ const Timeline = () => {
     }
     return recs.map((recording) => {
       return(
-        <Recording recording={recording} showRecording={()=>{setShowRecordingID(recording.id)}} tags={tags.filter((t)=>t.recording_id === recording.id)}/>
+        <Recording images = {filterImages(recording.id)} recording={recording} showRecording={()=>{setShowRecordingID(recording.id)}} tags={tags.filter((t)=>t.recording_id === recording.id)}/>
       )
     })
   }
@@ -65,9 +79,21 @@ const Timeline = () => {
    setTagChoice(e);
   }
 
+  const filterImages = (id) => {
+    if (images)
+    { let filteredImages = images.filter((image) => {
+        return (image.recording_id == id) 
+    })
+    if (filteredImages.length > 0)
+    {return filteredImages}
+    else
+      return []}
+  return []
+  }
+
   return (
     <div>
-    <h1 style={{margin:"20px", textAlign:"center"}}>Timeline</h1>
+    <VocalHeader style={{margin:"3rem"}}>My Journal Entries</VocalHeader>
     <InputGroup style={{width:"200px", float:"left", marginBottom:"10px"}}>
       <DropdownButton  onSelect={(choice)=>handleSelection(choice)} align="end" title="Search Tags" id="dropdown-menu-align-end">
         {renderSearchTags()}
@@ -76,7 +102,7 @@ const Timeline = () => {
       </DropdownButton> 
       
     </InputGroup>
-    {showRecordingID && <ShowRecording recording={recordings.find((r)=>r.id===showRecordingID)} handleClose={()=>{setShowRecordingID(null)}}/>}
+    {showRecordingID && <ShowRecording setImages = {setImages} images={filterImages(showRecordingID)} recording={recordings.find((r)=>r.id===showRecordingID)} handleClose={()=>{setShowRecordingID(null)}}/>}
     <br /> <br />
     {renderRecordings()}
     </div>

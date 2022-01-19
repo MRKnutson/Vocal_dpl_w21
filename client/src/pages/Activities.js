@@ -15,20 +15,12 @@ import {
 } from "react-vis";
 import {Chrono} from 'react-chrono';
 
-const data = [
-  { title: "this is a recording 1", duration: 101, mood: 3 },
-  { title: "this is a recording 2", duration: 15, mood: 4 },
-  { title: "this is a recording 3", duration: 45, mood: 2 },
-  { title: "this is a recording 4", duration: 100006, mood: 5 },
-];
-
 const Activities = () => {
   const [useCanvas, setUseCanvas] = useState(false);
   const [recordings, setRecordings] = useState([]);
   const [logData, setLogData] = useState([])
 
   useEffect(() => {
-    // console.log("recordings mounted");
     getRecordings();
     filterDay();
   }, []);
@@ -36,12 +28,10 @@ const Activities = () => {
   const getRecordings = async () => {
     try {
       let response = await axios.get("/api/recordings");
-      // console.log(response.data);
       setRecordings(response.data);
       if(response.data.length>0){
         let dailyRecordings = filterDay(response.data)
         setLogData(dailyRecordings)
-        // console.log(dailyRecordings)
       }
       
     } catch (error) {
@@ -83,13 +73,13 @@ const Activities = () => {
 
   const longestRecording = () => {
     if(recordings && recordings.length > 0){
-      let longest = data[0].duration;
-      data.map((recording) => {
+      let longest = recordings[0].duration;
+      recordings.map((recording) => {
         if (recording.duration > longest) {
           longest = recording.duration;
         }
       });
-      return (longest / 60).toFixed(0);
+      return longest.toFixed(0);
     } else {
       return 0
     }
@@ -98,13 +88,13 @@ const Activities = () => {
   const totalTime = () => {
     let durationArray = [];
     if(recordings && recordings.length >0) {
-      data.map((recording) => {
+      recordings.map((recording) => {
         durationArray.push(recording.duration);
       });
     }
     if(durationArray.length >0) {
       let total = durationArray.reduce((total, amount) => total + amount);
-      return (total / 60).toFixed(0)
+      return total.toFixed(0)
     } else {
       return 0
     };
@@ -208,9 +198,9 @@ const Activities = () => {
     if(logData.length > 0){
       return logData.map((recording) =>{
         let time = formatTime(recording.created_at)
-        let date = formatDate(recording.created_at)
+        let length = recording.duration
         return{
-          title: `${time}`, cardTitle: recording.title, cardDetailedText: recording.notes
+          title: `${time}`, cardTitle: recording.title, cardSubtitle: `Length: ${length} minutes`, cardDetailedText: `Notes: ${recording.notes}`
         }
       })
     }
@@ -228,7 +218,7 @@ const Activities = () => {
         <StatText as="h2">Entries Saved: {recordings.length}</StatText>
       </StatCard>
       <StatCard>
-        <StatText as="h2">Total time recorded: {totalTime()}</StatText>
+        <StatText as="h2">Total time recorded: {totalTime()} minutes</StatText>
       </StatCard>
       <StatCard>
         <StatText as="h2">Longest entry: {longestRecording()} minutes</StatText>

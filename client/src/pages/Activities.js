@@ -340,11 +340,11 @@ const Activities = () => {
             items = {normalizeLogsData()} 
             mode = "HORIZONTAL" 
             theme = {{
-              primary: "lightGrey",
-              secondary: `${PrimaryColor}`,
+              primary: `${PrimaryColor}`,
+              secondary: "lightgray",
               cardBgColor: `${PrimaryColor}`,
               cardForeColor: "white",
-              titleColor: "white"
+              titleColor: `${PrimaryColor}`
             }}
           />
         </div>

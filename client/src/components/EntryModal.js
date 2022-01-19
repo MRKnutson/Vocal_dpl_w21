@@ -3,32 +3,23 @@ import { Button, Modal } from 'react-bootstrap';
 import useRecorder from "./useRecorder";
 import {useState, useEffect} from 'react'
 import axios from "axios";
-
+import ChooseTags from './ChooseTags'
 const EntryModal = ({handleClose, handleChange, handleSave, show, blobURL, duration}) => {
 
     const [title, setTitle] = useState("")
     const [mood, setMood] = useState("")
     const [notes, setNotes] = useState("") 
-    const [tags, setTags] = useState([])
-    const [chosenTags, setChosenTags] = useState([])
+    
     const currentDate = new Date();
 
     const [date, setDate] = useState(currentDate.toLocaleDateString())
     const [time, setTime] = useState(currentDate.toLocaleTimeString())
 
 
-  useEffect(()=>{
-    getTags()
-  }, [])
+  
 
-  const getTags = async () => {
-    try{
-      let res = await axios.get(`api/tags`)
-      setTags(res.data)
-    } catch (err) {
-      console.log(err)
-    }
-  }
+  
+  
   return(
     <Modal
       show = {show}
@@ -62,13 +53,8 @@ const EntryModal = ({handleClose, handleChange, handleSave, show, blobURL, durat
               <div style={{display: "flex"}}>
                 <h6 >Notes: <textarea style={{verticalAlign: "top", height: "100px", width: "250px"}} name="notes" onChange={handleChange}></textarea></h6> 
               </div>
-              <h6>Tags: 
-                <select name="notes" onChange={handleChange}>
-                  {tags.map((t)=>{
-                    return <option value={t.id}>{t.text}</option>
-                  })}
-                </select>
-              </h6>
+              <ChooseTags />
+              
           </div>
         </div>
   

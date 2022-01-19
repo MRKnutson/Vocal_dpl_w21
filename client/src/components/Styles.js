@@ -1,4 +1,4 @@
-import {Card, Navbar, Button, Container} from "react-bootstrap";
+import {Card, Navbar, Button, Container, Form} from "react-bootstrap";
 import styled from "styled-components";
 
 //here are our theme colors for the app
@@ -20,9 +20,13 @@ export const VocalNavbar = styled(Navbar)`
   background-color: ${PrimaryColor};
 `
 
-export const VocalButton = styled(Button)`
+export const VocalButton = styled.button`
 background-color: ${ActionColor};
 border:none;
+border-radius:.2rem;
+&:hover {
+  background-color: ${SecondaryColor}
+}
 `
 
 export const VocalHeader = styled.h1`

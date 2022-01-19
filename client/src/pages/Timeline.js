@@ -83,7 +83,7 @@ const Timeline = () => {
       return(
       <tr key = {recording.id} onClick={()=>{setShowRecordingID(recording.id)}}>
         <td><a >{recording.title}</a></td>
-        {/* <td>{recording.length.substring(0, recording.length.indexOf(".")+3)}</td> limiting to 2 decimal digits */}
+        <td>{recording.duration.toString().substring(0, recording.duration.toString().indexOf(".")+3)}</td> {/*limiting to 2 decimal digits */}
         <td><audio src={recording.pointer} controls style={{height: "35px", margin: "auto"}}/></td>
         <td>{recording.created_at.substring(0, recording.created_at.indexOf("T"))}</td>
       </tr> )

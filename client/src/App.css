@@ -39,3 +39,8 @@
   color:white !important
 }
 
+.special-card{
+  background-color: #2A3950;
+  outline: none;
+  box-shadow:none !important;
+}

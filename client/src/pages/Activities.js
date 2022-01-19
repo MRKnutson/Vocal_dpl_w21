@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Card, Button } from "react-bootstrap";
 import { ResponsiveCalendar } from "@nivo/calendar";
 import axios from "axios";
-import { StatCard, StatText } from "../components/Styles.js";
+import { StatCard, StatText, VocalHeader } from "../components/Styles.js";
 import {
   XYPlot,
   XAxis,
@@ -13,6 +13,7 @@ import {
   VerticalBarSeriesCanvas,
   DiscreteColorLegend,
 } from "react-vis";
+import {Chrono} from 'react-chrono';
 
 const data = [
   { title: "this is a recording 1", duration: 101, mood: 3 },
@@ -24,10 +25,12 @@ const data = [
 const Activities = () => {
   const [useCanvas, setUseCanvas] = useState(false);
   const [recordings, setRecordings] = useState([]);
+  const [logData, setLogData] = useState([])
 
   useEffect(() => {
-    console.log("recordings mounted");
+    // console.log("recordings mounted");
     getRecordings();
+    filterDay();
   }, []);
 
   const getRecordings = async () => {
@@ -35,8 +38,24 @@ const Activities = () => {
       let response = await axios.get("/api/recordings");
       console.log(response.data);
       setRecordings(response.data);
+      if(response.data.length>0){
+        let dailyRecordings = filterDay(response.data)
+        setLogData(dailyRecordings)
+        console.log(dailyRecordings)
+      }
+      
     } catch (error) {
       alert("error at getRecordings");
+    }
+  };
+
+  const filterDay = (data) => {
+    if(data && data.length > 0){
+      let today = formatDate(new Date())
+      let todaysLogs = data.filter((recording)=>{
+      return(formatDate(recording.created_at) == today)
+      })
+      return todaysLogs
     }
   };
 
@@ -89,6 +108,18 @@ const Activities = () => {
     if (day.length < 2) day = "0" + day;
 
     return [year, month, day].join("-");
+  }
+
+  const formatTime = (dateTime) => {
+    let d = new Date(dateTime)
+    let hrs = d.getHours()
+    let mins = d.getMinutes()
+    if(hrs <= 9)
+    hrs = "0" + hrs
+    if(mins < 10)
+    mins = "0" + mins
+    const time = hrs+":"+mins
+    return time
   }
 
   const grabMonth = () => {
@@ -159,15 +190,26 @@ const Activities = () => {
     return [January, February, March, April, May, June, July, August, September, October, November, December]
   }
 
+  const normalizeLogsData = () =>{
+    if(logData.length > 0){
+      return logData.map((recording) =>{
+        let time = formatTime(recording.created_at)
+        let date = formatDate(recording.created_at)
+        return{
+          title: `${time}`, cardTitle: recording.title, cardDetailedText: recording.notes
+        }
+      })
+    }
+  };
+
 
   return (
     <Container>
-      <h1
-        className="header"
+      <VocalHeader
         style={{ marginTop: "50px", fontSize: "5em", textAlign: "center" }}
       >
         Activities
-      </h1>
+      </VocalHeader>
       <StatCard>
         <StatText as="h2">Entries Saved: {recordings.length}</StatText>
       </StatCard>
@@ -177,7 +219,7 @@ const Activities = () => {
       <StatCard>
         <StatText as="h2">Longest entry: {longestRecording()} minutes</StatText>
       </StatCard>
-      <Card>
+      <Card style ={{margin:"20px"}}>
         <h2 style={{ margin: "20px" }}>Activities Graphs</h2>
         <div style={{ width: "100%", height: 500, marginBottom: "50px" }}>
           {/* to work on this calendar use: https://nivo.rocks/calendar/ */}
@@ -207,6 +249,7 @@ const Activities = () => {
           />
         </div>
       </Card>
+      <Card style = {{paddingBottom: "75px", margin:"20px"}}>
       <div>
         <XYPlot yDomain = {[0,32]}  style={{margin:"50px"}} width={1000} height={600} stackBy="y" xType = "ordinal" >
         <DiscreteColorLegend
@@ -275,6 +318,12 @@ const Activities = () => {
           />
         </XYPlot>
       </div>
+      </Card>
+      {logData.length>1 && <Card className = "justify-content-center" style ={{margin: "20px", paddingBottom: "30px", paddingTop:"30px"}}>
+        <div style ={{height: "400px", width: "100%"}}>
+          <Chrono items = {normalizeLogsData()} mode = "HORIZONTAL" />
+        </div>
+      </Card>}
     </Container>
   );
 };

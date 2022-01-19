@@ -18,7 +18,7 @@ const ShowRecording = (props) => {
              <h6>{recording.title}</h6>
             <audio src={recording.pointer} controls style={{height: "35px", margin: "auto"}}/>
             <div style={{margin: "auto"}}>
-                  <h6 >{recording.length}</h6>
+                  <h6 >{recording.duration}</h6>
                   <h6>{recording.created_at.substring(0, recording.created_at.indexOf("T"))}</h6>
                   <h6>{recording.created_at.substring(recording.created_at.indexOf("T")+1, recording.created_at.indexOf("T")+6)}</h6>
               </div>

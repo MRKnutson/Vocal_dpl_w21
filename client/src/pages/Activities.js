@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Container, Card, Button } from "react-bootstrap";
-import { ResponsiveCalendar } from "@nivo/calendar";
+import { Container, Card, Button, Row, Col, CardGroup } from "react-bootstrap";
+import { ResponsiveCalendar, timeRangeDefaultProps } from "@nivo/calendar";
 import axios from "axios";
-import { PrimaryColor, SecondaryColor, StatCard, StatText, VocalHeader } from "../components/Styles.js";
+import { GraphCard, PrimaryColor, SecondaryColor, StatCard, StatText, VocalHeader } from "../components/Styles.js";
 import {
   XYPlot,
   XAxis,
@@ -118,12 +118,31 @@ const Activities = () => {
     let d = new Date(dateTime)
     let hrs = d.getHours()
     let mins = d.getMinutes()
-    if(hrs <= 9)
-    hrs = "0" + hrs
-    if(mins < 10)
-    mins = "0" + mins
-    const time = hrs+":"+mins
-    return time
+    // if(hrs <= 9)
+    // hrs = "0" + hrs
+    // if(mins < 10)
+    // mins = "0" + mins
+    // const time = hrs+":"+mins
+    if(hrs < 12){
+      if (mins <10){
+        mins = "0"+ mins
+      }
+      let time = hrs+":"+mins+" AM"
+      return time
+    } else if (hrs <13 && mins<60){
+      if (mins <10){
+        mins = "0"+ mins
+      }
+      let time = hrs+":"+mins+" PM"
+      return time
+    } else {
+      if (mins <10){
+        mins = "0"+ mins
+      }
+      let PMhrs = hrs - 12
+      let time = PMhrs+":"+mins+" PM"
+      return time
+    }
   }
 
   const grabMonth = () => {
@@ -198,7 +217,7 @@ const Activities = () => {
     if(logData.length > 0){
       return logData.map((recording) =>{
         let time = formatTime(recording.created_at)
-        let length = recording.duration
+        let length = recording.duration.toFixed(0)
         return{
           title: `${time}`, cardTitle: recording.title, cardSubtitle: `Length: ${length} minutes`, cardDetailedText: `Notes: ${recording.notes}`
         }
@@ -210,21 +229,32 @@ const Activities = () => {
   return (
     <Container>
       <VocalHeader
-        style={{ marginTop: "50px", fontSize: "5em", textAlign: "center" }}
+        style={{ marginTop: "50px", fontSize: "5em" }}
       >
-        Activities
+        Activity
       </VocalHeader>
-      <StatCard>
-        <StatText as="h2">Entries Saved: {recordings.length}</StatText>
-      </StatCard>
-      <StatCard>
-        <StatText as="h2">Total time recorded: {totalTime()} minutes</StatText>
-      </StatCard>
-      <StatCard>
-        <StatText as="h2">Longest entry: {longestRecording()} minutes</StatText>
-      </StatCard>
-      <Card style ={{margin:"20px"}}>
-        <h2 style={{ margin: "20px" }}>Activities Graphs</h2>
+      <Row md = {1} lg = {3}>
+        <Col>
+          <CardGroup>
+            <StatCard>
+              <StatText as="h2">Entries Saved: {recordings.length}</StatText>
+            </StatCard>
+          </CardGroup>
+          <CardGroup>
+            <StatCard>
+              <StatText as="h2">Total time recorded: {totalTime()} minutes</StatText>
+            </StatCard>
+          </CardGroup>
+          <CardGroup>
+            <StatCard>
+              <StatText as="h2">Longest entry: {longestRecording()} minutes</StatText>
+            </StatCard>
+          </CardGroup>
+        </Col>
+      </Row>
+      
+      <GraphCard style ={{margin:"20px"}}>
+        <h2 style={{ margin: "1.5rem" }}>Activities Graphs</h2>
         <div style={{ width: "100%", height: 500, marginBottom: "50px" }}>
           {/* to work on this calendar use: https://nivo.rocks/calendar/ */}
           <ResponsiveCalendar
@@ -252,8 +282,9 @@ const Activities = () => {
             ]}
           />
         </div>
-      </Card>
-      <Card style = {{paddingBottom: "75px", margin:"20px"}}>
+      </GraphCard>
+      <GraphCard style = {{paddingBottom: "75px"}}>
+      <h2 style={{ margin: "1.5rem" }}>Activities Graphs</h2>
       <div>
         <XYPlot yDomain = {[0,32]}  style={{margin:"50px"}} width={1000} height={600} stackBy="y" xType = "ordinal" >
         <DiscreteColorLegend
@@ -322,23 +353,24 @@ const Activities = () => {
           />
         </XYPlot>
       </div>
-      </Card>
-      {logData.length>1 && <Card className = "justify-content-center" style ={{ backgroundColor: `${SecondaryColor}`,margin: "20px", paddingBottom: "30px", paddingTop:"30px"}}>
-        <div style ={{height: "400px", width: "100%"}}>
+      </GraphCard>
+      {logData.length>1 && <GraphCard>
+        <h2 style={{ margin: "1.5rem" }}>Daily Log</h2>
+        <div style ={{height: "400px", width: "100%", paddingTop: "1.5rem"}}>
           <Chrono 
             cardPositionHorizontal = "TOP"
             items = {normalizeLogsData()} 
             mode = "HORIZONTAL" 
             theme = {{
-              primary: `${PrimaryColor}`,
-              secondary: "lightgray",
+              primary: `gray`,
+              secondary: `${PrimaryColor}`,
               cardBgColor: `${PrimaryColor}`,
               cardForeColor: "white",
-              titleColor: `${PrimaryColor}`
+              titleColor: `${SecondaryColor}`
             }}
           />
         </div>
-      </Card>}
+      </GraphCard>}
     </Container>
   );
 };

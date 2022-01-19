@@ -8,9 +8,20 @@ export const ActionColor = "#EF4C4C"
 
 //used in about us page
 export const StatCard = styled(Card)`
-  width: 300px;
-  margin: 20px;
+  width: 25rem;
+  margin: 1rem;
+  border-radius: 0.75rem;
+  height: 30rem
 `
+
+export const GraphCard = styled(Card)`
+  width: 100%;
+  margin: 1rem;
+  color: white;
+  border-radius: 0.75rem;
+  background-color: ${SecondaryColor}
+`
+
 export const StatText = styled(Card.Text)`
   padding: 10px;
 `

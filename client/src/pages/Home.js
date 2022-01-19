@@ -1,9 +1,8 @@
 import React, { useContext, useState } from 'react'
 import RenderJson from '../components/RenderJson';
+import EntryModal from '../components/EntryModal';
 import { AuthContext } from '../providers/AuthProvider';
 import Recorder from '../components/Recorder'
-import EntryModal from '../components/EntryModal';
-import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import '../StylesFolder/Styles_Landing.css';
 import { VocalButton } from '../components/Styles.js'

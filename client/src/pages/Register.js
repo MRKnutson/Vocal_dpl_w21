@@ -1,7 +1,8 @@
 import React, { useContext, useState } from 'react'
-import { Button, Container, Form } from 'react-bootstrap';
+import { Button, Container, Form} from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
+import {PrimaryColor, SecondaryColor, ActionColor, VocalHeader, VocalButton} from '../components/Styles.js'
 
 const Register = () => {
 
@@ -17,16 +18,21 @@ const Register = () => {
 
   return(
     <Container>
+    <VocalHeader style={{marginTop:"6rem", marginBottom:"3rem"}}>Sign Up</VocalHeader>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email Address</Form.Label>
+          <Form.Label style={{color:"white"}}>Email Address:</Form.Label>
           <Form.Control type="email" placeholder="Enter Email" onChange = {(e)=>setEmail(e.target.value)}/>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" onChange= {(e)=>setPassword(e.target.value)}/>
+          <Form.Label style={{color:"white"}}>Password:</Form.Label>
+          <Form.Control type="password" placeholder="Enter Password" onChange= {(e)=>setPassword(e.target.value)}/>
         </Form.Group>
-        <Button type ="submit">Register</Button>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label style={{color:"white"}}>Confirm Password:</Form.Label>
+          <Form.Control type="password" placeholder="Confirm Password" onChange= {(e)=>setPassword(e.target.value)}/>
+        </Form.Group>
+        <VocalButton type ="submit">Register</VocalButton>
       </Form>
     </Container>
   )

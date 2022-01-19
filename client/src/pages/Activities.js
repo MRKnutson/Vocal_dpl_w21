@@ -288,9 +288,9 @@ const Activities = () => {
       </div>
       </Card>
       <Card style ={{marginTop: "100px", marginBottom: "25px", paddingBottom: "30px", paddingTop:"30px"}}>
-        <div style ={{height: "400px", width: "1000px"}}>
+        {/* <div style ={{height: "400px", width: "1000px"}}> */}
           <Chrono items = {normalizeLogsData()} mode = "HORIZONTAL" />
-        </div>
+        {/* </div> */}
       </Card>
     </Container>
   );

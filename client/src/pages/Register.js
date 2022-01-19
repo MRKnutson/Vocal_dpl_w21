@@ -20,7 +20,6 @@ const Register = () => {
     e.preventDefault();
     handleRegister({email, password}, navigate)  
   };
-  console.log(errors)
   
   return (
     <Container>
@@ -41,8 +40,9 @@ const Register = () => {
         </Form.Group>
 
         <VocalButton type ="submit" onClick={()=> setShow(true)}>Register</VocalButton>
-        
-          <Overlay target={target.current} show={show} placement="right">
+      
+      {/* Front end authentication error */}
+          <Overlay target={target.current} show={show} placement="bottom">
           {({ placement, arrowProps, show: _show, popper, ...props }) => (
             <div
               {...props}

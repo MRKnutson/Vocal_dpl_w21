@@ -1,6 +1,7 @@
 class Api::RecordingsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_recording
+  before_action :set_image_path, only: [:recording_image]
 
   
   def index
@@ -55,11 +56,46 @@ end
     render json: @recording.find(params[:id]).destroy
   end
 
+  def recording_image 
+    file = params[:file]
+  
+    if file
+        begin 
+            puts "saving to cloudinary"
+            cloud_image = Cloudinary::Uploader.upload(file, public_id: file.original_filename, secure: true, resource_type: :auto, :folder=>"Vocal/Images")
+        rescue => e
+            puts 'An error occurred uploading to cloudinary. Check that uploaded file is FormData'
+            p e 
+            render json: {errors: e}, status: 422
+            return
+        end
+    end
+  
+    if cloud_image && cloud_image['secure_url']
+        @image = @image_path.photo.new(
+          pointer: cloud_image['secure_url']
+        )
+        @image.pointer = cloud_image['secure_url']
+    end
+  
+    if @image.save
+        render json: @image
+    else
+        render json: {errors: e}, status: 422
+    end
+  
+  end
+  
+
   private
 
    def set_recording
      @recording = current_user.recordings
    end
+
+   def set_image_path
+    @image_path = current_user.recordings.find([:recording_id])
+  end
 
   def recording_params
     params.permit(:title, :notes, :mood)

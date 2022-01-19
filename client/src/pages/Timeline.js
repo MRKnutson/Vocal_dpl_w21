@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import ShowRecording from '../components/ShowRecording'
 import { Table, Button, ButtonToolbar, InputGroup, FormControl, Dropdown, DropdownButton } from "react-bootstrap";
-
+import {PrimaryColor, SecondaryColor, ActionColor, VocalHeader, VocalButton} from '../components/Styles.js'
 
 const Timeline = () => {
   const [recordings, setRecordings] = useState([]);
@@ -115,7 +115,7 @@ const Timeline = () => {
 
   return (
     <div>
-    <h1 style={{margin:"20px", textAlign:"center"}}>Timeline</h1>
+    <VocalHeader style={{margin:"3rem"}}>My Journal Entries</VocalHeader>
     <InputGroup style={{width:"200px", float:"left", marginBottom:"10px"}}>
       <DropdownButton  onSelect={(choice)=>handleSelection(choice)} align="end" title="Search Tags" id="dropdown-menu-align-end">
         {renderSearchTags()}

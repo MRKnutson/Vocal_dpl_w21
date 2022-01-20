@@ -18,7 +18,7 @@ const ChooseTags = (props) => {
     const getTags = async () => {
     try{
       let res = await axios.get(`api/tags`)
-      setTags([...new Set(res.data)])
+      setTags(res.data)
     } catch (err) {
       console.log(err)
     }
@@ -30,7 +30,7 @@ const ChooseTags = (props) => {
   }
   const createTag = async (e) => {
       e.preventDefault()
-      setTags([...new Set([...tags, {tag_text: newTag}])])
+      setTags([...tags, {tag_text: newTag}])
       setChosenTags([...chosenTags, newTag])
       setShowCreateTag(false)
       setNewTag("")

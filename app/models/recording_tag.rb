@@ -11,11 +11,4 @@ class RecordingTag < ApplicationRecord
     .where("users.id = #{id}")
   end
 
-  def self.get_recordings_through_tags (id)
-    select('DISTINCT tags.id AS tag_id, text AS tag_text, users.id AS user_id')
-    .joins('JOIN tags ON tags.id = recording_tags.tag_id')
-    .joins('JOIN recordings ON recordings.id = recording_tags.recording_id')
-    .joins('JOIN users ON users.id = recordings.user_id')
-    .where("users.id = #{id}")
-  end
 end

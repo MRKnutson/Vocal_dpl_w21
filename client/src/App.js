@@ -11,15 +11,17 @@ import Activities from './pages/Activities';
 import AboutUs from './pages/AboutUs';
 import BackEndTestPage from './pages/BackEndTestPage';
 import Profile from './pages/Profile';
+import Landing from './pages/Landing'
 
 function App() {
   return (
     <Routes>
       <Route element = {<Layout />}>
         <Route path = "/register" element = {<Register />} />
+        <Route path = "/landing" element = {<Landing />} />
         <Route path = "/login" element = {<Login />} />
-        <Route path = "/" element = {<Home />} />
         <Route element = {<RequireAuth />}>
+        <Route path = "/" element = {<Home />} />
         <Route path = "/aboutus" element = {<AboutUs/>} />
         <Route path = "/profile" element = {<Profile />} />
         <Route path = "/backend" element = {<BackEndTestPage />} />

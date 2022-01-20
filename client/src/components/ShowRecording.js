@@ -24,6 +24,7 @@ const ShowRecording = (props) => {
               </div>
             <h6>Notes: </h6>
             <p style={{marginLeft: "20px"}}>{recording.notes}</p>
+            <p>Tags: {props.tags.map((t)=> t.tag_text)}</p>
         </div>
   
       </Modal.Body>

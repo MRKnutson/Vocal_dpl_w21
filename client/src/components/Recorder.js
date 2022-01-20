@@ -10,9 +10,11 @@ function Recorder() {
     let [audioURL, blobURL, isRecording, startRecording, stopRecording, clearRecording] = useRecorder();
     const [title, setTitle] = useState("")
     const [mood, setMood] = useState("")
-    const [notes, setNotes] = useState("")
+    const [notes, setNotes] = useState([])
     const [duration, setDuration] = useState("")
     const [secondsElapsed, setSecondsElapsed] = useState("")
+
+
     let timer
     
 
@@ -37,8 +39,10 @@ function Recorder() {
         else if(e.target.name==="notes"){setNotes(val)}
     }
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e, chosenTags) => {
         e.preventDefault()
+
+        
         
         let data = new FormData()
         if (audioURL){
@@ -51,6 +55,7 @@ function Recorder() {
         try{
             console.log("url: ", audioURL)
           let res = await axios.post('/api/recordings', data)
+          processTags(chosenTags, res.data.id)
         } catch(err){
             console.log(err)
         }
@@ -58,6 +63,18 @@ function Recorder() {
         nav('/recordings')
     }
 
+
+    const processTags = async (tags, rec_id) => {
+        tags.forEach((t)=>{
+            if(typeof t == "string"){
+                try{
+                    axios.post('/api/tags', {text: t, recording_id: rec_id})
+                } catch (err) {
+                    console.log("error creating tag: " + t, err)
+                }
+            }
+        })
+    }
   return (
     <div style={{display: "flex", margin: "10px"}}>
         {!audioURL ? 
@@ -80,7 +97,14 @@ function Recorder() {
                     REC
                 </button>)
         :
-           <EntryModal blobURL={blobURL} duration={duration} handleSave={handleSubmit} handleChange={handleChange} show={true} handleClose={clearRecording}/>
+           <EntryModal blobURL={blobURL} 
+                duration={duration} 
+                handleSave={handleSubmit} 
+                handleChange={handleChange} 
+                show={true} 
+                handleClose={clearRecording}
+                processTags={processTags}
+            />
         }
        
         

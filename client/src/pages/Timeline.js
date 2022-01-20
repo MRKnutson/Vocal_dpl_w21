@@ -76,7 +76,7 @@ const Timeline = () => {
       </DropdownButton> 
       
     </InputGroup>
-    {showRecordingID && <ShowRecording recording={recordings.find((r)=>r.id===showRecordingID)} handleClose={()=>{setShowRecordingID(null)}}/>}
+    {showRecordingID && <ShowRecording recording={recordings.find((r)=>r.id===showRecordingID)} tags={tags.filter((t)=>t.recording_id === showRecordingID)} handleClose={()=>{setShowRecordingID(null)}}/>}
     <br /> <br />
     {renderRecordings()}
     </div>

@@ -1,6 +1,8 @@
 const Recording = (props) => {
     const {recording, showRecording, tags} = props
+    console.log("tags: " + tags)
     return (
+        
         <div onClick={showRecording} style={{borderWidth: "1px", borderColor: "black", borderStyle: "solid"}}>
             <h4>{recording.title}</h4>
             <p>Duration: {recording.duration.toString().substring(0, recording.duration.toString().indexOf(".")+3)}</p> {/*limiting to 2 decimal digits */}

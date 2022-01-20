@@ -102,7 +102,7 @@ const Timeline = () => {
       </DropdownButton> 
       
     </InputGroup>
-    {showRecordingID && <ShowRecording setImages = {setImages} images={filterImages(showRecordingID)} recording={recordings.find((r)=>r.id===showRecordingID)} handleClose={()=>{setShowRecordingID(null)}}/>}
+    {showRecordingID && <ShowRecording setImages = {setImages} images={filterImages(showRecordingID)} recording={recordings.find((r)=>r.id===showRecordingID)} handleClose={()=>{setShowRecordingID(null)}} recordings = {recordings} setRecordings = {setRecordings}/>}
     <br /> <br />
     {renderRecordings()}
     </div>

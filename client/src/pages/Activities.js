@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Container, Card, Button } from "react-bootstrap";
-import { ResponsiveCalendar } from "@nivo/calendar";
+import { Container, Card, Button, Row, Col, CardGroup } from "react-bootstrap";
+import { ResponsiveCalendar, timeRangeDefaultProps } from "@nivo/calendar";
 import axios from "axios";
-import { PrimaryColor, SecondaryColor, StatCard, StatText, VocalHeader } from "../components/Styles.js";
+import { ActionColor, GraphCard, PrimaryColor, SecondaryColor, StatCard, StatText, VocalHeader } from "../components/Styles.js";
 import {
   XYPlot,
   XAxis,
@@ -14,6 +14,7 @@ import {
   DiscreteColorLegend,
 } from "react-vis";
 import {Chrono} from 'react-chrono';
+import logo from '../images/plain_logo.jpg'
 
 const Activities = () => {
   const [useCanvas, setUseCanvas] = useState(false);
@@ -118,12 +119,31 @@ const Activities = () => {
     let d = new Date(dateTime)
     let hrs = d.getHours()
     let mins = d.getMinutes()
-    if(hrs <= 9)
-    hrs = "0" + hrs
-    if(mins < 10)
-    mins = "0" + mins
-    const time = hrs+":"+mins
-    return time
+    // if(hrs <= 9)
+    // hrs = "0" + hrs
+    // if(mins < 10)
+    // mins = "0" + mins
+    // const time = hrs+":"+mins
+    if(hrs < 12){
+      if (mins <10){
+        mins = "0"+ mins
+      }
+      let time = hrs+":"+mins+" AM"
+      return time
+    } else if (hrs <13 && mins<60){
+      if (mins <10){
+        mins = "0"+ mins
+      }
+      let time = hrs+":"+mins+" PM"
+      return time
+    } else {
+      if (mins <10){
+        mins = "0"+ mins
+      }
+      let PMhrs = hrs - 12
+      let time = PMhrs+":"+mins+" PM"
+      return time
+    }
   }
 
   const grabMonth = () => {
@@ -198,7 +218,7 @@ const Activities = () => {
     if(logData.length > 0){
       return logData.map((recording) =>{
         let time = formatTime(recording.created_at)
-        let length = recording.duration
+        let length = recording.duration.toFixed(0)
         return{
           title: `${time}`, cardTitle: recording.title, cardSubtitle: `Length: ${length} minutes`, cardDetailedText: `Notes: ${recording.notes}`
         }
@@ -210,21 +230,31 @@ const Activities = () => {
   return (
     <Container>
       <VocalHeader
-        style={{ marginTop: "50px", fontSize: "5em", textAlign: "center" }}
+        style={{ marginTop: "50px", fontSize: "5em" }}
       >
-        Activities
+        Activity
       </VocalHeader>
-      <StatCard>
-        <StatText as="h2">Entries Saved: {recordings.length}</StatText>
-      </StatCard>
-      <StatCard>
-        <StatText as="h2">Total time recorded: {totalTime()} minutes</StatText>
-      </StatCard>
-      <StatCard>
-        <StatText as="h2">Longest entry: {longestRecording()} minutes</StatText>
-      </StatCard>
-      <Card style ={{margin:"20px"}}>
-        <h2 style={{ margin: "20px" }}>Activities Graphs</h2>
+      <Row md = {1} lg = {3} style ={{display: "flex", justifyContent: "space-between"}}>
+        <Col style = {{display:"flex", justifyContent: "space-around"}}>
+            <StatCard >
+              {/* <Card.Image variant = "top" /> */}
+              <StatText as="h2">Entries Saved: {recordings.length}</StatText>
+            </StatCard>
+        </Col>
+        <Col style = {{display:"flex", justifyContent: "space-around"}}>
+            <StatCard style ={{backgroundColor: `${ActionColor}`, color: "white"}}>
+              <StatText as="h2">Total time recorded: {totalTime()} minutes</StatText>
+            </StatCard>
+        </Col>
+        <Col style = {{display:"flex", justifyContent: "space-around"}}>     
+            <StatCard style ={{backgroundColor: `${SecondaryColor}`, color: "white"}}>
+              <StatText as="h2">Longest entry: {longestRecording()} minutes</StatText>
+            </StatCard>
+        </Col>
+      </Row>
+      
+      <GraphCard style ={{margin:"20px"}}>
+        <h2 style={{ margin: "1.5rem" }}>Annual Activity</h2>
         <div style={{ width: "100%", height: 500, marginBottom: "50px" }}>
           {/* to work on this calendar use: https://nivo.rocks/calendar/ */}
           <ResponsiveCalendar
@@ -232,12 +262,17 @@ const Activities = () => {
             from={new Date(new Date().getFullYear(), 0, 1)}
             to="2022-12-31"
             emptyColor="#eeeeee"
+            textColor="#ffffff"
             colors={["#61cdbb", "#97e3d5", "#e8c1a0", "#f47560"]}
+            theme = {{
+              textColor: "white",
+              backgroundColor: `${PrimaryColor}`
+            }}
             margin={{ top: 40, right: 40, bottom: 40, left: 40 }}
             yearSpacing={40}
-            monthBorderColor="#ffffff"
+            monthBorderColor={SecondaryColor}
             dayBorderWidth={2}
-            dayBorderColor="#ffffff"
+            dayBorderColor={SecondaryColor}
             legends={[
               {
                 anchor: "bottom-right",
@@ -252,8 +287,9 @@ const Activities = () => {
             ]}
           />
         </div>
-      </Card>
-      <Card style = {{paddingBottom: "75px", margin:"20px"}}>
+      </GraphCard>
+      <GraphCard style = {{paddingBottom: "75px"}}>
+      <h2 style={{ margin: "1.5rem" }}>Entries by Mood</h2>
       <div>
         <XYPlot yDomain = {[0,32]}  style={{margin:"50px"}} width={1000} height={600} stackBy="y" xType = "ordinal" >
         <DiscreteColorLegend
@@ -286,13 +322,17 @@ const Activities = () => {
           <HorizontalGridLines />
           <XAxis 
           title = "Month"
+          style = {{
+            line: {stroke: 'white'},
+            text: {fill: 'white'}
+          }}
           />
           <YAxis 
           title = "Number of Entries"
           style={{
             line: {stroke: '#ADDDE1'},
             ticks: {stroke: '#ADDDE1'},
-            text: {stroke: 'none', fill: '#6b6b76', fontWeight: 600}
+            text: {stroke: 'none', fill: 'white', fontWeight: 600}
           }}
             />
           <BarSeries
@@ -322,23 +362,24 @@ const Activities = () => {
           />
         </XYPlot>
       </div>
-      </Card>
-      {logData.length>1 && <Card className = "justify-content-center" style ={{ backgroundColor: `${SecondaryColor}`,margin: "20px", paddingBottom: "30px", paddingTop:"30px"}}>
-        <div style ={{height: "400px", width: "100%"}}>
+      </GraphCard>
+      {logData.length>1 && <GraphCard>
+        <h2 style={{ margin: "1.5rem" }}>Daily Log</h2>
+        <div style ={{height: "400px", width: "100%", paddingTop: "1.5rem"}}>
           <Chrono 
             cardPositionHorizontal = "TOP"
             items = {normalizeLogsData()} 
             mode = "HORIZONTAL" 
             theme = {{
-              primary: `${PrimaryColor}`,
-              secondary: "lightgray",
+              primary: `gray`,
+              secondary: `${PrimaryColor}`,
               cardBgColor: `${PrimaryColor}`,
               cardForeColor: "white",
-              titleColor: `${PrimaryColor}`
+              titleColor: `white`
             }}
           />
         </div>
-      </Card>}
+      </GraphCard>}
     </Container>
   );
 };

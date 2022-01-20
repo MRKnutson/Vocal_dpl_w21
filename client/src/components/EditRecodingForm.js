@@ -5,7 +5,7 @@ import { VocalButton } from './Styles';
 
 const EditRecordingForm = (props)=> {
 
-  const [recording, setRecording] = useState(props.recording)
+  const {showEdit, setShowEdit, recording, setRecording} = props
   const [title, setTitle] = useState(props.recording.title)
   const [notes, setNotes] = useState(props.recording.notes)
 
@@ -15,6 +15,7 @@ const EditRecordingForm = (props)=> {
     try{
       let response = await axios.put(`/api/recordings/${recording.id}`, updatedRecording)
       setRecording(response.data)
+      setShowEdit(!showEdit)
     } catch (err) {
       alert('error updating recording')
     }
@@ -23,9 +24,6 @@ const EditRecordingForm = (props)=> {
 
   return(
     <Form onSubmit = {handleSubmit}>
-      <h1>Form Here</h1>
-      <h3>{recording.title}</h3>
-      <p>{recording.duration}</p>
       <Form.Group className = "mb-3">
         <Form.Label>Title</Form.Label>
         <Form.Control defaultValue = {title} onChange = {(e)=>setTitle(e.target.value)}/>
@@ -36,6 +34,7 @@ const EditRecordingForm = (props)=> {
       </Form.Group>
       {/* <p>{title}</p> */}
       <VocalButton type = "submit">Submit Changes</VocalButton>
+      <VocalButton onClick = {()=>setShowEdit(!showEdit)}>Cancel</VocalButton>
     </Form>
   )
 };

@@ -7,8 +7,9 @@ import ShowImage from "../components/ShowImage";
 import EditRecordingForm from './EditRecodingForm';
 
 const ShowRecording = (props) => {
-    const {recording, handleClose, images, setImages, showImage} = props
+    const {handleClose, images, setImages, showImage, recordings, setRecordings} = props
 
+    const [recording, setRecording] = useState(props.recording)
     const [image, setImage] = useState(null);
     const [showUpload, setShowUpload] = useState(false);
     const [showImageModal, setShowImageModal] = useState(false);
@@ -40,6 +41,17 @@ const ShowRecording = (props) => {
     setImages(filteredImages);
   };
 
+  const handleDeleteRecording = async (id) => {
+    try{
+      let response = await axios.delete(`/api/recordings/${id}`)
+      let filteredRecordings = recordings.filter((r) => r.id !== id)
+      setRecordings(filteredRecordings)
+      handleClose()
+    } catch (err) {
+      alert('error deleting recording')
+    }
+  };
+
     return (
         <Modal
         show={1}
@@ -65,8 +77,9 @@ const ShowRecording = (props) => {
             <br/>
             {showUpload && <RecordingImage toggleUpload = {toggleUpload} setImages = {setImages} images = {images} recording_id = {recording.id}/>}
             {!showUpload && <VocalButton onClick = {toggleUpload}>Add Image</VocalButton>}
-            {showEdit && <EditRecordingForm toggleEdit = {toggleEdit} recording = {recording}/>}
+            {showEdit && <EditRecordingForm toggleEdit = {toggleEdit} recording = {recording} setRecording = {setRecording} showEdit = {showEdit} setShowEdit= {setShowEdit}/>}
             {!showEdit && <VocalButton onClick = {toggleEdit}>Edit Recording</VocalButton>}
+            <VocalButton onClick = {()=>handleDeleteRecording(recording.id)}>Delete Recording</VocalButton>
         </div>
       </Modal.Body>
       <Modal.Footer>

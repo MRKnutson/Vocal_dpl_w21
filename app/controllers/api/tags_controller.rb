@@ -17,6 +17,16 @@ class Api::TagsController < ApplicationController
           render json: {error: @tag.errors}, status: 422
       end
   end
+  
+  def update
+    @tag = Tag.find(params[:id])
+    rTag =  @tag.recording_tags.new(recording_id: params[:recording_id])
+    if rTag.save
+      render json: @tag
+    else
+        render json: {error: @tag.errors}, status: 422
+    end
+  end
   # def update
   #   if (@tag.update)
   #     render json: @tag

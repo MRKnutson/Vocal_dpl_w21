@@ -14,9 +14,13 @@ function Recorder() {
     const [duration, setDuration] = useState("")
     const [secondsElapsed, setSecondsElapsed] = useState("")
 
+    const [tags, setTags] = useState([])
 
     let timer
     
+    useEffect(()=>{
+        getTags()
+    }, [])
 
     useEffect(()=>{
         timer = setTimeout(() => {
@@ -41,7 +45,7 @@ function Recorder() {
 
     const handleSubmit = async (e, chosenTags) => {
         e.preventDefault()
-
+        
         
         
         let data = new FormData()
@@ -64,16 +68,29 @@ function Recorder() {
     }
 
 
-    const processTags = async (tags, rec_id) => {
-        tags.forEach((t)=>{
-            if(typeof t == "string"){
+    const processTags = async (chosenTags, rec_id) => {
+        chosenTags.forEach((ct)=>{
+            if(!(tags.map((t)=>t.tag_text).includes(ct))){
                 try{
-                    axios.post('/api/tags', {text: t, recording_id: rec_id})
+                    axios.post('/api/tags', {text: ct, recording_id: rec_id})
                 } catch (err) {
-                    console.log("error creating tag: " + t, err)
+                    console.log("error creating tag: " + ct, err)
                 }
+            } else {
+                let tag_id = tags.find((t)=>t.tag_text===ct).tag_id
+                 axios.put(`/api/tags/${tag_id}`, {recording_id: rec_id})
             }
         })
+    }
+
+    const getTags = async () => {
+        try{
+            let res = await axios.get('/api/tags')
+            setTags(res.data)
+        } catch (err) {
+            console.log("error getting tags: " + err)
+        }
+        
     }
   return (
     <div style={{display: "flex", margin: "10px"}}>

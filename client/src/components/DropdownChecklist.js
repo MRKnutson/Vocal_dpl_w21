@@ -9,7 +9,7 @@ import Checkbox from '@mui/material/Checkbox';
 
 const DropdownChecklist = (props) => {
     // const [selItems, setSelItems] = useState(props.selItems);
-    const [items, setItems] = useState([...new Set(props.items)]);
+    const [items, setItems] = useState(props.items);
     // useEffect(()=>{
     //     props.setState(selItems)
     // }, [selItems])

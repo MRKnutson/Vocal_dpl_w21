@@ -18,7 +18,6 @@ const EntryModal = ({handleClose, handleChange, handleSave, show, blobURL, durat
 
   
   const handleSubmit = (e) => {
-    console.log("chosen tags: " + chosenTags)
     handleSave(e, chosenTags)
   }
   

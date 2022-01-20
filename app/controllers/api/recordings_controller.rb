@@ -2,6 +2,7 @@ class Api::RecordingsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_recording
   before_action :set_image_path, only: [:recording_image]
+  before_action :set_image, only: [:destroy_image]
 
   
   def index
@@ -90,6 +91,10 @@ end
     render json: Recording.photo_index(current_user.id)
   end
 
+  def destroy_image
+    render json: @photo.destroy
+  end
+
   private
 
    def set_recording
@@ -102,6 +107,11 @@ end
 
   def recording_params
     params.permit(:title, :notes, :mood)
+  end
+
+  def set_image
+    recording = current_user.recordings.find(params[:recording_id])
+    @photo = recording.photos.find(params[:photo_id])
   end
 
 end

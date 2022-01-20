@@ -61,6 +61,10 @@ const UserImage = (props) => {
         setTimeout(()=>{setFailure(false)}, 3500);
     };
 
+    const handleDelete = () => {
+        
+    }
+
 
     return (
         <div style={{width: "60vw"}} >

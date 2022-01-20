@@ -6,9 +6,10 @@ export const AuthConsumer = AuthContext.Consumer;
 
 const AuthProvider = (props) => {
   const [user, setUser] = useState(null);
-  const [errors, setErrors] = useState([])
+  const [errors, setErrors] = useState(null)
 
   const handleRegister = async (user, navigate)=>{
+    setErrors(null)
     try {
       let response = await axios.post('api/auth', user);
       setUser(response.data.data)
@@ -21,6 +22,7 @@ const AuthProvider = (props) => {
   };
 
   const handleLogin = async (user, navigate)=>{
+    setErrors(null)
     try{
       let response = await axios.post('/api/auth/sign_in', user);
       setUser(response.data.data)
@@ -33,6 +35,7 @@ const AuthProvider = (props) => {
   };
 
   const handleLogout = async (navigate) => {
+    setErrors(null)
     try {
       let response = await axios.delete('api/auth/sign_out');
       localStorage.removeItem('access-token');
@@ -45,6 +48,7 @@ const AuthProvider = (props) => {
   };
 
   const handleUpdateUser = async (user) => {
+    setErrors(null)
     try {
       let response = await axios.put('/api/auth', user)
       setUser(response.data.data)

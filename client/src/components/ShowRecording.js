@@ -4,6 +4,7 @@ import RecordingImage from '../components/RecordingImage';
 import {PrimaryColor, SecondaryColor, ActionColor, VocalHeader, VocalButton} from '../components/Styles.js'
 import axios from "axios";
 import ShowImage from "../components/ShowImage";
+import EditRecordingForm from './EditRecodingForm';
 
 const ShowRecording = (props) => {
     const {recording, handleClose, images, setImages, showImage} = props
@@ -11,9 +12,14 @@ const ShowRecording = (props) => {
     const [image, setImage] = useState(null);
     const [showUpload, setShowUpload] = useState(false);
     const [showImageModal, setShowImageModal] = useState(false);
+    const [showEdit, setShowEdit] = useState(false)
 
      const toggleUpload = () => {
     setShowUpload(!showUpload);
+  };
+
+  const toggleEdit = () =>{
+    setShowEdit(!showEdit)
   };
 
     const renderImages = () => {
@@ -59,6 +65,8 @@ const ShowRecording = (props) => {
             <br/>
             {showUpload && <RecordingImage toggleUpload = {toggleUpload} setImages = {setImages} images = {images} recording_id = {recording.id}/>}
             {!showUpload && <VocalButton onClick = {toggleUpload}>Add Image</VocalButton>}
+            {showEdit && <EditRecordingForm toggleEdit = {toggleEdit} recording = {recording}/>}
+            {!showEdit && <VocalButton onClick = {toggleEdit}>Edit Recording</VocalButton>}
         </div>
       </Modal.Body>
       <Modal.Footer>

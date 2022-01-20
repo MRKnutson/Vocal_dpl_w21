@@ -31,12 +31,12 @@ const Register = () => {
   return (
     <Container>
       <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group className="mb-3" controlId="formBasicEmail" onClick={()=> setShow(false)}>
           <Form.Label style={{color:"white"}} ref={target}>Email Address:</Form.Label>
           <Form.Control type="email" placeholder="Enter Email" onChange = {(e)=>setEmail(e.target.value)}/>
         </Form.Group>
         
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className="mb-3" controlId="formBasicPassword" onClick={()=> setShow(false)}>
           <Form.Label style={{color:"white"}}>Password:</Form.Label>
           <Form.Control type="password" placeholder="Enter Password" onChange= {(e)=>setPassword(e.target.value)}/>
         </Form.Group>

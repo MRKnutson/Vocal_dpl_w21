@@ -5,7 +5,7 @@ import { VocalButton } from './Styles';
 
 const EditRecordingForm = (props)=> {
 
-  const {showEdit, setShowEdit, recording, setRecording} = props
+  const {showEdit, setShowEdit, recording, setRecording, recordings, setRecordings} = props
   const [title, setTitle] = useState(props.recording.title)
   const [notes, setNotes] = useState(props.recording.notes)
 
@@ -15,11 +15,16 @@ const EditRecordingForm = (props)=> {
     try{
       let response = await axios.put(`/api/recordings/${recording.id}`, updatedRecording)
       setRecording(response.data)
+      updateRecordings(response.data)
       setShowEdit(!showEdit)
     } catch (err) {
       alert('error updating recording')
     }
+  };
 
+  const updateRecordings = (changedRecording) => {
+    let updatedRecordings = recordings.map((r) => (r.id === changedRecording.id ? changedRecording : r));
+  setRecordings(updatedRecordings)
   };
 
   return(

@@ -77,7 +77,7 @@ const ShowRecording = (props) => {
             <br/>
             {showUpload && <RecordingImage toggleUpload = {toggleUpload} setImages = {setImages} images = {images} recording_id = {recording.id}/>}
             {!showUpload && <VocalButton onClick = {toggleUpload}>Add Image</VocalButton>}
-            {showEdit && <EditRecordingForm toggleEdit = {toggleEdit} recording = {recording} setRecording = {setRecording} showEdit = {showEdit} setShowEdit= {setShowEdit}/>}
+            {showEdit && <EditRecordingForm toggleEdit = {toggleEdit} recording = {recording} setRecording = {setRecording} showEdit = {showEdit} setShowEdit= {setShowEdit} recordings = {recordings} setRecordings = {setRecordings}/>}
             {!showEdit && <VocalButton onClick = {toggleEdit}>Edit Recording</VocalButton>}
             <VocalButton onClick = {()=>handleDeleteRecording(recording.id)}>Delete Recording</VocalButton>
         </div>

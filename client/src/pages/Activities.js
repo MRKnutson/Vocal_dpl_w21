@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Card, Button, Row, Col, CardGroup } from "react-bootstrap";
 import { ResponsiveCalendar, timeRangeDefaultProps } from "@nivo/calendar";
 import axios from "axios";
-import { GraphCard, PrimaryColor, SecondaryColor, StatCard, StatText, VocalHeader } from "../components/Styles.js";
+import { ActionColor, GraphCard, PrimaryColor, SecondaryColor, StatCard, StatText, VocalHeader } from "../components/Styles.js";
 import {
   XYPlot,
   XAxis,
@@ -14,6 +14,7 @@ import {
   DiscreteColorLegend,
 } from "react-vis";
 import {Chrono} from 'react-chrono';
+import logo from '../images/plain_logo.jpg'
 
 const Activities = () => {
   const [useCanvas, setUseCanvas] = useState(false);
@@ -233,28 +234,27 @@ const Activities = () => {
       >
         Activity
       </VocalHeader>
-      <Row md = {1} lg = {3}>
-        <Col>
-          <CardGroup>
-            <StatCard>
+      <Row md = {1} lg = {3} style ={{display: "flex", justifyContent: "space-between"}}>
+        <Col style = {{display:"flex", justifyContent: "space-around"}}>
+            <StatCard >
+              {/* <Card.Image variant = "top" /> */}
               <StatText as="h2">Entries Saved: {recordings.length}</StatText>
             </StatCard>
-          </CardGroup>
-          <CardGroup>
-            <StatCard>
+        </Col>
+        <Col style = {{display:"flex", justifyContent: "space-around"}}>
+            <StatCard style ={{backgroundColor: `${ActionColor}`, color: "white"}}>
               <StatText as="h2">Total time recorded: {totalTime()} minutes</StatText>
             </StatCard>
-          </CardGroup>
-          <CardGroup>
-            <StatCard>
+        </Col>
+        <Col style = {{display:"flex", justifyContent: "space-around"}}>     
+            <StatCard style ={{backgroundColor: `${SecondaryColor}`, color: "white"}}>
               <StatText as="h2">Longest entry: {longestRecording()} minutes</StatText>
             </StatCard>
-          </CardGroup>
         </Col>
       </Row>
       
       <GraphCard style ={{margin:"20px"}}>
-        <h2 style={{ margin: "1.5rem" }}>Activities Graphs</h2>
+        <h2 style={{ margin: "1.5rem" }}>Annual Activity</h2>
         <div style={{ width: "100%", height: 500, marginBottom: "50px" }}>
           {/* to work on this calendar use: https://nivo.rocks/calendar/ */}
           <ResponsiveCalendar
@@ -262,12 +262,17 @@ const Activities = () => {
             from={new Date(new Date().getFullYear(), 0, 1)}
             to="2022-12-31"
             emptyColor="#eeeeee"
+            textColor="#ffffff"
             colors={["#61cdbb", "#97e3d5", "#e8c1a0", "#f47560"]}
+            theme = {{
+              textColor: "white",
+              backgroundColor: `${PrimaryColor}`
+            }}
             margin={{ top: 40, right: 40, bottom: 40, left: 40 }}
             yearSpacing={40}
-            monthBorderColor="#ffffff"
+            monthBorderColor={SecondaryColor}
             dayBorderWidth={2}
-            dayBorderColor="#ffffff"
+            dayBorderColor={SecondaryColor}
             legends={[
               {
                 anchor: "bottom-right",
@@ -284,7 +289,7 @@ const Activities = () => {
         </div>
       </GraphCard>
       <GraphCard style = {{paddingBottom: "75px"}}>
-      <h2 style={{ margin: "1.5rem" }}>Activities Graphs</h2>
+      <h2 style={{ margin: "1.5rem" }}>Entries by Mood</h2>
       <div>
         <XYPlot yDomain = {[0,32]}  style={{margin:"50px"}} width={1000} height={600} stackBy="y" xType = "ordinal" >
         <DiscreteColorLegend
@@ -317,13 +322,17 @@ const Activities = () => {
           <HorizontalGridLines />
           <XAxis 
           title = "Month"
+          style = {{
+            line: {stroke: 'white'},
+            text: {fill: 'white'}
+          }}
           />
           <YAxis 
           title = "Number of Entries"
           style={{
             line: {stroke: '#ADDDE1'},
             ticks: {stroke: '#ADDDE1'},
-            text: {stroke: 'none', fill: '#6b6b76', fontWeight: 600}
+            text: {stroke: 'none', fill: 'white', fontWeight: 600}
           }}
             />
           <BarSeries
@@ -366,7 +375,7 @@ const Activities = () => {
               secondary: `${PrimaryColor}`,
               cardBgColor: `${PrimaryColor}`,
               cardForeColor: "white",
-              titleColor: `${SecondaryColor}`
+              titleColor: `white`
             }}
           />
         </div>

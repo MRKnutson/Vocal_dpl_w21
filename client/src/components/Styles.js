@@ -8,7 +8,7 @@ export const ActionColor = "#EF4C4C"
 
 //used in about us page
 export const StatCard = styled(Card)`
-  width: 25rem;
+  width: 19.5rem;
   margin: 1rem;
   border-radius: 0.75rem;
   height: 30rem

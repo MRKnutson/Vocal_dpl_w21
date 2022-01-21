@@ -50,7 +50,7 @@ const EditRecordingForm = (props)=> {
       </Form.Group>
       {/* <p>{title}</p> */}
       <VocalButton type = "submit">Submit Changes</VocalButton>
-      <VocalButton onClick = {()=>setShowEdit(!showEdit)}>Cancel</VocalButton>
+      {/* <VocalButton onClick = {()=>setShowEdit(!showEdit)}>Cancel</VocalButton> */}
     </Form>
   )
 };

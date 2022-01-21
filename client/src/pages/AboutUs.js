@@ -6,7 +6,7 @@ import {PrimaryColor, SecondaryColor, ActionColor, VocalHeader} from '../compone
 const programmers = [
   {
     name: "Asher Bay", 
-    image: "https://res.cloudinary.com/djhlv2nfc/image/upload/v1642617032/Vocal/Images/8AFD60E2-3407-4C00-B399-4F89AB22B67F-1000_gin2ew.jpg",
+    image: "https://res.cloudinary.com/djhlv2nfc/image/upload/c_crop,h_532,w_532/v1642617032/Vocal/Images/8AFD60E2-3407-4C00-B399-4F89AB22B67F-1000_gin2ew.jpg",
     GitHub: "https://github.com/MRKnutson/",
     LinkedIn: "www.linkedin.com/in/michaelrknutson",
     email: "mrknutson44@gmail.com",
@@ -15,7 +15,7 @@ const programmers = [
 },
 {
   name: "Michael Knutson", 
-  image: "https://res.cloudinary.com/djhlv2nfc/image/upload/v1642024460/Vocal/Images/IMG_4372_qcefm7.jpg",
+  image: "https://res.cloudinary.com/djhlv2nfc/image/upload/c_crop,h_461,w_461/v1642795190/Vocal/Images/IMG_4372_qcefm7.jpg",
   GitHub: "https://github.com/MRKnutson/",
   LinkedIn: "https://linkedin.com/in/michaelrknutson",
   email: "mrknutson44@gmail.com",
@@ -33,7 +33,7 @@ const programmers = [
 },
 {
   name: "Ruby Reed", 
-  image: "https://res.cloudinary.com/djhlv2nfc/image/upload/v1642119399/Vocal/Images/DD4625AA-BAE3-4897-9B6D-424C6CB78A44_1_201_a_kkxazz.jpg",
+  image: "https://res.cloudinary.com/djhlv2nfc/image/upload/c_crop,h_740,w_740/v1642119399/Vocal/Images/DD4625AA-BAE3-4897-9B6D-424C6CB78A44_1_201_a_kkxazz.jpg",
   GitHub: "https://github.com/rubyreed/",
   LinkedIn: "https://www.linkedin.com/in/ruby-reed-454844134/",
   email: "rubysreed@gmail.com",

@@ -63,7 +63,7 @@ const ShowRecording = (props) => {
         <Modal.Title style={{textAlign: "center"}}>Journal Entry Details</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div > 
+        <div style={{backgroundColor:`${SecondaryColor}`}}> 
              <h6>{recording.title}</h6>
             <audio src={recording.pointer} controls style={{height: "35px", margin: "auto"}}/>
             <div style={{margin: "auto"}}>

@@ -1,15 +1,50 @@
+import {useState} from "react"
+import {PrimaryColor, SecondaryColor, ActionColor, VocalHeader, VocalButton} from '../components/Styles.js'
+import Play from "../images/Play.png"
+import Pause from "../images/Pause.png"
+
+
 const Recording = (props) => {
 
     const {recording, showRecording, tags, images} = props
+    const [playing, setPlaying] = useState(false)
+
 
     const renderImages = () => {
         if (images && images.length > 0) {
             return images.map((image) => {
-               return <img src={image.pointer} alt="image" style={{width:"100px"}}/>
+               return <img key={recording.id} src={image.pointer} alt="image" style={{width:"100px"}}/>
             })
         }
     }
-    
+
+    // var mPlayer = document.getElementById("background_music"); 
+    // var mPlayAction = document.getElementById("playbutton"); 
+
+
+    // function playAudio() { 
+    //     mPlayer.play(); 
+    //     setPlaying(true);
+    //     mPlayAction.src = {Pause};
+    //     // document.getElementsByTagName('audio').addEventListener('playing',()=>setPlaying(false),true);
+    // } 
+
+    // function pauseAudio() { 
+    //     mPlayer.pause();
+    //     setPlaying(false);
+    //     mPlayAction.src = {Play};
+    // } 
+    // function HandleAudio(){
+    // if(playing == true){
+    //     //Playing already Pause it
+    //     pauseAudio();
+    // }else{
+    //     //Play the music
+    //     playAudio();
+    // } 
+    // }
+console.log(recording.pointer)
+
     return (
         
         <div onClick={showRecording} style={{borderWidth: "1px", borderColor: "black", borderStyle: "solid"}}>
@@ -19,8 +54,12 @@ const Recording = (props) => {
             <p>Tags: {tags.map((t)=> t.tag_text).join(', ')}</p>
             {images && images.length>0 && renderImages()}
             <br/>
-            <audio src={recording.pointer} controls style={{height: "35px", margin: "auto"}}/>
-        </div> 
+            {/* {!playing && <img src={Play} alt="play recording" id="playbutton" onClick={HandleAudio} style={{height:"100px"}}/>} */}
+            {/* {playing && <img src={Pause} alt="pause recording" id="playbutton" onClick={HandleAudio} style = {{height:"100px"}}/>} */}
+            {/* <audio id="background_music" src = {recording.pointer}/> */}
+            {/* <img src = {Play} alt = "play recording"/> */}
+            <audio controls src = {recording.pointer}/>
+        </div>
         )
 }
 export default Recording

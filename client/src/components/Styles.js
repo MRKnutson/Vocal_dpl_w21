@@ -1,10 +1,10 @@
-import {Card, Navbar, Button, Container, Form} from "react-bootstrap";
+import {Card, Navbar, Button, Container, Form, DropdownButton} from "react-bootstrap";
 import styled from "styled-components";
 
 //here are our theme colors for the app
 export const PrimaryColor = "#2A3950"
 export const SecondaryColor = "#3E619B"
-export const ActionColor = "#EF4C4C"
+export const ActionColor = "#EF4B4C"
 
 //used in about us page
 export const StatCard = styled(Card)`

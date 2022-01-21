@@ -24,11 +24,11 @@ const programmers = [
 },
 {
   name: "Dennis Plank", 
-  image: "https://cdn10.bigcommerce.com/s-npe4l/products/1157/images/1335/B-MZ-SMSHD---HIGH__85441.1477602947.1280.1280.jpg?c=2",
+  image: "https://res.cloudinary.com/doqs3jkhw/image/upload/v1642635589/A191FE32-8E83-4448-8EE6-66205E8650DC_1_105_c_qu3krj.jpg",
   GitHub: "https://github.com/DennyPlank/",
   LinkedIn: "www.linkedin.com/in/dennis-plank-4b5547224",
   email: "DennyMouzon@gmail.com",
-  blurb: "I just like thing to work right. When the button you click doesnt do anything? Yeah. Nightmare fuel."
+  blurb: "I just like things to work right. When the button you click doesnt do anything? Yeah. Nightmare fuel."
 
 },
 {

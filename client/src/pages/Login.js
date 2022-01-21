@@ -20,7 +20,7 @@ const Login = () => {
     e.preventDefault();
     handleLogin({email, password}, navigate)
   };
-  console.log(errors)
+  
   return(
     <div>
     <VocalHeader style={{marginTop:"5rem", marginBottom:"2rem", marginLeft:"5rem"}}> 
@@ -28,11 +28,11 @@ const Login = () => {
     </VocalHeader>
     <Container>
       <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group className="mb-3" controlId="formBasicEmail" onClick={()=> setShow(false)}>
           <Form.Label style={{color:"white"}} ref={target}>Email Address</Form.Label>
           <Form.Control type="email" value = {email} placeholder="Enter Email" onChange = {(e)=>setEmail(e.target.value)}/>
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className="mb-3" controlId="formBasicPassword" onClick={()=> setShow(false)}>
           <Form.Label style={{color:"white"}}>Password</Form.Label>
           <Form.Control type="password" value={password} placeholder="Password" onChange= {(e)=>setPassword(e.target.value)}/>
         </Form.Group>
@@ -52,7 +52,7 @@ const Login = () => {
                     ...props.style,
                   }}
                 >
-                  {errors ? errors : ['Unknown Error Occurred']}
+                  {errors && errors}
                 </div>
               )}
             </Overlay>

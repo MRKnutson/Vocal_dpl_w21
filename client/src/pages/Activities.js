@@ -229,8 +229,11 @@ const Activities = () => {
     if(logData.length > 0){
       return logData.map((recording) =>{
         if(photos && photos.length > 0){
+          // console.log(recording)
+          // console.log(photos)
           let filteredPhotos = photos.filter((p)=>p.recording_id == recording.id)
           let photo = filteredPhotos[0]
+          // console.log(photo)
           let time = formatTime(recording.created_at)
           let length = recording.duration.toFixed(0)
           if(photo){
@@ -394,7 +397,7 @@ const Activities = () => {
       </GraphCard>
       {logData.length>1 && <GraphCard>
         <h2 style={{ margin: "1.5rem" }}>Daily Log</h2>
-        <div style ={{height: "35rem", width: "100%", paddingTop: "1.5rem"}}>
+        <div style ={{height: "500px", width: "100%", paddingTop: "1.5rem"}}>
           <Chrono 
             cardPositionHorizontal = "TOP"
             items = {normalizeLogsData()} 

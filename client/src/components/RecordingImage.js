@@ -67,7 +67,7 @@ const UserImage = (props) => {
 
 
     return (
-        <div style={{width: "60vw"}} >
+        <div >
             <h3 style={{textAlign: "center"}} >Select an image for recording</h3>
             {success && 
             <div>

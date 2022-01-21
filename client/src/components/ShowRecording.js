@@ -57,13 +57,15 @@ const ShowRecording = (props) => {
         show={1}
       backdrop = "static"
       keyboard = {false}
-      style={{width: "800px", margin: "auto"}}
+      // size= "lg"
+      centered={true}
+      style={{margin: "auto"}}
     >
-      <Modal.Header >
-        <Modal.Title style={{textAlign: "center"}}>Journal Entry Details</Modal.Title>
+      <Modal.Header style ={{backgroundColor: `${SecondaryColor}`}}>
+        <Modal.Title style={{textAlign: "center", color: `white`}}>Journal Entry Details</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
-        <div style={{backgroundColor:`${SecondaryColor}`}}> 
+      <Modal.Body style ={{backgroundColor: `${SecondaryColor}`, color: "white"}}>
+        <div > 
              <h6>{recording.title}</h6>
             <audio src={recording.pointer} controls style={{height: "35px", margin: "auto"}}/>
             <div style={{margin: "auto"}}>
@@ -73,19 +75,21 @@ const ShowRecording = (props) => {
               </div>
             <h6>Notes: </h6>
             <p style={{marginLeft: "20px"}}>{recording.notes}</p>
+            <p>Tags: {props.tags.map((t)=> t.tag_text).join(', ')}</p>
             {images && renderImages()}
             <br/>
             {showUpload && <RecordingImage toggleUpload = {toggleUpload} setImages = {setImages} images = {images} recording_id = {recording.id}/>}
             {!showUpload && <VocalButton onClick = {toggleUpload}>Add Image</VocalButton>}
             {showEdit && <EditRecordingForm toggleEdit = {toggleEdit} recording = {recording} setRecording = {setRecording} showEdit = {showEdit} setShowEdit= {setShowEdit} recordings = {recordings} setRecordings = {setRecordings}/>}
             {!showEdit && <VocalButton onClick = {toggleEdit}>Edit Recording</VocalButton>}
-            <VocalButton onClick = {()=>handleDeleteRecording(recording.id)}>Delete Recording</VocalButton>
+            {!showEdit && <VocalButton onClick = {()=>handleDeleteRecording(recording.id)}>Delete Recording</VocalButton>}
         </div>
       </Modal.Body>
-      <Modal.Footer>
-        <Button variant = "primary" onClick={handleClose}>
-          OK
-        </Button>
+      <Modal.Footer style ={{backgroundColor: `${SecondaryColor}`}}>
+        {!showEdit && <VocalButton onClick={handleClose}>
+          Close
+        </VocalButton>}
+        {showEdit && <VocalButton onClick={toggleEdit}>Cancel</VocalButton>}
       </Modal.Footer>
     </Modal>
     )

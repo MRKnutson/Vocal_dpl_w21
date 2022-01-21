@@ -10,11 +10,17 @@ function Recorder() {
     let [audioURL, blobURL, isRecording, startRecording, stopRecording, clearRecording] = useRecorder();
     const [title, setTitle] = useState("")
     const [mood, setMood] = useState("")
-    const [notes, setNotes] = useState("")
+    const [notes, setNotes] = useState([])
     const [duration, setDuration] = useState("")
     const [secondsElapsed, setSecondsElapsed] = useState("")
+
+    const [tags, setTags] = useState([])
+
     let timer
     
+    useEffect(()=>{
+        getTags()
+    }, [])
 
     useEffect(()=>{
         timer = setTimeout(() => {
@@ -37,8 +43,10 @@ function Recorder() {
         else if(e.target.name==="notes"){setNotes(val)}
     }
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e, chosenTags) => {
         e.preventDefault()
+        
+        
         
         let data = new FormData()
         if (audioURL){
@@ -51,6 +59,7 @@ function Recorder() {
         try{
             console.log("url: ", audioURL)
           let res = await axios.post('/api/recordings', data)
+          processTags(chosenTags, res.data.id)
         } catch(err){
             console.log(err)
         }
@@ -58,6 +67,37 @@ function Recorder() {
         nav('/recordings')
     }
 
+
+    const connectTag = async (tag_id, rec_id) => {
+        await axios.put(`/api/tags/${tag_id}`, {recording_id: rec_id})
+    }
+    const addTag = async (rec_id, text) => {
+        await axios.post('/api/tags', {text: text, recording_id: rec_id})
+    }
+    const processTags = async (chosenTags, rec_id) => {
+        chosenTags.forEach((ct)=>{
+            if(!(tags.map((t)=>t.tag_text).includes(ct.tag_text))){
+                try{
+                    addTag(rec_id, ct.tag_text)
+                } catch (err) {
+                    console.log("error creating tag: " + ct.tag_text, err)
+                }
+            } else {
+                let tag_id = tags.find((t)=>t.tag_text===ct.tag_text).tag_id
+                connectTag(tag_id, rec_id)
+            }
+        })
+    }
+
+    const getTags = async () => {
+        try{
+            let res = await axios.get('/api/tags')
+            setTags(res.data)
+        } catch (err) {
+            console.log("error getting tags: " + err)
+        }
+        
+    }
   return (
     <div style={{display: "flex", margin: "10px"}}>
         {!audioURL ? 
@@ -80,7 +120,14 @@ function Recorder() {
                     REC
                 </button>)
         :
-           <EntryModal blobURL={blobURL} duration={duration} handleSave={handleSubmit} handleChange={handleChange} show={true} handleClose={clearRecording}/>
+           <EntryModal blobURL={blobURL} 
+                duration={duration} 
+                handleSave={handleSubmit} 
+                handleChange={handleChange} 
+                show={true} 
+                handleClose={clearRecording}
+                processTags={processTags}
+            />
         }
        
         

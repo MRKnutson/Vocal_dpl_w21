@@ -36,11 +36,11 @@ const EditRecordingForm = (props)=> {
       </Form.Group>
       <Form.Group className = "mb-3">
         <Form.Label>Notes</Form.Label>
-        <Form.Control defaultValue = {notes} onChange = {(e)=>setNotes(e.target.value)}/>
+        <Form.Control as="textarea" defaultValue = {notes} onChange = {(e)=>setNotes(e.target.value)}/>
       </Form.Group>
       <Form.Group>
         <Form.Label>Mood</Form.Label>
-        <Form.Select name = "mood" defaultValue = {mood} as= "select" onChange ={(e)=>setMood(e.target.value)}>
+        <Form.Select name = "mood" defaultValue = {mood} as= "select" onChange ={(e)=>setMood(e.target.value)} style={{width: "4rem"}}>
           <option value={1}>1</option>
           <option value={2}>2</option>
           <option value={3}>3</option>

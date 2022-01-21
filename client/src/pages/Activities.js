@@ -20,11 +20,22 @@ const Activities = () => {
   const [useCanvas, setUseCanvas] = useState(false);
   const [recordings, setRecordings] = useState([]);
   const [logData, setLogData] = useState([])
+  const [photos, setPhotos] =useState([])
 
   useEffect(() => {
     getRecordings();
+    getImages();
     filterDay();
   }, []);
+
+  const getImages = async () => {
+    try {
+      let response = await axios.get('/api/images')
+      setPhotos(response.data)
+    } catch (err){
+      alert('error grabbing photos')
+    }
+  };
 
   const getRecordings = async () => {
     try {
@@ -217,10 +228,28 @@ const Activities = () => {
   const normalizeLogsData = () =>{
     if(logData.length > 0){
       return logData.map((recording) =>{
-        let time = formatTime(recording.created_at)
-        let length = recording.duration.toFixed(0)
-        return{
-          title: `${time}`, cardTitle: recording.title, cardSubtitle: `Length: ${length} minutes`, cardDetailedText: `Notes: ${recording.notes}`
+        if(photos && photos.length > 0){
+          let filteredPhotos = photos.filter((p)=>p.recording_id == recording.id)
+          let photo = filteredPhotos[0]
+          let time = formatTime(recording.created_at)
+          let length = recording.duration.toFixed(0)
+          if(photo){
+            return{
+              title: `${time}`, cardTitle: recording.title, cardSubtitle: `Length: ${length} minutes`, cardDetailedText: `Notes: ${recording.notes}`, media: {
+                name: "Recording Photo", source:{url: photo.pointer}, type: "IMAGE"
+              }
+            }
+          } else{
+          return{
+              title: `${time}`, cardTitle: recording.title, cardSubtitle: `Length: ${length} minutes`, cardDetailedText: `Notes: ${recording.notes}`
+            }
+          }
+        } else {
+          let time = formatTime(recording.created_at)
+          let length = recording.duration.toFixed(0)
+          return{
+            title: `${time}`, cardTitle: recording.title, cardSubtitle: `Length: ${length} minutes`, cardDetailedText: `Notes: ${recording.notes}`
+          }
         }
       })
     }
@@ -365,7 +394,7 @@ const Activities = () => {
       </GraphCard>
       {logData.length>1 && <GraphCard>
         <h2 style={{ margin: "1.5rem" }}>Daily Log</h2>
-        <div style ={{height: "400px", width: "100%", paddingTop: "1.5rem"}}>
+        <div style ={{height: "35rem", width: "100%", paddingTop: "1.5rem"}}>
           <Chrono 
             cardPositionHorizontal = "TOP"
             items = {normalizeLogsData()} 

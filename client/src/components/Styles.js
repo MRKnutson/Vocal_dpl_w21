@@ -32,11 +32,26 @@ export const VocalNavbar = styled(Navbar)`
 `
 
 export const VocalButton = styled.button`
+color:white;
 background-color: ${ActionColor};
 border:none;
 border-radius:.2rem;
+padding:.5rem;
+marginL.5rem;
 &:hover {
   background-color: ${SecondaryColor}
+}
+`
+
+export const ViewButton = styled.button`
+color:white;
+background-color: ${ActionColor};
+border:none;
+border-radius:.2rem;
+padding:.5rem;
+marginL.5rem;
+&:hover {
+  background-color: ${PrimaryColor}
 }
 `
 

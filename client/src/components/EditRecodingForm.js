@@ -8,6 +8,7 @@ const EditRecordingForm = (props)=> {
   const {showEdit, setShowEdit, recording, setRecording, recordings, setRecordings} = props
   const [title, setTitle] = useState(props.recording.title)
   const [notes, setNotes] = useState(props.recording.notes)
+  const [mood, setMood] = useState(props.recording.mood)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,6 +37,16 @@ const EditRecordingForm = (props)=> {
       <Form.Group className = "mb-3">
         <Form.Label>Notes</Form.Label>
         <Form.Control defaultValue = {notes} onChange = {(e)=>setNotes(e.target.value)}/>
+      </Form.Group>
+      <Form.Group>
+        <Form.Label>Mood</Form.Label>
+        <Form.Select name = "mood" defaultValue = {mood} as= "select" onChange ={(e)=>setMood(e.target.value)}>
+          <option value={1}>1</option>
+          <option value={2}>2</option>
+          <option value={3}>3</option>
+          <option value={4}>4</option>
+          <option value={5}>5</option>
+        </Form.Select>
       </Form.Group>
       {/* <p>{title}</p> */}
       <VocalButton type = "submit">Submit Changes</VocalButton>

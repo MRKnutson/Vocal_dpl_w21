@@ -106,8 +106,11 @@ const Timeline = () => {
       <ShowRecording 
         recording={recordings.find((r)=>r.id===showRecordingID)} 
         tags={tags.filter((t)=>t.recording_id === showRecordingID)} 
-        setImages = {setImages} images={filterImages(showRecordingID)} 
+        setImages = {setImages} 
+        images={filterImages(showRecordingID)} 
         handleClose={()=>{setShowRecordingID(null)}}/>}
+        recordings = {recordings} 
+        setRecordings = {setRecordings}/>}
 
     <br /> <br />
     {renderRecordings()}

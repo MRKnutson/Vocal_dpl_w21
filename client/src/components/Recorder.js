@@ -68,18 +68,23 @@ function Recorder() {
     }
 
 
+    const connectTag = async (tag_id, rec_id) => {
+        await axios.put(`/api/tags/${tag_id}`, {recording_id: rec_id})
+    }
+    const addTag = async (rec_id, text) => {
+        await axios.post('/api/tags', {text: text, recording_id: rec_id})
+    }
     const processTags = async (chosenTags, rec_id) => {
-        console.log("cts: " + chosenTags.map((ct)=>ct.tag_text))
         chosenTags.forEach((ct)=>{
             if(!(tags.map((t)=>t.tag_text).includes(ct.tag_text))){
                 try{
-                    axios.post('/api/tags', {text: ct.tag_text, recording_id: rec_id})
+                    addTag(rec_id, ct.tag_text)
                 } catch (err) {
                     console.log("error creating tag: " + ct.tag_text, err)
                 }
             } else {
                 let tag_id = tags.find((t)=>t.tag_text===ct.tag_text).tag_id
-                 axios.put(`/api/tags/${tag_id}`, {recording_id: rec_id})
+                connectTag(tag_id, rec_id)
             }
         })
     }

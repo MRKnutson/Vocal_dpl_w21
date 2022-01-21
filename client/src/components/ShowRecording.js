@@ -41,7 +41,7 @@ const ShowRecording = (props) => {
               </div>
             <h6>Notes: </h6>
             <p style={{marginLeft: "20px"}}>{recording.notes}</p>
-            <p>Tags: {props.tags.map((t)=> t.tag_text)}</p>
+            <p>Tags: {props.tags.map((t)=> t.tag_text).join(', ')}</p>
             {images && renderImages()}
             <br/>
             {showUpload && <RecordingImage toggleUpload = {toggleUpload} setImages = {setImages} images = {images} recording_id = {recording.id}/>}

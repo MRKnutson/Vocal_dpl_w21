@@ -24,21 +24,13 @@ const Activities = () => {
 
   useEffect(() => {
     getRecordings();
-    getImages();
     filterDay();
   }, []);
 
-  const getImages = async () => {
-    try {
-      let response = await axios.get('/api/images')
-      setPhotos(response.data)
-    } catch (err){
-      alert('error grabbing photos')
-    }
-  };
-
   const getRecordings = async () => {
     try {
+      let images = await axios.get('/api/images')
+      setPhotos(images.data)
       let response = await axios.get("/api/recordings");
       setRecordings(response.data);
       if(response.data.length>0){
@@ -130,11 +122,6 @@ const Activities = () => {
     let d = new Date(dateTime)
     let hrs = d.getHours()
     let mins = d.getMinutes()
-    // if(hrs <= 9)
-    // hrs = "0" + hrs
-    // if(mins < 10)
-    // mins = "0" + mins
-    // const time = hrs+":"+mins
     if(hrs < 12){
       if (mins <10){
         mins = "0"+ mins

@@ -8,11 +8,11 @@ import Select from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
 
 const DropdownChecklist = (props) => {
-    const [selItems, setSelItems] = useState([]);
+    // const [selItems, setSelItems] = useState(props.selItems);
     const [items, setItems] = useState(props.items);
-    useEffect(()=>{
-        props.setState(selItems)
-    }, [selItems])
+    // useEffect(()=>{
+    //     props.setState(selItems)
+    // }, [selItems])
 
 
 
@@ -24,17 +24,16 @@ const DropdownChecklist = (props) => {
             labelId="demo-multiple-checkbox-label"
             id="demo-multiple-checkbox"
             multiple
-            value={selItems}
+            value={props.selItems}
             onChange={(e)=>{
-                setSelItems(e.target.value)
-                
+                props.setState(e.target.value)
             }}
             input={<OutlinedInput label="Tag" />}
             renderValue={(selected) => selected.join(', ')}
             >
             {props.items.map((item) => (
                 <MenuItem key={item} value={item} name={item}>
-                <Checkbox checked={selItems.indexOf(item) > -1} />
+                <Checkbox checked={props.selItems.indexOf(item) > -1} />
                 <ListItemText primary={item} />
                 </MenuItem>
             ))}

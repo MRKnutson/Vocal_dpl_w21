@@ -4,12 +4,12 @@ import useRecorder from "./useRecorder";
 import {useState, useEffect} from 'react'
 import axios from "axios";
 import ChooseTags from './ChooseTags'
-const EntryModal = ({handleClose, handleChange, handleSave, show, blobURL, duration}) => {
+const EntryModal = ({handleClose, handleChange, handleSave, show, blobURL, duration, processTags}) => {
 
     const [title, setTitle] = useState("")
     const [mood, setMood] = useState("")
     const [notes, setNotes] = useState("") 
-    
+    const [chosenTags, setChosenTags] = useState([])
     const currentDate = new Date();
 
     const [date, setDate] = useState(currentDate.toLocaleDateString())
@@ -17,7 +17,9 @@ const EntryModal = ({handleClose, handleChange, handleSave, show, blobURL, durat
 
 
   
-
+  const handleSubmit = (e) => {
+    handleSave(e, chosenTags)
+  }
   
   
   return(
@@ -53,7 +55,7 @@ const EntryModal = ({handleClose, handleChange, handleSave, show, blobURL, durat
               <div style={{display: "flex"}}>
                 <h6 >Notes: <textarea style={{verticalAlign: "top", height: "100px", width: "250px"}} name="notes" onChange={handleChange}></textarea></h6> 
               </div>
-              <ChooseTags />
+              <ChooseTags selectTags={setChosenTags} />
               
           </div>
         </div>
@@ -63,7 +65,7 @@ const EntryModal = ({handleClose, handleChange, handleSave, show, blobURL, durat
         <Button variant="secondary" onClick = {handleClose}>
           Cancel
         </Button>
-        <Button variant = "primary" onClick = {handleSave}>
+        <Button variant = "primary" onClick = {handleSubmit}>
           Save
         </Button>
       </Modal.Footer>

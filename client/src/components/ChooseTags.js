@@ -12,13 +12,25 @@ const ChooseTags = (props) => {
     }, [])
 
     useEffect(()=>{
-       props.selectTags(chosenTags)
+       props.selectTags(chosenTags.map((ct)=>{
+         if(ct.tag_text){
+           return ct
+         } else {
+           return {tag_text: ct}
+         }
+       }))
     }, [chosenTags])
 
     const getTags = async () => {
     try{
       let res = await axios.get(`api/tags`)
-      setTags(res.data)
+      let tagLog = []
+      let distinctTags = res.data.filter((t)=>{
+        let keep = !tagLog.includes(t.tag_text)
+        tagLog.push(t.tag_text)
+        return keep
+      })
+      setTags(distinctTags)
     } catch (err) {
       console.log(err)
     }

@@ -51,8 +51,8 @@ const ChooseTags = (props) => {
     return (
       <div>
             {showCreateTag ?
-                <div>
-                  <input onChange={handleChange}></input>
+                <div style={{backgroundColor: "white"}}>
+                  <input onChange={handleChange} style={{backgroundColor:"white"}}></input>
                   <button onClick={createTag} style={{borderRadius: "10%", borderWidth: "0.2px"}}>✓</button>
                   <button onClick={()=>{setShowCreateTag(false)}} style={{borderRadius: "10%", borderWidth: "0.2px"}}>X</button>
                 </div>
@@ -60,8 +60,8 @@ const ChooseTags = (props) => {
                 <div>
                   <DropdownChecklist tag="Tags" setState={setChosenTags} selItems={chosenTags} items={tags.map((t)=>{
                       return t.tag_text
-                    })}/>
-                  <button onClick={()=>{setShowCreateTag(true)}} style={{borderRadius: "10%", borderWidth: "0.2px"}}>+</button>
+                    })} />
+                  <button onClick={()=>{setShowCreateTag(true)}} style={{borderRadius: "0.25rem", borderWidth: "0.05rem", marginTop:"0.5rem"}}>New Tag</button>
                 </div>
             } 
       </div>

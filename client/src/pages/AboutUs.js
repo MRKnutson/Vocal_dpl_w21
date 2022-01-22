@@ -24,7 +24,7 @@ const programmers = [
 },
 {
   name: "Dennis Plank", 
-  image: "https://res.cloudinary.com/doqs3jkhw/image/upload/v1642635589/A191FE32-8E83-4448-8EE6-66205E8650DC_1_105_c_qu3krj.jpg",
+  image: "https://res.cloudinary.com/doqs3jkhw/image/upload/c_crop,h_720,w_720/v1642635589/A191FE32-8E83-4448-8EE6-66205E8650DC_1_105_c_qu3krj.jpg",
   GitHub: "https://github.com/DennyPlank/",
   LinkedIn: "www.linkedin.com/in/dennis-plank-4b5547224",
   email: "DennyMouzon@gmail.com",

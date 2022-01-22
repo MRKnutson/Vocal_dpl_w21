@@ -66,20 +66,20 @@ const ShowRecording = (props) => {
       </Modal.Header>
       <Modal.Body style ={{backgroundColor: `${SecondaryColor}`, color: "white"}}>
         <div > 
-             <h6>{recording.title}</h6>
+             {!showEdit && <h6>{recording.title}</h6>}
             <audio src={recording.pointer} controls style={{height: "35px", margin: "auto"}}/>
-            <div style={{margin: "auto"}}>
+            {!showEdit && <div style={{margin: "auto"}}>
                   <h6 >{recording.duration}</h6>
                   <h6>{recording.created_at.substring(0, recording.created_at.indexOf("T"))}</h6>
                   <h6>{recording.created_at.substring(recording.created_at.indexOf("T")+1, recording.created_at.indexOf("T")+6)}</h6>
-              </div>
-            <h6>Notes: </h6>
-            <p style={{marginLeft: "20px"}}>{recording.notes}</p>
-            <p>Tags: {props.tags.map((t)=> t.tag_text).join(', ')}</p>
+              </div>}
+            {!showEdit && <h6>Notes: </h6>}
+            {!showEdit && <p style={{marginLeft: "20px"}}>{recording.notes}</p>}
+            {!showEdit && <p>Tags: {props.tags.map((t)=> t.tag_text).join(', ')}</p>}
             {images && renderImages()}
             <br/>
             {showUpload && <RecordingImage toggleUpload = {toggleUpload} setImages = {setImages} images = {images} recording_id = {recording.id}/>}
-            {!showUpload && <ViewButton style={{marginRight:"1rem", marginLeft:"2.5rem"}} onClick = {toggleUpload}>Add Image</ViewButton>}
+            {!showUpload && <ViewButton style={{marginRight:"1rem"}} onClick = {toggleUpload}>Add Image</ViewButton>}
             {showEdit && <EditRecordingForm toggleEdit = {toggleEdit} recording = {recording} setRecording = {setRecording} showEdit = {showEdit} setShowEdit= {setShowEdit} recordings = {recordings} setRecordings = {setRecordings}/>}
             {!showEdit && <ViewButton style={{marginRight:"1rem"}} onClick = {toggleEdit}>Edit Recording</ViewButton>}
             {!showEdit && <ViewButton onClick = {()=>handleDeleteRecording(recording.id)}>Delete Recording</ViewButton>}

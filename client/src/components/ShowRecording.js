@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
 import { Button, Modal } from 'react-bootstrap';
 import RecordingImage from '../components/RecordingImage';
-import {PrimaryColor, SecondaryColor, ActionColor, VocalHeader, VocalButton} from '../components/Styles.js'
+import {PrimaryColor, SecondaryColor, ActionColor, VocalHeader, VocalButton, ViewButton} from '../components/Styles.js'
 import axios from "axios";
 import ShowImage from "../components/ShowImage";
 import EditRecordingForm from './EditRecodingForm';
@@ -59,7 +59,7 @@ const ShowRecording = (props) => {
       keyboard = {false}
       // size= "lg"
       centered={true}
-      style={{margin: "auto"}}
+      style={{margin: "auto", borderRadius:"1rem"}}
     >
       <Modal.Header style ={{backgroundColor: `${SecondaryColor}`}}>
         <Modal.Title style={{textAlign: "center", color: `white`}}>Journal Entry Details</Modal.Title>
@@ -79,17 +79,17 @@ const ShowRecording = (props) => {
             {images && renderImages()}
             <br/>
             {showUpload && <RecordingImage toggleUpload = {toggleUpload} setImages = {setImages} images = {images} recording_id = {recording.id}/>}
-            {!showUpload && <VocalButton onClick = {toggleUpload}>Add Image</VocalButton>}
+            {!showUpload && <ViewButton style={{marginRight:"1rem", marginLeft:"2.5rem"}} onClick = {toggleUpload}>Add Image</ViewButton>}
             {showEdit && <EditRecordingForm toggleEdit = {toggleEdit} recording = {recording} setRecording = {setRecording} showEdit = {showEdit} setShowEdit= {setShowEdit} recordings = {recordings} setRecordings = {setRecordings}/>}
-            {!showEdit && <VocalButton onClick = {toggleEdit}>Edit Recording</VocalButton>}
-            {!showEdit && <VocalButton onClick = {()=>handleDeleteRecording(recording.id)}>Delete Recording</VocalButton>}
+            {!showEdit && <ViewButton style={{marginRight:"1rem"}} onClick = {toggleEdit}>Edit Recording</ViewButton>}
+            {!showEdit && <ViewButton onClick = {()=>handleDeleteRecording(recording.id)}>Delete Recording</ViewButton>}
         </div>
       </Modal.Body>
       <Modal.Footer style ={{backgroundColor: `${SecondaryColor}`}}>
-        {!showEdit && <VocalButton onClick={handleClose}>
+        {!showEdit && <ViewButton onClick={handleClose}>
           Close
-        </VocalButton>}
-        {showEdit && <VocalButton onClick={toggleEdit}>Cancel</VocalButton>}
+        </ViewButton>}
+        {showEdit && <ViewButton onClick={toggleEdit}>Cancel</ViewButton>}
       </Modal.Footer>
     </Modal>
     )

@@ -18,7 +18,7 @@ const DropdownChecklist = (props) => {
 
     return(
     <div>
-        <FormControl sx={{ m: 1, width: 300 }}>
+        <FormControl sx={{width: "29.2rem" }} style={{backgroundColor: "white", borderRadius: "0.35rem"}}>
             {<InputLabel id="demo-multiple-checkbox-label">{props.tag}</InputLabel>}
             <Select
             labelId="demo-multiple-checkbox-label"

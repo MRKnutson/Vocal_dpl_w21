@@ -20,6 +20,7 @@ const Activities = () => {
   const [useCanvas, setUseCanvas] = useState(false);
   const [recordings, setRecordings] = useState([]);
   const [logData, setLogData] = useState([])
+  const [photos, setPhotos] =useState([])
 
   useEffect(() => {
     getRecordings();
@@ -28,6 +29,8 @@ const Activities = () => {
 
   const getRecordings = async () => {
     try {
+      let images = await axios.get('/api/images')
+      setPhotos(images.data)
       let response = await axios.get("/api/recordings");
       setRecordings(response.data);
       if(response.data.length>0){
@@ -119,11 +122,6 @@ const Activities = () => {
     let d = new Date(dateTime)
     let hrs = d.getHours()
     let mins = d.getMinutes()
-    // if(hrs <= 9)
-    // hrs = "0" + hrs
-    // if(mins < 10)
-    // mins = "0" + mins
-    // const time = hrs+":"+mins
     if(hrs < 12){
       if (mins <10){
         mins = "0"+ mins
@@ -217,10 +215,31 @@ const Activities = () => {
   const normalizeLogsData = () =>{
     if(logData.length > 0){
       return logData.map((recording) =>{
-        let time = formatTime(recording.created_at)
-        let length = recording.duration.toFixed(0)
-        return{
-          title: `${time}`, cardTitle: recording.title, cardSubtitle: `Length: ${length} minutes`, cardDetailedText: `Notes: ${recording.notes}`
+        if(photos && photos.length > 0){
+          // console.log(recording)
+          // console.log(photos)
+          let filteredPhotos = photos.filter((p)=>p.recording_id == recording.id)
+          let photo = filteredPhotos[0]
+          // console.log(photo)
+          let time = formatTime(recording.created_at)
+          let length = recording.duration.toFixed(0)
+          if(photo){
+            return{
+              title: `${time}`, cardTitle: recording.title, cardSubtitle: `Length: ${length} minutes`, cardDetailedText: `Notes: ${recording.notes}`, media: {
+                name: "Recording Photo", source:{url: photo.pointer}, type: "IMAGE"
+              }
+            }
+          } else{
+          return{
+              title: `${time}`, cardTitle: recording.title, cardSubtitle: `Length: ${length} minutes`, cardDetailedText: `Notes: ${recording.notes}`
+            }
+          }
+        } else {
+          let time = formatTime(recording.created_at)
+          let length = recording.duration.toFixed(0)
+          return{
+            title: `${time}`, cardTitle: recording.title, cardSubtitle: `Length: ${length} minutes`, cardDetailedText: `Notes: ${recording.notes}`
+          }
         }
       })
     }
@@ -237,18 +256,20 @@ const Activities = () => {
       <Row md = {1} lg = {3} style ={{display: "flex", justifyContent: "space-between"}}>
         <Col style = {{display:"flex", justifyContent: "space-around"}}>
             <StatCard >
-              {/* <Card.Image variant = "top" /> */}
-              <StatText as="h2">Entries Saved: {recordings.length}</StatText>
+              <Card.Img variant = "top" src ="https://static.vecteezy.com/system/resources/previews/001/200/448/non_2x/clock-png.png" style ={{display:"block", maxWidth: "7rem", height: "auto", width: "auto", marginTop: "4rem", marginBottom: "4rem", marginLeft: "2rem"}} />
+              <StatText as="h3" style={{margin:"1rem"}}>Entries Saved: {recordings.length}</StatText>
             </StatCard>
         </Col>
         <Col style = {{display:"flex", justifyContent: "space-around"}}>
             <StatCard style ={{backgroundColor: `${ActionColor}`, color: "white"}}>
-              <StatText as="h2">Total time recorded: {totalTime()} minutes</StatText>
+              <Card.Img variant = "top" src ="https://static.vecteezy.com/system/resources/previews/001/200/448/non_2x/clock-png.png" style ={{display:"block", maxWidth: "7rem", height: "auto", width: "auto", marginTop: "4rem", marginBottom: "4rem", marginLeft: "2rem"}} />
+              <StatText as="h3" style={{margin:"1rem"}}>Total time recorded: {totalTime()} minutes</StatText>
             </StatCard>
         </Col>
         <Col style = {{display:"flex", justifyContent: "space-around"}}>     
             <StatCard style ={{backgroundColor: `${SecondaryColor}`, color: "white"}}>
-              <StatText as="h2">Longest entry: {longestRecording()} minutes</StatText>
+              <Card.Img variant = "top" src ="https://static.vecteezy.com/system/resources/previews/001/200/448/non_2x/clock-png.png" style ={{display:"block", maxWidth: "7rem", height: "auto", width: "auto", marginTop: "4rem", marginBottom: "4rem", marginLeft: "2rem"}} />
+              <StatText as="h3" style={{margin:"1rem"}}>Longest entry: {longestRecording()} minutes</StatText>
             </StatCard>
         </Col>
       </Row>
@@ -291,7 +312,7 @@ const Activities = () => {
       <GraphCard style = {{paddingBottom: "75px"}}>
       <h2 style={{ margin: "1.5rem" }}>Entries by Mood</h2>
       <div>
-        <XYPlot yDomain = {[0,32]}  style={{margin:"50px"}} width={1000} height={600} stackBy="y" xType = "ordinal" >
+        <XYPlot yDomain = {[0,32]}  style={{margin:"3.5rem"}} width={1000} height={600} stackBy="y" xType = "ordinal" >
         <DiscreteColorLegend
             style={{position: 'relative', left: '950px', top: '-610px'}}
             orientation="horizontal"
@@ -323,16 +344,18 @@ const Activities = () => {
           <XAxis 
           title = "Month"
           style = {{
-            line: {stroke: 'white'},
-            text: {fill: 'white'}
+            line: {stroke: 'gray'},
+            text: {fill: 'white'},
+            title: {fill: "white"}
           }}
           />
           <YAxis 
           title = "Number of Entries"
           style={{
-            line: {stroke: '#ADDDE1'},
+            line: {stroke: 'gray'},
             ticks: {stroke: '#ADDDE1'},
-            text: {stroke: 'none', fill: 'white', fontWeight: 600}
+            text: {stroke: 'none', fill: 'white', fontWeight: 600},
+            title: {fill: 'white'}
           }}
             />
           <BarSeries
@@ -365,7 +388,7 @@ const Activities = () => {
       </GraphCard>
       {logData.length>1 && <GraphCard>
         <h2 style={{ margin: "1.5rem" }}>Daily Log</h2>
-        <div style ={{height: "400px", width: "100%", paddingTop: "1.5rem"}}>
+        <div style ={{height: "500px", width: "100%", paddingTop: "1.5rem"}}>
           <Chrono 
             cardPositionHorizontal = "TOP"
             items = {normalizeLogsData()} 

@@ -2,13 +2,14 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { Form } from 'react-bootstrap';
 import { VocalButton } from './Styles';
-
+import EditTags from './EditTags'
 const EditRecordingForm = (props)=> {
 
   const {showEdit, setShowEdit, recording, setRecording, recordings, setRecordings} = props
   const [title, setTitle] = useState(props.recording.title)
   const [notes, setNotes] = useState(props.recording.notes)
   const [mood, setMood] = useState(props.recording.mood)
+  const [tags, setTags] = useState(props.tags)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,6 +28,10 @@ const EditRecordingForm = (props)=> {
     let updatedRecordings = recordings.map((r) => (r.id === changedRecording.id ? changedRecording : r));
   setRecordings(updatedRecordings)
   };
+
+  const setChosenTags = () => {
+    
+  }
 
   return(
     <Form onSubmit = {handleSubmit}>
@@ -48,6 +53,7 @@ const EditRecordingForm = (props)=> {
           <option value={5}>5</option>
         </Form.Select>
       </Form.Group>
+      {/* <EditTags selectTags={setTags} chosenTags={tags}/> */}
       {/* <p>{title}</p> */}
       <VocalButton type = "submit">Submit Changes</VocalButton>
       <VocalButton onClick = {()=>setShowEdit(!showEdit)}>Cancel</VocalButton>

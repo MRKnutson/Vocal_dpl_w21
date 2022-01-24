@@ -7,7 +7,7 @@ import ShowImage from "../components/ShowImage";
 import EditRecordingForm from './EditRecodingForm';
 
 const ShowRecording = (props) => {
-    const {handleClose, images, setImages, showImage, recordings, setRecordings} = props
+    const {handleClose, images, setImages, showImage, recordings, setRecordings, tags} = props
 
     const [recording, setRecording] = useState(props.recording)
     const [image, setImage] = useState(null);
@@ -78,7 +78,7 @@ const ShowRecording = (props) => {
             <br/>
             {showUpload && <RecordingImage toggleUpload = {toggleUpload} setImages = {setImages} images = {images} recording_id = {recording.id}/>}
             {!showUpload && <VocalButton onClick = {toggleUpload}>Add Image</VocalButton>}
-            {showEdit && <EditRecordingForm toggleEdit = {toggleEdit} recording = {recording} setRecording = {setRecording} showEdit = {showEdit} setShowEdit= {setShowEdit} recordings = {recordings} setRecordings = {setRecordings}/>}
+            {showEdit && <EditRecordingForm toggleEdit = {toggleEdit} recording = {recording} setRecording = {setRecording} showEdit = {showEdit} setShowEdit= {setShowEdit} recordings = {recordings} setRecordings = {setRecordings} tags={tags}/>}
             {!showEdit && <VocalButton onClick = {toggleEdit}>Edit Recording</VocalButton>}
             <VocalButton onClick = {()=>handleDeleteRecording(recording.id)}>Delete Recording</VocalButton>
         </div>

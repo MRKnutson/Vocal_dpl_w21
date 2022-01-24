@@ -8,6 +8,7 @@ import {
   VocalHeader,
   VocalButton,
   ViewButton,
+  HoverImage,
 } from "../components/Styles.js";
 import axios from "axios";
 import ShowImage from "../components/ShowImage";
@@ -49,7 +50,7 @@ const ShowRecording = (props) => {
     return images.map((i) => {
       return (
         <>
-          <img
+          <HoverImage
             onClick={() => {
               handleImageModal(i);
             }}

@@ -73,7 +73,7 @@ const ShowRecording = (props) => {
     let response = await axios.delete(
       `/api/recordings/${props.recording.id}/photos/${id}`
     );
-    let filteredImages = images.filter((photo) => photo.photo_id !== id);
+    let filteredImages = allImages.filter((photo) => photo.photo_id !== id);
     setImages(filteredImages);
   };
 

@@ -1,20 +1,13 @@
 import { useState } from "react";
 import {
-  PrimaryColor,
+  HoverImage,
   SecondaryColor,
-  ActionColor,
-  VocalHeader,
-  VocalButton,
   ViewButton,
 } from "../components/Styles.js";
-import Play from "../images/Play.png";
-import Pause from "../images/Pause.png";
 import ShowImage from "./ShowImage.js";
-import axios from "axios";
 
 const Recording = (props) => {
   const { recording, showRecording, tags, images, setImages } = props;
-  const [playing, setPlaying] = useState(false);
   const [showImageModal, setShowImageModal] = useState(false);
   const [modalImage, setModalImage] = useState(null);
   const deletable = false;
@@ -33,16 +26,16 @@ const Recording = (props) => {
       return images.map((image) => {
         return (
           <>
-            <img
+            <HoverImage
               onClick={() => handleModal(image)}
               key={recording.id}
               src={image.pointer}
               alt='image'
-              style={{
-                width: "150px",
-                border: "2px solid white",
-                margin: "1rem",
-              }}
+              //   style={{
+              //     width: "150px",
+              //     border: "2px solid white",
+              //     margin: "1rem",
+              //   }}
             />
             {modalImage && (
               <ShowImage
@@ -122,4 +115,5 @@ const Recording = (props) => {
     </div>
   );
 };
+
 export default Recording;

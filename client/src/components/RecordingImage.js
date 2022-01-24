@@ -47,7 +47,7 @@ const UserImage = (props) => {
       setSuccess(true);
       setLoading(false);
       console.log(images);
-      setImages([res.data, ...allImages]);
+      setImages([{ ...res.data, photo_id: res.data.id }, ...allImages]);
       toggleUpload();
     } catch (err) {
       console.log(err);

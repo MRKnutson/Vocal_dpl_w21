@@ -15,6 +15,8 @@ const ShowImage = (props) => {
     props.deletable === false ? false : true
   );
   console.log(imagePointer);
+  console.log(image);
+  console.log(image.photo_id);
   const handleClose = () => setShowImageModal(false);
 
   const handleDelete = () => {

@@ -73,5 +73,6 @@ export const HoverImage = styled.img`
   margin: 1rem;
   &:hover {
     cursor: pointer;
+    width: 10.25rem;
   }
 `;

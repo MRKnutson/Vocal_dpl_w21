@@ -56,7 +56,7 @@ const EditRecordingForm = (props)=> {
       {/* <EditTags selectTags={setTags} chosenTags={tags}/> */}
       {/* <p>{title}</p> */}
       <VocalButton type = "submit">Submit Changes</VocalButton>
-      <VocalButton onClick = {()=>setShowEdit(!showEdit)}>Cancel</VocalButton>
+      {/* <VocalButton onClick = {()=>setShowEdit(!showEdit)}>Cancel</VocalButton> */}
     </Form>
   )
 };

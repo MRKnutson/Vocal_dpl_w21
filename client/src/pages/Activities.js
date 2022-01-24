@@ -256,18 +256,20 @@ const Activities = () => {
       <Row md = {1} lg = {3} style ={{display: "flex", justifyContent: "space-between"}}>
         <Col style = {{display:"flex", justifyContent: "space-around"}}>
             <StatCard >
-              {/* <Card.Image variant = "top" /> */}
-              <StatText as="h2">Entries Saved: {recordings.length}</StatText>
+              <Card.Img variant = "top" src ="https://static.vecteezy.com/system/resources/previews/001/200/448/non_2x/clock-png.png" style ={{display:"block", maxWidth: "7rem", height: "auto", width: "auto", marginTop: "4rem", marginBottom: "4rem", marginLeft: "2rem"}} />
+              <StatText as="h3" style={{margin:"1rem"}}>Entries Saved: {recordings.length}</StatText>
             </StatCard>
         </Col>
         <Col style = {{display:"flex", justifyContent: "space-around"}}>
             <StatCard style ={{backgroundColor: `${ActionColor}`, color: "white"}}>
-              <StatText as="h2">Total time recorded: {totalTime()} minutes</StatText>
+              <Card.Img variant = "top" src ="https://static.vecteezy.com/system/resources/previews/001/200/448/non_2x/clock-png.png" style ={{display:"block", maxWidth: "7rem", height: "auto", width: "auto", marginTop: "4rem", marginBottom: "4rem", marginLeft: "2rem"}} />
+              <StatText as="h3" style={{margin:"1rem"}}>Total time recorded: {totalTime()} minutes</StatText>
             </StatCard>
         </Col>
         <Col style = {{display:"flex", justifyContent: "space-around"}}>     
             <StatCard style ={{backgroundColor: `${SecondaryColor}`, color: "white"}}>
-              <StatText as="h2">Longest entry: {longestRecording()} minutes</StatText>
+              <Card.Img variant = "top" src ="https://static.vecteezy.com/system/resources/previews/001/200/448/non_2x/clock-png.png" style ={{display:"block", maxWidth: "7rem", height: "auto", width: "auto", marginTop: "4rem", marginBottom: "4rem", marginLeft: "2rem"}} />
+              <StatText as="h3" style={{margin:"1rem"}}>Longest entry: {longestRecording()} minutes</StatText>
             </StatCard>
         </Col>
       </Row>
@@ -310,7 +312,7 @@ const Activities = () => {
       <GraphCard style = {{paddingBottom: "75px"}}>
       <h2 style={{ margin: "1.5rem" }}>Entries by Mood</h2>
       <div>
-        <XYPlot yDomain = {[0,32]}  style={{margin:"50px"}} width={1000} height={600} stackBy="y" xType = "ordinal" >
+        <XYPlot yDomain = {[0,32]}  style={{margin:"3.5rem"}} width={1000} height={600} stackBy="y" xType = "ordinal" >
         <DiscreteColorLegend
             style={{position: 'relative', left: '950px', top: '-610px'}}
             orientation="horizontal"
@@ -342,16 +344,18 @@ const Activities = () => {
           <XAxis 
           title = "Month"
           style = {{
-            line: {stroke: 'white'},
-            text: {fill: 'white'}
+            line: {stroke: 'gray'},
+            text: {fill: 'white'},
+            title: {fill: "white"}
           }}
           />
           <YAxis 
           title = "Number of Entries"
           style={{
-            line: {stroke: '#ADDDE1'},
+            line: {stroke: 'gray'},
             ticks: {stroke: '#ADDDE1'},
-            text: {stroke: 'none', fill: 'white', fontWeight: 600}
+            text: {stroke: 'none', fill: 'white', fontWeight: 600},
+            title: {fill: 'white'}
           }}
             />
           <BarSeries

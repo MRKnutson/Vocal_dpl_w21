@@ -1,0 +1,13 @@
+#moods_container{
+  background-color: #3e619b;
+  border-radius: 2%;
+  margin-top: 3%;
+  margin-left: 2%;
+  margin-right: 2%;
+  max-width: 100vw;
+}
+#moods_header{
+  padding-left: 10%;
+  padding-top: 2%;
+  color: #e4f1fd;
+}

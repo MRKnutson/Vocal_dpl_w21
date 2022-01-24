@@ -73,6 +73,7 @@ const Timeline = () => {
       return (
         <Recording
           images={filterImages(recording.id)}
+          setImages={setImages}
           recording={recording}
           showRecording={() => {
             setShowRecordingID(recording.id);
@@ -132,6 +133,7 @@ const Timeline = () => {
           recording={recordings.find((r) => r.id === showRecordingID)}
           tags={tags.filter((t) => t.recording_id === showRecordingID)}
           setImages={setImages}
+          allImages={images}
           images={filterImages(showRecordingID)}
           handleClose={() => {
             setShowRecordingID(null);

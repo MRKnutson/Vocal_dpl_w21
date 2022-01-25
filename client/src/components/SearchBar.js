@@ -14,7 +14,7 @@ const SearchBar = ({ keyword, filterRecordings }) => {
       style={BarStyling}
       key='random1'
       value={keyword}
-      placeholder={"Search Products"}
+      placeholder={"Title Search"}
       onChange={(e) => filterRecordings(e.target.value)}
     />
   );

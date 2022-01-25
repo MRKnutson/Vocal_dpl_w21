@@ -93,6 +93,12 @@ class Api::RecordingsController < ApplicationController
     render json: @photo.destroy
   end
 
+
+  def clear_tags
+    rTags = RecordingTag.where(recording_id: params[:recording_id])
+    RecordingTag.destroy(rTags)
+  end
+
   private
 
   def set_recording

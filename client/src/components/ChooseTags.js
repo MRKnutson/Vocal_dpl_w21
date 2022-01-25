@@ -30,6 +30,7 @@ const ChooseTags = (props) => {
         tagLog.push(t.tag_text)
         return keep
       })
+      console.log("tags gotten")
       setTags(distinctTags)
     } catch (err) {
       console.log(err)
@@ -38,6 +39,7 @@ const ChooseTags = (props) => {
 
   const handleChange = (e) => {
       e.preventDefault()
+      console.log("change handled")
       setNewTag(e.target.value)
   }
   const createTag = async (e) => {
@@ -51,20 +53,21 @@ const ChooseTags = (props) => {
     return (
       <div>
             {showCreateTag ?
-                <div style={{backgroundColor: "white"}}>
+                <div >
                   <input onChange={handleChange} style={{backgroundColor:"white"}}></input>
-                  <button onClick={createTag} style={{borderRadius: "10%", borderWidth: "0.2px"}}>✓</button>
-                  <button onClick={()=>{setShowCreateTag(false)}} style={{borderRadius: "10%", borderWidth: "0.2px"}}>X</button>
+                  <button type="button" onClick={createTag} style={{borderRadius: "10%", borderWidth: "0.2px"}}>✓</button>
+                  <button type="button" onClick={()=>{setShowCreateTag(false)}} style={{borderRadius: "10%", borderWidth: "0.2px"}}>X</button>
                 </div>
             :
                 <div>
                   <DropdownChecklist tag="Tags" setState={setChosenTags} selItems={chosenTags} items={tags.map((t)=>{
                       return t.tag_text
                     })} />
-                  <button onClick={()=>{setShowCreateTag(true)}} style={{borderRadius: "0.25rem", borderWidth: "0.05rem", marginTop:"0.5rem"}}>New Tag</button>
+                  <button type="button" onClick={()=>{setShowCreateTag(true)}} style={{borderRadius: "0.25rem", borderWidth: "0.05rem", marginTop:"0.5rem"}}>New Tag</button>
                 </div>
             } 
       </div>
     )
 } 
+//
 export default ChooseTags

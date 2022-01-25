@@ -18,6 +18,8 @@ import {
   VocalButton,
 } from "../components/Styles.js";
 import Recording from "../components/Recording";
+import SearchBar from "../components/SearchBar";
+import RenderJson from "../components/RenderJson";
 
 const Timeline = () => {
   const [recordings, setRecordings] = useState([]);
@@ -25,20 +27,22 @@ const Timeline = () => {
   const [showRecordingID, setShowRecordingID] = useState(null);
   const [tagChoice, setTagChoice] = useState(null);
   const [images, setImages] = useState(null);
+  const [search, setSearch] = useState(null);
+  const [filteredRecordings, setFilteredRecordings] = useState([]);
 
   useEffect(() => {
-    getData()
+    getData();
   }, []);
 
-
-  useEffect(() => {
-    console.log("showRecordingID: " + showRecordingID);
-  }, [showRecordingID]);
+  // useEffect(() => {
+  //   console.log("showRecordingID: " + showRecordingID);
+  // }, [showRecordingID]);
 
   const getRecordings = async () => {
     try {
       let response = await axios.get("/api/recordings");
       setRecordings(response.data.reverse());
+      setFilteredRecordings(response.data);
     } catch (error) {
       alert("error occured in getRecordings");
     }
@@ -47,7 +51,6 @@ const Timeline = () => {
   const getImages = async () => {
     try {
       let response = await axios.get("/api/images");
-      console.log(response.data);
       setImages(response.data);
     } catch (error) {
       alert("error occured in getImages");
@@ -67,26 +70,28 @@ const Timeline = () => {
     getImages();
     getRecordings();
     getTags();
-  }
+  };
 
-  const renderRecordings = () => {
-    let recs = recordings;
+  const renderRecordings = (recordingsToRender) => {
+    let recs = recordingsToRender;
     if (tagChoice) {
-      recs = recordings.filter((r) => r.tag_id == tagChoice);
+      recs = recordingsToRender.filter((r) => r.tag_id == tagChoice);
     }
-    return recs.map((recording) => {
-      return (
-        <Recording
-          images={filterImages(recording.id)}
-          setImages={setImages}
-          recording={recording}
-          showRecording={() => {
-            setShowRecordingID(recording.id);
-          }}
-          tags={tags.filter((t) => t.recording_id === recording.id)}
-        />
-      );
-    });
+    if (recs.length > 0) {
+      return recs.map((recording) => {
+        return (
+          <Recording
+            images={filterImages(recording.id)}
+            setImages={setImages}
+            recording={recording}
+            showRecording={() => {
+              setShowRecordingID(recording.id);
+            }}
+            tags={tags.filter((t) => t.recording_id === recording.id)}
+          />
+        );
+      });
+    }
   };
   // this renders the possible tags the person has
   const renderSearchTags = () => {
@@ -118,6 +123,22 @@ const Timeline = () => {
     return [];
   };
 
+  const filterRecordings = (search) => {
+    let allRecordings = recordings;
+    if (allRecordings.length > 0) {
+      let mappedRecordings = allRecordings.map((recording) => {
+        if (recording.title.includes(search)) {
+          return recording;
+        }
+      });
+      let filteredRecordings = allRecordings.filter((f) =>
+        f.title.includes(search)
+      );
+      setFilteredRecordings(filteredRecordings);
+      setSearch(search);
+    }
+  };
+
   return (
     <div>
       <VocalHeader style={{ margin: "3rem" }}>My Journal Entries</VocalHeader>
@@ -133,6 +154,7 @@ const Timeline = () => {
           <Dropdown.Item eventKey='All'>View All Recordings</Dropdown.Item>
         </DropdownButton>
       </InputGroup>
+      <SearchBar input={search} filterRecordings={filterRecordings} />
       {showRecordingID && (
         <ShowRecording
           recording={recordings.find((r) => r.id === showRecordingID)}
@@ -149,7 +171,7 @@ const Timeline = () => {
         />
       )}
       <br /> <br />
-      {renderRecordings()}
+      {renderRecordings(filteredRecordings)}
     </div>
   );
 };

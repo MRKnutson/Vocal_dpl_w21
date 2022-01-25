@@ -5,7 +5,7 @@ import { VocalButton } from './Styles';
 import EditTags from './EditTags'
 const EditRecordingForm = (props)=> {
 
-  const {showEdit, setShowEdit, recording, setRecording, recordings, setRecordings} = props
+  const {showEdit, setShowEdit, recording, setRecording, recordings, setRecordings, getData} = props
   const [title, setTitle] = useState(props.recording.title)
   const [notes, setNotes] = useState(props.recording.notes)
   const [mood, setMood] = useState(props.recording.mood)
@@ -18,19 +18,27 @@ const EditRecordingForm = (props)=> {
     getAllTags()
   }, [])
 
+  useEffect(()=>{
+    
+ 
+  }, [])
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     let updatedRecording = {...recording, title: title, notes: notes};
-    clearTags()
-    processTags(tags, recording.id)
+    
     try{
+      clearTags()
+      processTags(tags, recording.id)
       let response = await axios.put(`/api/recordings/${recording.id}`, updatedRecording)
       setRecording(response.data)
       updateRecordings(response.data)
       setShowEdit(!showEdit)
+      
     } catch (err) {
       alert('error updating recording')
     }
+    getData()
   };
 
   const updateRecordings = (changedRecording) => {

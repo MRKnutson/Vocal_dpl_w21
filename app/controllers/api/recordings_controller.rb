@@ -96,8 +96,8 @@ class Api::RecordingsController < ApplicationController
 
   def clear_tags
     rTags = RecordingTag.where(recording_id: params[:id])
-    RecordingTag.destroy(rTags)
-    render json: @single_recording
+    RecordingTag.delete(rTags)
+    # render json: @single_recording
   end
 
   private

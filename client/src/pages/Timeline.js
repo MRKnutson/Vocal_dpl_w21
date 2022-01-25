@@ -27,10 +27,9 @@ const Timeline = () => {
   const [images, setImages] = useState(null);
 
   useEffect(() => {
-    getImages();
-    getRecordings();
-    getTags();
+    getData()
   }, []);
+
 
   useEffect(() => {
     console.log("showRecordingID: " + showRecordingID);
@@ -63,6 +62,12 @@ const Timeline = () => {
       alert("error occured in getTags");
     }
   };
+
+  const getData = () => {
+    getImages();
+    getRecordings();
+    getTags();
+  }
 
   const renderRecordings = () => {
     let recs = recordings;
@@ -140,6 +145,7 @@ const Timeline = () => {
           }}
           recordings={recordings}
           setRecordings={setRecordings}
+          getData={getData}
         />
       )}
       <br /> <br />

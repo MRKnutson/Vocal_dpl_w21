@@ -14,11 +14,14 @@ const EditRecordingForm = (props)=> {
 
 
   useEffect(()=>{
+    
     getAllTags()
   }, [])
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     let updatedRecording = {...recording, title: title, notes: notes};
+    clearTags()
     processTags(tags, recording.id)
     try{
       let response = await axios.put(`/api/recordings/${recording.id}`, updatedRecording)
@@ -34,6 +37,10 @@ const EditRecordingForm = (props)=> {
     let updatedRecordings = recordings.map((r) => (r.id === changedRecording.id ? changedRecording : r));
   setRecordings(updatedRecordings)
   };
+
+  const clearTags = async () => {
+    await axios.get(`/api/recordings/${recording.id}/clear_tags`)
+  }
 
   const connectTag = async (tag_id, rec_id) => {
         await axios.put(`/api/tags/${tag_id}`, {recording_id: rec_id})

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     get "images", to: "recordings#get_images"
     put "/api/tags/:id", to: "tags#update"
     delete "recordings/:recording_id/photos/:photo_id", to: "recordings#destroy_image"
-    delete "/api/recordings/:id/clear_tags", to: "recordings#clear_tags"
+    get "/api/recordings/:id/clear_tags", to: "recordings#clear_tags"
   end
 
   get "*other", to: "static#index"

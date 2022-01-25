@@ -95,8 +95,9 @@ class Api::RecordingsController < ApplicationController
 
 
   def clear_tags
-    rTags = RecordingTag.where(recording_id: params[:recording_id])
+    rTags = RecordingTag.where(recording_id: params[:id])
     RecordingTag.destroy(rTags)
+    render json: @single_recording
   end
 
   private
@@ -114,7 +115,7 @@ class Api::RecordingsController < ApplicationController
   end
 
   def recording_params
-    params.permit(:title, :notes, :mood)
+    params.require(:recording).permit(:title, :notes, :mood, :user_id, :id, :pointer, :created_at, :updated_at, :duration)
   end
 
   def set_image

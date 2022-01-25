@@ -23,6 +23,7 @@ const ShowRecording = (props) => {
     allImages,
     recordings,
     setRecordings,
+    tags
   } = props;
 
   const [recording, setRecording] = useState(props.recording);
@@ -160,6 +161,7 @@ const ShowRecording = (props) => {
               setShowEdit={setShowEdit}
               recordings={recordings}
               setRecordings={setRecordings}
+              tags={tags}
             />
           )}
           {!showEdit && (

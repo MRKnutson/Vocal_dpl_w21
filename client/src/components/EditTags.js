@@ -2,8 +2,18 @@ import {useState, useEffect} from 'react'
 import axios from "axios";
 import DropdownChecklist from "./DropdownChecklist"
 const ChooseTags = (props) => {
+
+  const formatTags = (tagArr) => {
+    return tagArr.map((t)=>{
+         if(t.tag_text){
+           return t
+         } else {
+           return {tag_text: t}
+         }
+       })
+  }
     const [tags, setTags] = useState([])
-    const [chosenTags, setChosenTags] = useState([])
+    const [chosenTags, setChosenTags] = useState(formatTags(props.chosenTags))
     const [showCreateTag, setShowCreateTag] = useState(false)
     const [newTag, setNewTag] = useState("")
 
@@ -12,13 +22,7 @@ const ChooseTags = (props) => {
     }, [])
 
     useEffect(()=>{
-       props.selectTags(chosenTags.map((ct)=>{
-         if(ct.tag_text){
-           return ct
-         } else {
-           return {tag_text: ct}
-         }
-       }))
+       props.selectTags(formatTags(chosenTags))
     }, [chosenTags])
 
     const getTags = async () => {
@@ -30,7 +34,6 @@ const ChooseTags = (props) => {
         tagLog.push(t.tag_text)
         return keep
       })
-      console.log("tags gotten")
       setTags(distinctTags)
     } catch (err) {
       console.log(err)
@@ -39,35 +42,42 @@ const ChooseTags = (props) => {
 
   const handleChange = (e) => {
       e.preventDefault()
-      console.log("change handled")
       setNewTag(e.target.value)
   }
   const createTag = async (e) => {
       e.preventDefault()
-      setTags([...tags, {tag_text: newTag}])
-      setChosenTags([...chosenTags, newTag])
+      setTags(formatTags([...tags, {tag_text: newTag}]))
+      setChosenTags(formatTags([...chosenTags, newTag]))
       setShowCreateTag(false)
       setNewTag("")
   }
+
+  const selectTags = (selTags) => {
+    setChosenTags(formatTags(selTags))
+  }
+
+
+  
   
     return (
       <div>
             {showCreateTag ?
-                <div >
-                  <input onChange={handleChange} style={{backgroundColor:"white"}}></input>
+                <div>
+                  <input onChange={handleChange}></input>
                   <button type="button" onClick={createTag} style={{borderRadius: "10%", borderWidth: "0.2px"}}>✓</button>
                   <button type="button" onClick={()=>{setShowCreateTag(false)}} style={{borderRadius: "10%", borderWidth: "0.2px"}}>X</button>
                 </div>
             :
                 <div>
-                  <DropdownChecklist tag="Tags" setState={setChosenTags} selItems={chosenTags} items={tags.map((t)=>{
+                  <DropdownChecklist tag="Tags" setState={selectTags} selItems={chosenTags.map((t)=>{
                       return t.tag_text
-                    })} />
-                  <button type="button" onClick={()=>{setShowCreateTag(true)}} style={{borderRadius: "0.25rem", borderWidth: "0.05rem", marginTop:"0.5rem"}}>New Tag</button>
+                    })} items={tags.map((t)=>{
+                      return t.tag_text
+                    })}/>
+                  <button onClick={()=>{setShowCreateTag(true)}} style={{borderRadius: "10%", borderWidth: "0.2px"}}>+</button>
                 </div>
             } 
       </div>
     )
 } 
-//
 export default ChooseTags

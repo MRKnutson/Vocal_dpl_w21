@@ -43,6 +43,7 @@ const useRecorder = () => {
   const clearRecording = () => {
       setAudioURL(null)
       setBlobURL(null);
+      console.log("recording cleared")
   }
 
   return [audioURL, blobURL, isRecording, startRecording, stopRecording, clearRecording];

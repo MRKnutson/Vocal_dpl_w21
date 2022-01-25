@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import '../StylesFolder/Styles_Mood.css';
 import {
   BarChart,
   Bar,
@@ -86,17 +87,17 @@ export default function Mood() {
           // r.created_at = formatTime(r.created_at)
           console.log(r)
           normalizedData.push({
-            name: r.title,
+            title: r.title,
             uv: r.mood,
-            pv: r.mood,
-            amt: r.created_at
+            mood: r.mood,
+            date: r.created_at
           })
         }); return normalizedData;
       }
 
 
     return (
-    <div>
+    <div id="moods_container">
       <h2>Moods</h2>
         <BarChart
           width={1000}
@@ -108,13 +109,13 @@ export default function Mood() {
             left: 20,
             bottom: 5,
           }}
-          barSize={20}
+          barSize={35}
         >
-          <XAxis dataKey="amt" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="pv" fill="#ef4b4c" />
+          <XAxis dataKey="title" />
+          {/* <YAxis /> */}
+          <Tooltip dataKey="title" />
+          {/* <Legend /> */}
+          <Bar dataKey="mood" fill="#ef4b4c" />
           {/* <Bar dataKey="uv" fill="#82ca9d" /> */}
         </BarChart>
     </div>

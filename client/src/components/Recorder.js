@@ -4,6 +4,9 @@ import {useState, useEffect} from 'react'
 import axios from "axios";
 import EntryModal from "./EntryModal";
 import { useNavigate } from "react-router-dom";
+import Play from "../images/Play.png"
+import Pause from "../images/Pause.png"
+import { VocalHeader } from "./Styles";
 
 function Recorder() {
     const nav = useNavigate()
@@ -99,40 +102,44 @@ function Recorder() {
         
     }
   return (
+      <>
     <div style={{display: "flex", margin: "10px"}}>
         {!audioURL ? 
             (isRecording ? 
-                <div style={{display: "flex", gap: "10px"}}>
-                    <button onClick={()=>{
+                <div style={{display: "flex"}}>
+                    <button style={{background:"none", border:"none"}} onClick={()=>{
                     clearTimeout(timer)
                     stopRecording() 
                 }} disabled={!isRecording}>
-                        STOP
+                        <img src={Pause} style={{height:"5rem"}}/>
                     </button>
-                    <h5>{duration}</h5>
+                    <br/>
+                    <VocalHeader style={{padding:"2rem"}}>{duration}</VocalHeader>
                 </div>
             :
-                <button onClick={()=>{
-                    setSecondsElapsed(0)
-                    setDuration("0:00")
-                    startRecording() 
-                }} disabled={isRecording}>
-                    REC
-                </button>)
+            <>
+                <button style={{ background: "none", border: "none" }} onClick={() => {
+                    setSecondsElapsed(0);
+                    setDuration("0:00");
+                    startRecording();
+                } } disabled={isRecording}>
+                      <img src={Play} style={{ height: "5rem" }} />
+                  </button>
+                  
+                  </>)
         :
-           <EntryModal blobURL={blobURL} 
-                duration={duration} 
-                handleSave={handleSubmit} 
-                handleChange={handleChange} 
-                show={true} 
-                handleClose={clearRecording}
-                processTags={processTags}
-            />
-        }
-       
-        
-      
+        <EntryModal blobURL={blobURL} 
+        duration={duration} 
+        handleSave={handleSubmit} 
+        handleChange={handleChange} 
+        show={true} 
+        handleClose={clearRecording}
+        processTags={processTags}
+        />
+    }  
     </div>
+
+       </>
   );
 }
 export default Recorder

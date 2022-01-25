@@ -1,7 +1,7 @@
 import {useState} from "react"
 import {PrimaryColor, SecondaryColor, ActionColor, VocalHeader, VocalButton, ViewButton} from '../components/Styles.js'
-import Play from "../images/Play.png"
-import Pause from "../images/Pause.png"
+// import Play from "../images/Play.png"
+// import Pause from "../images/Pause.png"
 
 
 const Recording = (props) => {

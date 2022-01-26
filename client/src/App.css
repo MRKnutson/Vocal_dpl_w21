@@ -53,3 +53,18 @@
   background-color: transparent !important;
   border: none !important;
 }
+
+.search-bar {
+  width: 20rem;
+  float: right;
+  border-radius: 0.35rem;
+  height: 2.5rem;
+  margin-right: 1.5rem;
+  background-color: #ef4c4c;
+  color: #ffffff;
+  padding-left: 0.5rem;
+}
+.search-bar::placeholder {
+  color: #ffffff;
+  padding-left: 0.5rem;
+}

@@ -20,12 +20,14 @@ import {
 import Recording from "../components/Recording";
 import SearchBar from "../components/SearchBar";
 import RenderJson from "../components/RenderJson";
+import DropdownChecklist from "../components/DropdownChecklist";
 
 const Timeline = () => {
   const [recordings, setRecordings] = useState([]);
   const [tags, setTags] = useState([]);
+  const [uniqueTags, setUniqueTags] = useState([]);
   const [showRecordingID, setShowRecordingID] = useState(null);
-  const [tagChoice, setTagChoice] = useState(null);
+  const [chosenTags, setChosenTags] = useState([]);
   const [images, setImages] = useState(null);
   const [search, setSearch] = useState(null);
   const [filteredRecordings, setFilteredRecordings] = useState([]);
@@ -33,6 +35,14 @@ const Timeline = () => {
   useEffect(() => {
     getData();
   }, []);
+
+  //   useEffect(() => {
+  //   console.log("chosen: " + chosenTags);
+  // }, [chosenTags]);
+
+  // useEffect(() => {
+  //   console.log("tags: " + tags);
+  // }, [tags]);
 
   // useEffect(() => {
   //   console.log("showRecordingID: " + showRecordingID);
@@ -60,6 +70,15 @@ const Timeline = () => {
   const getTags = async () => {
     try {
       let response = await axios.get("/api/tags");
+      let unique = [];
+      response.data.forEach((t) => {
+        if (unique.map((ut) => ut.tag_text).includes(t.tag_text)) {
+          console.log("duplicate skipped");
+        } else {
+          unique.push(t);
+        }
+      });
+      setUniqueTags(unique);
       setTags(response.data);
     } catch (error) {
       alert("error occured in getTags");
@@ -74,8 +93,11 @@ const Timeline = () => {
 
   const renderRecordings = (recordingsToRender) => {
     let recs = recordingsToRender;
-    if (tagChoice) {
-      recs = recordingsToRender.filter((r) => r.tag_id == tagChoice);
+    let searchTags = tags.filter((t) => chosenTags.includes(t.tag_text));
+    // console.log("searchTags: " + searchTags)
+    let taggedRecIds = searchTags.map((t) => t.recording_id);
+    if (chosenTags.length > 0) {
+      recs = recordingsToRender.filter((r) => taggedRecIds.includes(r.id));
     }
     if (recs.length > 0) {
       return recs.map((recording) => {
@@ -108,7 +130,7 @@ const Timeline = () => {
   };
 
   const handleSelection = (e) => {
-    setTagChoice(e);
+    setChosenTags(e);
   };
 
   const filterImages = (id) => {
@@ -124,36 +146,28 @@ const Timeline = () => {
   };
 
   const filterRecordings = (search) => {
+    let casedSearch = search.toLowerCase();
     let allRecordings = recordings;
     if (allRecordings.length > 0) {
-      let mappedRecordings = allRecordings.map((recording) => {
-        if (recording.title.includes(search)) {
-          return recording;
-        }
-      });
       let filteredRecordings = allRecordings.filter((f) =>
-        f.title.includes(search)
+        f.title.toLowerCase().includes(casedSearch)
       );
       setFilteredRecordings(filteredRecordings);
-      setSearch(search);
+      setSearch(casedSearch);
     }
   };
 
   return (
     <div>
       <VocalHeader style={{ margin: "3rem" }}>My Journal Entries</VocalHeader>
-      <InputGroup
-        style={{ width: "200px", float: "right", marginBottom: "10px" }}
-      >
-        <DropdownButton
-          onSelect={(choice) => handleSelection(choice)}
-          title='Search Tags'
-        >
-          {renderSearchTags()}
-          <Dropdown.Divider />
-          <Dropdown.Item eventKey='All'>View All Recordings</Dropdown.Item>
-        </DropdownButton>
-      </InputGroup>
+      <DropdownChecklist
+        tag='Tags'
+        setState={setChosenTags}
+        selItems={chosenTags}
+        items={uniqueTags.map((t) => {
+          return t.tag_text;
+        })}
+      />
       <SearchBar input={search} filterRecordings={filterRecordings} />
       {showRecordingID && (
         <ShowRecording

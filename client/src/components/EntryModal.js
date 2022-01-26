@@ -39,6 +39,11 @@ const EntryModal = ({handleClose, handleChange, handleSave, show, blobURL, durat
     return hDisplay + mDisplay + sDisplay; 
 }
 
+  const selectMood = (e) => {
+    e.preventDefault()
+    setMood(e.target.value)
+  }
+
   
   return(
     <div>
@@ -75,11 +80,11 @@ const EntryModal = ({handleClose, handleChange, handleSave, show, blobURL, durat
                 <br/>
                 <div>
                 <label style={{marginRight:".8rem"}}>Choose a Mood: </label>
-                <button style={{border:"none", backgroundColor:`${SecondaryColor}`}} value={1} onClick = {(e)=>setMood(e.target.value)}><img style={{height:"3rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={one}/></button>
-                <button style={{border:"none", backgroundColor:`${SecondaryColor}`}} value={2} onClick = {(e)=>setMood(e.target.value)}><img style={{height:"3rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={two}/></button>
-                <button style={{border:"none", backgroundColor:`${SecondaryColor}`}} value={3} onClick = {(e)=>setMood(e.target.value)}><img style={{height:"3rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={three}/></button>
-                <button style={{border:"none", backgroundColor:`${SecondaryColor}`}} value={4} onClick = {(e)=>setMood(e.target.value)}><img style={{height:"3rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={four}/></button>
-                <button style={{border:"none", backgroundColor:`${SecondaryColor}`}} value={5} onClick = {(e)=>setMood(e.target.value)}><img style={{height:"3rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={five}/></button>
+                <button style={{border:"none", backgroundColor:`${SecondaryColor}`}} value={1} onClick = {selectMood}><img style={{height:"3rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={one}/></button>
+                <button style={{border:"none", backgroundColor:`${SecondaryColor}`}} value={2} onClick = {selectMood}><img style={{height:"3rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={two}/></button>
+                <button style={{border:"none", backgroundColor:`${SecondaryColor}`}} value={3} onClick = {selectMood}><img style={{height:"3rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={three}/></button>
+                <button style={{border:"none", backgroundColor:`${SecondaryColor}`}} value={4} onClick = {selectMood}><img style={{height:"3rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={four}/></button>
+                <button style={{border:"none", backgroundColor:`${SecondaryColor}`}} value={5} onClick = {selectMood}><img style={{height:"3rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={five}/></button>
                 {/* <select defaultValue = {mood} as= "select" onChange ={handleChange} style={{width: "4rem"}}>
                   <option value={1}>1</option>
                   <option value={2}>2</option>

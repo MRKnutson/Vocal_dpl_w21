@@ -31,6 +31,7 @@ const ChooseTags = (props) => {
         tagLog.push(t.tag_text)
         return keep
       })
+      console.log("tags gotten")
       setTags(distinctTags)
     } catch (err) {
       console.log(err)
@@ -39,6 +40,7 @@ const ChooseTags = (props) => {
 
   const handleChange = (e) => {
       e.preventDefault()
+      console.log("change handled")
       setNewTag(e.target.value)
   }
 
@@ -70,4 +72,5 @@ const ChooseTags = (props) => {
       </div>
     )
 } 
+//
 export default ChooseTags

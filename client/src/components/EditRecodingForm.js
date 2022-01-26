@@ -1,32 +1,85 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Form } from 'react-bootstrap';
 import { VocalButton } from './Styles';
-
+import EditTags from './EditTags'
 const EditRecordingForm = (props)=> {
 
-  const {showEdit, setShowEdit, recording, setRecording, recordings, setRecordings} = props
+  const {showEdit, setShowEdit, recording, setRecording, recordings, setRecordings, getData} = props
   const [title, setTitle] = useState(props.recording.title)
   const [notes, setNotes] = useState(props.recording.notes)
   const [mood, setMood] = useState(props.recording.mood)
+  const [tags, setTags] = useState(props.tags)
+  const [allTags, setAllTags] = useState([])
+
+
+  useEffect(()=>{
+    
+    getAllTags()
+  }, [])
+
+  useEffect(()=>{
+    
+ 
+  }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     let updatedRecording = {...recording, title: title, notes: notes};
+    
     try{
+      clearTags()
+      processTags(tags, recording.id)
       let response = await axios.put(`/api/recordings/${recording.id}`, updatedRecording)
       setRecording(response.data)
       updateRecordings(response.data)
       setShowEdit(!showEdit)
+      
     } catch (err) {
       alert('error updating recording')
     }
+    getData()
   };
 
   const updateRecordings = (changedRecording) => {
     let updatedRecordings = recordings.map((r) => (r.id === changedRecording.id ? changedRecording : r));
   setRecordings(updatedRecordings)
   };
+
+  const clearTags = async () => {
+    await axios.get(`/api/recordings/${recording.id}/clear_tags`)
+  }
+
+  const connectTag = async (tag_id, rec_id) => {
+        await axios.put(`/api/tags/${tag_id}`, {recording_id: rec_id})
+    }
+    const addTag = async (rec_id, text) => {
+        await axios.post('/api/tags', {text: text, recording_id: rec_id})
+    }
+    const processTags = async (chosenTags, rec_id) => {
+        chosenTags.forEach((ct)=>{
+            if(!(allTags.map((t)=>t.tag_text).includes(ct.tag_text))){
+                try{
+                    addTag(rec_id, ct.tag_text)
+                } catch (err) {
+                    console.log("error creating tag: " + ct.tag_text, err)
+                }
+            } else {
+                let tag_id = allTags.find((t)=>t.tag_text===ct.tag_text).tag_id
+                connectTag(tag_id, rec_id)
+            }
+        })
+    }
+
+    const getAllTags = async () => {
+        try{
+            let res = await axios.get('/api/tags')
+            setAllTags(res.data)
+        } catch (err) {
+            console.log("error getting tags: " + err)
+        }
+        
+    }
 
   return(
     <Form onSubmit = {handleSubmit}>
@@ -48,6 +101,7 @@ const EditRecordingForm = (props)=> {
           <option value={5}>5</option>
         </Form.Select>
       </Form.Group>
+      <EditTags selectTags={setTags} chosenTags={tags}/>
       {/* <p>{title}</p> */}
       <VocalButton type = "submit">Submit Changes</VocalButton>
       {/* <VocalButton onClick = {()=>setShowEdit(!showEdit)}>Cancel</VocalButton> */}

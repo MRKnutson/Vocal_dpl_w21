@@ -161,15 +161,6 @@ const Timeline = () => {
   return (
     <div>
       <VocalHeader style={{ margin: "3rem" }}>My Journal Entries</VocalHeader>
-      <Form.Select
-        aria-label='Default select example'
-        style={{ backgroundColor: `${ActionColor}`, color: "white" }}
-      >
-        <option>Open this select menu</option>
-        <option value='1'>One</option>
-        <option value='2'>Two</option>
-        <option value='3'>Three</option>
-      </Form.Select>
       <DropdownChecklist
         tag='Tags'
         setState={setChosenTags}

@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 
 const SearchBar = ({ keyword, filterRecordings }) => {
   const BarStyling = {
@@ -9,9 +10,17 @@ const SearchBar = ({ keyword, filterRecordings }) => {
     borderRadius: "10px",
     paddingLeft: "10px",
   };
+
+  const SearchInput = styled.input`
+    width: 20rem;
+    margin-bottom: 30px;
+    float: right;
+    border-radius: 10px;
+    padding-left: 10px;
+  `;
   return (
     <input
-      style={BarStyling}
+      class='search-bar'
       key='random1'
       value={keyword}
       placeholder={"Title Search"}

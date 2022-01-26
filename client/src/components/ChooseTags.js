@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react'
 import axios from "axios";
 import DropdownChecklist from "./DropdownChecklist"
+import { ViewButton, VocalButton, SecondaryColor, PrimaryColor, ActionColor } from './Styles';
 const ChooseTags = (props) => {
     const [tags, setTags] = useState([])
     const [chosenTags, setChosenTags] = useState([])
@@ -42,6 +43,7 @@ const ChooseTags = (props) => {
       console.log("change handled")
       setNewTag(e.target.value)
   }
+
   const createTag = async (e) => {
       e.preventDefault()
       setTags([...tags, {tag_text: newTag}])
@@ -53,17 +55,18 @@ const ChooseTags = (props) => {
     return (
       <div>
             {showCreateTag ?
-                <div >
-                  <input onChange={handleChange} style={{backgroundColor:"white"}}></input>
-                  <button type="button" onClick={createTag} style={{borderRadius: "10%", borderWidth: "0.2px"}}>✓</button>
-                  <button type="button" onClick={()=>{setShowCreateTag(false)}} style={{borderRadius: "10%", borderWidth: "0.2px"}}>X</button>
+                <div style={{backgroundColor: `${SecondaryColor}`}}>
+                  <label style={{marginRight:".8rem"}}>Enter new tag:</label>
+                  <input onChange={handleChange} style={{border:"none", borderRadius:"0.3rem"}}></input>
+                  <ViewButton onClick={createTag} style={{borderRadius: ".4rem", marginRight:".5rem", marginLeft:".5rem", width:"2.5rem"}}>✓</ViewButton>
+                  <ViewButton onClick={()=>{setShowCreateTag(false)}} style={{borderRadius: ".4rem", width:"2.5rem"}}>X</ViewButton>
                 </div>
             :
-                <div>
-                  <DropdownChecklist tag="Tags" setState={setChosenTags} selItems={chosenTags} items={tags.map((t)=>{
+                <div style={{marginTop:"1.5rem"}}>
+                  {tags.length > 0 && <DropdownChecklist tag="Select a Tag" setState={setChosenTags} selItems={chosenTags} items={tags.map((t)=>{
                       return t.tag_text
-                    })} />
-                  <button type="button" onClick={()=>{setShowCreateTag(true)}} style={{borderRadius: "0.25rem", borderWidth: "0.05rem", marginTop:"0.5rem"}}>New Tag</button>
+                    })} />}
+                  <ViewButton onClick={()=>{setShowCreateTag(true)}} style={{borderRadius: "0.25rem", borderWidth: "0.05rem", marginTop:"0.5rem"}}>Add New Tag</ViewButton>
                 </div>
             } 
       </div>

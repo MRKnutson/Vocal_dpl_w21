@@ -5,6 +5,7 @@ import { AuthContext } from "../providers/AuthProvider";
 import axios from "axios";
 import {Container} from 'react-bootstrap'
 import UserImage from '../components/UserImage';
+import { VocalHeader } from "../components/Styles";
 
 const Profile = (props) => {
   const [showForm, setShowForm] = useState(false);
@@ -46,7 +47,7 @@ const Profile = (props) => {
 
   return (
     <Container key={props.id}>
-      <h1>My Profile</h1>
+      <VocalHeader>My Profile</VocalHeader>
       {image && <img style = {{width:"300px"}} src = {image}/>}
       {/* <p>ID: {id}</p> */}
       <br/>

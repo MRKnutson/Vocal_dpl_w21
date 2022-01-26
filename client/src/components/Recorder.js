@@ -20,6 +20,21 @@ function Recorder() {
     const [tags, setTags] = useState([])
 
     let timer
+
+
+  function secondsToHms() {
+    var h = Math.floor(secondsElapsed / 3600);
+    var m = Math.floor(secondsElapsed % 3600 / 60);
+    var s = Math.floor(secondsElapsed % 3600 % 60);
+    var n = Math.floor(secondsElapsed % 3600 % 60);
+
+    var hDisplay = h > 0 ? h + (h == 1 ? " Hour, " : " Hours, ") : "";
+    var mDisplay = m > 0 ? m + (m == 1 ? " Minute, " : " Minutes, ") : "";
+    var sDisplay = s > 0 ? s + (s == 1 ? " Second" : " Seconds") : "";
+    var nDisplay = n < 1 ? n + " Seconds" : "";
+    return hDisplay + mDisplay + sDisplay +nDisplay; 
+}
+
     
     useEffect(()=>{
         getTags()
@@ -114,7 +129,7 @@ function Recorder() {
                         <img src={Pause} style={{height:"5rem"}}/>
                     </button>
                     <br/>
-                    <VocalHeader style={{padding:"2rem"}}>{duration}</VocalHeader>
+                    <VocalHeader style={{padding:"2rem"}}>{secondsToHms()}</VocalHeader>
                 </div>
             :
             <>
@@ -123,7 +138,7 @@ function Recorder() {
                     setDuration("0:00");
                     startRecording();
                 } } disabled={isRecording}>
-                      <img src={Play} style={{ height: "5rem" }} />
+                      <img src={Play} style={{ height: "5rem" }}/>
                   </button>
                   
                   </>)
@@ -135,6 +150,7 @@ function Recorder() {
         show={true} 
         handleClose={clearRecording}
         processTags={processTags}
+        secondsElapsed={secondsElapsed}
         />
     }  
     </div>

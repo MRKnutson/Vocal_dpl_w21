@@ -10,7 +10,7 @@ import { SecondaryColor } from './Styles';
 
 const DropdownChecklist = (props) => {
     // const [selItems, setSelItems] = useState(props.selItems);
-    const [items, setItems] = useState(props.items);
+    // const [items, setItems] = useState(props.items);
     // useEffect(()=>{
     //     props.setState(selItems)
     // }, [selItems])

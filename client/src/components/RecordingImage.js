@@ -16,6 +16,13 @@ import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 import axios from "axios";
 import { AuthContext } from "../providers/AuthProvider";
 import { Alert } from "react-bootstrap";
+import {
+  PrimaryColor,
+  ActionColor,
+  VocalHeader,
+  ViewButton,
+} from "../components/Styles.js";
+
 
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
@@ -67,11 +74,12 @@ const UserImage = (props) => {
     }, 3500);
   };
 
-  const handleDelete = () => {};
+  const handleDelete = () => {
+  };
 
   return (
-    <div>
-      <h3 style={{ textAlign: "center" }}>Select an image for recording</h3>
+    <div style={{padding:"2rem", marginTop:"2rem", borderRadius:".5rem", boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}>
+      <h3 style={{ textAlign: "center", marginTop:"2rem"}}>Select an Image</h3>
       {success && (
         <div>
           <Alert variant='success'>Successfully uploaded your image!</Alert>
@@ -92,11 +100,11 @@ const UserImage = (props) => {
         labelIdle='Drag & Drop your file or <span class="filepond--label-action">Browse</span>'
       />
       <div style={{ display: "flex", justifyContent: "flex-end" }}>
-        <Button disabled={loading} variant='primary' onClick={handleUpload}>
+        <ViewButton disabled={loading} variant='primary' onClick={handleUpload}>
           {loading ? "Uploading.." : "Upload"}
-        </Button>
+        </ViewButton>
       </div>
-      <Button onClick={toggleUpload}>Cancel</Button>
+      <ViewButton onClick={toggleUpload}>Cancel</ViewButton>
     </div>
   );
 };

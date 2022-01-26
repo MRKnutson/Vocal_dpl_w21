@@ -13,11 +13,11 @@ import five from "../images/5smiley.png";
 
 
 
-const EntryModal = ({handleClose, handleChange, handleSave, show, blobURL, duration, processTags, secondsElapsed}) => {
+const EntryModal = ({handleClose, handleChange, handleSave, show, blobURL, duration, processTags, secondsElapsed, mood, setMood}) => {
     const [title, setTitle] = useState("")
-    const [mood, setMood] = useState("")
     const [notes, setNotes] = useState("") 
     const [chosenTags, setChosenTags] = useState([])
+    const [selectedMood, setSelectedMood] = useState(null)
     const currentDate = new Date();
 
     const [date, setDate] = useState(currentDate.toLocaleDateString('default', { year: 'numeric',month: 'long', day:'numeric'}))
@@ -25,7 +25,9 @@ const EntryModal = ({handleClose, handleChange, handleSave, show, blobURL, durat
 
   
   const handleSubmit = (e) => {
-    handleSave(e, chosenTags)
+    console.log(selectedMood + "in handle submit")
+    e.preventDefault()
+    handleSave(e, chosenTags, selectedMood)
   }
 
   function secondsToHms() {
@@ -39,11 +41,12 @@ const EntryModal = ({handleClose, handleChange, handleSave, show, blobURL, durat
     return hDisplay + mDisplay + sDisplay; 
 }
 
-  const selectMood = (e) => {
+  const selectMood = (e, value) => {
     e.preventDefault()
-    setMood(e.target.value)
+    setSelectedMood(value)
+    console.log(value)
   }
-
+  
   
   return(
     <div>
@@ -74,17 +77,16 @@ const EntryModal = ({handleClose, handleChange, handleSave, show, blobURL, durat
               </div>
               <div>
                 <label style={{marginRight:"1rem"}}>Title: </label>
-                <input style={{borderRadius:".3rem", border:"none", padding:".3rem"}} type="text" onChange={handleChange}/>
+                <input name="title" style={{borderRadius:".3rem", border:"none", padding:".3rem"}} type="text" onChange={handleChange}/>
                 </div>
-                {/* <Form.Control name="title" onChange={handleChange}/> */}
                 <br/>
                 <div>
                 <label style={{marginRight:".8rem"}}>Choose a Mood: </label>
-                <button style={{border:"none", backgroundColor:`${SecondaryColor}`}} value={1} onClick = {selectMood}><img style={{height:"3rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={one}/></button>
-                <button style={{border:"none", backgroundColor:`${SecondaryColor}`}} value={2} onClick = {selectMood}><img style={{height:"3rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={two}/></button>
-                <button style={{border:"none", backgroundColor:`${SecondaryColor}`}} value={3} onClick = {selectMood}><img style={{height:"3rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={three}/></button>
-                <button style={{border:"none", backgroundColor:`${SecondaryColor}`}} value={4} onClick = {selectMood}><img style={{height:"3rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={four}/></button>
-                <button style={{border:"none", backgroundColor:`${SecondaryColor}`}} value={5} onClick = {selectMood}><img style={{height:"3rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={five}/></button>
+                <button style={{border:"none", backgroundColor:`${SecondaryColor}`}} onClick = {(e)=>{selectMood(e,1)}}><img style={{height:"3rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={one}/></button>
+                <button style={{border:"none", backgroundColor:`${SecondaryColor}`}} onClick = {(e)=>{selectMood(e,2)}}><img style={{height:"3rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={two}/></button>
+                <button style={{border:"none", backgroundColor:`${SecondaryColor}`}} onClick = {(e)=>{selectMood(e,3)}}><img style={{height:"3rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={three}/></button>
+                <button style={{border:"none", backgroundColor:`${SecondaryColor}`}} onClick = {(e)=>{selectMood(e,4)}}><img style={{height:"3rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={four}/></button>
+                <button style={{border:"none", backgroundColor:`${SecondaryColor}`}} onClick = {(e)=>{selectMood(e,5)}}><img style={{height:"3rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={five}/></button>
                 {/* <select defaultValue = {mood} as= "select" onChange ={handleChange} style={{width: "4rem"}}>
                   <option value={1}>1</option>
                   <option value={2}>2</option>
@@ -96,7 +98,7 @@ const EntryModal = ({handleClose, handleChange, handleSave, show, blobURL, durat
                 <br/>
                 <label style={{marginBottom:".5rem"}}>Notes:</label>
                 <br/>
-                <textarea style={{height:"8rem", width:"30rem", borderRadius:".4rem", padding:".6rem"}} onChange = {handleChange}/>
+                <textarea name="notes" style={{height:"8rem", width:"30rem", borderRadius:".4rem", padding:".6rem"}} onChange = {handleChange}/>
                 <ChooseTags selectTags={setChosenTags} />
           </div>
         </form>

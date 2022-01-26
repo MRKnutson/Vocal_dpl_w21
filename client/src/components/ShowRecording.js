@@ -33,6 +33,8 @@ const ShowRecording = (props) => {
   const [showImageModal, setShowImageModal] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [modalImage, setModalImage] = useState(null);
+  
+  
 
   const toggleUpload = () => {
     setShowUpload(!showUpload);
@@ -57,7 +59,7 @@ const ShowRecording = (props) => {
               handleImageModal(i);
             }}
             src={i.pointer}
-            style={{ width: "100px" }}
+            style={{ width: "10rem" }}
           />
           {showImageModal && modalImage && (
             <ShowImage
@@ -80,6 +82,10 @@ const ShowRecording = (props) => {
     setImages(filteredImages);
   };
 
+  function refreshPage(){
+    window.location.reload(false);
+    };
+
   const handleDeleteRecording = async (id) => {
     try {
       let response = await axios.delete(`/api/recordings/${id}`);
@@ -89,46 +95,37 @@ const ShowRecording = (props) => {
     } catch (err) {
       alert("error deleting recording");
     }
+    refreshPage()
   };
 
+
+  
   return (
     <Modal
-      show={1}
-      backdrop='static'
-      keyboard={false}
-      // size= "lg"
-      centered={true}
-      style={{ margin: "auto", borderRadius: "1rem" }}
+    show={1}
+    backdrop='static'
+    keyboard={false}
+    size= "lg"
+    centered={true}
     >
-      <Modal.Header style={{ backgroundColor: `${SecondaryColor}` }}>
-        <Modal.Title style={{ textAlign: "center", color: `white` }}>
-          Journal Entry Details
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body
-        style={{ backgroundColor: `${SecondaryColor}`, color: "white" }}
-      >
+      <Modal.Body style ={{backgroundColor: `${SecondaryColor}`, color: "white", padding:"2rem", borderRadius:"1.5rem"}}>
+      {!showEdit && <ViewButton onClick={handleClose}>Close</ViewButton>}
+        {!showEdit && <VocalHeader style={{ textAlign: "center", marginTop:"2rem", marginBottom:"2rem" }}>
+          {recording.title}
+        </VocalHeader>}
         <div>
-          {!showEdit && <h6>{recording.title}</h6>}
-          <audio
-            src={recording.pointer}
-            controls
-            style={{ height: "35px", margin: "auto" }}
-          />
           {!showEdit && (
             <div style={{ margin: "auto" }}>
-              <h6>{recording.duration}</h6>
-              <h6>
-                {recording.created_at.substring(
+              <h6>Length: {recording.duration} seconds</h6>
+              <h6>Date: {recording.created_at.substring(
                   0,
                   recording.created_at.indexOf("T")
-                )}
+                  )}
               </h6>
-              <h6>
-                {recording.created_at.substring(
+              <h6>Time: {recording.created_at.substring(
                   recording.created_at.indexOf("T") + 1,
                   recording.created_at.indexOf("T") + 6
-                )}
+                  )}
               </h6>
             </div>
           )}
@@ -136,9 +133,14 @@ const ShowRecording = (props) => {
           {!showEdit && <p style={{ marginLeft: "20px" }}>{recording.notes}</p>}
           {!showEdit && (
             <p>Tags: {props.tags.map((t) => t.tag_text).join(", ")}</p>
-          )}
+            )}
           {images && renderImages()}
-          <br />
+            <br/>
+            <audio
+              src={recording.pointer}
+              controls
+              style={{ height: "35px", margin: "auto" }}
+            />
           {showUpload && (
             <RecordingImage
               toggleUpload={toggleUpload}
@@ -148,24 +150,26 @@ const ShowRecording = (props) => {
               recording_id={recording.id}
             />
           )}
-          {!showUpload && (
-            <ViewButton style={{ marginRight: "1rem" }} onClick={toggleUpload}>
-              Add Image
-            </ViewButton>
-          )}
+          <br />
           {showEdit && (
             <EditRecordingForm
-              toggleEdit={toggleEdit}
-              recording={recording}
-              setRecording={setRecording}
-              showEdit={showEdit}
-              setShowEdit={setShowEdit}
-              recordings={recordings}
-              setRecordings={setRecordings}
-              tags={tags}
-              getData={getData}
+            toggleEdit={toggleEdit}
+            recording={recording}
+            setRecording={setRecording}
+            showEdit={showEdit}
+            setShowEdit={setShowEdit}
+            recordings={recordings}
+            setRecordings={setRecordings}
+            tags={tags}
+            getData={getData}
             />
           )}
+          <div style={{marginTop:"2rem", display:"flex", justifyContent:"center"}}>
+          {!showUpload && (
+              <ViewButton style={{ marginRight: "1rem" }} onClick={toggleUpload}>
+                Add Image
+              </ViewButton>
+            )}
           {!showEdit && (
             <ViewButton style={{ marginRight: "1rem" }} onClick={toggleEdit}>
               Edit Recording
@@ -176,12 +180,10 @@ const ShowRecording = (props) => {
               Delete Recording
             </ViewButton>
           )}
+          </div>
         </div>
-      </Modal.Body>
-      <Modal.Footer style={{ backgroundColor: `${SecondaryColor}` }}>
-        {!showEdit && <ViewButton onClick={handleClose}>Close</ViewButton>}
         {showEdit && <ViewButton onClick={toggleEdit}>Cancel</ViewButton>}
-      </Modal.Footer>
+      </Modal.Body>
     </Modal>
   );
 };

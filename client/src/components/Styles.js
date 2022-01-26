@@ -67,12 +67,14 @@ export const VocalHeader = styled.h1`
 `;
 
 export const HoverImage = styled.img`
-  width: 10rem;
-  border: 0.25rem solid white;
-  border-radius: 0.5rem;
+  width: 12rem;
+  border: 0.2rem solid white;
+  border-radius: 0.3rem;
   margin: 1rem;
   &:hover {
     cursor: pointer;
-    width: 10.25rem;
+    width: 12.25rem;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
   }
 `;
+

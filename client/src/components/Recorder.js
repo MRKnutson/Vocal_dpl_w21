@@ -57,32 +57,32 @@ function Recorder() {
         e.preventDefault()
         let val = e.target.value
         if(e.target.name==="title"){setTitle(val)}
-        else if(e.target.name==="mood"){setMood(val)}
         else if(e.target.name==="notes"){setNotes(val)}
     }
 
-    const handleSubmit = async (e, chosenTags) => {
+    const handleSubmit = async (e, chosenTags, selectedMood) => {
+        console.log(selectedMood + "in recorder")
         e.preventDefault()
-        
-        
+    
         
         let data = new FormData()
         if (audioURL){
           data.append('file', audioURL)
           data.append('title', title)
           data.append('notes', notes)
-          data.append('mood', parseInt(mood))
+          data.append('mood', selectedMood)
         
+          
+          try{
+              console.log("url: ", audioURL)
+              let res = await axios.post('/api/recordings', data)
+              processTags(chosenTags, res.data.id)
+            } catch(err){
+                console.log(err)
+            }
         }
-        try{
-            console.log("url: ", audioURL)
-          let res = await axios.post('/api/recordings', data)
-          processTags(chosenTags, res.data.id)
-        } catch(err){
-            console.log(err)
-        }
-        console.log("submitted to controller")
-        nav('/recordings')
+            console.log("submitted to controller")
+            nav('/recordings')
     }
 
 
@@ -151,6 +151,8 @@ function Recorder() {
         handleClose={clearRecording}
         processTags={processTags}
         secondsElapsed={secondsElapsed}
+        mood={mood}
+        setMood={setMood}
         />
     }  
     </div>

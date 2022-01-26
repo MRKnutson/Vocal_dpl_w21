@@ -5,8 +5,6 @@ import {
   VocalHeader,
   VocalButton,
 } from "../components/Styles.js";
-// import Play from "../images/Play.png"
-// import Pause from "../images/Pause.png"
 
 import {
   HoverImage,
@@ -14,6 +12,11 @@ import {
   ViewButton,
 } from "../components/Styles.js";
 import ShowImage from "./ShowImage.js";
+import one from "../images/1smiley.png";
+import two from "../images/2smiley.png";
+import three from "../images/3smiley.png";
+import four from "../images/4smiley.png";
+import five from "../images/5smiley.png";
 
 const Recording = (props) => {
   const { recording, showRecording, tags, images, setImages } = props;
@@ -40,11 +43,6 @@ const Recording = (props) => {
               key={recording.id}
               src={image.pointer}
               alt='image'
-              //   style={{
-              //     width: "150px",
-              //     border: "2px solid white",
-              //     margin: "1rem",
-              //   }}
             />
             {modalImage && (
               <ShowImage
@@ -62,31 +60,21 @@ const Recording = (props) => {
     }
   };
 
-  // var mPlayer = document.getElementById("background_music");
-  // var mPlayAction = document.getElementById("playbutton");
+  // console.log(recording.mood);
 
-  // function playAudio() {
-  //     mPlayer.play();
-  //     setPlaying(true);
-  //     mPlayAction.src = {Pause};
-  //     // document.getElementsByTagName('audio').addEventListener('playing',()=>setPlaying(false),true);
-  // }
-
-  // function pauseAudio() {
-  //     mPlayer.pause();
-  //     setPlaying(false);
-  //     mPlayAction.src = {Play};
-  // }
-  // function HandleAudio(){
-  // if(playing == true){
-  //     //Playing already Pause it
-  //     pauseAudio();
-  // }else{
-  //     //Play the music
-  //     playAudio();
-  // }
-  // }
-  console.log(recording.pointer);
+  const moodImage=()=> {
+    if (recording.mood==1){
+      return <img style={{height:"3rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={one}/>
+    } if (recording.mood==2) {
+      return <img style={{height:"3rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={two}/>
+    } if (recording.mood==3) {
+      return <img style={{height:"3rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={three}/>
+    } if (recording.mood==4) {
+      return <img style={{height:"3rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={four}/>
+    } if (recording.mood==5) {
+      return <img style={{height:"3rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={five}/>
+    }
+  };
 
   return (
     <div
@@ -97,8 +85,7 @@ const Recording = (props) => {
         padding: "2rem",
       }}
     >
-      <h4 style={{ color: "white" }}>{recording.title}</h4>
-      {/* <p style={{color:"white"}}>{playing.toString()}</p> */}
+      <h2 style={{color:"white", marginBottom:"2rem"}}>{recording.title}</h2>
       <p style={{ color: "white" }}>
         Duration:{" "}
         {recording.duration
@@ -110,17 +97,18 @@ const Recording = (props) => {
         Date:{" "}
         {recording.created_at.substring(0, recording.created_at.indexOf("T"))}
       </p>
-      <p style={{ color: "white" }}>
+      {tags.length > 0 && <p style={{ color: "white" }}>
         Tags: {tags.map((t) => t.tag_text).join(", ")}
-      </p>
-      <br />
+      </p>} 
+      {recording.mood && <p style={{ color: "white" }}>
+        Mood: {moodImage()}
+      </p>}
       {images && images.length > 0 && renderImages()}
       <br />
-      {/* {!playing && <img src={Play} alt="play recording" id="playbutton" onClick={HandleAudio} style={{height:"100px"}}/>}
-            {playing && <img src={Pause} alt="pause recording" id="playbutton" onClick={HandleAudio} style = {{height:"100px"}}/>} */}
-      <audio controls id='background_music' src={recording.pointer} />
-      <br />
+      <div style={{display:"flex", flexWrap:"wrap", justifyContent:"space-between", alignItems:"flex-end"}}>
       <ViewButton onClick={showRecording}>View Details</ViewButton>
+      <audio controls id='background_music' src={recording.pointer} />
+      </div>
     </div>
   );
 };

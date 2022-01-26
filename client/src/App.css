@@ -56,8 +56,8 @@
 .search-bar {
   width: 20rem;
   float: right;
-  border-radius: 0.35rem;
-  height: 2.5rem;
+  border-radius: 0.75rem;
+  height: 3.5rem;
   margin-right: 1.5rem;
   background-color: #ef4c4c;
   color: #ffffff;
@@ -66,4 +66,8 @@
 .search-bar::placeholder {
   color: #ffffff;
   padding-left: 0.5rem;
+}
+
+.MuiSelect-icon {
+  fill: #ffffff;
 }

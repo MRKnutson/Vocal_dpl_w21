@@ -20,7 +20,7 @@ import {
 import Recording from "../components/Recording";
 import SearchBar from "../components/SearchBar";
 import RenderJson from "../components/RenderJson";
-import DropdownChecklist from '../components/DropdownChecklist'
+import DropdownChecklist from "../components/DropdownChecklist";
 
 const Timeline = () => {
   const [recordings, setRecordings] = useState([]);
@@ -70,15 +70,15 @@ const Timeline = () => {
   const getTags = async () => {
     try {
       let response = await axios.get("/api/tags");
-      let unique = []
-      response.data.forEach((t)=>{
-        if(unique.map((ut)=>ut.tag_text).includes(t.tag_text)){
-          console.log("duplicate skipped")
+      let unique = [];
+      response.data.forEach((t) => {
+        if (unique.map((ut) => ut.tag_text).includes(t.tag_text)) {
+          console.log("duplicate skipped");
         } else {
-          unique.push(t)
+          unique.push(t);
         }
-      })
-      setUniqueTags(unique)
+      });
+      setUniqueTags(unique);
       setTags(response.data);
     } catch (error) {
       alert("error occured in getTags");
@@ -93,10 +93,10 @@ const Timeline = () => {
 
   const renderRecordings = (recordingsToRender) => {
     let recs = recordingsToRender;
-    let searchTags = tags.filter((t)=> chosenTags.includes(t.tag_text))
-    console.log("searchTags: " + searchTags)
-    let taggedRecIds = searchTags.map((t)=>t.recording_id)
-    if (chosenTags.length>0) {
+    let searchTags = tags.filter((t) => chosenTags.includes(t.tag_text));
+    // console.log("searchTags: " + searchTags)
+    let taggedRecIds = searchTags.map((t) => t.recording_id);
+    if (chosenTags.length > 0) {
       recs = recordingsToRender.filter((r) => taggedRecIds.includes(r.id));
     }
     if (recs.length > 0) {
@@ -146,27 +146,28 @@ const Timeline = () => {
   };
 
   const filterRecordings = (search) => {
+    let casedSearch = search.toLowerCase();
     let allRecordings = recordings;
     if (allRecordings.length > 0) {
-      let mappedRecordings = allRecordings.map((recording) => {
-        if (recording.title.includes(search)) {
-          return recording;
-        }
-      });
       let filteredRecordings = allRecordings.filter((f) =>
-        f.title.includes(search)
+        f.title.toLowerCase().includes(casedSearch)
       );
       setFilteredRecordings(filteredRecordings);
-      setSearch(search);
+      setSearch(casedSearch);
     }
   };
 
   return (
     <div>
       <VocalHeader style={{ margin: "3rem" }}>My Journal Entries</VocalHeader>
-      <DropdownChecklist tag="Tags" setState={setChosenTags} selItems={chosenTags} items={uniqueTags.map((t)=>{
-                      return t.tag_text
-                    })} />
+      <DropdownChecklist
+        tag='Tags'
+        setState={setChosenTags}
+        selItems={chosenTags}
+        items={uniqueTags.map((t) => {
+          return t.tag_text;
+        })}
+      />
       <SearchBar input={search} filterRecordings={filterRecordings} />
       {showRecordingID && (
         <ShowRecording

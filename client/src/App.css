@@ -1,46 +1,54 @@
 /* this is for the links to be happy on the moods page...delete it! */
-.card{
+.card {
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
-.link{
-  padding:5px;
+.link {
+  padding: 5px;
   background-color: rgb(188, 188, 188);
-  color:rgb(6, 255, 159);
+  color: rgb(6, 255, 159);
   text-decoration: none;
 }
 
-
 /* this is all navbar styling */
-.navbar-nav .dropdown-menu{
-  background-color: #3E619B;
+.navbar-nav .dropdown-menu {
+  background-color: #3e619b;
 }
-.navbar-nav .dropdown-menu a:hover{
-  background-color: #EF4C4C;
-}
-
-.navbar-nav .dropdown-item{
-  color:white;
+.navbar-nav .dropdown-menu a:hover {
+  background-color: #ef4c4c;
 }
 
-.navdropdown-title{
-  color:white;
+.navbar-nav .dropdown-item {
+  color: white;
+}
+
+.navdropdown-title {
+  color: white;
 }
 
 #navdropdown-arrow {
-  color:white;
+  color: white;
 }
 
-.navbar-links a:hover{
-  color:#EF4C4C !important;
+.navbar-links a:hover {
+  color: #ef4c4c !important;
 }
 
 .navbar-links {
-  color:white !important
+  color: white !important;
 }
 
-.special-card{
-  background-color: #2A3950;
+.special-card {
+  background-color: #2a3950;
   outline: none;
-  box-shadow:none !important;
+  box-shadow: none !important;
+}
+
+.record {
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+
+.modal-content {
+  background-color: transparent !important;
 }

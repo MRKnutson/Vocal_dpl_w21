@@ -9,9 +9,9 @@ const Home =  (props) => {
 const {recording} = props
 console.log(props)
   return (
-    <div style={{backgroundColor:`${SecondaryColor}`, height:"40rem",margin:"8rem", borderRadius:"2rem", padding:"2rem"}}>
+    <div style={{backgroundColor:`${SecondaryColor}`, height:"40rem",margin:"8rem", borderRadius:"1.5rem", padding:"2rem"}}>
      <div style={{display:"flex", flexFlow:"column", textAlign:"center", alignItems:"center", marginTop:"5rem"}}>
-     <img src={voice} style={{borderRadius:"20rem", height:"20rem"}}/>
+     <img src={voice} className="record" style={{borderRadius:"20rem", height:"20rem"}}/>
      <div style={{}}>
      <Recorder/>
      </div>

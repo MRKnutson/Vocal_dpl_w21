@@ -83,7 +83,7 @@ const Activities = () => {
           longest = recording.duration;
         }
       });
-      return longest.toFixed(0);
+      return (longest/60).toFixed(2);
     } else {
       return 0
     }
@@ -98,7 +98,7 @@ const Activities = () => {
     }
     if(durationArray.length >0) {
       let total = durationArray.reduce((total, amount) => total + amount);
-      return total.toFixed(0)
+      return (total/60).toFixed(2)
     } else {
       return 0
     };

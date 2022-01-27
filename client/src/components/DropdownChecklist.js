@@ -4,20 +4,11 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import ListItemText from "@mui/material/ListItemText";
-import Select from "@mui/material/Select";
 import Checkbox from "@mui/material/Checkbox";
-import { ActionColor, SecondaryColor } from "./Styles";
+import { ActionColor, RedSelect } from "./Styles";
 
 const DropdownChecklist = (props) => {
-  // const [selItems, setSelItems] = useState(props.selItems);
-  // const [items, setItems] = useState(props.items);
-  // useEffect(()=>{
-  //     props.setState(selItems)
-  // }, [selItems])
-
   return (
-    // <div>
-    //   {/* <p style={{ color: "#FFFFFF" }}>Select Tag(s): </p> */}
     <FormControl
       sx={{
         width: "20rem",
@@ -25,22 +16,18 @@ const DropdownChecklist = (props) => {
         float: "right",
         marginRight: "1rem",
         backgroundColor: `${ActionColor}`,
-        borderRadius: "0.75rem",
+        borderRadius: "0.75rem !important",
         color: "#FFFFFF",
       }}
     >
-      {
-        <InputLabel
-          id='demo-multiple-checkbox-label'
-          //   color='secondary'
-          style={{ color: "#FFFFFF" }}
-        >
-          Select Tag(s)
-        </InputLabel>
-      }
-      <Select
-        classes={"MuiSelect-icon"}
-        // IconComponent={"none"}
+      <InputLabel
+        id='demo-multiple-checkbox-label'
+        style={{ color: "#FFFFFF" }}
+      >
+        Select Tag(s)
+      </InputLabel>
+      <RedSelect
+        variant='filled'
         labelId='demo-multiple-checkbox-label'
         label='Select Tag(s)'
         id='demo-multiple-checkbox'
@@ -53,22 +40,13 @@ const DropdownChecklist = (props) => {
         renderValue={(selected) => selected.join(", ")}
       >
         {props.items.map((item) => (
-          <MenuItem
-            key={item}
-            value={item}
-            name={item}
-            // style={{ backgroundColor: `${ActionColor}`, color: "#FFFFFF" }}
-          >
-            <Checkbox
-              checked={props.selItems.indexOf(item) > -1}
-              //   style={{ color: "white" }}
-            />
+          <MenuItem key={item} variant='filled' value={item} name={item}>
+            <Checkbox checked={props.selItems.indexOf(item) > -1} />
             <ListItemText primary={item} />
           </MenuItem>
         ))}
-      </Select>
+      </RedSelect>
     </FormControl>
-    // </div>
   );
 };
 export default DropdownChecklist;

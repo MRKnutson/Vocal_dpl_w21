@@ -104,6 +104,7 @@ const Timeline = () => {
       return recs.map((recording) => {
         return (
           <Recording
+            key={recording.id}
             images={filterImages(recording.id)}
             setImages={setImages}
             recording={recording}

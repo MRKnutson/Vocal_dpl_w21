@@ -100,7 +100,7 @@ const Recording = (props) => {
       {tags.length > 0 && <p style={{ color: "white" }}>
         Tags: {tags.map((t) => t.tag_text).join(", ")}
       </p>} 
-      {recording.mood && <p style={{ color: "white" }}>
+      {recording.mood>0 && <p style={{ color: "white" }}>
         Mood: {moodImage()}
       </p>}
       {images && images.length > 0 && renderImages()}

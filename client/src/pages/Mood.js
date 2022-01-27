@@ -19,6 +19,8 @@ import {
 export default function Mood() {
   const [recordings, setRecordings] = useState([]);
   const [dateTimeValueChoice, setDateTimeValueChoice] = useState(null);
+  const [rDate, setRDate] = useState([]);
+
 
       useEffect(() => {
         console.log("recordings mounted");
@@ -71,35 +73,42 @@ export default function Mood() {
           if (day.length < 2) day = "0" + day;
         return (`${month}/${day}/${year}`);
       }
-
       // Compare todays date to selected date from dropdown and renders that
-      const renderSelectedDataForFraph = () => {
-        let normalizedData = [] 
-        recordings.map((r)=> {
-          r.created_at = (`${formatDate(r.created_at)} + ${formatTime(r.created_at)}`)
-          normalizedData.push({
-            title: r.title,
-            uv: r.mood,
-            mood: r.mood,
-            date: r.created_at
-          })
-        }); return normalizedData;
+      const renderSelectedDataForGraph = () => {
+        console.log(recordings)
+        // let normalData = re 
+        // let recordings = recordings.filter((r)=> r.created_at )
+        
+        
+        
+        
+        
+        // recordings.map((r)=> {
+        //   r.created_at = (`${formatDate(r.created_at)} + ${formatTime(r.created_at)}`)
+        //   normalData.push({
+        //     title: r.title,
+        //     uv: r.mood,
+        //     mood: r.mood,
+        //     date: r.created_at
+        //   })
+
+        // });
+        //  return normalizedData;
       }
       
       //  Renders data for showing all recordings
       const renderDataForGraph = () => {
         let normalizedData = [] 
         recordings.map((r)=> {
-          r.created_at = formatDate(r.created_at) + " " + formatTime(r.created_at)
-          // console.log(typeof r.created_at)
+          r.created_at = formatDate(r.created_at) + " " + formatTime(r.created_at);
           normalizedData.push({
             title: r.title,
             uv: r.mood,
             mood: r.mood,
             date: r.created_at
-          })
+          });
         }); return normalizedData;
-      }
+      };
 
       const handleSelection = (e) => {
         setDateTimeValueChoice(e)
@@ -120,7 +129,7 @@ export default function Mood() {
         <div id="moods_container">
               <h2>Moods</h2>
               <ResponsiveContainer width="100%" height={400}>
-              <BarChart    data={dateTimeValueChoice ? renderSelectedDataForFraph() : renderDataForGraph()}>
+              <BarChart    data={dateTimeValueChoice ? renderSelectedDataForGraph() : renderDataForGraph()}>
                   <YAxis stroke="white" /> 
                   <XAxis dataKey="date" stroke="white" /> 
                   {/* <Tooltip /> */}

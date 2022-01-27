@@ -82,7 +82,11 @@ export const HoverImage = styled.img`
 `;
 
 export const RedSelect = styled(Select)`
+  color: white;
   & .MuiSelect-icon {
+    color: white;
+  }
+  & .MuiSelect-select {
     color: white;
   }
 `;

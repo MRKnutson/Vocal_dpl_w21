@@ -16,6 +16,7 @@ import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 import axios from 'axios';
 import { AuthContext } from "../providers/AuthProvider";
 import { Alert } from "react-bootstrap";
+import { VocalButton } from "./Styles";
 
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
@@ -61,8 +62,8 @@ const UserImage = (props) => {
 
 
     return (
-        <div style={{width: "60vw"}} >
-            <h3 style={{textAlign: "center"}} >Select an image for your avatar</h3>
+        <div style={{padding:"2rem", marginTop:"2rem", borderRadius:".5rem", width: "60vw", boxShadow:"rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px"}} >
+            <h3 style={{textAlign: "center", color:"white"}} >Select an Image for your Avatar</h3>
             {success && 
             <div>
                 <Alert variant="success" >Successfully uploaded your image!</Alert>
@@ -81,9 +82,9 @@ const UserImage = (props) => {
                 labelIdle='Drag & Drop your file or <span class="filepond--label-action">Browse</span>'
             />
             <div style={{display: "flex", justifyContent: "flex-end"}} >
-                <Button disabled={loading} variant="primary" onClick={handleUpload} >{loading ? "Uploading.." : "Upload"}</Button>
+                <VocalButton disabled={loading} variant="primary" onClick={handleUpload} >{loading ? "Uploading.." : "Upload"}</VocalButton>
             </div>
-              <Button onClick = {toggleUpload}>Cancel</Button>
+              <VocalButton onClick = {toggleUpload}>Cancel</VocalButton>
         </div>
     );
 };

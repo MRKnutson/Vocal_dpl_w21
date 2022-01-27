@@ -13,7 +13,7 @@ import styled from "styled-components";
 export const PrimaryColor = "#2A3950";
 export const SecondaryColor = "#3E619B";
 export const ActionColor = "#EF4B4C";
-export const HighlightColor = "#6C63FF"
+export const HighlightColor = "#6C63FF";
 
 //used in about us page
 export const StatCard = styled(Card)`
@@ -82,21 +82,6 @@ export const HoverImage = styled.img`
 `;
 
 export const RedSelect = styled(Select)`
-  background-color: ${ActionColor};
-  border-radius: 0.75rem;
-  color: white;
-  & .MuiSelect-root {
-    background-color: ${ActionColor};
-  }
-  & .MuiSelect-nativeInput {
-    background-color: ${ActionColor};
-  }
-  & .MuiSelect-filled {
-    background-color: ${ActionColor};
-  }
-  & .MuiSelect-select {
-    color: white;
-  }
   & .MuiSelect-icon {
     color: white;
   }

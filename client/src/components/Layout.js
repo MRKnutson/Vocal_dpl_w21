@@ -33,14 +33,10 @@ const Layout = () => {
       )
     } else {
       return(
-        <VocalNavbar expand = "md">
-          {/* <Container fluid> */}
-            <Nav onSelect = {handleSelect}>
-              <Nav.Link style = {{color:"white"}} eventKey = "/login">Log In</Nav.Link>
-              <VocalButton><Nav.Link href = "/register">Sign Up</Nav.Link></VocalButton>
-            </Nav>
-          {/* </Container> */}
-        </VocalNavbar>
+            <div style={{justifyContent:"right"}} onSelect = {handleSelect}>
+              <VocalButton style={{backgroundColor:"transparent"}}><Nav.Link style={{color:"white"}} href = "/login">Log In</Nav.Link></VocalButton>
+              <VocalButton><Nav.Link style={{color:"white"}} href = "/register">Sign Up</Nav.Link></VocalButton>
+            </div>
       )
     };
   };

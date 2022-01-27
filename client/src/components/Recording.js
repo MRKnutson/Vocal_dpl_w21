@@ -90,7 +90,7 @@ const Recording = (props) => {
         Duration:{" "}
         {recording.duration
           .toString()
-          .substring(0, recording.duration.toString().indexOf(".") + 3)}
+          .substring(0, recording.duration.toString().indexOf(".") + 3)} seconds
       </p>{" "}
       {/*limiting to 2 decimal digits */}
       <p style={{ color: "white" }}>

@@ -98,6 +98,43 @@ const ShowRecording = (props) => {
     refreshPage()
   };
 
+  const formatTime = (created_at) => {
+    let d = new Date(created_at);
+    let hrs = d.getHours();
+    let mins = d.getMinutes();
+    if (hrs < 12) {
+      if (mins < 10) {
+        mins = "0" + mins;
+      }
+      let time = hrs + ":" + mins + " AM";
+      return time;
+    } else if (hrs < 13 && mins < 60) {
+      if (mins < 10) {
+        mins = "0" + mins;
+      }
+      let time = hrs + ":" + mins + " PM";
+      return time;
+    } else {
+      if (mins < 10) {
+        mins = "0" + mins;
+      }
+      let PMhrs = hrs - 12;
+      let time = PMhrs + ":" + mins + " PM";
+      return time;
+    }
+  };
+
+  function formatDate(date) {
+    var d = new Date(date),
+      month = "" + (d.getMonth() + 1),
+      day = "" + d.getDate(),
+      year = d.getFullYear();
+
+    if (month.length < 2) month = "0" + month;
+    if (day.length < 2) day = "0" + day;
+
+    return [month, day, year].join("-");
+  }
 
   
   return (
@@ -117,15 +154,9 @@ const ShowRecording = (props) => {
           {!showEdit && (
             <div style={{ margin: "auto" }}>
               <h6>Length: {recording.duration} seconds</h6>
-              <h6>Date: {recording.created_at.substring(
-                  0,
-                  recording.created_at.indexOf("T")
-                  )}
+              <h6>Date: {formatDate(recording.created_at)}
               </h6>
-              <h6>Time: {recording.created_at.substring(
-                  recording.created_at.indexOf("T") + 1,
-                  recording.created_at.indexOf("T") + 6
-                  )}
+              <h6>Time: {formatTime(recording.created_at)}
               </h6>
             </div>
           )}

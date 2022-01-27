@@ -16,11 +16,11 @@ const Layout = () => {
       return(
         <>
         <Container style={{display:"flex", justifyContent:"center"}}  onSelect = {handleSelect}>
-            <Nav.Link className="navbar-links" eventKey = "/">Record</Nav.Link>
-            <Nav.Link className="navbar-links" eventKey = "/activities">Activity</Nav.Link>
-            <Nav.Link className="navbar-links" eventKey = "/recordings">Timeline</Nav.Link>
-            <Nav.Link className="navbar-links" eventKey = "/mood">Mood</Nav.Link>
-            <Nav.Link className="navbar-links" eventKey = "/aboutus">About Us</Nav.Link>
+            <Nav.Link className="navbar-links" href = "/">Record</Nav.Link>
+            <Nav.Link className="navbar-links" href = "/activities">Activity</Nav.Link>
+            <Nav.Link className="navbar-links" href = "/recordings">Timeline</Nav.Link>
+            <Nav.Link className="navbar-links" href = "/mood">Mood</Nav.Link>
+            <Nav.Link className="navbar-links" href = "/aboutus">About Us</Nav.Link>
           </Container>
           <Nav>
            <img src={avatar} alt="User Avatar" style={{height:"40px", borderRadius:"20px"}}/>

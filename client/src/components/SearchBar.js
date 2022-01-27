@@ -3,7 +3,7 @@ import React from "react";
 const SearchBar = ({ keyword, filterRecordings }) => {
   return (
     <input
-      class='search-bar'
+      className='search-bar'
       key='random1'
       value={keyword}
       placeholder={"Title Search"}

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import '../StylesFolder/Styles_Mood.css';
+import { DateTime } from "luxon";
 import { DropdownButton, Dropdown } from "react-bootstrap";
 import {
   BarChart,
@@ -33,15 +34,11 @@ export default function Mood() {
         }
       }
 
+      // Formats time for the UI/UX
       const formatTime = (dateTime) => {
         let d = new Date(dateTime)
         let hrs = d.getHours()
         let mins = d.getMinutes()
-        // if(hrs <= 9)
-        // hrs = "0" + hrs
-        // if(mins < 10)
-        // mins = "0" + mins
-        // const time = hrs+":"+mins
         if(hrs < 12){
           if (mins <10){
             mins = "0"+ mins
@@ -63,6 +60,8 @@ export default function Mood() {
           return time;
         }
       }
+
+      //  Formats date for the UI/UX
       const formatDate = (date) => {
         var d = new Date(date),
           month = "" + (d.getMonth() + 1),
@@ -70,14 +69,14 @@ export default function Mood() {
           year = d.getFullYear();
           if (month.length < 2) month = "0" + month;
           if (day.length < 2) day = "0" + day;
-    
         return (`${month}/${day}/${year}`);
       }
 
+      // Compare todays date to selected date from dropdown and renders that
       const renderSelectedDataForFraph = () => {
         let normalizedData = [] 
         recordings.map((r)=> {
-         r.created_at = (`${formatDate(r.created_at)} + ${formatTime(r.created_at)}`)
+          r.created_at = (`${formatDate(r.created_at)} + ${formatTime(r.created_at)}`)
           normalizedData.push({
             title: r.title,
             uv: r.mood,
@@ -86,12 +85,13 @@ export default function Mood() {
           })
         }); return normalizedData;
       }
-
+      
+      //  Renders data for showing all recordings
       const renderDataForGraph = () => {
         let normalizedData = [] 
         recordings.map((r)=> {
           r.created_at = formatDate(r.created_at) + " " + formatTime(r.created_at)
-          console.log(r.created_at)
+          // console.log(typeof r.created_at)
           normalizedData.push({
             title: r.title,
             uv: r.mood,
@@ -100,13 +100,17 @@ export default function Mood() {
           })
         }); return normalizedData;
       }
+
       const handleSelection = (e) => {
-        // e.preventDefault();
         setDateTimeValueChoice(e)
-        console.log(e)
       }
+
+
+      // this is the return
     return (
         <div>
+        <h3>Todays Date: {DateTime.now().toLocaleString()} </h3>
+
               <DropdownButton id="dropdown_moodss" title="Filter Dates" onSelect={handleSelection}>
                   <Dropdown.Item eventKey="day"> Day </Dropdown.Item>
                   <Dropdown.Item eventKey="week"> Week </Dropdown.Item>

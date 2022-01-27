@@ -1,3 +1,4 @@
+import { Select } from "@mui/material";
 import {
   Card,
   Navbar,
@@ -75,7 +76,28 @@ export const HoverImage = styled.img`
   &:hover {
     cursor: pointer;
     width: 12.25rem;
-    box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px,
+      rgba(0, 0, 0, 0.05) 0px 5px 10px;
   }
 `;
 
+export const RedSelect = styled(Select)`
+  background-color: ${ActionColor};
+  border-radius: 0.75rem;
+  color: white;
+  & .MuiSelect-root {
+    background-color: ${ActionColor};
+  }
+  & .MuiSelect-nativeInput {
+    background-color: ${ActionColor};
+  }
+  & .MuiSelect-filled {
+    background-color: ${ActionColor};
+  }
+  & .MuiSelect-select {
+    color: white;
+  }
+  & .MuiSelect-icon {
+    color: white;
+  }
+`;

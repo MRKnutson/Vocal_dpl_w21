@@ -81,24 +81,17 @@ const EntryModal = ({handleClose, handleChange, handleSave, show, blobURL, durat
                 </div>
                 <br/>
                 <div>
-                <label style={{marginRight:".8rem"}}>Choose a Mood: </label>
-                <button style={{border:"none", backgroundColor:`${SecondaryColor}`}} onClick = {(e)=>{selectMood(e,1)}}><img style={{height:"3rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={one}/></button>
-                <button style={{border:"none", backgroundColor:`${SecondaryColor}`}} onClick = {(e)=>{selectMood(e,2)}}><img style={{height:"3rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={two}/></button>
-                <button style={{border:"none", backgroundColor:`${SecondaryColor}`}} onClick = {(e)=>{selectMood(e,3)}}><img style={{height:"3rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={three}/></button>
-                <button style={{border:"none", backgroundColor:`${SecondaryColor}`}} onClick = {(e)=>{selectMood(e,4)}}><img style={{height:"3rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={four}/></button>
-                <button style={{border:"none", backgroundColor:`${SecondaryColor}`}} onClick = {(e)=>{selectMood(e,5)}}><img style={{height:"3rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={five}/></button>
-                {/* <select defaultValue = {mood} as= "select" onChange ={handleChange} style={{width: "4rem"}}>
-                  <option value={1}>1</option>
-                  <option value={2}>2</option>
-                  <option value={3}>3</option>
-                  <option value={4}>4</option>
-                  <option value={5}>5</option> 
-                </select>*/}
+                  <label>Choose a Mood: </label>
+                    <button className="mood-button" style={{width:"3.5rem", border:"none", backgroundColor:"transparent"}} onClick = {(e)=>{selectMood(e,1)}}><img style={{height:"3rem", borderRadius:"1.5rem"}} src={one}/></button>
+                    <button className="mood-button" style={{width:"3.5rem", border:"none", backgroundColor:"transparent"}} onClick = {(e)=>{selectMood(e,2)}}><img style={{height:"3rem", borderRadius:"1.5rem"}} src={two}/></button>
+                    <button className="mood-button" style={{width:"3.5rem", border:"none", backgroundColor:"transparent"}} onClick = {(e)=>{selectMood(e,3)}}><img style={{height:"3rem", borderRadius:"1.5rem"}} src={three}/></button>
+                    <button className="mood-button" style={{width:"3.5rem", border:"none", backgroundColor:"transparent"}} onClick = {(e)=>{selectMood(e,4)}}><img style={{height:"3rem", borderRadius:"1.5rem"}} src={four}/></button>
+                    <button className="mood-button" style={{width:"3.5rem", border:"none", backgroundColor:"transparent"}} onClick = {(e)=>{selectMood(e,5)}}><img style={{height:"3rem", borderRadius:"1.5rem"}} src={five}/></button>
                 </div>
                 <br/>
                 <label style={{marginBottom:".5rem"}}>Notes:</label>
                 <br/>
-                <textarea name="notes" style={{height:"8rem", width:"30rem", borderRadius:".4rem", padding:".6rem"}} onChange = {handleChange}/>
+                <textarea name="notes" style={{height:"8rem", width:"28rem", borderRadius:".4rem", padding:".6rem"}} onChange = {handleChange}/>
                 <ChooseTags selectTags={setChosenTags} />
           </div>
         </form>

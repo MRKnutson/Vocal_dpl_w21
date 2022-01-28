@@ -64,8 +64,11 @@ const ChooseTags = (props) => {
             {showCreateTag ?
                 <div>
                   <input onChange={handleChange}></input>
-                  <button type="button" onClick={createTag} style={{borderRadius: "10%", borderWidth: "0.2px"}}>✓</button>
-                  <button type="button" onClick={()=>{setShowCreateTag(false)}} style={{borderRadius: "10%", borderWidth: "0.2px"}}>X</button>
+                  {newTag && <button type="button" onClick={createTag} style={{borderRadius: "10%", borderWidth: "0.2px"}}>✓</button>}
+                  <button type="button" onClick={()=>{
+                    setShowCreateTag(false)
+                    setNewTag("")
+                  }} style={{borderRadius: "10%", borderWidth: "0.2px"}}>X</button>
                 </div>
             :
                 <div>

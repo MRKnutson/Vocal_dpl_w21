@@ -10,7 +10,7 @@ import { VocalHeader } from "./Styles";
 
 function Recorder() {
     const nav = useNavigate()
-    let [audioURL, blobURL, isRecording, startRecording, stopRecording, clearRecording] = useRecorder();
+    let [audioURL, blobURL, isRecording, startRecording, stopRecording, clearRecording, recorder] = useRecorder();
     const [title, setTitle] = useState("")
     const [mood, setMood] = useState("")
     const [notes, setNotes] = useState([])
@@ -20,7 +20,6 @@ function Recorder() {
     const [tags, setTags] = useState([])
 
     let timer
-
 
   function secondsToHms() {
     var h = Math.floor(secondsElapsed / 3600);
@@ -133,13 +132,17 @@ function Recorder() {
                 </div>
             :
             <>
-                <button style={{ background: "none", border: "none" }} onClick={() => {
-                    setSecondsElapsed(0);
-                    setDuration("0:00");
-                    startRecording();
-                } } disabled={isRecording}>
-                      <img src={Play} style={{ height: "5rem" }}/>
-                  </button>
+                {recorder ?
+                    <button style={{ background: "none", border: "none" }} onClick={() => {
+                        setSecondsElapsed(0);
+                        setDuration("0:00");
+                        startRecording();
+                    } } disabled={isRecording}>
+                        <img src={Play} style={{ height: "5rem" }}/>
+                    </button>
+                :
+                    <h2>Connect microphone to record</h2>
+                }
                   
                   </>)
         :
@@ -153,6 +156,7 @@ function Recorder() {
         secondsElapsed={secondsElapsed}
         mood={mood}
         setMood={setMood}
+        
         />
     }  
     </div>

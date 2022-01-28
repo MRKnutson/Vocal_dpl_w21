@@ -58,8 +58,11 @@ const ChooseTags = (props) => {
                 <div style={{backgroundColor: `${SecondaryColor}`}}>
                   <label style={{marginRight:".8rem"}}>Enter new tag:</label>
                   <input onChange={handleChange} style={{border:"none", borderRadius:"0.3rem"}}></input>
-                  <ViewButton onClick={createTag} style={{borderRadius: ".4rem", marginRight:".5rem", marginLeft:".5rem", width:"2.5rem"}}>✓</ViewButton>
-                  <ViewButton onClick={()=>{setShowCreateTag(false)}} style={{borderRadius: ".4rem", width:"2.5rem"}}>X</ViewButton>
+                  {newTag && <ViewButton onClick={createTag} style={{borderRadius: ".4rem", marginRight:".5rem", marginLeft:".5rem", width:"2.5rem"}}>✓</ViewButton>}
+                  <ViewButton onClick={()=>{
+                    setNewTag("")
+                    setShowCreateTag(false)
+                  }} style={{borderRadius: ".4rem", width:"2.5rem"}}>X</ViewButton>
                 </div>
             :
                 <div style={{marginTop:"1.5rem"}}>

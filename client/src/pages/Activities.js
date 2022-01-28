@@ -349,6 +349,7 @@ const Activities = () => {
         <div style={{ width: "100%", height: 500, marginBottom: "50px" }}>
           {/* to work on this calendar use: https://nivo.rocks/calendar/ */}
           <ResponsiveCalendar
+            isInteractive={false}
             data={changeData()}
             from={new Date(new Date().getFullYear(), 0, 1)}
             to='2022-12-31'

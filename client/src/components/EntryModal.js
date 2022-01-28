@@ -16,7 +16,6 @@ import two from "../images/2smiley.png";
 import three from "../images/3smiley.png";
 import four from "../images/4smiley.png";
 import five from "../images/5smiley.png";
-
 const EntryModal = ({
   handleClose,
   handleChange,

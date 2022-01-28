@@ -86,16 +86,18 @@ const ShowRecording = (props) => {
     window.location.reload(false);
   }
 
-  const handleDeleteRecording = async (id) => {
+  const handleDeleteRecording = async (id, e) => {
+    e.preventDefault()
     try {
       let response = await axios.delete(`/api/recordings/${id}`);
       let filteredRecordings = recordings.filter((r) => r.id !== id);
       setRecordings(filteredRecordings);
+      getData()
       handleClose();
     } catch (err) {
       alert("error deleting recording");
     }
-    refreshPage();
+    // refreshPage();
   };
 
   const formatTime = (created_at) => {
@@ -138,6 +140,7 @@ const ShowRecording = (props) => {
 
   const handleShowDelete = () => {
     setShowDeleteModal(true);
+    
   };
 
   return (

@@ -17,18 +17,9 @@ const EditRecordingForm = (props)=> {
   const [mood, setMood] = useState(props.recording.mood)
   const [tags, setTags] = useState(props.tags)
   const [allTags, setAllTags] = useState([])
-  // const [selectedMood, setSelectedMood] = useState(null)
-
-
 
   useEffect(()=>{
-    
     getAllTags()
-  }, [])
-
-  useEffect(()=>{
-    
- 
   }, [])
 
   const handleSubmit = async (e) => {
@@ -99,11 +90,11 @@ const EditRecordingForm = (props)=> {
     <Form onSubmit = {handleSubmit}>
       <Form.Group className = "mb-3">
         <Form.Label>Title</Form.Label>
-        <Form.Control defaultValue = {title} onChange = {(e)=>setTitle(e.target.value)}/>
+        <Form.Control defaultValue = {title} maxLength={55} onChange = {(e)=>setTitle(e.target.value)}/>
       </Form.Group>
       <Form.Group className = "mb-3">
         <Form.Label>Notes</Form.Label>
-        <Form.Control as="textarea" defaultValue = {notes} onChange = {(e)=>setNotes(e.target.value)}/>
+        <Form.Control as="textarea" maxLength={255} defaultValue = {notes} onChange = {(e)=>setNotes(e.target.value)}/>
       </Form.Group>
       <Form.Group>
               <br/>

@@ -186,6 +186,8 @@ const Timeline = () => {
           recordings={recordings}
           setRecordings={setRecordings}
           getData={getData}
+          showRecordingID={showRecordingID}
+          setShowRecordingID={setShowRecordingID}
         />
       )}
       <br /> <br />

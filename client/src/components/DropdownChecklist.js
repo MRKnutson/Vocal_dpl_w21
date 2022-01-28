@@ -14,9 +14,9 @@ const DropdownChecklist = (props) => {
         width: "20rem",
         height: "3.5rem",
         float: "right",
-        marginRight: "1rem",
+        // marginRight: "1rem",
+        borderRadius: "0.3rem",
         backgroundColor: `${ActionColor}`,
-        borderRadius: "0.75rem !important",
         color: "#FFFFFF",
       }}
     >
@@ -27,7 +27,6 @@ const DropdownChecklist = (props) => {
         Select Tag(s)
       </InputLabel>
       <RedSelect
-        variant='filled'
         labelId='demo-multiple-checkbox-label'
         label='Select Tag(s)'
         id='demo-multiple-checkbox'
@@ -40,7 +39,7 @@ const DropdownChecklist = (props) => {
         renderValue={(selected) => selected.join(", ")}
       >
         {props.items.map((item) => (
-          <MenuItem key={item} variant='filled' value={item} name={item}>
+          <MenuItem key={item} value={item} name={item}>
             <Checkbox checked={props.selItems.indexOf(item) > -1} />
             <ListItemText primary={item} />
           </MenuItem>

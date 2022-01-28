@@ -5,7 +5,7 @@ import { AuthContext } from "../providers/AuthProvider";
 import axios from "axios";
 import {Container} from 'react-bootstrap'
 import UserImage from '../components/UserImage';
-import { VocalHeader } from "../components/Styles";
+import { VocalButton, VocalHeader } from "../components/Styles";
 
 const Profile = (props) => {
   const [showForm, setShowForm] = useState(false);
@@ -47,21 +47,23 @@ const Profile = (props) => {
 
   return (
     <Container key={props.id}>
-      <VocalHeader>My Profile</VocalHeader>
+      <VocalHeader style={{marginTop:"5rem", marginBottom:"2rem", marginLeft:"4rem"}}>My Profile</VocalHeader>
       {image && <img style = {{width:"300px"}} src = {image}/>}
       {/* <p>ID: {id}</p> */}
       <br/>
-      <div style={{margin:"20px"}}>
+      <div style={{marginLeft:"6rem"}}>
+      <p style={{color:"white"}}>Email: {email}</p>
+      <p style={{color:"white"}}>Password: ****** </p>
+      <div style={{marginBottom:"1rem", marginTop:"3rem"}}>
       {showUpload && <UserImage toggleUpload = {toggleUpload}/>}
-      {!showUpload && <button onClick = {toggleUpload}>Change Profile Picture</button>}
+      {!showUpload && <VocalButton onClick = {toggleUpload}>Change Profile Picture</VocalButton>}
       </div>
-      <p>Email: {email}</p>
-      <p>Password: ****** </p>
-      <button onClick = {toggleForm}>
+      <VocalButton style={{marginRight:"1rem"}} onClick = {toggleForm}>
         {showForm ? "Cancel" : "Update"}
-      </button>
+      </VocalButton>
       {showForm && <UserForm id = {id} email = {email} password = {password} handleUpdateUser = {handleUpdateUser} toggleForm = {toggleForm}/>}
-    <button onClick={() => deleteUser(id)}>Delete</button>
+    <VocalButton onClick={() => deleteUser(id)}>Delete User</VocalButton>
+    </div>
     </Container>
   );
 };

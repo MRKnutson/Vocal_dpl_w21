@@ -3,6 +3,12 @@ import React, { useState, useEffect } from 'react'
 import { Form } from 'react-bootstrap';
 import { VocalButton } from './Styles';
 import EditTags from './EditTags'
+import ShowImage from "./ShowImage.js";
+import one from "../images/1smiley.png";
+import two from "../images/2smiley.png";
+import three from "../images/3smiley.png";
+import four from "../images/4smiley.png";
+import five from "../images/5smiley.png";
 const EditRecordingForm = (props)=> {
 
   const {showEdit, setShowEdit, recording, setRecording, recordings, setRecordings, getData} = props
@@ -11,6 +17,8 @@ const EditRecordingForm = (props)=> {
   const [mood, setMood] = useState(props.recording.mood)
   const [tags, setTags] = useState(props.tags)
   const [allTags, setAllTags] = useState([])
+  // const [selectedMood, setSelectedMood] = useState(null)
+
 
 
   useEffect(()=>{
@@ -25,7 +33,7 @@ const EditRecordingForm = (props)=> {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let updatedRecording = {...recording, title: title, notes: notes};
+    let updatedRecording = {...recording, title: title, notes: notes, mood: mood};
     
     try{
       clearTags()
@@ -81,6 +89,12 @@ const EditRecordingForm = (props)=> {
         
     }
 
+    const selectMood = (e, value) => {
+      e.preventDefault()
+      setMood(value)
+      console.log(value)
+    }
+
   return(
     <Form onSubmit = {handleSubmit}>
       <Form.Group className = "mb-3">
@@ -92,14 +106,16 @@ const EditRecordingForm = (props)=> {
         <Form.Control as="textarea" defaultValue = {notes} onChange = {(e)=>setNotes(e.target.value)}/>
       </Form.Group>
       <Form.Group>
-        <Form.Label>Mood</Form.Label>
-        <Form.Select name = "mood" defaultValue = {mood} as= "select" onChange ={(e)=>setMood(e.target.value)} style={{width: "4rem"}}>
-          <option value={1}>1</option>
-          <option value={2}>2</option>
-          <option value={3}>3</option>
-          <option value={4}>4</option>
-          <option value={5}>5</option>
-        </Form.Select>
+              <br/>
+                  <div>
+                    <label>Choose a Mood: </label>
+                      <button className="mood-button" style={{width:"3.5rem", border:"none", backgroundColor:"transparent"}} onClick = {(e)=>{selectMood(e,1)}}><img style={{height:"3rem", borderRadius:"1.5rem"}} src={one}/></button>
+                      <button className="mood-button" style={{width:"3.5rem", border:"none", backgroundColor:"transparent"}} onClick = {(e)=>{selectMood(e,2)}}><img style={{height:"3rem", borderRadius:"1.5rem"}} src={two}/></button>
+                      <button className="mood-button" style={{width:"3.5rem", border:"none", backgroundColor:"transparent"}} onClick = {(e)=>{selectMood(e,3)}}><img style={{height:"3rem", borderRadius:"1.5rem"}} src={three}/></button>
+                      <button className="mood-button" style={{width:"3.5rem", border:"none", backgroundColor:"transparent"}} onClick = {(e)=>{selectMood(e,4)}}><img style={{height:"3rem", borderRadius:"1.5rem"}} src={four}/></button>
+                      <button className="mood-button" style={{width:"3.5rem", border:"none", backgroundColor:"transparent"}} onClick = {(e)=>{selectMood(e,5)}}><img style={{height:"3rem", borderRadius:"1.5rem"}} src={five}/></button>
+                  </div>
+                <br/>
       </Form.Group>
       <EditTags selectTags={setTags} chosenTags={tags}/>
       {/* <p>{title}</p> */}

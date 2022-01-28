@@ -69,6 +69,13 @@ const EntryModal = ({
     console.log(value);
   };
 
+
+  const preventEnterSubmit = (event) => {
+    if (event.keyCode === 13) { //13 is the key code for Enter
+      event.preventDefault()
+      //Here you can even write the logic to select the value from the drop down or something.
+    }
+  }
   return (
     <div>
       <Modal
@@ -92,7 +99,7 @@ const EntryModal = ({
             borderRadius: "1.5rem",
           }}
         >
-          <form>
+          <form >
             <ViewButton style={{}} variant='secondary' onClick={handleClose}>
               Cancel
             </ViewButton>
@@ -113,13 +120,14 @@ const EntryModal = ({
                     padding: ".3rem",
                   }}
                   type='text'
+                  onKeyDown={preventEnterSubmit}
                   onChange={handleChange}
                 />
               </div>
               <br />
               <div>
                 <label style={{marginRight:"1rem"}}>Title: </label>
-                <input name="title" style={{borderRadius:".3rem", border:"none", padding:".3rem"}} type="text" onChange={handleChange}/>
+                <input name="title" style={{borderRadius:".3rem", border:"none", padding:".3rem"}} type="text" onKeyDown={preventEnterSubmit} onChange={handleChange}/>
                 </div>
                 <br/>
                 <div className="mood-div">
@@ -133,12 +141,12 @@ const EntryModal = ({
                 <br/>
                 <label style={{marginBottom:".5rem"}}>Notes:</label>
                 <br/>
-                <textarea name="notes" style={{height:"8rem", width:"28rem", borderRadius:".4rem", padding:".6rem"}} onChange = {handleChange}/>
+                <textarea name="notes" style={{height:"8rem", width:"28rem", borderRadius:".4rem", padding:".6rem"}} onKeyDown={preventEnterSubmit} onChange = {handleChange}/>
                 <ChooseTags selectTags={setChosenTags} />
           </div>
         </form>
         <br/>
-        <ViewButton style={{width:"100%"}} variant = "primary" onClick = {handleSubmit}>
+        <ViewButton type="button" style={{width:"100%"}} variant = "primary" onClick = {handleSubmit}>
           Save
         </ViewButton>
       </Modal.Body>

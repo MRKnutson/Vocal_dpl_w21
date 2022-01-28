@@ -162,14 +162,16 @@ const Timeline = () => {
   return (
     <div>
       <VocalHeader style={{ margin: "3rem" }}>My Journal Entries</VocalHeader>
-      <DropdownChecklist
-        tag='Tags'
-        setState={setChosenTags}
-        selItems={chosenTags}
-        items={uniqueTags.map((t) => {
-          return t.tag_text;
-        })}
-      />
+      <div style={{ marginRight: "1rem" }}>
+        <DropdownChecklist
+          tag='Tags'
+          setState={setChosenTags}
+          selItems={chosenTags}
+          items={uniqueTags.map((t) => {
+            return t.tag_text;
+          })}
+        />
+      </div>
       <SearchBar input={search} filterRecordings={filterRecordings} />
       {showRecordingID && (
         <ShowRecording

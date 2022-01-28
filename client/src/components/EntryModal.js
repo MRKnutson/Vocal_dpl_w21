@@ -138,7 +138,7 @@ const EntryModal = ({
           </div>
         </form>
         <br/>
-        <ViewButton style={{width:"100%"}} variant = "primary" onClick = {handleSubmit}>
+        <ViewButton type="button" style={{width:"100%"}} variant = "primary" onClick = {handleSubmit}>
           Save
         </ViewButton>
       </Modal.Body>

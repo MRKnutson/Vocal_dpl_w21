@@ -4,9 +4,15 @@ import {useState, useEffect} from 'react'
 import axios from "axios";
 import EntryModal from "./EntryModal";
 import { useNavigate } from "react-router-dom";
-import Play from "../images/Play.png"
-import Pause from "../images/Pause.png"
-import { VocalHeader } from "./Styles";
+import microphone from "../images/microphone.jpg"
+import stop from "../images/stop.jpg"
+import {
+    ActionColor,
+    SecondaryColor,
+    VocalButton,
+    VocalHeader,
+    ViewButton,
+  } from "./Styles";
 
 function Recorder() {
     const nav = useNavigate()
@@ -121,15 +127,18 @@ function Recorder() {
     <div style={{display: "flex", margin: "10px"}}>
         {!audioURL ? 
             (isRecording ? 
-                <div style={{display: "flex"}}>
-                    <button style={{background:"none", border:"none"}} onClick={()=>{
+                <div style={{}}>
+                    <button style={{background:"none", border:"none", marginBottom:"1rem"}} onClick={()=>{
                     clearTimeout(timer)
                     stopRecording() 
-                }} disabled={!isRecording}>
-                        <img src={Pause} style={{height:"5rem"}}/>
+                    }} disabled={!isRecording}>
+                    <img className="record-button" src={stop} style={{height:"5rem", borderRadius:"2.5rem"}}/>
                     </button>
+                    <div style={{display:"flex"}}>
+                    <VocalHeader>Recording...</VocalHeader>
                     <br/>
-                    <VocalHeader style={{padding:"2rem"}}>{secondsToHms()}</VocalHeader>
+                    <p style={{color:"white", marginLeft:"1rem", fontSize:"2rem"}}>{duration}</p>
+                    </div>
                 </div>
             :
             <>
@@ -138,7 +147,7 @@ function Recorder() {
                     setDuration("0:00");
                     startRecording();
                 } } disabled={isRecording}>
-                      <img src={Play} style={{ height: "5rem" }}/>
+                      <img className="record-button" src={microphone} style={{ height: "5rem", borderRadius:"2.5rem" }}/>
                   </button>
                   
                   </>)

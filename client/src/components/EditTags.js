@@ -56,16 +56,24 @@ const ChooseTags = (props) => {
     setChosenTags(formatTags(selTags))
   }
 
-
+  const preventEnterSubmit = (event) => {
+    if (event.keyCode === 13) { //13 is the key code for Enter
+      event.preventDefault()
+      //Here you can even write the logic to select the value from the drop down or something.
+    }
+  }
   
   
     return (
       <div>
             {showCreateTag ?
                 <div>
-                  <input onChange={handleChange}></input>
-                  <button type="button" onClick={createTag} style={{borderRadius: "10%", borderWidth: "0.2px"}}>✓</button>
-                  <button type="button" onClick={()=>{setShowCreateTag(false)}} style={{borderRadius: "10%", borderWidth: "0.2px"}}>X</button>
+                  <input onKeyDown={preventEnterSubmit} onChange={handleChange}></input>
+                  {newTag && <button type="button" onClick={createTag} style={{borderRadius: "10%", borderWidth: "0.2px"}}>✓</button>}
+                  <button type="button" onClick={()=>{
+                    setShowCreateTag(false)
+                    setNewTag("")
+                  }} style={{borderRadius: "10%", borderWidth: "0.2px"}}>X</button>
                 </div>
             :
                 <div>

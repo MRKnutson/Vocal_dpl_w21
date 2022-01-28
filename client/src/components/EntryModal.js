@@ -16,7 +16,6 @@ import two from "../images/2smiley.png";
 import three from "../images/3smiley.png";
 import four from "../images/4smiley.png";
 import five from "../images/5smiley.png";
-
 const EntryModal = ({
   handleClose,
   handleChange,
@@ -69,6 +68,13 @@ const EntryModal = ({
     console.log(value);
   };
 
+  const preventEnterSubmit = (event) => {
+    if (event.keyCode === 13) {
+      //13 is the key code for Enter
+      event.preventDefault();
+      //Here you can even write the logic to select the value from the drop down or something.
+    }
+  };
   return (
     <div>
       <Modal

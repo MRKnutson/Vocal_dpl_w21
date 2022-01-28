@@ -16,7 +16,7 @@ import {
 
 function Recorder() {
     const nav = useNavigate()
-    let [audioURL, blobURL, isRecording, startRecording, stopRecording, clearRecording] = useRecorder();
+    let [audioURL, blobURL, isRecording, startRecording, stopRecording, clearRecording, recorder] = useRecorder();
     const [title, setTitle] = useState("")
     const [mood, setMood] = useState("")
     const [notes, setNotes] = useState([])
@@ -26,7 +26,6 @@ function Recorder() {
     const [tags, setTags] = useState([])
 
     let timer
-
 
   function secondsToHms() {
     var h = Math.floor(secondsElapsed / 3600);
@@ -142,6 +141,7 @@ function Recorder() {
                 </div>
             :
             <>
+            {recorder ?
                 <button style={{ background: "none", border: "none" }} onClick={() => {
                     setSecondsElapsed(0);
                     setDuration("0:00");
@@ -149,7 +149,9 @@ function Recorder() {
                 } } disabled={isRecording}>
                       <img className="record-button" src={microphone} style={{ height: "5rem", borderRadius:"2.5rem" }}/>
                   </button>
-                  
+            :
+                <h2>Connect microphone to record</h2>
+            } 
                   </>)
         :
         <EntryModal blobURL={blobURL} 
@@ -162,6 +164,7 @@ function Recorder() {
         secondsElapsed={secondsElapsed}
         mood={mood}
         setMood={setMood}
+        
         />
     }  
     </div>

@@ -268,6 +268,68 @@ const Activities = () => {
     }
   };
 
+  const normalizeLogsData2 = () => {
+    if (logData.length > 0) {
+      return logData.map((recording) => {
+        if (photos && photos.length > 0) {
+          // console.log(recording)
+          // console.log(photos)
+          let filteredPhotos = photos.filter(
+            (p) => p.recording_id == recording.id
+          );
+          let photo = filteredPhotos[0];
+          // console.log(photo)
+          let time = formatTime(recording.created_at);
+          let length = (recording.duration / 60).toFixed(2);
+          if (photo) {
+            return (
+              <div>
+                <p>{recording.title}</p>
+              </div>
+            );
+            // {
+            //   title: `${time}`,
+            //   cardTitle: recording.title,
+            //   cardSubtitle: `Length: ${length} minutes`,
+            //   cardDetailedText: `Notes: ${recording.notes}`,
+            //   media: {
+            //     name: "Recording Photo",
+            //     source: { url: photo.pointer },
+            //     type: "IMAGE",
+            //   },
+            // };
+          } else {
+            return (
+              <div>
+                <p>{recording.title}</p>
+              </div>
+            );
+            // {
+            //   title: `${time}`,
+            //   cardTitle: recording.title,
+            //   cardSubtitle: `Length: ${length} minutes`,
+            //   cardDetailedText: `Notes: ${recording.notes}`,
+            // };
+          }
+        } else {
+          let time = formatTime(recording.created_at);
+          let length = recording.duration.toFixed(0);
+          return (
+            <div>
+              <p>{recording.title}</p>
+            </div>
+          );
+          // {
+          //   title: `${time}`,
+          //   cardTitle: recording.title,
+          //   cardSubtitle: `Length: ${length} minutes`,
+          //   cardDetailedText: `Notes: ${recording.notes}`,
+          // };
+        }
+      });
+    }
+  };
+
   return (
     <Container>
       <VocalHeader style={{ marginTop: "50px", fontSize: "5em" }}>
@@ -471,7 +533,7 @@ const Activities = () => {
             <Chrono
               hideControls
               cardPositionHorizontal='Bottom'
-              items={normalizeLogsData()}
+              // items={normalizeLogsData()}
               mode='HORIZONTAL'
               theme={{
                 primary: `white`,
@@ -480,7 +542,9 @@ const Activities = () => {
                 cardForeColor: "white",
                 titleColor: `white`,
               }}
-            />
+            >
+              {normalizeLogsData2()}
+            </Chrono>
           </div>
         </GraphCard>
       )}

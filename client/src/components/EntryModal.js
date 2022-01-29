@@ -86,10 +86,6 @@ const EntryModal = ({
         centered={true}
         size='lg'
       >
-        {/* <Modal.Header closeButton style ={{backgroundColor: `${SecondaryColor}`, color: "white"}}>
-        <Modal.Title style={{textAlign: "center"}}>Journal Entry Details</Modal.Title>
-      </Modal.Header> */}
-        {/* <div className="modal-content" style={{borderRadius:"2rem", backgroundColor:`${SecondaryColor}`, border:"none"}}> */}
         <Modal.Body
           style={{
             backgroundColor: `${SecondaryColor}`,
@@ -109,140 +105,34 @@ const EntryModal = ({
                 <h6 style={{ marginBottom: "4rem" }}>{date}</h6>
                 {/* <h6>Time: {time}</h6> */}
               </div>
-              <div>
-                <label style={{ marginRight: "1rem" }}>Title: </label>
-                <input
-                  name='title'
-                  style={{
-                    borderRadius: ".3rem",
-                    border: "none",
-                    padding: ".3rem",
-                  }}
-                  type='text'
-                  onKeyDown={preventEnterSubmit}
-                  onChange={handleChange}
-                />
-              </div>
               <br />
               <div>
-                <label style={{ marginRight: "1rem" }}>Title: </label>
-                <input
-                  name='title'
-                  style={{
-                    borderRadius: ".3rem",
-                    border: "none",
-                    padding: ".3rem",
-                  }}
-                  type='text'
-                  onKeyDown={preventEnterSubmit}
-                  onChange={handleChange}
-                />
-              </div>
-              <br />
-              <div className='mood-div'>
-                <label style={{ marginRight: ".8rem" }}>Choose a Mood: </label>
-                <img
-                  className='mood-button'
-                  onClick={(e) => {
-                    selectMood(e, 1);
-                  }}
-                  style={{
-                    height: "3rem",
-                    borderRadius: "1.5rem",
-                    marginRight: "1rem",
-                  }}
-                  src={one}
-                />
-                <img
-                  className='mood-button'
-                  onClick={(e) => {
-                    selectMood(e, 2);
-                  }}
-                  style={{
-                    height: "3rem",
-                    borderRadius: "1.5rem",
-                    marginRight: "1rem",
-                  }}
-                  src={two}
-                />
-                <img
-                  className='mood-button'
-                  onClick={(e) => {
-                    selectMood(e, 3);
-                  }}
-                  style={{
-                    height: "3rem",
-                    borderRadius: "1.5rem",
-                    marginRight: "1rem",
-                  }}
-                  src={three}
-                />
-                <img
-                  className='mood-button'
-                  onClick={(e) => {
-                    selectMood(e, 4);
-                  }}
-                  style={{
-                    height: "3rem",
-                    borderRadius: "1.5rem",
-                    marginRight: "1rem",
-                  }}
-                  src={four}
-                />
-                <img
-                  className='mood-button'
-                  onClick={(e) => {
-                    selectMood(e, 5);
-                  }}
-                  style={{
-                    height: "3rem",
-                    borderRadius: "1.5rem",
-                    marginRight: "1rem",
-                  }}
-                  src={five}
-                />
-              </div>
-              <br />
-              <label style={{ marginBottom: ".5rem" }}>Notes:</label>
-              <br />
-              <textarea
-                name='notes'
-                style={{
-                  height: "8rem",
-                  width: "28rem",
-                  borderRadius: ".4rem",
-                  padding: ".6rem",
-                }}
-                onKeyDown={preventEnterSubmit}
-                onChange={handleChange}
-              />
-              <ChooseTags selectTags={setChosenTags} />
-            </div>
-          </form>
-          <br />
-          {!disableButton && (
-            <ViewButton
-              type='button'
-              style={{ width: "100%" }}
-              variant='primary'
-              onClick={handleSubmit}
-            >
-              Save
-            </ViewButton>
-          )}
-          {disableButton && (
-            <ViewButton
-              type='button'
-              style={{ width: "100%" }}
-              variant='primary'
-              disabled
-            >
-              Saving Recording
-            </ViewButton>
-          )}
-        </Modal.Body>
-        {/* </div> */}
-      </Modal>
+                <label style={{marginRight:"1rem"}}>Title: </label>
+                <input maxLength={55} name="title" style={{borderRadius:".3rem", border:"none", padding:".3rem"}} type="text" onChange={handleChange}/>
+                </div>
+                <br/>
+                <div className="mood-div" style={{display:"flex", flexWrap:"wrap", alignItems:"center"}}>
+                  <label style={{marginRight:".8rem"}}>Choose a Mood: </label>
+                    <input type="image" className="mood-button" onClick = {(e)=>{selectMood(e,1)}} style={{height:"3rem", borderRadius:"1.5rem", marginRight:"1rem"}} src={one}/>
+                    <input type="image" className="mood-button" onClick = {(e)=>{selectMood(e,2)}} style={{height:"3rem", borderRadius:"1.5rem", marginRight:"1rem"}} src={two}/>
+                    <input type="image" className="mood-button" onClick = {(e)=>{selectMood(e,3)}} style={{height:"3rem", borderRadius:"1.5rem", marginRight:"1rem"}} src={three}/>
+                    <input type="image" className="mood-button" onClick = {(e)=>{selectMood(e,4)}} style={{height:"3rem", borderRadius:"1.5rem", marginRight:"1rem"}} src={four}/>
+                    <input type="image" className="mood-button" onClick = {(e)=>{selectMood(e,5)}} style={{height:"3rem", borderRadius:"1.5rem", marginRight:"1rem"}} src={five}/>
+                </div>
+                <br/>
+                <label style={{marginBottom:".5rem"}}>Notes:</label>
+                <br/>
+                <textarea maxLength={255} name="notes" style={{height:"8rem", width:"28rem", borderRadius:".4rem", padding:".6rem"}} onChange = {handleChange}/>
+                <ChooseTags selectTags={setChosenTags} />
+          </div>
+        </form>
+        <br/>
+        <ViewButton style={{width:"100%"}} variant = "primary" onClick = {handleSubmit}>
+          Save
+        </ViewButton>
+      </Modal.Body>
+      {/* </div> */}
+    </Modal>
     </div>
   );
 };

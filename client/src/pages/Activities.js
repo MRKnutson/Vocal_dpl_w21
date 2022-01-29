@@ -469,11 +469,12 @@ const Activities = () => {
           <h2 style={{ margin: "1.5rem" }}>Daily Log</h2>
           <div style={{ height: "500px", width: "100%", paddingTop: "1.5rem" }}>
             <Chrono
-              cardPositionHorizontal='TOP'
+              hideControls
+              cardPositionHorizontal='Bottom'
               items={normalizeLogsData()}
               mode='HORIZONTAL'
               theme={{
-                primary: `gray`,
+                primary: `white`,
                 secondary: `${PrimaryColor}`,
                 cardBgColor: `${PrimaryColor}`,
                 cardForeColor: "white",

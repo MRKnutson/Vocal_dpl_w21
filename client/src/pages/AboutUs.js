@@ -33,7 +33,7 @@ const programmers = [
 },
 {
   name: "Ruby Reed", 
-  image: "https://res.cloudinary.com/djhlv2nfc/image/upload/c_crop,h_740,w_740/v1642119399/Vocal/Images/DD4625AA-BAE3-4897-9B6D-424C6CB78A44_1_201_a_kkxazz.jpg",
+  image: "https://res.cloudinary.com/djhlv2nfc/image/upload/c_crop,h_1232,w_1232/v1643503884/Vocal/Images/Image_from_iOS_rh0l5z.jpg",
   GitHub: "https://github.com/rubyreed/",
   LinkedIn: "https://www.linkedin.com/in/ruby-reed-454844134/",
   email: "rubysreed@gmail.com",

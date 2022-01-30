@@ -3,7 +3,6 @@ import Recorder from '../components/Recorder'
 import '../StylesFolder/Styles_Landing.css';
 import {PrimaryColor, SecondaryColor, ActionColor, VocalHeader, VocalButton, ViewButton} from '../components/Styles.js'
 import soundwaves from "../images/soundwaves.png";
-import soundwavestwo from "../images/soundwaves2.png";
 
 
 const Home =  (props) => {

@@ -89,6 +89,7 @@ const Profile = (props) => {
         show={showDeleteModal}
         setShow={setShowDeleteModal}
       />
+      {/* <Link style={{textDecoration:"none"}} to="/howto">Getting Started</Link> */}
     </Container>
   );
 };

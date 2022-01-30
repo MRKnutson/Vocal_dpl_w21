@@ -5,6 +5,8 @@ import { AuthContext } from '../providers/AuthProvider';
 import {VocalNavbar, PrimaryColor, SecondaryColor, ActionColor, VocalButton} from '../components/Styles.js'
 import avatar from '../images/avatar.jpeg'
 import logofive from '../images/logo5edited.png'
+import VocalFooter from './VocalFooter';
+import VOCAL from "../images/VOCAL.jpg";
 
 const Layout = () => {
   const navigate = useNavigate();
@@ -25,7 +27,7 @@ const Layout = () => {
             </Nav>
           </Container>
           <Nav>
-           <img src={image} alt="User Avatar" style={{height:"40px", borderRadius:"20px"}}/>
+           <img src={image} alt="User Avatar" style={{height:"3.5rem", borderRadius:"1.75rem", border:".13rem solid #FFFF"}}/>
             <NavDropdown onSelect = {handleSelect} style={{marginRight:"1.5rem"}} id = "navdropdown-arrow" title = {<span className="navdropdown-title">User</span>}>
               <NavDropdown.Item eventKey = "/profile">Profile</NavDropdown.Item>
               <NavDropdown.Item onClick={()=>handleLogout(navigate)}>Logout</NavDropdown.Item>
@@ -49,10 +51,10 @@ const Layout = () => {
 
   return(
     <>
-      <VocalNavbar style={{borderBottom:"1px solid #FFFF"}}expand = "md">
+      <VocalNavbar style={{borderBottom:".18rem solid #FFFF"}}expand = "md">
         <Container fluid>
           <VocalNavbar.Brand href="/">
-            <img style={{height:"4rem", padding:".2rem", marginLeft:".5rem"}} src={logofive} alt="Vocal Logo"/>
+            <img style={{height:"4rem"}} src={VOCAL} alt="Vocal Logo"/>
           </VocalNavbar.Brand>
           <VocalNavbar.Toggle aria-controls="response-navbar-nav" />
           <VocalNavbar.Collapse id="responsive-navbar-nav">
@@ -61,6 +63,7 @@ const Layout = () => {
         </Container>
       </VocalNavbar>
       <Outlet/>
+      <VocalFooter/>
     </>
   );
 };

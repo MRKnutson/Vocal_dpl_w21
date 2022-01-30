@@ -38,6 +38,7 @@ export const StatText = styled(Card.Text)`
 //used in navbar
 export const VocalNavbar = styled(Navbar)`
   background-color: ${PrimaryColor};
+  height:5rem;
 `;
 
 export const VocalButton = styled.button`
@@ -88,5 +89,9 @@ export const RedSelect = styled(Select)`
   }
   & .MuiSelect-select {
     color: white;
-  }
+  },
+  fieldset{
+    border: none !important;
+    outline: none !important;
+}
 `;

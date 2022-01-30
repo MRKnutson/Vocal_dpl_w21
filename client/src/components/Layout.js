@@ -9,7 +9,7 @@ import logofive from '../images/logo5edited.png'
 const Layout = () => {
   const navigate = useNavigate();
 
-  const {authenticated, handleLogout} = useContext(AuthContext);
+  const {authenticated, handleLogout, image} = useContext(AuthContext);
 
   const renderUILinks =()=>{
     if(authenticated){
@@ -25,7 +25,7 @@ const Layout = () => {
             </Nav>
           </Container>
           <Nav>
-           <img src={avatar} alt="User Avatar" style={{height:"40px", borderRadius:"20px"}}/>
+           <img src={image} alt="User Avatar" style={{height:"40px", borderRadius:"20px"}}/>
             <NavDropdown onSelect = {handleSelect} style={{marginRight:"1.5rem"}} id = "navdropdown-arrow" title = {<span className="navdropdown-title">User</span>}>
               <NavDropdown.Item eventKey = "/profile">Profile</NavDropdown.Item>
               <NavDropdown.Item onClick={()=>handleLogout(navigate)}>Logout</NavDropdown.Item>

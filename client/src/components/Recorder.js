@@ -142,6 +142,7 @@ function Recorder() {
             :
             <>
             {recorder ?
+                <div>
                 <button style={{ background: "none", border: "none" }} onClick={() => {
                     setSecondsElapsed(0);
                     setDuration("0:00");
@@ -149,6 +150,8 @@ function Recorder() {
                 } } disabled={isRecording}>
                       <img className="record-button" src={microphone} style={{ height: "5rem", borderRadius:"2.5rem" }}/>
                   </button>
+                {/* <VocalHeader>Click to Record</VocalHeader> */}
+                </div>
             :
                 <h2>Connect microphone to record</h2>
             } 

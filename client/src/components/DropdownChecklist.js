@@ -11,10 +11,9 @@ const DropdownChecklist = (props) => {
   return (
     <FormControl
       sx={{
-        width: "20rem",
-        height: "3.5rem",
+        width: "10rem",
+        height: "3rem",
         float: "right",
-        // marginRight: "1rem",
         borderRadius: "0.3rem",
         backgroundColor: `${ActionColor}`,
         color: "#FFFFFF",
@@ -29,6 +28,7 @@ const DropdownChecklist = (props) => {
       <RedSelect
         labelId='demo-multiple-checkbox-label'
         label='Select Tag(s)'
+        // style={{height:"3rem"}}
         id='demo-multiple-checkbox'
         multiple
         value={props.selItems}

@@ -76,14 +76,28 @@ export default function Mood() {
       }
       // Function to render only selected data
       const renderSelectedDate = () => {
-        console.log("selected hit")
+        var d = new Date();
+          d.setDate(d.getDate() - parseInt(timeChoice));
+          console.log(d + "this is the choosen date")
+          let returnRecs = []
+          let validRecs = recordings.filter((r)=> formatDate(r.created_at) > formatDate(d))
+          validRecs.map((r)=>{
+            let dateAndTime = formatDate(r.created_at) + " " + formatTime(r.created_at);
+            returnRecs.push({
+              title: r.title,
+              uv: r.mood,
+              mood: r.mood,
+              date: dateAndTime
+            }); 
+          });
+          return returnRecs;
       }
 
 
       //  Renders data for showing all recordings
       const renderDataForGraph = () => {
         // if True, renders dropped down selected data
-        if (timeChoice) return renderSelectedDate();
+        if (timeChoice && (timeChoice != 'All')) return renderSelectedDate();
           // if False, Normal data here
           let normalizedData = [] 
               recordings.map((r)=> {
@@ -108,11 +122,11 @@ export default function Mood() {
         <div>
         <h3>Todays Date: {DateTime.now().toLocaleString()} </h3>
 
-              <DropdownButton id="dropdown_moods" title="Dont Use me, I break things" onSelect={handleSelection}>
+              <DropdownButton id="dropdown_moods" title="Filter" onSelect={handleSelection}>
                   <Dropdown.Item eventKey="1"> Day </Dropdown.Item>
                   <Dropdown.Item eventKey="7"> Week </Dropdown.Item>
                   <Dropdown.Item eventKey="30"> Month </Dropdown.Item>
-                  <Dropdown.Item eventKey="365"> Year </Dropdown.Item>
+                  <Dropdown.Item eventKey="All"> All </Dropdown.Item>
               </DropdownButton>
         <div id="moods_container">
               <h2>Moods</h2>

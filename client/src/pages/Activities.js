@@ -21,6 +21,7 @@ import {
   VerticalBarSeries,
   VerticalBarSeriesCanvas,
   DiscreteColorLegend,
+  FlexibleWidthXYPlot,
 } from "react-vis";
 import { Chrono } from "react-chrono";
 import one from "../images/1smiley.png";
@@ -266,11 +267,11 @@ const Activities = () => {
                 <br />
                 {renderPhotos}
                 <br />
-                <VocalButton
+                {/* <VocalButton
                   onClick={() => handleModal(recording, filteredPhotos)}
                 >
                   View Recording
-                </VocalButton>
+                </VocalButton> */}
               </div>
             );
           } else {
@@ -285,11 +286,11 @@ const Activities = () => {
                   controls
                   style={{ height: "2rem", margin: "auto" }}
                 />
-                <VocalButton
+                {/* <VocalButton
                   onClick={() => handleModal(recording, filteredPhotos)}
                 >
                   View Recording
-                </VocalButton>
+                </VocalButton> */}
               </div>
             );
           }
@@ -307,9 +308,9 @@ const Activities = () => {
                 style={{ height: "2rem", margin: "auto" }}
               />
               <br />
-              <VocalButton onClick={() => handleModal(recording)}>
+              {/* <VocalButton onClick={() => handleModal(recording)}>
                 View Recording
-              </VocalButton>
+              </VocalButton> */}
             </div>
           );
         }
@@ -423,7 +424,7 @@ const Activities = () => {
             display: "flex",
             justifyContent: "center",
             marginLeft: "2rem",
-            marginBottom:"3rem",
+            marginBottom: "3rem",
           }}
         >
           <Col style={{ display: "flex", justifyContent: "space-around" }}>
@@ -492,31 +493,31 @@ const Activities = () => {
           </Col>
         </Row>
 
-            {logData.length > 1 && (
-              <GraphCard>
-                <h2 style={{ margin: "1.5rem" }}>Daily Log</h2>
-                <div
-                  style={{ height: "500px", width: "100%", paddingTop: "1.5rem" }}
-                >
-                  <Chrono
-                    hideControls
-                    cardPositionHorizontal='Bottom'
-                    items={LogTitles()}
-                    mode='HORIZONTAL'
-                    theme={{
-                      primary: `white`,
-                      secondary: `${PrimaryColor}`,
-                      cardBgColor: `${PrimaryColor}`,
-                      cardForeColor: "white",
-                      titleColor: `white`,
-                    }}
-                  >
-                    {normalizeLogsData()}
-                  </Chrono>
-                </div>
-              </GraphCard>
-            )}
-            {recordingShow && displayModal(recording)}
+        {logData.length > 1 && (
+          <GraphCard>
+            <h2 style={{ margin: "1.5rem" }}>Daily Log</h2>
+            <div
+              style={{ height: "500px", width: "100%", paddingTop: "1.5rem" }}
+            >
+              <Chrono
+                hideControls
+                cardPositionHorizontal='Bottom'
+                items={LogTitles()}
+                mode='HORIZONTAL'
+                theme={{
+                  primary: `white`,
+                  secondary: `${PrimaryColor}`,
+                  cardBgColor: `${PrimaryColor}`,
+                  cardForeColor: "white",
+                  titleColor: `white`,
+                }}
+              >
+                {normalizeLogsData()}
+              </Chrono>
+            </div>
+          </GraphCard>
+        )}
+        {recordingShow && displayModal(recording)}
         <GraphCard style={{ marginBottom: "3rem" }}>
           <h2 style={{ margin: "1.5rem" }}>Annual Activity</h2>
           <div style={{ width: "100%", height: 500, marginBottom: "50px" }}>
@@ -555,38 +556,88 @@ const Activities = () => {
         </GraphCard>
         <GraphCard style={{ paddingBottom: "75px" }}>
           <h2 style={{ margin: "1.5rem" }}>Entries by Mood</h2>
-          <div>
-            <XYPlot
+          <div style={{ marginRight: "5rem" }}>
+            <FlexibleWidthXYPlot
               yDomain={[0, 32]}
               style={{ margin: "3.5rem" }}
-              width={1000}
               height={600}
               stackBy='y'
               xType='ordinal'
             >
               <DiscreteColorLegend
-                style={{ position: "relative", left: "950px", top: "-610px" }}
+                style={{
+                  // position: "relative",
+                  marginLeft: "90%",
+                  marginTop: "-40rem",
+                }}
+                width={100}
+                height={100}
                 orientation='horizontal'
                 items={[
                   {
-                    title: "Mood1",
-                    color: "red",
+                    title: (
+                      <img
+                        style={{
+                          height: "3rem",
+                          borderRadius: "1.5rem",
+                          marginRight: ".5rem",
+                        }}
+                        src={one}
+                      />
+                    ),
+                    color: "#4287f5",
                   },
                   {
-                    title: "Mood2",
-                    color: "orange",
+                    title: (
+                      <img
+                        style={{
+                          height: "3rem",
+                          borderRadius: "1.5rem",
+                          marginRight: ".5rem",
+                        }}
+                        src={two}
+                      />
+                    ),
+                    color: "#40de50",
                   },
                   {
-                    title: "Mood3",
-                    color: "blue",
+                    title: (
+                      <img
+                        style={{
+                          height: "3rem",
+                          borderRadius: "1.5rem",
+                          marginRight: ".5rem",
+                        }}
+                        src={three}
+                      />
+                    ),
+                    color: "#d9de40",
                   },
                   {
-                    title: "Mood4",
-                    color: "green",
+                    title: (
+                      <img
+                        style={{
+                          height: "3rem",
+                          borderRadius: "1.5rem",
+                          marginRight: ".5rem",
+                        }}
+                        src={four}
+                      />
+                    ),
+                    color: "#ffad33",
                   },
                   {
-                    title: "Mood5",
-                    color: "yellow",
+                    title: (
+                      <img
+                        style={{
+                          height: "3rem",
+                          borderRadius: "1.5rem",
+                          marginRight: ".5rem",
+                        }}
+                        src={five}
+                      />
+                    ),
+                    color: "#ff3399",
                   },
                 ]}
               />
@@ -611,30 +662,30 @@ const Activities = () => {
               />
               <BarSeries
                 cluster='mood1'
-                color='blue'
+                color='#4287f5'
                 data={normalizeMonthData(1)}
               />
               <BarSeries
                 cluster='mood2'
-                color='green'
+                color='#40de50'
                 data={normalizeMonthData(2)}
               />
               <BarSeries
                 cluster='mood3'
-                color='yellow'
+                color='#d9de40'
                 data={normalizeMonthData(3)}
               />
               <BarSeries
                 cluster='mood4'
-                color='orange'
+                color='#ffad33'
                 data={normalizeMonthData(4)}
               />
               <BarSeries
                 cluster='mood5'
-                color='pink'
+                color='#ff3399'
                 data={normalizeMonthData(5)}
               />
-            </XYPlot>
+            </FlexibleWidthXYPlot>
           </div>
         </GraphCard>
       </Container>

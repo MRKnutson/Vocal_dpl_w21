@@ -1,18 +1,19 @@
 import React, {useState} from "react";
 import axios from "axios";
-import {Button, Form} from 'react-bootstrap'
-import UserImage from '../components/UserImage'
+import {Form} from 'react-bootstrap'
+import { SecondaryColor, VocalButton } from "../components/Styles";
 
 const UserForm = (props) => {
 
-  const {newestUser, id, handleUpdateUser, email:initialEmail, password:initialPassword, toggleForm} = props
+  const {newestUser, id, handleUpdateUser, email:initialEmail, password:initialPassword, toggleForm, nickname:initialNickname} = props
 
+  const [nicknameState, setNicknameState] = useState(initialNickname ? initialNickname : "");
   const [emailState, setEmailState] = useState(initialEmail ? initialEmail: "");
   const [passwordState, setPasswordState] = useState(initialPassword ? initialPassword : "");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const newUser = {email: emailState, password: passwordState};
+    const newUser = {nickname: nicknameState, email: emailState, password: passwordState};
   if (id) {
     let response = await axios.put(`/api/users/${id}`, newUser)
     handleUpdateUser(response.data)
@@ -25,26 +26,21 @@ const UserForm = (props) => {
   };
 
   return (
-  <div style={styles.form}>
-    <h1>{id ? "Update" : "New"}</h1>
+  <div style={{backgroundColor:`${SecondaryColor}`, padding:"1rem", borderRadius:"1.5rem"}}>
+    <h1 style={{color:"white"}}>{id ? "Update" : "New"}</h1>
       <Form onSubmit={handleSubmit}>
-        <Form.Label>Email:</Form.Label>
+        <Form.Label style={{color:"white"}}>Nickname:</Form.Label>
+        <Form.Control value = {nicknameState} onChange = {(e) => setNicknameState(e.target.value)}/>
+        <Form.Label style={{color:"white"}}>Email:</Form.Label>
         <Form.Control value = {emailState} onChange = {(e) => setEmailState(e.target.value)}/>
-        <Form.Label>Password:</Form.Label>
+        <Form.Label style={{color:"white"}}>Password:</Form.Label>
         <Form.Control value = {passwordState} onChange = {(e) => setPasswordState(e.target.value)}/>
        <br/>
-        <Button type = "submit">{id ? "Update" : "Create"}</Button>
+        <VocalButton type = "submit">{id ? "Update" : "Create"}</VocalButton>
       </Form>
   </div>
   );
 };
 
-const styles = {
-  form: {
-    border: "3px solid blue",
-    margin: "5px",
-    padding: "5px"
-  }
-};
 
 export default UserForm;

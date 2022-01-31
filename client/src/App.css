@@ -90,3 +90,11 @@
 .record-button:focus {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
+
+hr.solid {
+  border-top: 3px solid #bbb;
+}
+
+.how-to {
+  color: #2a3950;
+}

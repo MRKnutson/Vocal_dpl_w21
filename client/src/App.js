@@ -12,6 +12,7 @@ import AboutUs from './pages/AboutUs';
 import BackEndTestPage from './pages/BackEndTestPage';
 import Profile from './pages/Profile';
 import Landing from './pages/Landing'
+import HowTo from './pages/HowTo';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path = "/landing" element = {<Landing />} />
         <Route path = "/login" element = {<Login />} />
         <Route element = {<RequireAuth />}>
+        <Route path = "/howto" element={<HowTo/>} />
         <Route path = "/" element = {<Home />} />
         <Route path = "/aboutus" element = {<AboutUs/>} />
         <Route path = "/profile" element = {<Profile />} />

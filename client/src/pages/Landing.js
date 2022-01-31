@@ -1,12 +1,13 @@
-import { VocalButton } from '../components/Styles.js'
+import { VocalButton, VocalHeader } from '../components/Styles.js'
 import { Link } from 'react-router-dom';
 
 const Landing = () => {
   return (
     <div id="landingBody">
-    <h2 id="landingIntro"> Your Audio Journal App built by DevPoint Labs </h2>
+    <VocalHeader>Your Audio Journal App</VocalHeader>
+    <VocalHeader>built by DevPoint Labs </VocalHeader>
     <Link to="/register" id="signUpButton">
-      <VocalButton> Sign Up </VocalButton>
+      <VocalButton>Sign Up </VocalButton>
     </Link>
 </div>
   )

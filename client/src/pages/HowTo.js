@@ -1,5 +1,6 @@
 import React from "react"
-import { VocalHeader, SecondaryColor, PrimaryColor } from "../components/Styles"
+import { Link } from "react-router-dom"
+import { ActionColor, PrimaryColor, VocalButton } from "../components/Styles"
 import avatar from "../images/avatar.jpeg"
 
 const HowTo = () => {
@@ -29,6 +30,9 @@ const HowTo = () => {
                 <h3 className="how-to">Review your entries</h3>
                 <p className="how-to">Review your journal entries on a daily and session by session basis.</p>
             </div>       
+            </div>
+            <div style={{display:"flex", justifyContent:"center"}}>
+            <VocalButton><Link style={{color:"white",textDecoration:"none"}} to='/'>Go to Recorder</Link></VocalButton>
             </div>
         </div>
     )

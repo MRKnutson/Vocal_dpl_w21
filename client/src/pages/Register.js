@@ -30,7 +30,7 @@ const Register = () => {
   
   return (
     <Container>
-      <VocalHeader style={{marginTop:"5rem", marginBottom:"2rem", marginLeft:"4rem"}}>Sign Up</VocalHeader>
+      <VocalHeader style={{marginTop:"5rem", marginBottom:"2rem", marginLeft:"3rem"}}>Sign Up</VocalHeader>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail" onClick={()=> setShow(false)}>
           <Form.Label style={{color:"white"}} ref={target}>Email Address:</Form.Label>

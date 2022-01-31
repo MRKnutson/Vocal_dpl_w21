@@ -23,7 +23,7 @@ const Login = () => {
   
   return(
     <div>
-    <VocalHeader style={{marginTop:"5rem", marginBottom:"2rem", marginLeft:"5rem"}}> 
+    <VocalHeader style={{marginTop:"5rem", marginBottom:"2rem", marginLeft:"8rem"}}> 
       Log In
     </VocalHeader>
     <Container>

@@ -423,6 +423,7 @@ const Activities = () => {
             display: "flex",
             justifyContent: "center",
             marginLeft: "2rem",
+            marginBottom:"3rem",
           }}
         >
           <Col style={{ display: "flex", justifyContent: "space-around" }}>
@@ -491,7 +492,32 @@ const Activities = () => {
           </Col>
         </Row>
 
-        <GraphCard style={{ margin: "20px" }}>
+            {logData.length > 1 && (
+              <GraphCard>
+                <h2 style={{ margin: "1.5rem" }}>Daily Log</h2>
+                <div
+                  style={{ height: "500px", width: "100%", paddingTop: "1.5rem" }}
+                >
+                  <Chrono
+                    hideControls
+                    cardPositionHorizontal='Bottom'
+                    items={LogTitles()}
+                    mode='HORIZONTAL'
+                    theme={{
+                      primary: `white`,
+                      secondary: `${PrimaryColor}`,
+                      cardBgColor: `${PrimaryColor}`,
+                      cardForeColor: "white",
+                      titleColor: `white`,
+                    }}
+                  >
+                    {normalizeLogsData()}
+                  </Chrono>
+                </div>
+              </GraphCard>
+            )}
+            {recordingShow && displayModal(recording)}
+        <GraphCard style={{ marginBottom: "3rem" }}>
           <h2 style={{ margin: "1.5rem" }}>Annual Activity</h2>
           <div style={{ width: "100%", height: 500, marginBottom: "50px" }}>
             {/* to work on this calendar use: https://nivo.rocks/calendar/ */}
@@ -611,31 +637,6 @@ const Activities = () => {
             </XYPlot>
           </div>
         </GraphCard>
-        {logData.length > 1 && (
-          <GraphCard>
-            <h2 style={{ margin: "1.5rem" }}>Daily Log</h2>
-            <div
-              style={{ height: "500px", width: "100%", paddingTop: "1.5rem" }}
-            >
-              <Chrono
-                hideControls
-                cardPositionHorizontal='Bottom'
-                items={LogTitles()}
-                mode='HORIZONTAL'
-                theme={{
-                  primary: `white`,
-                  secondary: `${PrimaryColor}`,
-                  cardBgColor: `${PrimaryColor}`,
-                  cardForeColor: "white",
-                  titleColor: `white`,
-                }}
-              >
-                {normalizeLogsData()}
-              </Chrono>
-            </div>
-          </GraphCard>
-        )}
-        {recordingShow && displayModal(recording)}
       </Container>
     </>
   );

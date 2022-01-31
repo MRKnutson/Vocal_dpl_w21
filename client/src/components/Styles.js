@@ -53,6 +53,18 @@ marginL.5rem;
 }
 `;
 
+export const UpdateButton = styled.button`
+color:${PrimaryColor};
+background-color: #ebebeb;
+border:none;
+border-radius:.2rem;
+padding:.5rem;
+marginL.5rem;
+&:hover {
+  background-color: #dedede;
+}
+`;
+
 export const ViewButton = styled.button`
 color:white;
 background-color: ${ActionColor};

@@ -22,7 +22,6 @@ import {
   DiscreteColorLegend,
 } from "react-vis";
 import { Chrono } from "react-chrono";
-import logo from "../images/plain_logo.jpg";
 
 const Activities = () => {
   const [useCanvas, setUseCanvas] = useState(false);
@@ -270,7 +269,7 @@ const Activities = () => {
 
   return (<>
     <Container>
-      <VocalHeader style={{ marginTop: "5rem" }}>
+      <VocalHeader style={{ marginTop: "5rem" , marginBottom:"3rem"}}>
         Activity
       </VocalHeader>
       <Row
@@ -438,27 +437,27 @@ const Activities = () => {
             />
             <BarSeries
               cluster='mood1'
-              color='red'
+              color='blue'
               data={normalizeMonthData(1)}
             />
             <BarSeries
               cluster='mood2'
-              color='orange'
+              color='green'
               data={normalizeMonthData(2)}
             />
             <BarSeries
               cluster='mood3'
-              color='blue'
+              color='yellow'
               data={normalizeMonthData(3)}
             />
             <BarSeries
               cluster='mood4'
-              color='green'
+              color='orange'
               data={normalizeMonthData(4)}
             />
             <BarSeries
               cluster='mood5'
-              color='yellow'
+              color='pink'
               data={normalizeMonthData(5)}
             />
           </XYPlot>

@@ -5,7 +5,7 @@ import { AuthContext } from "../providers/AuthProvider";
 import axios from "axios";
 import { Container } from "react-bootstrap";
 import UserImage from "../components/UserImage";
-import { PrimaryColor, VocalButton, VocalHeader } from "../components/Styles";
+import { PrimaryColor, VocalButton, UpdateButton } from "../components/Styles";
 import DeleteUserModal from "../components/DeleteUserModal";
 
 const Profile = (props) => {
@@ -69,9 +69,9 @@ const Profile = (props) => {
         <p className="profile-label">Password</p>
         <p className="profile-input">******</p>
         <div style={{display:"flex", justifyContent:"right"}}>
-        <VocalButton style={{ marginRight: "1rem" }} onClick={toggleForm}>
+        <UpdateButton style={{ marginRight: "1rem"}} onClick={toggleForm}>
           {showForm ? "Cancel" : "Update User"}
-        </VocalButton>
+        </UpdateButton>
         {showForm && (
           <UserForm
             id={id}

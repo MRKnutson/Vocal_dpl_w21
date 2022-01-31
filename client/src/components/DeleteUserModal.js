@@ -27,11 +27,11 @@ const DeleteUserModal = (props) => {
         }}
       >
         <h5>
-          Are you sure you would like to delete account? All associated data
+          Are you sure? All associated data
           will be lost.
         </h5>
         <Modal.Footer>
-          <ViewButton onClick={handleClose}>Cancel Delete</ViewButton>
+          <ViewButton onClick={handleClose}>Cancel</ViewButton>
           <ViewButton onClick={() => deleteUser(id)}>Delete Account</ViewButton>
         </Modal.Footer>
       </Modal.Body>

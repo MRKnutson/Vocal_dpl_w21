@@ -13,6 +13,7 @@ import BackEndTestPage from './pages/BackEndTestPage';
 import Profile from './pages/Profile';
 import Landing from './pages/Landing'
 import HowTo from './pages/HowTo';
+import VocalFooter from './components/VocalFooter';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path = "/register" element = {<Register />} />
         <Route path = "/landing" element = {<Landing />} />
         <Route path = "/login" element = {<Login />} />
+        <Route path = "/vocalfooter" element = {<VocalFooter/>}/>
         <Route element = {<RequireAuth />}>
         <Route path = "/howto" element={<HowTo/>} />
         <Route path = "/" element = {<Home />} />

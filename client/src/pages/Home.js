@@ -9,7 +9,7 @@ const Home =  (props) => {
 const {recording} = props
 console.log(props)
   return (
-    <div style={{backgroundColor:`${SecondaryColor}`, height:"45rem",margin:"8rem", borderRadius:"1.5rem", padding:"2rem"}}>
+    <div style={{backgroundColor:`${SecondaryColor}`, height:"44rem",marginTop:"5rem", marginLeft:"8rem", marginRight:"8rem", marginBottom:"5rem", borderRadius:"1.5rem", padding:"2rem"}}>
      <div style={{display:"flex", flexFlow:"column", textAlign:"center", alignItems:"center", marginTop:"5rem"}}>
      <img src={soundwaves} className="record" style={{height:"21rem", borderRadius:"15rem", marginBottom:"2rem"}}/>
      <div style={{}}>

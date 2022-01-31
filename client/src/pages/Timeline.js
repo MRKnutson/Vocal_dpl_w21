@@ -37,18 +37,6 @@ const Timeline = () => {
     getData();
   }, []);
 
-  //   useEffect(() => {
-  //   console.log("chosen: " + chosenTags);
-  // }, [chosenTags]);
-
-  // useEffect(() => {
-  //   console.log("tags: " + tags);
-  // }, [tags]);
-
-  // useEffect(() => {
-  //   console.log("showRecordingID: " + showRecordingID);
-  // }, [showRecordingID]);
-
   const getRecordings = async () => {
     try {
       let response = await axios.get("/api/recordings");
@@ -161,8 +149,8 @@ const Timeline = () => {
 
   return (
     <div>
-      <VocalHeader style={{ margin: "3rem" }}>My Journal Entries</VocalHeader>
-      <div style={{ marginRight: "1rem" }}>
+      <div style={{ marginRight: "8rem"}}>
+        <VocalHeader style={{ marginTop: "5rem", marginLeft:"8rem" }}>My Journal Entries</VocalHeader>
         <DropdownChecklist
           tag='Tags'
           setState={setChosenTags}

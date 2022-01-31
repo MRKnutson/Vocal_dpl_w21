@@ -5,7 +5,7 @@ import { AuthContext } from "../providers/AuthProvider";
 import axios from "axios";
 import { Container } from "react-bootstrap";
 import UserImage from "../components/UserImage";
-import { VocalButton, VocalHeader } from "../components/Styles";
+import { PrimaryColor, VocalButton, UpdateButton } from "../components/Styles";
 import DeleteUserModal from "../components/DeleteUserModal";
 
 const Profile = (props) => {
@@ -47,29 +47,31 @@ const Profile = (props) => {
   }
 
   return (
-    <Container key={props.id}>
-      <VocalHeader
-        style={{ marginTop: "5rem", marginBottom: "2rem", marginLeft: "4rem" }}
-      >
-        My Profile
-      </VocalHeader>
-      {image && <img style={{ width: "300px" }} src={image} />}
-      {/* <p>ID: {id}</p> */}
-      <br />
-      <div style={{ marginLeft: "6rem" }}>
-        <p style={{ color: "white" }}>Email: {email}</p>
-        <p style={{ color: "white" }}>Password: ****** </p>
-        <div style={{ marginBottom: "1rem", marginTop: "3rem" }}>
+    <div style={{backgroundColor: "white", height:"auto",marginLeft:"8rem", marginRight:"8rem", marginTop:"5rem", marginBottom:"5rem", borderRadius:"1.5rem", padding:"2rem"}} key={props.id}>
+      <h1 style={{marginBottom: "2rem", marginLeft: "4rem", marginTop:"2rem", color:`${PrimaryColor}` }}>My Profile</h1>
+      <div style={{display:"flex", justifyContent:"center", marginTop:"2rem"}}>
+        {image && <img style={{ width: "10rem", borderRadius:"5rem"}} src={image} />}
+      </div>
+      <div style={{display:"flex", justifyContent:"center"}}>
           {showUpload && <UserImage toggleUpload={toggleUpload} />}
           {!showUpload && (
-            <VocalButton onClick={toggleUpload}>
+            <VocalButton style={{margin:"1rem"}} onClick={toggleUpload}>
               Change Profile Picture
             </VocalButton>
           )}
-        </div>
-        <VocalButton style={{ marginRight: "1rem" }} onClick={toggleForm}>
-          {showForm ? "Cancel" : "Update"}
-        </VocalButton>
+      </div>
+      <br />
+      <div>
+        <p className="profile-label">Name</p>
+        <p className="profile-input">pull name in here</p>
+        <p className="profile-label">Email</p>
+        <p className="profile-input">{email}</p>
+        <p className="profile-label">Password</p>
+        <p className="profile-input">******</p>
+        <div style={{display:"flex", justifyContent:"right"}}>
+        <UpdateButton style={{ marginRight: "1rem"}} onClick={toggleForm}>
+          {showForm ? "Cancel" : "Update User"}
+        </UpdateButton>
         {showForm && (
           <UserForm
             id={id}
@@ -82,14 +84,16 @@ const Profile = (props) => {
         <VocalButton onClick={() => setShowDeleteModal(true)}>
           Delete User
         </VocalButton>
-      </div>
       <DeleteUserModal
         deleteUser={deleteUser}
         id={id}
         show={showDeleteModal}
         setShow={setShowDeleteModal}
       />
-    </Container>
+      </div>
+      {/* <Link style={{textDecoration:"none"}} to="/howto">Getting Started</Link> */}
+    </div>
+    </div>
   );
 };
 

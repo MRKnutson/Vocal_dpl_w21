@@ -137,7 +137,7 @@ const EntryModal = ({
                     selectMood(e, 1);
                   }}
                   style={{
-                    height: "3rem",
+                    height: "2.8rem",
                     borderRadius: "1.5rem",
                     marginRight: "1rem",
                   }}
@@ -150,7 +150,7 @@ const EntryModal = ({
                     selectMood(e, 2);
                   }}
                   style={{
-                    height: "3rem",
+                    height: "2.8rem",
                     borderRadius: "1.5rem",
                     marginRight: "1rem",
                   }}
@@ -163,7 +163,7 @@ const EntryModal = ({
                     selectMood(e, 3);
                   }}
                   style={{
-                    height: "3rem",
+                    height: "2.8rem",
                     borderRadius: "1.5rem",
                     marginRight: "1rem",
                   }}
@@ -176,7 +176,7 @@ const EntryModal = ({
                     selectMood(e, 4);
                   }}
                   style={{
-                    height: "3rem",
+                    height: "2.8rem",
                     borderRadius: "1.5rem",
                     marginRight: "1rem",
                   }}
@@ -189,7 +189,7 @@ const EntryModal = ({
                     selectMood(e, 5);
                   }}
                   style={{
-                    height: "3rem",
+                    height: "2.8rem",
                     borderRadius: "1.5rem",
                     marginRight: "1rem",
                   }}

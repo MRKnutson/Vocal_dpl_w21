@@ -81,7 +81,10 @@ const Recording = (props) => {
       style={{
         backgroundColor: `${SecondaryColor}`,
         borderRadius: "1rem",
-        margin: "1rem",
+        marginRight: "8rem",
+        marginBottom:"1rem",
+        marginLeft: "8rem",
+        marginTop:"1.5rem",
         padding: "2rem",
       }}
     >

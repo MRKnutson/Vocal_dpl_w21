@@ -13,7 +13,7 @@ const AuthProvider = (props) => {
     try {
       let response = await axios.post('api/auth', user);
       setUser(response.data.data)
-      navigate('/')
+      navigate('/howto')
     } catch (err) {
       // console.log(err.response.data.errors.full_messages)
       // alert(err.response.data.errors.full_messages)

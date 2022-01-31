@@ -36,7 +36,7 @@ const programmers = [
     LinkedIn: "www.linkedin.com/in/dennis-plank-4b5547224",
     email: "DennyMouzon@gmail.com",
     blurb:
-      "I just like things to work right. When the button you click doesnt do anything? Yeah. Nightmare fuel.",
+      "I just like things to work right. When the button you click doesn't do anything? Yeah. Nightmare fuel.",
   },
   {
     name: "Ruby Reed",
@@ -46,7 +46,7 @@ const programmers = [
     LinkedIn: "https://www.linkedin.com/in/ruby-reed-454844134/",
     email: "rubysreed@gmail.com",
     blurb:
-      "After earning a Bachelor's in Biological Science I spent some time traveling and trying to figure out my career... I finally landed on coding! And I'm loving it. ",
+      "After earning a Bachelor's in Biological Science I spent some time traveling and trying to figure out my career... I finally landed on Web Development (with an emphasis on Front End)! And I'm loving it.",
   },
 ];
 

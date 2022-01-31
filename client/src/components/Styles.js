@@ -7,6 +7,7 @@ import {
   Form,
   DropdownButton,
 } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 //here are our theme colors for the app
@@ -29,6 +30,7 @@ export const GraphCard = styled(Card)`
   color: white;
   border-radius: 0.75rem;
   background-color: ${SecondaryColor};
+  margin-bottom:3rem;
 `;
 
 export const StatText = styled(Card.Text)`
@@ -48,6 +50,16 @@ border:none;
 border-radius:.2rem;
 padding:.5rem;
 marginL.5rem;
+&:hover {
+  background-color: ${SecondaryColor}
+}
+`;
+
+export const SmallButton = styled.button`
+color:white;
+background-color: ${ActionColor};
+border:none;
+border-radius:.2rem;
 &:hover {
   background-color: ${SecondaryColor}
 }

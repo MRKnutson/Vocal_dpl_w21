@@ -2,11 +2,10 @@ import React, { useContext } from 'react'
 import {Button, Container, Nav, NavDropdown} from 'react-bootstrap'
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
-import {VocalNavbar, PrimaryColor, SecondaryColor, ActionColor, VocalButton} from '../components/Styles.js'
-import avatar from '../images/avatar.jpeg'
-import logofive from '../images/logo5edited.png'
+import {VocalNavbar, PrimaryColor, SecondaryColor, ActionColor, VocalButton, SmallButton} from '../components/Styles.js'
 import VocalFooter from './VocalFooter';
 import VOCAL from "../images/VOCAL.jpg";
+import avatar from "../images/avatar.jpeg";
 
 const Layout = () => {
   const navigate = useNavigate();
@@ -27,7 +26,8 @@ const Layout = () => {
             </Nav>
           </Container>
           <Nav>
-           <img src={image} alt="User Avatar" style={{height:"2.8rem", borderRadius:"1.4rem", border:".13rem solid #FFFF"}}/>
+           {image && <img src={image} alt="User Avatar" style={{height:"2.8rem", borderRadius:"1.4rem", border:".13rem solid #FFFF"}}/>}
+           {!image && <img src={avatar} alt="User Avatar" style={{height:"2.8rem", borderRadius:"1.4rem", border:".13rem solid #FFFF"}}/>}
             <NavDropdown onSelect = {handleSelect} style={{marginRight:"1.5rem"}} id = "navdropdown-arrow" title = {<span className="navdropdown-title">User</span>}>
               <NavDropdown.Item eventKey = "/profile">Profile</NavDropdown.Item>
               <NavDropdown.Item onClick={()=>handleLogout(navigate)}>Logout</NavDropdown.Item>
@@ -39,7 +39,7 @@ const Layout = () => {
       return(
             <Container style ={{display: "flex", justifyContent: "right"}} onSelect = {handleSelect}>
               <VocalButton style={{backgroundColor:"transparent"}}><Nav.Link style={{color:"white"}} href = "/login">Log In</Nav.Link></VocalButton>
-              <VocalButton><Nav.Link style={{color:"white"}} href = "/register">Sign Up</Nav.Link></VocalButton>
+              <SmallButton><Nav.Link style={{color:"white"}} href = "/register">Sign Up</Nav.Link></SmallButton>
             </Container>
       )
     };

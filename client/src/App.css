@@ -98,3 +98,21 @@ hr.solid {
 .how-to {
   color: #2a3950;
 }
+
+.profile-input {
+  background-color: #ebebeb;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+  padding: 0.5rem;
+  width: auto;
+  border-radius: 0.2rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  margin-bottom: 2rem;
+  color: #2a3950;
+}
+
+.profile-label {
+  margin-left: 1.5rem;
+  margin-right: 2rem;
+  color: #2a3950;
+}

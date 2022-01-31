@@ -17,8 +17,8 @@ export const HighlightColor = "#6C63FF";
 
 //used in about us page
 export const StatCard = styled(Card)`
-  width: 19.5rem;
-  margin: 1rem;
+  width: 20rem;
+  margin:.5rem;
   border-radius: 0.75rem;
   height: 30rem;
 `;

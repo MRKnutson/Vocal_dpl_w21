@@ -268,15 +268,15 @@ const Activities = () => {
     }
   };
 
-  return (
+  return (<>
     <Container>
-      <VocalHeader style={{ marginTop: "50px", fontSize: "5em" }}>
+      <VocalHeader style={{ marginTop: "5rem" }}>
         Activity
       </VocalHeader>
       <Row
         md={1}
         lg={3}
-        style={{ display: "flex", justifyContent: "space-between" }}
+        style={{ display: "flex", justifyContent: "center", marginLeft:"2rem" }}
       >
         <Col style={{ display: "flex", justifyContent: "space-around" }}>
           <StatCard>
@@ -292,7 +292,7 @@ const Activities = () => {
                 marginBottom: "4rem",
                 marginLeft: "2rem",
               }}
-            />
+              />
             <StatText as='h3' style={{ margin: "1rem" }}>
               Entries Saved: {recordings.length}
             </StatText>
@@ -301,7 +301,7 @@ const Activities = () => {
         <Col style={{ display: "flex", justifyContent: "space-around" }}>
           <StatCard
             style={{ backgroundColor: `${ActionColor}`, color: "white" }}
-          >
+            >
             <Card.Img
               variant='top'
               src='https://static.vecteezy.com/system/resources/previews/001/200/448/non_2x/clock-png.png'
@@ -314,7 +314,7 @@ const Activities = () => {
                 marginBottom: "4rem",
                 marginLeft: "2rem",
               }}
-            />
+              />
             <StatText as='h3' style={{ margin: "1rem" }}>
               Total time recorded: {totalTime()} minutes
             </StatText>
@@ -323,7 +323,7 @@ const Activities = () => {
         <Col style={{ display: "flex", justifyContent: "space-around" }}>
           <StatCard
             style={{ backgroundColor: `${SecondaryColor}`, color: "white" }}
-          >
+            >
             <Card.Img
               variant='top'
               src='https://static.vecteezy.com/system/resources/previews/001/200/448/non_2x/clock-png.png'
@@ -336,7 +336,7 @@ const Activities = () => {
                 marginBottom: "4rem",
                 marginLeft: "2rem",
               }}
-            />
+              />
             <StatText as='h3' style={{ margin: "1rem" }}>
               Longest entry: {longestRecording()} minutes
             </StatText>
@@ -485,6 +485,7 @@ const Activities = () => {
         </GraphCard>
       )}
     </Container>
+    </>
   );
 };
 

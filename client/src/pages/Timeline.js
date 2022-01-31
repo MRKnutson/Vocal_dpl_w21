@@ -149,8 +149,8 @@ const Timeline = () => {
 
   return (
     <div>
-      <VocalHeader style={{ marginTop: "5rem", marginLeft:"8rem" }}>My Journal Entries</VocalHeader>
-      <div style={{ marginRight: "8rem" }}>
+      <div style={{ marginRight: "8rem"}}>
+        <VocalHeader style={{ marginTop: "5rem", marginLeft:"8rem" }}>My Journal Entries</VocalHeader>
         <DropdownChecklist
           tag='Tags'
           setState={setChosenTags}

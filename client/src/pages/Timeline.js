@@ -153,7 +153,7 @@ const Timeline = () => {
     <div>
       <div style={{ marginRight: "8rem"}}>
         <VocalHeader style={{ marginTop: "5rem", marginLeft:"8rem" }}>My Journal Entries</VocalHeader>
-        {!recordings && (
+        {!recordings.length > 0 && (
           <>
           <Container style={{display:"flex", justifyContent:"center", marginTop:"10rem"}}>
           <h3 style={{color:"white"}}>No Recordings Yet....</h3>
@@ -163,7 +163,7 @@ const Timeline = () => {
           </Container>
           </>
         )}
-        {recordings && (<DropdownChecklist
+        {recordings.length > 0 && (<DropdownChecklist
           tag='Tags'
           setState={setChosenTags}
           selItems={chosenTags}
@@ -173,7 +173,7 @@ const Timeline = () => {
         />
         )}
       </div>
-      {recordings && (<SearchBar input={search} filterRecordings={filterRecordings} />)}
+      {recordings.length > 0 && (<SearchBar input={search} filterRecordings={filterRecordings} />)}
       {showRecordingID && (
         <ShowRecording
           recording={recordings.find((r) => r.id === showRecordingID)}

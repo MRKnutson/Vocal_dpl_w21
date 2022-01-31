@@ -43,7 +43,7 @@ const programmers = [
     image:
       "https://res.cloudinary.com/djhlv2nfc/image/upload/c_crop,h_1232,w_1232/v1643503884/Vocal/Images/Image_from_iOS_rh0l5z.jpg",
     GitHub: "https://github.com/rubyreed/",
-    LinkedIn: "https://www.linkedin.com/in/ruby-reed-454844134/",
+    LinkedIn: "https://www.linkedin.com/in/ruby-s-reed/",
     email: "rubysreed@gmail.com",
     blurb:
       "After earning a Bachelor's in Biological Science I spent some time traveling and trying to figure out my career... I finally landed on Web Development (with an emphasis on Front End)! And I'm loving it.",

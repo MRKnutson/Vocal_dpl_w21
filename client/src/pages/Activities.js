@@ -9,6 +9,7 @@ import {
   SecondaryColor,
   StatCard,
   StatText,
+  VocalButton,
   VocalHeader,
 } from "../components/Styles.js";
 import {
@@ -22,12 +23,21 @@ import {
   DiscreteColorLegend,
 } from "react-vis";
 import { Chrono } from "react-chrono";
+import one from "../images/1smiley.png";
+import two from "../images/2smiley.png";
+import three from "../images/3smiley.png";
+import four from "../images/4smiley.png";
+import five from "../images/5smiley.png";
+import DailyLogModal from "../components/DailyLogModal.js";
 
 const Activities = () => {
   const [useCanvas, setUseCanvas] = useState(false);
   const [recordings, setRecordings] = useState([]);
   const [logData, setLogData] = useState([]);
   const [photos, setPhotos] = useState([]);
+  const [recordingShow, setRecordingShow] = useState(false);
+  const [recording, setRecording] = useState(null);
+  const [recordingPhotos, setRecordingPhotos] = useState(null);
 
   useEffect(() => {
     getRecordings();
@@ -233,257 +243,400 @@ const Activities = () => {
           // console.log(photo)
           let time = formatTime(recording.created_at);
           let length = (recording.duration / 60).toFixed(2);
-          if (photo) {
-            return {
-              title: `${time}`,
-              cardTitle: recording.title,
-              cardSubtitle: `Length: ${length} minutes`,
-              cardDetailedText: `Notes: ${recording.notes}`,
-              media: {
-                name: "Recording Photo",
-                source: { url: photo.pointer },
-                type: "IMAGE",
-              },
-            };
+          if (filteredPhotos.length > 0) {
+            let renderPhotos = filteredPhotos.map((photo) => {
+              return (
+                <img
+                  src={photo.pointer}
+                  style={{ maxHeight: "5rem", margin: "0.35rem" }}
+                />
+              );
+            });
+            return (
+              <div>
+                <h3>{recording.title}</h3>
+                <p>Length: {length} minutes</p>
+                <p>Mood: {moodImage(recording.mood)}</p>
+                <p>Notes: {recording.notes}</p>
+                <audio
+                  src={recording.pointer}
+                  controls
+                  style={{ height: "2rem", margin: "auto" }}
+                />
+                <br />
+                {renderPhotos}
+                <br />
+                <VocalButton
+                  onClick={() => handleModal(recording, filteredPhotos)}
+                >
+                  View Recording
+                </VocalButton>
+              </div>
+            );
           } else {
-            return {
-              title: `${time}`,
-              cardTitle: recording.title,
-              cardSubtitle: `Length: ${length} minutes`,
-              cardDetailedText: `Notes: ${recording.notes}`,
-            };
+            return (
+              <div>
+                <h3>{recording.title}</h3>
+                <p>Length: {length} minutes</p>
+                <p>Mood: {moodImage(recording.mood)}</p>
+                <p>Notes: {recording.notes}</p>
+                <audio
+                  src={recording.pointer}
+                  controls
+                  style={{ height: "2rem", margin: "auto" }}
+                />
+                <VocalButton
+                  onClick={() => handleModal(recording, filteredPhotos)}
+                >
+                  View Recording
+                </VocalButton>
+              </div>
+            );
           }
         } else {
-          let time = formatTime(recording.created_at);
           let length = recording.duration.toFixed(0);
-          return {
-            title: `${time}`,
-            cardTitle: recording.title,
-            cardSubtitle: `Length: ${length} minutes`,
-            cardDetailedText: `Notes: ${recording.notes}`,
-          };
+          return (
+            <div>
+              <h3>{recording.title}</h3>
+              <p>Length: {length} minutes</p>
+              <p>Mood: {moodImage(recording.mood)}</p>
+              <p>Notes: {recording.notes}</p>
+              <audio
+                src={recording.pointer}
+                controls
+                style={{ height: "2rem", margin: "auto" }}
+              />
+              <br />
+              <VocalButton onClick={() => handleModal(recording)}>
+                View Recording
+              </VocalButton>
+            </div>
+          );
         }
       });
     }
   };
 
-  return (<>
-    <Container>
-      <VocalHeader style={{ marginTop: "5rem" , marginBottom:"3rem"}}>
-        Activity
-      </VocalHeader>
-      <Row
-        md={1}
-        lg={3}
-        style={{ display: "flex", justifyContent: "center", marginLeft:"2rem" }}
-      >
-        <Col style={{ display: "flex", justifyContent: "space-around" }}>
-          <StatCard>
-            <Card.Img
-              variant='top'
-              src='https://static.vecteezy.com/system/resources/previews/001/200/448/non_2x/clock-png.png'
-              style={{
-                display: "block",
-                maxWidth: "7rem",
-                height: "auto",
-                width: "auto",
-                marginTop: "4rem",
-                marginBottom: "4rem",
-                marginLeft: "2rem",
-              }}
-              />
-            <StatText as='h3' style={{ margin: "1rem" }}>
-              Entries Saved: {recordings.length}
-            </StatText>
-          </StatCard>
-        </Col>
-        <Col style={{ display: "flex", justifyContent: "space-around" }}>
-          <StatCard
-            style={{ backgroundColor: `${ActionColor}`, color: "white" }}
-            >
-            <Card.Img
-              variant='top'
-              src='https://static.vecteezy.com/system/resources/previews/001/200/448/non_2x/clock-png.png'
-              style={{
-                display: "block",
-                maxWidth: "7rem",
-                height: "auto",
-                width: "auto",
-                marginTop: "4rem",
-                marginBottom: "4rem",
-                marginLeft: "2rem",
-              }}
-              />
-            <StatText as='h3' style={{ margin: "1rem" }}>
-              Total time recorded: {totalTime()} minutes
-            </StatText>
-          </StatCard>
-        </Col>
-        <Col style={{ display: "flex", justifyContent: "space-around" }}>
-          <StatCard
-            style={{ backgroundColor: `${SecondaryColor}`, color: "white" }}
-            >
-            <Card.Img
-              variant='top'
-              src='https://static.vecteezy.com/system/resources/previews/001/200/448/non_2x/clock-png.png'
-              style={{
-                display: "block",
-                maxWidth: "7rem",
-                height: "auto",
-                width: "auto",
-                marginTop: "4rem",
-                marginBottom: "4rem",
-                marginLeft: "2rem",
-              }}
-              />
-            <StatText as='h3' style={{ margin: "1rem" }}>
-              Longest entry: {longestRecording()} minutes
-            </StatText>
-          </StatCard>
-        </Col>
-      </Row>
+  const LogTitles = () => {
+    if (logData.length > 0) {
+      return logData.map((recording) => {
+        let time = formatTime(recording.created_at);
+        return {
+          title: `${time}`,
+        };
+      });
+    }
+  };
 
-      <GraphCard style={{ margin: "20px" }}>
-        <h2 style={{ margin: "1.5rem" }}>Annual Activity</h2>
-        <div style={{ width: "100%", height: 500, marginBottom: "50px" }}>
-          {/* to work on this calendar use: https://nivo.rocks/calendar/ */}
-          <ResponsiveCalendar
-            isInteractive={false}
-            data={changeData()}
-            from={new Date(new Date().getFullYear(), 0, 1)}
-            to='2022-12-31'
-            emptyColor='#eeeeee'
-            textColor='#ffffff'
-            colors={["#61cdbb", "#97e3d5", "#e8c1a0", "#f47560"]}
-            theme={{
-              textColor: "white",
-              backgroundColor: `${PrimaryColor}`,
-            }}
-            margin={{ top: 40, right: 40, bottom: 40, left: 40 }}
-            yearSpacing={40}
-            monthBorderColor={SecondaryColor}
-            dayBorderWidth={2}
-            dayBorderColor={SecondaryColor}
-            legends={[
-              {
-                anchor: "bottom-right",
-                direction: "row",
-                translateY: 36,
-                itemCount: 4,
-                itemWidth: 42,
-                itemHeight: 36,
-                itemsSpacing: 14,
-                itemDirection: "right-to-left",
-              },
-            ]}
-          />
-        </div>
-      </GraphCard>
-      <GraphCard style={{ paddingBottom: "75px" }}>
-        <h2 style={{ margin: "1.5rem" }}>Entries by Mood</h2>
-        <div>
-          <XYPlot
-            yDomain={[0, 32]}
-            style={{ margin: "3.5rem" }}
-            width={1000}
-            height={600}
-            stackBy='y'
-            xType='ordinal'
-          >
-            <DiscreteColorLegend
-              style={{ position: "relative", left: "950px", top: "-610px" }}
-              orientation='horizontal'
-              items={[
+  const handleModal = (singleRecording, filteredPhotos) => {
+    setRecording(singleRecording);
+    setRecordingPhotos(filteredPhotos);
+    setRecordingShow(true);
+  };
+
+  const displayModal = (singleRecording) => {
+    return (
+      <DailyLogModal
+        recording={singleRecording}
+        show={recordingShow}
+        setShow={setRecordingShow}
+        formatDate={formatDate}
+        formatTime={formatTime}
+        images={recordingPhotos}
+      />
+    );
+  };
+
+  const moodImage = (mood) => {
+    if (mood == 1) {
+      return (
+        <img
+          style={{
+            height: "3rem",
+            borderRadius: "1.5rem",
+            marginRight: ".5rem",
+          }}
+          src={one}
+        />
+      );
+    }
+    if (mood == 2) {
+      return (
+        <img
+          style={{
+            height: "3rem",
+            borderRadius: "1.5rem",
+            marginRight: ".5rem",
+          }}
+          src={two}
+        />
+      );
+    }
+    if (mood == 3) {
+      return (
+        <img
+          style={{
+            height: "3rem",
+            borderRadius: "1.5rem",
+            marginRight: ".5rem",
+          }}
+          src={three}
+        />
+      );
+    }
+    if (mood == 4) {
+      return (
+        <img
+          style={{
+            height: "3rem",
+            borderRadius: "1.5rem",
+            marginRight: ".5rem",
+          }}
+          src={four}
+        />
+      );
+    }
+    if (mood == 5) {
+      return (
+        <img
+          style={{
+            height: "3rem",
+            borderRadius: "1.5rem",
+            marginRight: ".5rem",
+          }}
+          src={five}
+        />
+      );
+    }
+  };
+
+  return (
+    <>
+      <Container>
+        <VocalHeader style={{ marginTop: "5rem", marginBottom: "3rem" }}>
+          Activity
+        </VocalHeader>
+        <Row
+          md={1}
+          lg={3}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginLeft: "2rem",
+          }}
+        >
+          <Col style={{ display: "flex", justifyContent: "space-around" }}>
+            <StatCard>
+              <Card.Img
+                variant='top'
+                src='https://static.vecteezy.com/system/resources/previews/001/200/448/non_2x/clock-png.png'
+                style={{
+                  display: "block",
+                  maxWidth: "7rem",
+                  height: "auto",
+                  width: "auto",
+                  marginTop: "4rem",
+                  marginBottom: "4rem",
+                  marginLeft: "2rem",
+                }}
+              />
+              <StatText as='h3' style={{ margin: "1rem" }}>
+                Entries Saved: {recordings.length}
+              </StatText>
+            </StatCard>
+          </Col>
+          <Col style={{ display: "flex", justifyContent: "space-around" }}>
+            <StatCard
+              style={{ backgroundColor: `${ActionColor}`, color: "white" }}
+            >
+              <Card.Img
+                variant='top'
+                src='https://static.vecteezy.com/system/resources/previews/001/200/448/non_2x/clock-png.png'
+                style={{
+                  display: "block",
+                  maxWidth: "7rem",
+                  height: "auto",
+                  width: "auto",
+                  marginTop: "4rem",
+                  marginBottom: "4rem",
+                  marginLeft: "2rem",
+                }}
+              />
+              <StatText as='h3' style={{ margin: "1rem" }}>
+                Total time recorded: {totalTime()} minutes
+              </StatText>
+            </StatCard>
+          </Col>
+          <Col style={{ display: "flex", justifyContent: "space-around" }}>
+            <StatCard
+              style={{ backgroundColor: `${SecondaryColor}`, color: "white" }}
+            >
+              <Card.Img
+                variant='top'
+                src='https://static.vecteezy.com/system/resources/previews/001/200/448/non_2x/clock-png.png'
+                style={{
+                  display: "block",
+                  maxWidth: "7rem",
+                  height: "auto",
+                  width: "auto",
+                  marginTop: "4rem",
+                  marginBottom: "4rem",
+                  marginLeft: "2rem",
+                }}
+              />
+              <StatText as='h3' style={{ margin: "1rem" }}>
+                Longest entry: {longestRecording()} minutes
+              </StatText>
+            </StatCard>
+          </Col>
+        </Row>
+
+        <GraphCard style={{ margin: "20px" }}>
+          <h2 style={{ margin: "1.5rem" }}>Annual Activity</h2>
+          <div style={{ width: "100%", height: 500, marginBottom: "50px" }}>
+            {/* to work on this calendar use: https://nivo.rocks/calendar/ */}
+            <ResponsiveCalendar
+              isInteractive={false}
+              data={changeData()}
+              from={new Date(new Date().getFullYear(), 0, 1)}
+              to='2022-12-31'
+              emptyColor='#eeeeee'
+              textColor='#ffffff'
+              colors={["#61cdbb", "#97e3d5", "#e8c1a0", "#f47560"]}
+              theme={{
+                textColor: "white",
+                backgroundColor: `${PrimaryColor}`,
+              }}
+              margin={{ top: 40, right: 40, bottom: 40, left: 40 }}
+              yearSpacing={40}
+              monthBorderColor={SecondaryColor}
+              dayBorderWidth={2}
+              dayBorderColor={SecondaryColor}
+              legends={[
                 {
-                  title: "Mood1",
-                  color: "red",
-                },
-                {
-                  title: "Mood2",
-                  color: "orange",
-                },
-                {
-                  title: "Mood3",
-                  color: "blue",
-                },
-                {
-                  title: "Mood4",
-                  color: "green",
-                },
-                {
-                  title: "Mood5",
-                  color: "yellow",
+                  anchor: "bottom-right",
+                  direction: "row",
+                  translateY: 36,
+                  itemCount: 4,
+                  itemWidth: 42,
+                  itemHeight: 36,
+                  itemsSpacing: 14,
+                  itemDirection: "right-to-left",
                 },
               ]}
             />
-            <VerticalGridLines />
-            <HorizontalGridLines />
-            <XAxis
-              title='Month'
-              style={{
-                line: { stroke: "gray" },
-                text: { fill: "white" },
-                title: { fill: "white" },
-              }}
-            />
-            <YAxis
-              title='Number of Entries'
-              style={{
-                line: { stroke: "gray" },
-                ticks: { stroke: "#ADDDE1" },
-                text: { stroke: "none", fill: "white", fontWeight: 600 },
-                title: { fill: "white" },
-              }}
-            />
-            <BarSeries
-              cluster='mood1'
-              color='blue'
-              data={normalizeMonthData(1)}
-            />
-            <BarSeries
-              cluster='mood2'
-              color='green'
-              data={normalizeMonthData(2)}
-            />
-            <BarSeries
-              cluster='mood3'
-              color='yellow'
-              data={normalizeMonthData(3)}
-            />
-            <BarSeries
-              cluster='mood4'
-              color='orange'
-              data={normalizeMonthData(4)}
-            />
-            <BarSeries
-              cluster='mood5'
-              color='pink'
-              data={normalizeMonthData(5)}
-            />
-          </XYPlot>
-        </div>
-      </GraphCard>
-      {logData.length > 1 && (
-        <GraphCard>
-          <h2 style={{ margin: "1.5rem" }}>Daily Log</h2>
-          <div style={{ height: "500px", width: "100%", paddingTop: "1.5rem" }}>
-            <Chrono
-              hideControls
-              cardPositionHorizontal='Bottom'
-              items={normalizeLogsData()}
-              mode='HORIZONTAL'
-              theme={{
-                primary: `white`,
-                secondary: `${PrimaryColor}`,
-                cardBgColor: `${PrimaryColor}`,
-                cardForeColor: "white",
-                titleColor: `white`,
-              }}
-            />
           </div>
         </GraphCard>
-      )}
-    </Container>
+        <GraphCard style={{ paddingBottom: "75px" }}>
+          <h2 style={{ margin: "1.5rem" }}>Entries by Mood</h2>
+          <div>
+            <XYPlot
+              yDomain={[0, 32]}
+              style={{ margin: "3.5rem" }}
+              width={1000}
+              height={600}
+              stackBy='y'
+              xType='ordinal'
+            >
+              <DiscreteColorLegend
+                style={{ position: "relative", left: "950px", top: "-610px" }}
+                orientation='horizontal'
+                items={[
+                  {
+                    title: "Mood1",
+                    color: "red",
+                  },
+                  {
+                    title: "Mood2",
+                    color: "orange",
+                  },
+                  {
+                    title: "Mood3",
+                    color: "blue",
+                  },
+                  {
+                    title: "Mood4",
+                    color: "green",
+                  },
+                  {
+                    title: "Mood5",
+                    color: "yellow",
+                  },
+                ]}
+              />
+              <VerticalGridLines />
+              <HorizontalGridLines />
+              <XAxis
+                title='Month'
+                style={{
+                  line: { stroke: "gray" },
+                  text: { fill: "white" },
+                  title: { fill: "white" },
+                }}
+              />
+              <YAxis
+                title='Number of Entries'
+                style={{
+                  line: { stroke: "gray" },
+                  ticks: { stroke: "#ADDDE1" },
+                  text: { stroke: "none", fill: "white", fontWeight: 600 },
+                  title: { fill: "white" },
+                }}
+              />
+              <BarSeries
+                cluster='mood1'
+                color='blue'
+                data={normalizeMonthData(1)}
+              />
+              <BarSeries
+                cluster='mood2'
+                color='green'
+                data={normalizeMonthData(2)}
+              />
+              <BarSeries
+                cluster='mood3'
+                color='yellow'
+                data={normalizeMonthData(3)}
+              />
+              <BarSeries
+                cluster='mood4'
+                color='orange'
+                data={normalizeMonthData(4)}
+              />
+              <BarSeries
+                cluster='mood5'
+                color='pink'
+                data={normalizeMonthData(5)}
+              />
+            </XYPlot>
+          </div>
+        </GraphCard>
+        {logData.length > 1 && (
+          <GraphCard>
+            <h2 style={{ margin: "1.5rem" }}>Daily Log</h2>
+            <div
+              style={{ height: "500px", width: "100%", paddingTop: "1.5rem" }}
+            >
+              <Chrono
+                hideControls
+                cardPositionHorizontal='Bottom'
+                items={LogTitles()}
+                mode='HORIZONTAL'
+                theme={{
+                  primary: `white`,
+                  secondary: `${PrimaryColor}`,
+                  cardBgColor: `${PrimaryColor}`,
+                  cardForeColor: "white",
+                  titleColor: `white`,
+                }}
+              >
+                {normalizeLogsData()}
+              </Chrono>
+            </div>
+          </GraphCard>
+        )}
+        {recordingShow && displayModal(recording)}
+      </Container>
     </>
   );
 };

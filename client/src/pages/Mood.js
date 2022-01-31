@@ -78,7 +78,6 @@ export default function Mood() {
       const renderSelectedDate = () => {
         var d = new Date();
           d.setDate(d.getDate() - parseInt(timeChoice));
-          console.log(d + "this is the choosen date")
           let returnRecs = []
           let validRecs = recordings.filter((r)=> formatDate(r.created_at) > formatDate(d))
           validRecs.map((r)=>{
@@ -101,7 +100,6 @@ export default function Mood() {
           // if False, Normal data here
           let normalizedData = [] 
               recordings.map((r)=> {
-                console.log(r.created_at)
               let dateAndTime = formatDate(r.created_at) + " " + formatTime(r.created_at);
                 normalizedData.push({
                   title: r.title,
@@ -131,13 +129,14 @@ export default function Mood() {
         <div id="moods_container">
               <h2>Moods</h2>
               <ResponsiveContainer width="100%" height={400}>
-              <BarChart    data={renderDataForGraph()}>
+              <BarChart    data={renderDataForGraph()} barSize={60}>
                   <YAxis stroke="white" /> 
                   <XAxis dataKey="date" stroke="white" /> 
                   {/* <Tooltip /> */}
                 <Bar dataKey="uv" 
                   fill="#ef4b4c"
                   label dataKey='mood'
+                  radius={10}
                   />
                 <Label value="mood" dataKey="mood" position="insideRight" />
               </BarChart>

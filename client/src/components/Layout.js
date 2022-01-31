@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import {Button, Container, Nav, NavDropdown} from 'react-bootstrap'
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
-import {VocalNavbar, PrimaryColor, SecondaryColor, ActionColor, VocalButton, SmallButton} from '../components/Styles.js'
+import {VocalNavbar, VocalButton, SmallButton} from '../components/Styles.js'
 import VocalFooter from './VocalFooter';
 import VOCAL from "../images/VOCAL.jpg";
 import avatar from "../images/avatar.jpeg";
@@ -10,7 +10,7 @@ import avatar from "../images/avatar.jpeg";
 const Layout = () => {
   const navigate = useNavigate();
 
-  const {authenticated, handleLogout, image} = useContext(AuthContext);
+  const {authenticated, handleLogout, image, nickname} = useContext(AuthContext);
 
   const renderUILinks =()=>{
     if(authenticated){
@@ -28,7 +28,7 @@ const Layout = () => {
           <Nav>
            {image && <img src={image} alt="User Avatar" style={{height:"2.8rem", borderRadius:"1.4rem", border:".13rem solid #FFFF"}}/>}
            {!image && <img src={avatar} alt="User Avatar" style={{height:"2.8rem", borderRadius:"1.4rem", border:".13rem solid #FFFF"}}/>}
-            <NavDropdown onSelect = {handleSelect} style={{marginRight:"1.5rem"}} id = "navdropdown-arrow" title = {<span className="navdropdown-title">User</span>}>
+          <NavDropdown onSelect = {handleSelect} style={{marginRight:"1.5rem"}} id = "navdropdown-arrow" title = {<span className="navdropdown-title">{nickname}</span>}>
               <NavDropdown.Item eventKey = "/profile">Profile</NavDropdown.Item>
               <NavDropdown.Item onClick={()=>handleLogout(navigate)}>Logout</NavDropdown.Item>
             </NavDropdown>

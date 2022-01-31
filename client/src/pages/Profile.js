@@ -7,6 +7,7 @@ import { Container } from "react-bootstrap";
 import UserImage from "../components/UserImage";
 import { PrimaryColor, VocalButton, UpdateButton } from "../components/Styles";
 import DeleteUserModal from "../components/DeleteUserModal";
+import UpdateUser from "../components/UpdateUser";
 
 const Profile = (props) => {
   const [showForm, setShowForm] = useState(false);
@@ -14,7 +15,7 @@ const Profile = (props) => {
   const [users, setUsers] = useState([]);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-  const { id, email, password, handleUpdateUser, image } =
+  const { id, email, password, handleUpdateUser, image, nickname } =
     useContext(AuthContext);
 
   useEffect(() => {
@@ -46,24 +47,25 @@ const Profile = (props) => {
     window.location.reload(false);
   }
 
+  console.log(nickname)
   return (
     <div style={{backgroundColor: "white", height:"auto",marginLeft:"8rem", marginRight:"8rem", marginTop:"5rem", marginBottom:"5rem", borderRadius:"1.5rem", padding:"2rem"}} key={props.id}>
       <h1 style={{marginBottom: "2rem", marginLeft: "4rem", marginTop:"2rem", color:`${PrimaryColor}` }}>My Profile</h1>
       <div style={{display:"flex", justifyContent:"center", marginTop:"2rem"}}>
-        {image && <img style={{ width: "20rem", borderRadius:"5rem"}} src={image} />}
+        {image && <img style={{ width: "20rem", borderRadius:"10rem"}} src={image} />}
       </div>
       <div style={{display:"flex", justifyContent:"center"}}>
           {showUpload && <UserImage toggleUpload={toggleUpload} />}
           {!showUpload && (
             <VocalButton style={{margin:"1rem"}} onClick={toggleUpload}>
-              Change Profile Picture
+              {image ? "Change Profile Picture" : "Add Profile Picture"} 
             </VocalButton>
           )}
       </div>
       <br />
       <div>
-        <p className="profile-label">Name</p>
-        <p className="profile-input">pull name in here</p>
+        <p className="profile-label">Nickname</p>
+        <p className="profile-input">{nickname}</p>
         <p className="profile-label">Email</p>
         <p className="profile-input">{email}</p>
         <p className="profile-label">Password</p>
@@ -73,10 +75,11 @@ const Profile = (props) => {
           {showForm ? "Cancel" : "Update User"}
         </UpdateButton>
         {showForm && (
-          <UserForm
+          <UpdateUser
             id={id}
             email={email}
             password={password}
+            nickname={nickname}
             handleUpdateUser={handleUpdateUser}
             toggleForm={toggleForm}
           />

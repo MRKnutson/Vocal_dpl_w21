@@ -9,6 +9,7 @@ import {
   SecondaryColor,
   StatCard,
   StatText,
+  VocalButton,
   VocalHeader,
 } from "../components/Styles.js";
 import {
@@ -22,13 +23,21 @@ import {
   DiscreteColorLegend,
 } from "react-vis";
 import { Chrono } from "react-chrono";
-import logo from "../images/plain_logo.jpg";
+import one from "../images/1smiley.png";
+import two from "../images/2smiley.png";
+import three from "../images/3smiley.png";
+import four from "../images/4smiley.png";
+import five from "../images/5smiley.png";
+import DailyLogModal from "../components/DailyLogModal.js";
 
 const Activities = () => {
   const [useCanvas, setUseCanvas] = useState(false);
   const [recordings, setRecordings] = useState([]);
   const [logData, setLogData] = useState([]);
   const [photos, setPhotos] = useState([]);
+  const [recordingShow, setRecordingShow] = useState(false);
+  const [recording, setRecording] = useState(null);
+  const [recordingPhotos, setRecordingPhotos] = useState(null);
 
   useEffect(() => {
     getRecordings();
@@ -234,99 +243,170 @@ const Activities = () => {
           // console.log(photo)
           let time = formatTime(recording.created_at);
           let length = (recording.duration / 60).toFixed(2);
-          if (photo) {
-            return {
-              title: `${time}`,
-              cardTitle: recording.title,
-              cardSubtitle: `Length: ${length} minutes`,
-              cardDetailedText: `Notes: ${recording.notes}`,
-              media: {
-                name: "Recording Photo",
-                source: { url: photo.pointer },
-                type: "IMAGE",
-              },
-            };
+          if (filteredPhotos.length > 0) {
+            let renderPhotos = filteredPhotos.map((photo) => {
+              return (
+                <img
+                  src={photo.pointer}
+                  style={{ maxHeight: "5rem", margin: "0.35rem" }}
+                />
+              );
+            });
+            return (
+              <div>
+                <h3>{recording.title}</h3>
+                <p>Length: {length} minutes</p>
+                <p>Mood: {moodImage(recording.mood)}</p>
+                <p>Notes: {recording.notes}</p>
+                <audio
+                  src={recording.pointer}
+                  controls
+                  style={{ height: "2rem", margin: "auto" }}
+                />
+                <br />
+                {renderPhotos}
+                <br />
+                <VocalButton
+                  onClick={() => handleModal(recording, filteredPhotos)}
+                >
+                  View Recording
+                </VocalButton>
+              </div>
+            );
           } else {
-            return {
-              title: `${time}`,
-              cardTitle: recording.title,
-              cardSubtitle: `Length: ${length} minutes`,
-              cardDetailedText: `Notes: ${recording.notes}`,
-            };
+            return (
+              <div>
+                <h3>{recording.title}</h3>
+                <p>Length: {length} minutes</p>
+                <p>Mood: {moodImage(recording.mood)}</p>
+                <p>Notes: {recording.notes}</p>
+                <audio
+                  src={recording.pointer}
+                  controls
+                  style={{ height: "2rem", margin: "auto" }}
+                />
+                <VocalButton
+                  onClick={() => handleModal(recording, filteredPhotos)}
+                >
+                  View Recording
+                </VocalButton>
+              </div>
+            );
           }
         } else {
-          let time = formatTime(recording.created_at);
           let length = recording.duration.toFixed(0);
-          return {
-            title: `${time}`,
-            cardTitle: recording.title,
-            cardSubtitle: `Length: ${length} minutes`,
-            cardDetailedText: `Notes: ${recording.notes}`,
-          };
+          return (
+            <div>
+              <h3>{recording.title}</h3>
+              <p>Length: {length} minutes</p>
+              <p>Mood: {moodImage(recording.mood)}</p>
+              <p>Notes: {recording.notes}</p>
+              <audio
+                src={recording.pointer}
+                controls
+                style={{ height: "2rem", margin: "auto" }}
+              />
+              <br />
+              <VocalButton onClick={() => handleModal(recording)}>
+                View Recording
+              </VocalButton>
+            </div>
+          );
         }
       });
     }
   };
 
-  const normalizeLogsData2 = () => {
+  const LogTitles = () => {
     if (logData.length > 0) {
       return logData.map((recording) => {
-        if (photos && photos.length > 0) {
-          // console.log(recording)
-          // console.log(photos)
-          let filteredPhotos = photos.filter(
-            (p) => p.recording_id == recording.id
-          );
-          let photo = filteredPhotos[0];
-          // console.log(photo)
-          let time = formatTime(recording.created_at);
-          let length = (recording.duration / 60).toFixed(2);
-          if (photo) {
-            return (
-              <div>
-                <p>{recording.title}</p>
-              </div>
-            );
-            // {
-            //   title: `${time}`,
-            //   cardTitle: recording.title,
-            //   cardSubtitle: `Length: ${length} minutes`,
-            //   cardDetailedText: `Notes: ${recording.notes}`,
-            //   media: {
-            //     name: "Recording Photo",
-            //     source: { url: photo.pointer },
-            //     type: "IMAGE",
-            //   },
-            // };
-          } else {
-            return (
-              <div>
-                <p>{recording.title}</p>
-              </div>
-            );
-            // {
-            //   title: `${time}`,
-            //   cardTitle: recording.title,
-            //   cardSubtitle: `Length: ${length} minutes`,
-            //   cardDetailedText: `Notes: ${recording.notes}`,
-            // };
-          }
-        } else {
-          let time = formatTime(recording.created_at);
-          let length = recording.duration.toFixed(0);
-          return (
-            <div>
-              <p>{recording.title}</p>
-            </div>
-          );
-          // {
-          //   title: `${time}`,
-          //   cardTitle: recording.title,
-          //   cardSubtitle: `Length: ${length} minutes`,
-          //   cardDetailedText: `Notes: ${recording.notes}`,
-          // };
-        }
+        let time = formatTime(recording.created_at);
+        return {
+          title: `${time}`,
+        };
       });
+    }
+  };
+
+  const handleModal = (singleRecording, filteredPhotos) => {
+    setRecording(singleRecording);
+    setRecordingPhotos(filteredPhotos);
+    setRecordingShow(true);
+  };
+
+  const displayModal = (singleRecording) => {
+    return (
+      <DailyLogModal
+        recording={singleRecording}
+        show={recordingShow}
+        setShow={setRecordingShow}
+        formatDate={formatDate}
+        formatTime={formatTime}
+        images={recordingPhotos}
+      />
+    );
+  };
+
+  const moodImage = (mood) => {
+    if (mood == 1) {
+      return (
+        <img
+          style={{
+            height: "3rem",
+            borderRadius: "1.5rem",
+            marginRight: ".5rem",
+          }}
+          src={one}
+        />
+      );
+    }
+    if (mood == 2) {
+      return (
+        <img
+          style={{
+            height: "3rem",
+            borderRadius: "1.5rem",
+            marginRight: ".5rem",
+          }}
+          src={two}
+        />
+      );
+    }
+    if (mood == 3) {
+      return (
+        <img
+          style={{
+            height: "3rem",
+            borderRadius: "1.5rem",
+            marginRight: ".5rem",
+          }}
+          src={three}
+        />
+      );
+    }
+    if (mood == 4) {
+      return (
+        <img
+          style={{
+            height: "3rem",
+            borderRadius: "1.5rem",
+            marginRight: ".5rem",
+          }}
+          src={four}
+        />
+      );
+    }
+    if (mood == 5) {
+      return (
+        <img
+          style={{
+            height: "3rem",
+            borderRadius: "1.5rem",
+            marginRight: ".5rem",
+          }}
+          src={five}
+        />
+      );
     }
   };
 
@@ -533,7 +613,7 @@ const Activities = () => {
             <Chrono
               hideControls
               cardPositionHorizontal='Bottom'
-              // items={normalizeLogsData()}
+              items={LogTitles()}
               mode='HORIZONTAL'
               theme={{
                 primary: `white`,
@@ -543,11 +623,12 @@ const Activities = () => {
                 titleColor: `white`,
               }}
             >
-              {normalizeLogsData2()}
+              {normalizeLogsData()}
             </Chrono>
           </div>
         </GraphCard>
       )}
+      {recordingShow && displayModal(recording)}
     </Container>
   );
 };

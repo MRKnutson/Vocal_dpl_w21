@@ -8,6 +8,7 @@ import UserImage from "../components/UserImage";
 import { PrimaryColor, VocalButton, UpdateButton } from "../components/Styles";
 import DeleteUserModal from "../components/DeleteUserModal";
 import UpdateUser from "../components/UpdateUser";
+import avatar from "../images/avatar.jpeg"
 
 const Profile = (props) => {
   const [showForm, setShowForm] = useState(false);
@@ -53,6 +54,7 @@ const Profile = (props) => {
       <h1 style={{marginBottom: "2rem", marginLeft: "4rem", marginTop:"2rem", color:`${PrimaryColor}` }}>My Profile</h1>
       <div style={{display:"flex", justifyContent:"center", marginTop:"2rem"}}>
         {image && <img style={{ width: "20rem", borderRadius:"10rem"}} src={image} />}
+        {!image && <img style={{ width: "20rem", borderRadius:"10rem"}} src={avatar} />}
       </div>
       <div style={{display:"flex", justifyContent:"center"}}>
           {showUpload && <UserImage toggleUpload={toggleUpload} />}
@@ -64,15 +66,14 @@ const Profile = (props) => {
       </div>
       <br />
       <div>
-        <p className="profile-label">Nickname</p>
-        <p className="profile-input">{nickname}</p>
+        {nickname && <><p className="profile-label">Nickname</p><p className="profile-input">{nickname}</p></>}
         <p className="profile-label">Email</p>
         <p className="profile-input">{email}</p>
         <p className="profile-label">Password</p>
         <p className="profile-input">******</p>
         <div style={{display:"flex", justifyContent:"right"}}>
         <UpdateButton style={{ marginRight: "1rem"}} onClick={toggleForm}>
-          {showForm ? "Cancel" : "Update User"}
+          {showForm ? "Cancel" : "Update Info"}
         </UpdateButton>
         {showForm && (
           <UpdateUser

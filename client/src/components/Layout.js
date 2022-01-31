@@ -28,10 +28,14 @@ const Layout = () => {
           <Nav>
            {image && <img src={image} alt="User Avatar" style={{height:"2.8rem", borderRadius:"1.4rem", border:".13rem solid #FFFF"}}/>}
            {!image && <img src={avatar} alt="User Avatar" style={{height:"2.8rem", borderRadius:"1.4rem", border:".13rem solid #FFFF"}}/>}
-          <NavDropdown onSelect = {handleSelect} style={{marginRight:"1.5rem"}} id = "navdropdown-arrow" title = {<span className="navdropdown-title">{nickname}</span>}>
+          {nickname && <NavDropdown onSelect = {handleSelect} style={{marginRight:"1.5rem"}} id = "navdropdown-arrow" title = {<span className="navdropdown-title">{nickname}</span>}>
               <NavDropdown.Item eventKey = "/profile">Profile</NavDropdown.Item>
               <NavDropdown.Item onClick={()=>handleLogout(navigate)}>Logout</NavDropdown.Item>
-            </NavDropdown>
+            </NavDropdown>}
+            {!nickname && <NavDropdown onSelect = {handleSelect} style={{marginRight:"1.5rem"}} id = "navdropdown-arrow" title = {<span className="navdropdown-title">User</span>}>
+              <NavDropdown.Item eventKey = "/profile">Profile</NavDropdown.Item>
+              <NavDropdown.Item onClick={()=>handleLogout(navigate)}>Logout</NavDropdown.Item>
+            </NavDropdown>}
           </Nav>
         </>
       )

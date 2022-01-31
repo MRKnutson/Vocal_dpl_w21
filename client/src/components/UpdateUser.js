@@ -2,7 +2,7 @@
 import React, {useState} from "react";
 import axios from "axios";
 import {Form, Modal} from 'react-bootstrap'
-import { SecondaryColor, VocalButton } from "../components/Styles";
+import { SecondaryColor, ViewButton } from "../components/Styles";
 
 const UpdateUser = (props) => {
     const {newestUser, id, handleUpdateUser, email:initialEmail, password:initialPassword, toggleForm, nickname:initialNickname} = props
@@ -26,9 +26,9 @@ const UpdateUser = (props) => {
     };
   
     return (
-    <Modal backdrop='static' size='lg' keyboard={false} show={true} style={{backgroundColor:`${SecondaryColor}`, borderRadius:"1.5rem"}}>
+    <Modal backdrop='static' size='lg' keyboard={false} centered={true} show={true}>
+        <Modal.Body style={{backgroundColor: `${SecondaryColor}`, color: "white", padding: "2rem", borderRadius: "1.5rem"}}>
       <h1 style={{color:"white"}}>{id ? "Update" : "New"}</h1>
-        <Modal.Body>
         <Form onSubmit={handleSubmit}>
           <Form.Label style={{color:"white"}}>Nickname:</Form.Label>
           <Form.Control value = {nicknameState} onChange = {(e) => setNicknameState(e.target.value)}/>
@@ -37,8 +37,8 @@ const UpdateUser = (props) => {
           <Form.Label style={{color:"white"}}>Password:</Form.Label>
           <Form.Control value = {passwordState} onChange = {(e) => setPasswordState(e.target.value)}/>
          <br/>
-          <VocalButton type = "submit">{id ? "Update" : "Create"}</VocalButton>
-          <VocalButton onClick={toggleForm}>Cancel</VocalButton>
+          <ViewButton style={{marginRight:"1rem"}} type = "submit">{id ? "Update" : "Create"}</ViewButton>
+          <ViewButton onClick={toggleForm}>Cancel</ViewButton>
         </Form>
         </Modal.Body>
     </Modal>

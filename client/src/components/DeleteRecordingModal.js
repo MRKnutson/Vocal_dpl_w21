@@ -32,7 +32,7 @@ const DeleteRecordingModal = (props) => {
           undone.
         </Modal.Header>
         <Modal.Footer>
-          <ViewButton onClick={handleClose}>Cancel Delete</ViewButton>
+          <ViewButton onClick={handleClose}>Cancel</ViewButton>
           <ViewButton onClick={(e) => {
             deleteRecording(recording.id, e)
           }}>

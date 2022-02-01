@@ -29,6 +29,9 @@ import two from "../images/2smiley.png";
 import three from "../images/3smiley.png";
 import four from "../images/4smiley.png";
 import five from "../images/5smiley.png";
+import ClockActivity from "../images/ClockActivity.png";
+import Stopwatch from "../images/Stopwatch.png";
+import Lightbulb from "../images/Lightbulb.png";
 import DailyLogModal from "../components/DailyLogModal.js";
 
 const Activities = () => {
@@ -249,7 +252,11 @@ const Activities = () => {
               return (
                 <img
                   src={photo.pointer}
-                  style={{ maxHeight: "5rem", marginBottom: ".35rem", float:"center" }}
+                  style={{
+                    maxHeight: "5rem",
+                    marginBottom: ".35rem",
+                    float: "center",
+                  }}
                 />
               );
             });
@@ -431,7 +438,7 @@ const Activities = () => {
             <StatCard>
               <Card.Img
                 variant='top'
-                src='https://static.vecteezy.com/system/resources/previews/001/200/448/non_2x/clock-png.png'
+                src={Lightbulb}
                 style={{
                   display: "block",
                   maxWidth: "7rem",
@@ -453,7 +460,7 @@ const Activities = () => {
             >
               <Card.Img
                 variant='top'
-                src='https://static.vecteezy.com/system/resources/previews/001/200/448/non_2x/clock-png.png'
+                src={Stopwatch}
                 style={{
                   display: "block",
                   maxWidth: "7rem",
@@ -475,7 +482,7 @@ const Activities = () => {
             >
               <Card.Img
                 variant='top'
-                src='https://static.vecteezy.com/system/resources/previews/001/200/448/non_2x/clock-png.png'
+                src={ClockActivity}
                 style={{
                   display: "block",
                   maxWidth: "7rem",
@@ -520,7 +527,7 @@ const Activities = () => {
         {recordingShow && displayModal(recording)}
         <GraphCard style={{ marginBottom: "3rem" }}>
           <h2 style={{ margin: "3rem" }}>Annual Activity</h2>
-          <div style={{ width: "100%", height: 500, marginBottom: "50px" }}>
+          <div style={{ width: "100%", height: "20rem", marginBottom: "50px" }}>
             {/* to work on this calendar use: https://nivo.rocks/calendar/ */}
             <ResponsiveCalendar
               isInteractive={false}
@@ -532,10 +539,12 @@ const Activities = () => {
               colors={["#61cdbb", "#97e3d5", "#e8c1a0", "#f47560"]}
               theme={{
                 textColor: "white",
+                fontSize: "1rem",
                 backgroundColor: `${PrimaryColor}`,
               }}
               margin={{ top: 40, right: 40, bottom: 40, left: 40 }}
               yearSpacing={40}
+              // monthSpacing={10}
               monthBorderColor={SecondaryColor}
               dayBorderWidth={2}
               dayBorderColor={SecondaryColor}
@@ -581,6 +590,7 @@ const Activities = () => {
                           height: "3rem",
                           borderRadius: "1.5rem",
                           marginRight: ".5rem",
+                          marginBottom: "0.25rem",
                         }}
                         src={one}
                       />
@@ -594,6 +604,7 @@ const Activities = () => {
                           height: "3rem",
                           borderRadius: "1.5rem",
                           marginRight: ".5rem",
+                          marginBottom: "0.25rem",
                         }}
                         src={two}
                       />
@@ -607,6 +618,7 @@ const Activities = () => {
                           height: "3rem",
                           borderRadius: "1.5rem",
                           marginRight: ".5rem",
+                          marginBottom: "0.25rem",
                         }}
                         src={three}
                       />
@@ -620,6 +632,7 @@ const Activities = () => {
                           height: "3rem",
                           borderRadius: "1.5rem",
                           marginRight: ".5rem",
+                          marginBottom: "0.25rem",
                         }}
                         src={four}
                       />
@@ -633,6 +646,7 @@ const Activities = () => {
                           height: "3rem",
                           borderRadius: "1.5rem",
                           marginRight: ".5rem",
+                          marginBottom: "0.25rem",
                         }}
                         src={five}
                       />
@@ -644,15 +658,18 @@ const Activities = () => {
               <VerticalGridLines />
               <HorizontalGridLines />
               <XAxis
+                // hideTicks
                 title='Month'
+                tickSize={0}
                 style={{
                   line: { stroke: "gray" },
-                  text: { fill: "white" },
+                  text: { stroke: "none", fill: "white" },
                   title: { fill: "white" },
                 }}
               />
               <YAxis
                 title='Number of Entries'
+                tickSize={0}
                 style={{
                   line: { stroke: "gray" },
                   ticks: { stroke: "#ADDDE1" },

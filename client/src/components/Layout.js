@@ -26,8 +26,8 @@ const Layout = () => {
             </Nav>
           </Container>
           <Nav>
-           {image && <img src={image} alt="User Avatar" style={{height:"2.8rem", borderRadius:"1.4rem", border:".13rem solid #FFFF"}}/>}
-           {!image && <img src={avatar} alt="User Avatar" style={{height:"2.8rem", borderRadius:"1.4rem", border:".13rem solid #FFFF"}}/>}
+           {image && <img src={image} alt="User Avatar" style={{height:"2.8rem",width:"2.8rem", borderRadius:"1.4rem", border:".13rem solid #FFFF"}}/>}
+           {!image && <img src={avatar} alt="User Avatar" style={{height:"2.8rem", width:"2.8rem", borderRadius:"1.4rem", border:".13rem solid #FFFF"}}/>}
           {nickname && <NavDropdown onSelect = {handleSelect} style={{marginRight:"1.5rem"}} id = "navdropdown-arrow" title = {<span className="navdropdown-title">{nickname}</span>}>
               <NavDropdown.Item eventKey = "/profile">Profile</NavDropdown.Item>
               <NavDropdown.Item onClick={()=>handleLogout(navigate)}>Logout</NavDropdown.Item>
@@ -55,7 +55,7 @@ const Layout = () => {
 
   return(
     <>
-      <VocalNavbar style={{borderBottom:".18rem solid #FFFF"}}expand = "md">
+      <VocalNavbar className="navbar-dark" style={{borderBottom:".18rem solid #FFFF"}}expand = "md">
         <Container fluid>
           <VocalNavbar.Brand href="/">
             <img style={{height:"4rem"}} src={VOCAL} alt="Vocal Logo"/>

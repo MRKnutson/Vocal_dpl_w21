@@ -7,12 +7,13 @@ import {
   ActionColor,
   VocalHeader,
 } from "../components/Styles.js";
+import AsherPic from '../images/AsherPic.jpg'
 
 const programmers = [
   {
     name: "Asher Bay",
     image:
-      "https://res.cloudinary.com/djhlv2nfc/image/upload/c_crop,h_532,w_532/v1642617032/Vocal/Images/8AFD60E2-3407-4C00-B399-4F89AB22B67F-1000_gin2ew.jpg",
+      AsherPic,
     GitHub: "https://github.com/MRKnutson/",
     LinkedIn: "www.linkedin.com/in/michaelrknutson",
     email: "mrknutson44@gmail.com",

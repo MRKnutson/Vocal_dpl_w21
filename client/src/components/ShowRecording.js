@@ -171,13 +171,14 @@ const ShowRecording = (props) => {
       keyboard={false}
       size='lg'
       centered={true}
+      focus={true}
     >
       <Modal.Body
         style={{
           backgroundColor: `${SecondaryColor}`,
           color: "white",
           padding: "2rem",
-          borderRadius: "1.5rem",
+          borderRadius: "1.5rem"
         }}
       >
         {!showEdit && <ViewButton onClick={handleClose}>Close</ViewButton>}

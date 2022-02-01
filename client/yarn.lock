@@ -2799,7 +2799,6 @@ automation-events@^4.0.12:
     "@babel/runtime" "^7.16.7"
     tslib "^2.3.1"
 
-
 autoprefixer@^10.4.2:
   version "10.4.2"
   resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-10.4.2.tgz#25e1df09a31a9fba5c40b578936b90d35c9d4d3b"

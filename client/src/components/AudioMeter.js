@@ -10,6 +10,7 @@ const AudioMeter = () => {
     const mic = new Tone.UserMedia().connect(meter)
 
     useEffect(()=>{
+        Tone.start()
         mic.open().then(() => {
         console.log("mic open")
         setIntervalId(setInterval(() => setLevel(meter.getValue()), 25))

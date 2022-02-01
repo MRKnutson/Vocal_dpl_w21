@@ -23,7 +23,7 @@ const AudioMeter = () => {
     
     return (
         <div style={{display: "inline"}}>
-            <LinearProgress sx={{ height: "50px", transform: "rotate(270deg) translate(320px, 225px)" }} variant="determinate" value={Math.pow(level, 0.2) * 120}/>
+            <LinearProgress sx={{backgroundColor:`${ActionColor}`,height: "50px", transform: "rotate(270deg) translate(320px, 225px)" }} variant="determinate" value={Math.pow(level, 0.2) * 120}/>
         </div>
     )
 }

@@ -14,6 +14,11 @@ import axios from "axios";
 import ShowImage from "../components/ShowImage";
 import EditRecordingForm from "./EditRecodingForm";
 import DeleteRecordingModal from "./DeleteRecordingModal";
+import one from "../images/1smiley.png"
+import two from "../images/2smiley.png"
+import three from "../images/3smiley.png"
+import four from "../images/4smiley.png"
+import five from "../images/5smiley.png"
 
 const ShowRecording = (props) => {
   const {
@@ -26,6 +31,7 @@ const ShowRecording = (props) => {
     setRecordings,
     tags,
     getData,
+    mood,
   } = props;
 
   const [recording, setRecording] = useState(props.recording);
@@ -143,6 +149,21 @@ const ShowRecording = (props) => {
     
   };
 
+  const moodImage=()=> {
+    if (recording.mood==1){
+      return <img style={{height:"2.8rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={one}/>
+    } if (recording.mood==2) {
+      return <img style={{height:"2.8rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={two}/>
+    } if (recording.mood==3) {
+      return <img style={{height:"2.8rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={three}/>
+    } if (recording.mood==4) {
+      return <img style={{height:"2.8rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={four}/>
+    } if (recording.mood==5) {
+      return <img style={{height:"2.8rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={five}/>
+    }
+  };
+
+
   return (
     <Modal
       show={1}
@@ -184,6 +205,8 @@ const ShowRecording = (props) => {
           {!showEdit && (
             <p>Tags: {props.tags.map((t) => t.tag_text).join(", ")}</p>
           )}
+          {!showEdit && <h6>Mood: </h6>}
+          {!showEdit && <p style={{ marginLeft: "20px" }}>{moodImage()}</p>}
           {images && renderImages()}
           <br />
           <audio

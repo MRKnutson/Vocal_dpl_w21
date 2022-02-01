@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
-import { Form } from 'react-bootstrap';
+import { Form, Modal } from 'react-bootstrap';
 import { VocalButton } from './Styles';
 import EditTags from './EditTags'
 import ShowImage from "./ShowImage.js";
@@ -9,7 +9,9 @@ import two from "../images/2smiley.png";
 import three from "../images/3smiley.png";
 import four from "../images/4smiley.png";
 import five from "../images/5smiley.png";
-const EditRecordingForm = (props)=> {
+
+
+const EditRecordingModal = (props)=> {
 
   const {showEdit, setShowEdit, recording, setRecording, recordings, setRecordings, getData} = props
   const [title, setTitle] = useState(props.recording.title)
@@ -17,6 +19,17 @@ const EditRecordingForm = (props)=> {
   const [mood, setMood] = useState(props.recording.mood)
   const [tags, setTags] = useState(props.tags)
   const [allTags, setAllTags] = useState([])
+  const [recording, setRecording] = useState(props.recording);
+  const [image, setImage] = useState(null);
+  const [showUpload, setShowUpload] = useState(false);
+  const [showImageModal, setShowImageModal] = useState(false);
+  const [showEdit, setShowEdit] = useState(false);
+  const [modalImage, setModalImage] = useState(null);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+  const toggleUpload = () => {
+    setShowUpload(!showUpload);
+  };
 
   useEffect(()=>{
     getAllTags()
@@ -87,16 +100,27 @@ const EditRecordingForm = (props)=> {
     }
 
   return(
-    <Form onSubmit = {handleSubmit}>
-      <Form.Group className = "mb-3">
-        <Form.Label>Title</Form.Label>
-        <Form.Control defaultValue = {title} maxLength={55} onChange = {(e)=>setTitle(e.target.value)}/>
-      </Form.Group>
-      <Form.Group className = "mb-3">
-        <Form.Label>Notes</Form.Label>
-        <Form.Control as="textarea" maxLength={255} defaultValue = {notes} onChange = {(e)=>setNotes(e.target.value)}/>
-      </Form.Group>
-      <Form.Group>
+      <Modal show={1}
+      backdrop='static'
+      keyboard={false}
+      size='lg'
+      centered={true}
+      onHide={handleClose}>
+        <Modal.Body style={{
+          backgroundColor: `${SecondaryColor}`,
+          color: "white",
+          padding: "2rem",
+          borderRadius: "1.5rem"}}>
+            <Form onSubmit = {handleSubmit}>
+                <Form.Group className = "mb-3">
+                    <Form.Label>Title</Form.Label>
+                    <Form.Control defaultValue = {title} maxLength={55} onChange = {(e)=>setTitle(e.target.value)}/>
+                </Form.Group>
+                <Form.Group className = "mb-3">
+                    <Form.Label>Notes</Form.Label>
+                    <Form.Control as="textarea" maxLength={255} defaultValue = {notes} onChange = {(e)=>setNotes(e.target.value)}/>
+                </Form.Group>
+                <Form.Group>
               <br/>
               <div
                 className='mood-div'
@@ -176,9 +200,15 @@ const EditRecordingForm = (props)=> {
                 <br/>
       </Form.Group>
       <EditTags selectTags={setTags} chosenTags={tags}/>
+      <ViewButton style={{ marginRight: "1rem" }} onClick={toggleUpload}>
+                Add Image
+              </ViewButton>
       <VocalButton type = "submit">Submit Changes</VocalButton>
+      <ViewButton onClick={handleClose}>Cancel</ViewButton>
     </Form>
+    </Modal.Body>
+    </Modal>
   )
 };
 
-export default EditRecordingForm;
+export default EditRecordingModal;

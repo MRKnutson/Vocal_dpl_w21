@@ -1,8 +1,3 @@
-/* @font-face {
-  font-family: "Raleway";
-  src: local(RaleyWay-Medium),
-    url("./fonts/Raleway-Medium.ttf") format ("truetype");
-} */
 * {
   font-family: raleway, sans-serif !important;
 }
@@ -125,9 +120,13 @@ hr.solid {
   color: #2a3950;
 }
 
-/* .MuiLinearProgress-bar
-  .MuiLinearProgress-barColorPrimary
-  .MuiLinearProgress-bar1Determinate
-  .css-5xe99f-MuiLinearProgress-bar1 {
-  background-color: "white";
-} */
+.navbar-collapse {
+  background-color: #3e619b;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
+    rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
+    rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  padding: 2rem;
+  z-index: 9999;
+  border-radius: 1.5rem;
+  width: 10rem;
+}

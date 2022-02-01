@@ -249,7 +249,7 @@ const Activities = () => {
               return (
                 <img
                   src={photo.pointer}
-                  style={{ maxHeight: "5rem", margin: "0.35rem" }}
+                  style={{ maxHeight: "5rem", marginBottom: ".35rem", float:"center" }}
                 />
               );
             });
@@ -259,14 +259,14 @@ const Activities = () => {
                 <p>Length: {length} minutes</p>
                 <p>Mood: {moodImage(recording.mood)}</p>
                 <p>Notes: {recording.notes}</p>
-                <audio
-                  src={recording.pointer}
-                  controls
-                  style={{ height: "2rem", margin: "auto" }}
-                />
                 <br />
                 {renderPhotos}
                 <br />
+                <audio
+                  src={recording.pointer}
+                  controls
+                  style={{ height: "2rem", marginTop: "1rem" }}
+                />
                 {/* <VocalButton
                   onClick={() => handleModal(recording, filteredPhotos)}
                 >
@@ -495,7 +495,7 @@ const Activities = () => {
 
         {logData.length > 1 && (
           <GraphCard>
-            <h2 style={{ margin: "1.5rem" }}>Daily Log</h2>
+            <h2 style={{ margin: "3rem" }}>Daily Log</h2>
             <div
               style={{ height: "500px", width: "100%", paddingTop: "1.5rem" }}
             >
@@ -519,7 +519,7 @@ const Activities = () => {
         )}
         {recordingShow && displayModal(recording)}
         <GraphCard style={{ marginBottom: "3rem" }}>
-          <h2 style={{ margin: "1.5rem" }}>Annual Activity</h2>
+          <h2 style={{ margin: "3rem" }}>Annual Activity</h2>
           <div style={{ width: "100%", height: 500, marginBottom: "50px" }}>
             {/* to work on this calendar use: https://nivo.rocks/calendar/ */}
             <ResponsiveCalendar
@@ -555,7 +555,7 @@ const Activities = () => {
           </div>
         </GraphCard>
         <GraphCard style={{ paddingBottom: "75px" }}>
-          <h2 style={{ margin: "1.5rem" }}>Entries by Mood</h2>
+          <h2 style={{ margin: "3rem" }}>Entries by Mood</h2>
           <div style={{ marginRight: "5rem" }}>
             <FlexibleWidthXYPlot
               yDomain={[0, 32]}

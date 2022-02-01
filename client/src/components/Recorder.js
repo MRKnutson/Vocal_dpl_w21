@@ -14,6 +14,7 @@ import {
     ViewButton,
   } from "./Styles";
 import AudioMeter from './AudioMeter'
+import * as Tone from 'tone'
 
 function Recorder() {
     const nav = useNavigate()
@@ -152,6 +153,7 @@ function Recorder() {
                     setSecondsElapsed(0);
                     setDuration("0:00");
                     startRecording();
+                    Tone.start()
                 } } disabled={isRecording}>
                       <img className="record-button" src={microphone} style={{ height: "5rem", borderRadius:"2.5rem" }}/>
                   </button>

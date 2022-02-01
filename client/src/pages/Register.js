@@ -9,6 +9,7 @@ const Register = () => {
   const [show, setShow] = useState(false);
   const target = useRef(null);
   const {handleRegister} = useContext(AuthContext);
+  const [nickname, setNickname] = useState(null)
   const [email, setEmail]=useState(null)
   const [password, setPassword]=useState(null)
   const [passwordConfirmation, setPasswordConfirmation]=useState(null);
@@ -21,7 +22,7 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password == passwordConfirmation){
-      handleRegister({email, password}, navigate)  
+      handleRegister({email, password, nickname}, navigate)  
     } else {
       setPassError(['--Passwords do not match, please try again'])
       // setPasswordConfirmation(null);
@@ -30,8 +31,12 @@ const Register = () => {
   
   return (
     <Container>
-      <VocalHeader style={{marginTop:"5rem", marginBottom:"2rem", marginLeft:"4rem"}}>Sign Up</VocalHeader>
+      <VocalHeader style={{marginTop:"5rem", marginBottom:"2rem", marginLeft:"3rem"}}>Sign Up</VocalHeader>
       <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3" onClick={()=> setShow(false)}>
+          <Form.Label style={{color:"white"}} ref={target}>Nickname:</Form.Label>
+          <Form.Control maxLength={20} placeholder="Enter Nickname" onChange = {(e)=>setNickname(e.target.value)}/>
+        </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicEmail" onClick={()=> setShow(false)}>
           <Form.Label style={{color:"white"}} ref={target}>Email Address:</Form.Label>
           <Form.Control type="email" placeholder="Enter Email" onChange = {(e)=>setEmail(e.target.value)}/>

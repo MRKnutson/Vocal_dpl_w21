@@ -10,6 +10,7 @@ import {
   Dropdown,
   DropdownButton,
   Form,
+  Container,
 } from "react-bootstrap";
 import {
   PrimaryColor,
@@ -22,6 +23,7 @@ import Recording from "../components/Recording";
 import SearchBar from "../components/SearchBar";
 import RenderJson from "../components/RenderJson";
 import DropdownChecklist from "../components/DropdownChecklist";
+import { Link } from "react-router-dom";
 
 const Timeline = () => {
   const [recordings, setRecordings] = useState([]);
@@ -36,18 +38,6 @@ const Timeline = () => {
   useEffect(() => {
     getData();
   }, []);
-
-  //   useEffect(() => {
-  //   console.log("chosen: " + chosenTags);
-  // }, [chosenTags]);
-
-  // useEffect(() => {
-  //   console.log("tags: " + tags);
-  // }, [tags]);
-
-  // useEffect(() => {
-  //   console.log("showRecordingID: " + showRecordingID);
-  // }, [showRecordingID]);
 
   const getRecordings = async () => {
     try {
@@ -161,9 +151,19 @@ const Timeline = () => {
 
   return (
     <div>
-      <VocalHeader style={{ margin: "3rem" }}>My Journal Entries</VocalHeader>
-      <div style={{ marginRight: "1rem" }}>
-        <DropdownChecklist
+      <div style={{ marginRight: "8rem"}}>
+        <VocalHeader style={{ marginTop: "5rem", marginLeft:"8rem" }}>My Journal Entries</VocalHeader>
+        {!recordings.length > 0 && (
+          <>
+          <Container style={{display:"flex", justifyContent:"center", marginTop:"10rem"}}>
+          <h3 style={{color:"white"}}>No Recordings Yet....</h3>
+          </Container>
+          <Container style={{display:"flex", justifyContent:"center"}}>
+          <VocalButton><Link style={{color:"white",textDecoration:"none"}} to='/'>Go to Recorder</Link></VocalButton>
+          </Container>
+          </>
+        )}
+        {recordings.length > 0 && (<DropdownChecklist
           tag='Tags'
           setState={setChosenTags}
           selItems={chosenTags}
@@ -171,8 +171,9 @@ const Timeline = () => {
             return t.tag_text;
           })}
         />
+        )}
       </div>
-      <SearchBar input={search} filterRecordings={filterRecordings} />
+      {recordings.length > 0 && (<SearchBar input={search} filterRecordings={filterRecordings} />)}
       {showRecordingID && (
         <ShowRecording
           recording={recordings.find((r) => r.id === showRecordingID)}

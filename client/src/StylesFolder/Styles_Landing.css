@@ -1,17 +1,19 @@
-#landingBody{
+#landingBody {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 9rem;
 }
 
-#signUpButton{
+#signUpButton {
   margin-top: 5vh;
 }
 
-#landingIntro{
-  max-width: 30vw;
+#landingIntro {
+  max-width: 34rem;
   margin-top: 10%;
   text-align: left;
   color: white;
+  font-size: 3rem;
 }

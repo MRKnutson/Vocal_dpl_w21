@@ -7,6 +7,7 @@ import {
   Form,
   DropdownButton,
 } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 //here are our theme colors for the app
@@ -17,8 +18,8 @@ export const HighlightColor = "#6C63FF";
 
 //used in about us page
 export const StatCard = styled(Card)`
-  width: 19.5rem;
-  margin: 1rem;
+  width: 20rem;
+  margin:.5rem;
   border-radius: 0.75rem;
   height: 30rem;
 `;
@@ -29,6 +30,7 @@ export const GraphCard = styled(Card)`
   color: white;
   border-radius: 0.75rem;
   background-color: ${SecondaryColor};
+  margin-bottom:3rem;
 `;
 
 export const StatText = styled(Card.Text)`
@@ -38,6 +40,7 @@ export const StatText = styled(Card.Text)`
 //used in navbar
 export const VocalNavbar = styled(Navbar)`
   background-color: ${PrimaryColor};
+  height:5rem;
 `;
 
 export const VocalButton = styled.button`
@@ -49,6 +52,28 @@ padding:.5rem;
 marginL.5rem;
 &:hover {
   background-color: ${SecondaryColor}
+}
+`;
+
+export const SmallButton = styled.button`
+color:white;
+background-color: ${ActionColor};
+border:none;
+border-radius:.2rem;
+&:hover {
+  background-color: ${SecondaryColor}
+}
+`;
+
+export const UpdateButton = styled.button`
+color:${PrimaryColor};
+background-color: #ebebeb;
+border:none;
+border-radius:.2rem;
+padding:.5rem;
+marginL.5rem;
+&:hover {
+  background-color: #dedede;
 }
 `;
 
@@ -88,5 +113,9 @@ export const RedSelect = styled(Select)`
   }
   & .MuiSelect-select {
     color: white;
-  }
+  },
+  fieldset{
+    border: none !important;
+    outline: none !important;
+}
 `;

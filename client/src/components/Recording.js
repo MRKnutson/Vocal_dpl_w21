@@ -64,15 +64,15 @@ const Recording = (props) => {
 
   const moodImage=()=> {
     if (recording.mood==1){
-      return <img style={{height:"3rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={one}/>
+      return <img style={{height:"2.8rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={one}/>
     } if (recording.mood==2) {
-      return <img style={{height:"3rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={two}/>
+      return <img style={{height:"2.8rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={two}/>
     } if (recording.mood==3) {
-      return <img style={{height:"3rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={three}/>
+      return <img style={{height:"2.8rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={three}/>
     } if (recording.mood==4) {
-      return <img style={{height:"3rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={four}/>
+      return <img style={{height:"2.8rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={four}/>
     } if (recording.mood==5) {
-      return <img style={{height:"3rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={five}/>
+      return <img style={{height:"2.8rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={five}/>
     }
   };
 
@@ -81,7 +81,10 @@ const Recording = (props) => {
       style={{
         backgroundColor: `${SecondaryColor}`,
         borderRadius: "1rem",
-        margin: "1rem",
+        marginRight: "8rem",
+        marginBottom:"1rem",
+        marginLeft: "8rem",
+        marginTop:"1.5rem",
         padding: "2rem",
       }}
     >

@@ -13,6 +13,8 @@ import {
     VocalHeader,
     ViewButton,
   } from "./Styles";
+import AudioMeter from './AudioMeter'
+import * as Tone from 'tone'
 
 function Recorder() {
     const nav = useNavigate()
@@ -127,28 +129,36 @@ function Recorder() {
         {!audioURL ? 
             (isRecording ? 
                 <div style={{}}>
+                
                     <button style={{background:"none", border:"none", marginBottom:"1rem"}} onClick={()=>{
                     clearTimeout(timer)
                     stopRecording() 
                     }} disabled={!isRecording}>
                     <img className="record-button" src={stop} style={{height:"5rem", borderRadius:"2.5rem"}}/>
                     </button>
-                    <div style={{display:"flex"}}>
-                    <VocalHeader>Recording...</VocalHeader>
+                    <AudioMeter />
+                    <div style={{display:"flex", transform: "translate(0px, -50px)"}}>
+                    <VocalHeader style={{}}>Recording...</VocalHeader>
+                    
                     <br/>
+                    
                     <p style={{color:"white", marginLeft:"1rem", fontSize:"2rem"}}>{duration}</p>
                     </div>
                 </div>
             :
             <>
             {recorder ?
+                <div>
                 <button style={{ background: "none", border: "none" }} onClick={() => {
                     setSecondsElapsed(0);
                     setDuration("0:00");
                     startRecording();
+                    Tone.start()
                 } } disabled={isRecording}>
                       <img className="record-button" src={microphone} style={{ height: "5rem", borderRadius:"2.5rem" }}/>
                   </button>
+                {/* <VocalHeader>Click to Record</VocalHeader> */}
+                </div>
             :
                 <h2>Connect microphone to record</h2>
             } 

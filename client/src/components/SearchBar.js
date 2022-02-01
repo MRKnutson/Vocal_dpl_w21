@@ -6,7 +6,7 @@ const SearchBar = ({ keyword, filterRecordings }) => {
       className='search-bar'
       key='random1'
       value={keyword}
-      placeholder={"Title Search"}
+      placeholder={"Search by title..."}
       onChange={(e) => filterRecordings(e.target.value)}
     />
   );

@@ -1,4 +1,12 @@
-/* this is for the links to be happy on the moods page...delete it! */
+/* @font-face {
+  font-family: "Raleway";
+  src: local(RaleyWay-Medium),
+    url("./fonts/Raleway-Medium.ttf") format ("truetype");
+} */
+* {
+  font-family: raleway, sans-serif !important;
+}
+
 .card {
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
@@ -57,10 +65,10 @@
 
 .search-bar {
   border: none;
-  width: 20rem;
+  width: 10rem;
   float: right;
   border-radius: 0.35rem;
-  height: 3.5rem;
+  height: 3rem;
   margin-right: 1.5rem;
   background-color: #ef4b4c;
   color: #ffffff;
@@ -89,4 +97,30 @@
 
 .record-button:focus {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+hr.solid {
+  border-top: 3px solid #bbb;
+}
+
+.how-to {
+  color: #2a3950;
+}
+
+.profile-input {
+  background-color: #ebebeb;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+  padding: 0.5rem;
+  width: auto;
+  border-radius: 0.2rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  margin-bottom: 2rem;
+  color: #2a3950;
+}
+
+.profile-label {
+  margin-left: 1.5rem;
+  margin-right: 2rem;
+  color: #2a3950;
 }

@@ -2,14 +2,15 @@ import React, { useContext } from 'react'
 import {Button, Container, Nav, NavDropdown} from 'react-bootstrap'
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
-import {VocalNavbar, PrimaryColor, SecondaryColor, ActionColor, VocalButton} from '../components/Styles.js'
-import avatar from '../images/avatar.jpeg'
-import logofive from '../images/logo5edited.png'
+import {VocalNavbar, VocalButton, SmallButton} from '../components/Styles.js'
+import VocalFooter from './VocalFooter';
+import VOCAL from "../images/VOCAL.jpg";
+import avatar from "../images/avatar.jpeg";
 
 const Layout = () => {
   const navigate = useNavigate();
 
-  const {authenticated, handleLogout} = useContext(AuthContext);
+  const {authenticated, handleLogout, image, nickname} = useContext(AuthContext);
 
   const renderUILinks =()=>{
     if(authenticated){
@@ -25,11 +26,16 @@ const Layout = () => {
             </Nav>
           </Container>
           <Nav>
-           <img src={avatar} alt="User Avatar" style={{height:"40px", borderRadius:"20px"}}/>
-            <NavDropdown onSelect = {handleSelect} style={{marginRight:"1.5rem"}} id = "navdropdown-arrow" title = {<span className="navdropdown-title">User</span>}>
+           {image && <img src={image} alt="User Avatar" style={{height:"2.8rem", borderRadius:"1.4rem", border:".13rem solid #FFFF"}}/>}
+           {!image && <img src={avatar} alt="User Avatar" style={{height:"2.8rem", borderRadius:"1.4rem", border:".13rem solid #FFFF"}}/>}
+          {nickname && <NavDropdown onSelect = {handleSelect} style={{marginRight:"1.5rem"}} id = "navdropdown-arrow" title = {<span className="navdropdown-title">{nickname}</span>}>
               <NavDropdown.Item eventKey = "/profile">Profile</NavDropdown.Item>
               <NavDropdown.Item onClick={()=>handleLogout(navigate)}>Logout</NavDropdown.Item>
-            </NavDropdown>
+            </NavDropdown>}
+            {!nickname && <NavDropdown onSelect = {handleSelect} style={{marginRight:"1.5rem"}} id = "navdropdown-arrow" title = {<span className="navdropdown-title">User</span>}>
+              <NavDropdown.Item eventKey = "/profile">Profile</NavDropdown.Item>
+              <NavDropdown.Item onClick={()=>handleLogout(navigate)}>Logout</NavDropdown.Item>
+            </NavDropdown>}
           </Nav>
         </>
       )
@@ -37,7 +43,7 @@ const Layout = () => {
       return(
             <Container style ={{display: "flex", justifyContent: "right"}} onSelect = {handleSelect}>
               <VocalButton style={{backgroundColor:"transparent"}}><Nav.Link style={{color:"white"}} href = "/login">Log In</Nav.Link></VocalButton>
-              <VocalButton><Nav.Link style={{color:"white"}} href = "/register">Sign Up</Nav.Link></VocalButton>
+              <SmallButton><Nav.Link style={{color:"white"}} href = "/register">Sign Up</Nav.Link></SmallButton>
             </Container>
       )
     };
@@ -49,10 +55,10 @@ const Layout = () => {
 
   return(
     <>
-      <VocalNavbar style={{borderBottom:"1px solid #FFFF"}}expand = "md">
+      <VocalNavbar style={{borderBottom:".18rem solid #FFFF"}}expand = "md">
         <Container fluid>
           <VocalNavbar.Brand href="/">
-            <img style={{height:"4rem", padding:".2rem", marginLeft:".5rem"}} src={logofive} alt="Vocal Logo"/>
+            <img style={{height:"4rem"}} src={VOCAL} alt="Vocal Logo"/>
           </VocalNavbar.Brand>
           <VocalNavbar.Toggle aria-controls="response-navbar-nav" />
           <VocalNavbar.Collapse id="responsive-navbar-nav">
@@ -61,6 +67,7 @@ const Layout = () => {
         </Container>
       </VocalNavbar>
       <Outlet/>
+      <VocalFooter/>
     </>
   );
 };

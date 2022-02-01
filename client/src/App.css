@@ -1,4 +1,12 @@
-/* this is for the links to be happy on the moods page...delete it! */
+/* @font-face {
+  font-family: "Raleway";
+  src: local(RaleyWay-Medium),
+    url("./fonts/Raleway-Medium.ttf") format ("truetype");
+} */
+* {
+  font-family: raleway, sans-serif !important;
+}
+
 .card {
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }

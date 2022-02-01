@@ -11,25 +11,25 @@ const HowTo = () => {
             <h1 style={{color:`${PrimaryColor}`, margin:"2rem"}}>How to use Vocal</h1>
             <hr className="solid"/>
             <div style={{display:"flex", flexDirection:"row"}}>
-                <img style={{height:"8rem", marginRight:"1rem", marginBottom:"2rem"}} src={record} />
+                <img style={{height:"10rem", marginRight:"2rem", marginBottom:"2rem", borderRadius:".4rem"}} src={record} />
                 <div style={{display:"flex", flexDirection:"column"}}>
-                <h3 className="how-to">Record your audio journals with the recorder!</h3>
-                <p className="how-to">Save your audio journal entries by clicking the microphone button on the dashboard.</p>
+                <h3 className="how-to">Record your audio journals</h3>
+                <p className="how-to">Record & save your audio on the Record page.</p>
             </div>
             </div>
             <hr className="solid"/>
             <div style={{display:"flex", flexDirection:"row"}}>
-                <img style={{height:"8rem", marginRight:"1rem", marginBottom:"2rem"}} src={mood}/> 
+                <img style={{height:"10rem", marginRight:"2rem", marginBottom:"2rem", borderRadius:".4rem"}} src={mood}/> 
                 <div style={{display:"flex", flexDirection:"column"}}>
-                <h3 className="how-to">Track your mood on the Mood page</h3>
-                <p className="how-to">Input your mood, and view your mood history at a glance.</p>
+                <h3 className="how-to">Track your mood & add tags to recordings</h3>
+                <p className="how-to">Input your mood, add tags, and view your mood history at a glance.</p>
             </div>       
             </div>       
             <hr className="solid"/>
             <div style={{display:"flex", flexDirection:"row"}}>
-                <img style={{height:"8rem", marginRight:"1rem", marginBottom:"2rem"}} src={daily}/>
+                <img style={{height:"10rem", marginRight:"2rem", marginBottom:"2rem", borderRadius:".4rem"}} src={daily}/>
                 <div style={{display:"flex", flexDirection:"column"}}>
-                <h3 className="how-to">Review your entries in the Timeline</h3>
+                <h3 className="how-to">Review your entries</h3>
                 <p className="how-to">Review your journal entries on a daily and session by session basis.</p>
             </div>       
             </div>

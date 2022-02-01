@@ -34,6 +34,11 @@ const EntryModal = ({
   const [selectedMood, setSelectedMood] = useState(null);
   const [disableButton, setDisableButton] = useState(false);
   const currentDate = new Date();
+  const [mood1Active, setMood1Active] = useState(false);
+  const [mood2Active, setMood2Active] = useState(false);
+  const [mood3Active, setMood3Active] = useState(false);
+  const [mood4Active, setMood4Active] = useState(false);
+  const [mood5Active, setMood5Active] = useState(false);
 
   const [date, setDate] = useState(
     currentDate.toLocaleDateString("default", {
@@ -64,8 +69,37 @@ const EntryModal = ({
 
   const selectMood = (e, value) => {
     e.preventDefault();
+    setMood1Active(false);
+    setMood2Active(false);
+    setMood3Active(false);
+    setMood4Active(false);
+    setMood5Active(false);
     setSelectedMood(value);
     console.log(value);
+    if (value == 1) {
+      setMood1Active(true);
+    }
+    if (value == 2) {
+      setMood2Active(true);
+    }
+    if (value == 3) {
+      setMood3Active(true);
+    }
+    if (value == 4) {
+      setMood4Active(true);
+    }
+    if (value == 5) {
+      setMood5Active(true);
+    }
+  };
+
+  const selectActive = (active) => {
+    console.log(active);
+    if (active == true) {
+      return "mood-button-active";
+    } else {
+      return "mood-button";
+    }
   };
 
   const preventEnterSubmit = (event) => {
@@ -107,7 +141,7 @@ const EntryModal = ({
               </div>
               <br />
               <div>
-                <label style={{ marginRight: "1rem" }}>Title: </label>
+                <label style={{ marginRight: "1rem", fontWeight:"700" }}>Title: </label>
                 <input
                   maxLength={55}
                   name='title'
@@ -129,10 +163,10 @@ const EntryModal = ({
                   alignItems: "center",
                 }}
               >
-                <label style={{ marginRight: ".8rem" }}>Choose a Mood: </label>
+                <label style={{ marginRight: ".8rem", fontWeight:"700" }}>Choose a Mood: </label>
                 <input
                   type='image'
-                  className='mood-button'
+                  className={selectActive(mood1Active)}
                   onClick={(e) => {
                     selectMood(e, 1);
                   }}
@@ -145,7 +179,7 @@ const EntryModal = ({
                 />
                 <input
                   type='image'
-                  className='mood-button'
+                  className={selectActive(mood2Active)}
                   onClick={(e) => {
                     selectMood(e, 2);
                   }}
@@ -158,7 +192,7 @@ const EntryModal = ({
                 />
                 <input
                   type='image'
-                  className='mood-button'
+                  className={selectActive(mood3Active)}
                   onClick={(e) => {
                     selectMood(e, 3);
                   }}
@@ -171,7 +205,7 @@ const EntryModal = ({
                 />
                 <input
                   type='image'
-                  className='mood-button'
+                  className={selectActive(mood4Active)}
                   onClick={(e) => {
                     selectMood(e, 4);
                   }}
@@ -184,7 +218,7 @@ const EntryModal = ({
                 />
                 <input
                   type='image'
-                  className='mood-button'
+                  className={selectActive(mood5Active)}
                   onClick={(e) => {
                     selectMood(e, 5);
                   }}
@@ -196,7 +230,7 @@ const EntryModal = ({
                 />
               </div>
               <br />
-              <label style={{ marginBottom: ".5rem" }}>Notes:</label>
+              <label style={{ marginBottom: ".5rem", fontWeight:"700" }}>Notes:</label>
               <br />
               <textarea
                 maxLength={255}

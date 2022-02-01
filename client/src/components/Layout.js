@@ -19,8 +19,8 @@ const Layout = () => {
         <Container style={{display:"flex", justifyContent:"center"}}  >
             <Nav onSelect = {handleSelect}>
                     <Nav.Link className="navbar-links" eventKey="/" >Record</Nav.Link>
-                    <Nav.Link className="navbar-links" eventKey="/activities" >Activity</Nav.Link>
                     <Nav.Link className="navbar-links" eventKey="/recordings" >Timeline</Nav.Link>
+                    <Nav.Link className="navbar-links" eventKey="/activities" >Activity</Nav.Link>
                     <Nav.Link className="navbar-links" eventKey="/mood" >Mood</Nav.Link>
                     <Nav.Link className="navbar-links" eventKey="/aboutus">About Us</Nav.Link>
             </Nav>

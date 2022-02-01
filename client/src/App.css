@@ -23,10 +23,12 @@
 
 .navbar-nav .dropdown-item {
   color: white;
+  font-weight: 700;
 }
 
 .navdropdown-title {
   color: white;
+  font-weight: 700;
 }
 
 #navdropdown-arrow {
@@ -40,6 +42,8 @@
 
 .navbar-links {
   color: white !important;
+  font-weight: 700 !important;
+  margin: 1rem;
 }
 
 .special-card {
@@ -68,6 +72,7 @@
   background-color: #ef4b4c;
   color: #ffffff;
   padding-left: 0.5rem;
+  font-weight: 700;
 }
 .search-bar::placeholder {
   color: #ffffff;
@@ -75,6 +80,12 @@
 }
 
 .mood-button:focus {
+  -webkit-box-shadow: 0px 0px 15px 5px rgb(255, 255, 255);
+  -moz-box-shadow: 0px 0px 15px 5px rgb(255, 255, 255);
+  box-shadow: 0px 0px 15px 5px rgb(255, 255, 255);
+}
+
+.mood-button-active {
   -webkit-box-shadow: 0px 0px 15px 5px rgb(255, 255, 255);
   -moz-box-shadow: 0px 0px 15px 5px rgb(255, 255, 255);
   box-shadow: 0px 0px 15px 5px rgb(255, 255, 255);
@@ -118,6 +129,7 @@ hr.solid {
   margin-left: 1.5rem;
   margin-right: 2rem;
   color: #2a3950;
+  font-weight: 700;
 }
 
 .navbar-collapse.collapsing,
@@ -130,4 +142,14 @@ hr.solid {
   z-index: 9999;
   border-radius: 1.5rem;
   width: 10rem;
+}
+
+.continue {
+  font-size: larger;
+  color: #2a3950;
+  font-weight: 700;
+}
+
+.continue:hover {
+  color: darkgray;
 }

@@ -141,7 +141,7 @@ const EntryModal = ({
               </div>
               <br />
               <div>
-                <label style={{ marginRight: "1rem" }}>Title: </label>
+                <label style={{ marginRight: "1rem", fontWeight:"700" }}>Title: </label>
                 <input
                   maxLength={55}
                   name='title'
@@ -163,7 +163,7 @@ const EntryModal = ({
                   alignItems: "center",
                 }}
               >
-                <label style={{ marginRight: ".8rem" }}>Choose a Mood: </label>
+                <label style={{ marginRight: ".8rem", fontWeight:"700" }}>Choose a Mood: </label>
                 <input
                   type='image'
                   className={selectActive(mood1Active)}
@@ -230,7 +230,7 @@ const EntryModal = ({
                 />
               </div>
               <br />
-              <label style={{ marginBottom: ".5rem" }}>Notes:</label>
+              <label style={{ marginBottom: ".5rem", fontWeight:"700" }}>Notes:</label>
               <br />
               <textarea
                 maxLength={255}

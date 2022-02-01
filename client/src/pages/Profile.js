@@ -51,7 +51,7 @@ const Profile = (props) => {
   console.log(nickname)
   return (
     <div style={{backgroundColor: "white", height:"auto",marginLeft:"8rem", marginRight:"8rem", marginTop:"5rem", marginBottom:"5rem", borderRadius:"1.5rem", padding:"2rem"}} key={props.id}>
-      <h1 style={{marginBottom: "2rem", marginLeft: "4rem", marginTop:"2rem", color:`${PrimaryColor}` }}>My Profile</h1>
+      <h1 style={{fontWeight:"700", marginBottom: "2rem", marginLeft: "4rem", marginTop:"2rem", color:`${PrimaryColor}` }}>My Profile</h1>
       <div style={{display:"flex", justifyContent:"center", marginTop:"2rem"}}>
         {image && <img style={{ width: "20rem", borderRadius:"10rem"}} src={image} />}
         {!image && <img style={{ width: "20rem", borderRadius:"10rem"}} src={avatar} />}

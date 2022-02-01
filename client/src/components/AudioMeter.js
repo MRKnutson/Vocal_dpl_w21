@@ -1,7 +1,7 @@
 import * as Tone from 'tone'
 import React, {useState, useEffect} from 'react'
 import {LinearProgress, Box} from '@mui/material'
-import soundwaves from "../images/transparentSoundwaves.png";
+import { ActionColor } from "./Styles";
 
 const AudioMeter = () => {
     const [level, setLevel] = useState(0)

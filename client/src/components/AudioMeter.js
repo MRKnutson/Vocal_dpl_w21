@@ -30,8 +30,8 @@ const AudioMeter = () => {
                 completed={Math.pow(level, 0.2) * 120}
                 isLabelVisible={false}
                 transitionDuration={"0s"}
-                baseBgColor={"pink"}
-                bgColor={"yellow"}  
+                baseBgColor={"white"}
+                bgColor={"lightGrey"}  
                 //you can name these classes and put css on them if you want
                     // className="wrapper"
                     // barContainerClassName="container"

@@ -173,7 +173,7 @@ const EntryModal = ({
                   style={{
                     height: "2.8rem",
                     borderRadius: "1.5rem",
-                    marginRight: "1rem",
+                    marginRight: ".8rem",
                   }}
                   src={one}
                 />
@@ -186,7 +186,7 @@ const EntryModal = ({
                   style={{
                     height: "2.8rem",
                     borderRadius: "1.5rem",
-                    marginRight: "1rem",
+                    marginRight: ".8rem",
                   }}
                   src={two}
                 />
@@ -199,7 +199,7 @@ const EntryModal = ({
                   style={{
                     height: "2.8rem",
                     borderRadius: "1.5rem",
-                    marginRight: "1rem",
+                    marginRight: ".8rem",
                   }}
                   src={three}
                 />
@@ -212,7 +212,7 @@ const EntryModal = ({
                   style={{
                     height: "2.8rem",
                     borderRadius: "1.5rem",
-                    marginRight: "1rem",
+                    marginRight: ".8rem",
                   }}
                   src={four}
                 />
@@ -225,7 +225,6 @@ const EntryModal = ({
                   style={{
                     height: "2.8rem",
                     borderRadius: "1.5rem",
-                    marginRight: "1rem",
                   }}
                   src={five}
                 />

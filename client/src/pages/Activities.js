@@ -263,9 +263,9 @@ const Activities = () => {
             return (
               <div>
                 <h3>{recording.title}</h3>
-                <p>Length: {length} minutes</p>
-                <p>Mood: {moodImage(recording.mood)}</p>
-                <p>Notes: {recording.notes}</p>
+                <p><b>Length: </b>{length} minutes</p>
+                <p><b>Mood: </b>{moodImage(recording.mood)}</p>
+                <p><b>Notes: </b>{recording.notes}</p>
                 <br />
                 {renderPhotos}
                 <br />

@@ -31,7 +31,10 @@ export default function Mood() {
       const getRecordings = async () => {
         try { 
           let response = await axios.get("/api/recordings");
-          setRecordings(response.data) 
+          let gotRecordings = response.data.reverse();
+          let get20 = gotRecordings.splice(20, gotRecordings.length);
+          console.log(gotRecordings)
+          setRecordings(gotRecordings.reverse()) 
         } catch (error){
           alert ("error at getRecordings")
         }
@@ -76,32 +79,31 @@ export default function Mood() {
       }
       // Function to render only selected data
       const renderSelectedDate = () => {
-        var d = new Date();
-          d.setDate(d.getDate() - parseInt(timeChoice));
-          let returnRecs = []
-          let validRecs = recordings.filter((r)=> formatDate(r.created_at) > formatDate(d))
-          validRecs.map((r)=>{
-            let color = ""
-            if (r.mood==1){
-              color =  "#0089FC"
-            } if (r.mood==2) {
-              color = "#15FA14"
-            } if (r.mood==3) {
-              color = "#FAF503"
-            } if (r.mood==4) {
-              color = "#FB9D00"
-            } if (r.mood==5) {
-              color = "#FC0889"
-            }
-            let dateAndTime = formatDate(r.created_at) + " " + formatTime(r.created_at);
-            returnRecs.push({
-              title: r.title,
-              fill: color,
-              mood: r.mood,
-              date: dateAndTime
-            }); 
-          });
-          return returnRecs;
+        console.log(timeChoice)
+        let renderFormatedRecs = []
+        let returnedRecs = recordings.slice((recordings.length - timeChoice), recordings.length);
+        returnedRecs.map((r)=>{
+              let color = ""
+                if (r.mood==1){
+                  color =  "#0089FC"
+                } if (r.mood==2) {
+                  color = "#15FA14"
+                } if (r.mood==3) {
+                  color = "#FAF503"
+                } if (r.mood==4) {
+                  color = "#FB9D00"
+                } if (r.mood==5) {
+                  color = "#FC0889"
+                }
+          let dateAndTime = formatDate(r.created_at) + " " + formatTime(r.created_at);
+         renderFormatedRecs.push({
+           title: r.title,
+           fill: color,
+           mood: r.mood,
+           date: dateAndTime
+         })
+        });
+        return renderFormatedRecs
       }
 
 
@@ -124,7 +126,7 @@ export default function Mood() {
                 } if (r.mood==5) {
                   color = "#FC0889"
                 }
-                console.log(color)
+                // console.log(color)
               let dateAndTime = formatDate(r.created_at) + " " + formatTime(r.created_at);
                 normalizedData.push({
                   title: r.title,
@@ -133,7 +135,7 @@ export default function Mood() {
                   date: dateAndTime
             }); 
           });
-          console.log(normalizedData)
+          // console.log(normalizedData)
           return normalizedData;
       }
 
@@ -158,10 +160,10 @@ export default function Mood() {
         )}
         {recordings.length > 0 && (<><VocalHeader style={{ marginTop: "3rem", marginLeft: "3rem" }}>Track Your Mood</VocalHeader><div style={{ display: "flex", justifyContent: "right" }}>
           <DropdownButton id="dropdown_moods" title="Filter" onSelect={handleSelection}>
-            <Dropdown.Item eventKey="1"> Day </Dropdown.Item>
-            <Dropdown.Item eventKey="7"> Week </Dropdown.Item>
-            <Dropdown.Item eventKey="30"> Month </Dropdown.Item>
-            <Dropdown.Item eventKey="All"> All </Dropdown.Item>
+            <Dropdown.Item eventKey="5"> 5 </Dropdown.Item>
+            <Dropdown.Item eventKey="10"> 10 </Dropdown.Item>
+            <Dropdown.Item eventKey="15"> 15 </Dropdown.Item>
+            <Dropdown.Item eventKey="20"> 20 </Dropdown.Item>
           </DropdownButton>
         </div><div id="moods_container">
                   <img style={{height:"5rem", float:"right", marginBottom:"-5rem"}} src = {label} alt="label"/>

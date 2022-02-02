@@ -153,3 +153,15 @@ hr.solid {
 .continue:hover {
   color: darkgray;
 }
+
+.happy-link {
+  text-decoration: none;
+  color: lightgrey;
+  font-size: large;
+  margin-top: 1rem;
+}
+
+.happy-link:hover {
+  color: white;
+  text-decoration: underline;
+}

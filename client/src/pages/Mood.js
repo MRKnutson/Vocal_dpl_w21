@@ -8,10 +8,12 @@ import {
   XAxis,
   YAxis,
   ResponsiveContainer,
-  Label
+  Label,
+  Legend
 } from "recharts";
 import { VocalHeader, VocalButton } from "../components/Styles";
 import { Link } from "react-router-dom";
+import label from "../images/label.png"
 
 // export default here
 export default function Mood() {
@@ -142,6 +144,7 @@ export default function Mood() {
 
       // this is the return
     return (
+      <>
         <Container>
           {!recordings.length > 0 && (
           <>
@@ -161,6 +164,7 @@ export default function Mood() {
             <Dropdown.Item eventKey="All"> All </Dropdown.Item>
           </DropdownButton>
         </div><div id="moods_container">
+                  <img style={{height:"5rem", float:"right", marginBottom:"-5rem"}} src = {label} alt="label"/>
             <ResponsiveContainer width="100%" height={500}>
               <BarChart data={renderDataForGraph()} barSize={60}>
                 <YAxis stroke="white" type="number" domain={[0, 5]} ticks={[1, 2, 3, 4, 5]}>
@@ -182,5 +186,12 @@ export default function Mood() {
             </ResponsiveContainer>
           </div></>)}
       </Container>
+      <h2 style={{color:"white", marginTop:"6.5rem", display:"flex", justifyContent:"center"}}>Not happy with your mood recently? Check out these resouces.</h2>
+      <div style={{display:"flex", justifyContent:"space-around"}}>
+      <a className="happy-link" href="https://www.happybrainscience.com/resources/">Happy Brain Science</a>
+      <a className="happy-link" href="https://www.helpguide.org/articles/mental-health/cultivating-happiness.htm">Cultivating Happiness</a>
+      <a className="happy-link" href="https://www.unh.edu/pacs/positive-psychology-strategies-increased-happiness">Positive Psychology Strategies</a>
+      </div>
+      </>
   );
 }

@@ -75,9 +75,29 @@ const Activities = () => {
 
   const changeData = () => {
     if (recordings && recordings.length > 0) {
-      return recordings.map((recording) => {
-        return { value: 1, day: formatDate(recording.created_at) };
+      let d = new Date();
+      // To set to future next line should be
+      // d.setDate(new Date().getDate()+ 205);
+      d.setDate(new Date().getDate());
+      let today = formatDate(d);
+      let daysRecording = recordings.filter((r) => {
+        return formatDate(r.created_at) == today;
       });
+      if (daysRecording.length > 0) {
+        return recordings.map((recording) => {
+          if (formatDate(recording.created_at) !== today) {
+            return { value: 5, day: formatDate(recording.created_at) };
+          } else {
+            return { value: 1, day: today };
+          }
+        });
+      } else {
+        let dataArray = recordings.map((recording) => {
+          return { value: 5, day: formatDate(recording.created_at) };
+        });
+        dataArray.push({ value: 1, day: today });
+        return dataArray;
+      }
     } else {
       return [];
     }

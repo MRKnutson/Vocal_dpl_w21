@@ -22,17 +22,14 @@ export default function Mood() {
   const [rDate, setRDate] = useState([]);
 
       useEffect(() => {
-        // console.log("recordings mounted");
         getRecordings();
       },[])
     
       const getRecordings = async () => {
         try { 
           let response = await axios.get("/api/recordings");
-          console.log(response.data)
           let gotRecordings = response.data.reverse();
           let get20 = gotRecordings.splice(20, gotRecordings.length);
-          // console.log(gotRecordings)
           setRecordings(gotRecordings.reverse()) ;
         } catch (error){
           alert ("error at getRecordings")
@@ -78,7 +75,6 @@ export default function Mood() {
       }
       // Function to render only selected data
       const renderSelectedDate = () => {
-        console.log(timeChoice)
         let renderFormatedRecs = []
         let returnedRecs = recordings.slice((recordings.length - timeChoice), recordings.length);
         returnedRecs.map((r)=>{
@@ -134,7 +130,6 @@ export default function Mood() {
                   date: dateAndTime
             }); 
           });
-          // console.log(normalizedData)
           return normalizedData;
       }
 

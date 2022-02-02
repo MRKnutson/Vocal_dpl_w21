@@ -23,10 +23,10 @@ function App() {
         <Route path = "/landing" element = {<Landing />} />
         <Route path = "/login" element = {<Login />} />
         <Route path = "/vocalfooter" element = {<VocalFooter/>}/>
+        <Route path = "/aboutus" element = {<AboutUs/>} />
         <Route element = {<RequireAuth />}>
         <Route path = "/howto" element={<HowTo/>} />
         <Route path = "/" element = {<Home />} />
-        <Route path = "/aboutus" element = {<AboutUs/>} />
         <Route path = "/profile" element = {<Profile />} />
         <Route path = "/backend" element = {<BackEndTestPage />} />
         <Route path = "/recordings" element = {<Timeline/>} />

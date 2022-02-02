@@ -34,26 +34,26 @@ const Register = () => {
       <VocalHeader style={{marginTop:"5rem", marginBottom:"2rem", marginLeft:"3rem"}}>Sign Up</VocalHeader>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" onClick={()=> setShow(false)}>
-          <Form.Label style={{color:"white"}} ref={target}>Nickname:</Form.Label>
-          <Form.Control maxLength={20} placeholder="Enter Nickname" onChange = {(e)=>setNickname(e.target.value)}/>
+          <Form.Label style={{color:"white", fontWeight:"700"}} ref={target}>Nickname:</Form.Label>
+          <Form.Control style={{marginLeft:".5rem"}} maxLength={20} placeholder="Enter Nickname" onChange = {(e)=>setNickname(e.target.value)}/>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicEmail" onClick={()=> setShow(false)}>
-          <Form.Label style={{color:"white"}} ref={target}>Email Address:</Form.Label>
-          <Form.Control type="email" placeholder="Enter Email" onChange = {(e)=>setEmail(e.target.value)}/>
+          <Form.Label style={{color:"white", fontWeight:"700"}} ref={target}>Email Address:</Form.Label>
+          <Form.Control style={{marginLeft:".5rem"}} type="email" placeholder="Enter Email" onChange = {(e)=>setEmail(e.target.value)}/>
         </Form.Group>
         
         <Form.Group className="mb-3" controlId="formBasicPassword" onClick={()=> setShow(false)}>
-          <Form.Label style={{color:"white"}}>Password:</Form.Label>
-          <Form.Control type="password" placeholder="Enter Password" onChange= {(e)=>setPassword(e.target.value)}/>
+          <Form.Label style={{color:"white", fontWeight:"700"}}>Password:</Form.Label>
+          <Form.Control style={{marginLeft:".5rem"}} type="password" placeholder="Enter Password" onChange= {(e)=>setPassword(e.target.value)}/>
         </Form.Group>
         
         <Form.Group className="mb-3" controlId="formBasicPassword" onClick={()=>(setShow(false) & setPassError(null))}>
-          <Form.Label style={{color:"white"}}>Confirm Password:</Form.Label>
-          <Form.Control type="password" placeholder="Confirm Password" onChange= {(e)=>setPasswordConfirmation(e.target.value)}/>
+          <Form.Label style={{color:"white", fontWeight:"700"}}>Confirm Password:</Form.Label>
+          <Form.Control style={{marginLeft:".5rem"}} type="password" placeholder="Confirm Password" onChange= {(e)=>setPasswordConfirmation(e.target.value)}/>
         </Form.Group>
-
-        <VocalButton type ="submit" onClick={()=> setShow(true)}>Register</VocalButton>
-      
+        <div style={{display:"flex", justifyContent:"center", marginTop:"2rem"}}>
+        <VocalButton style={{width:"7rem"}} type ="submit" onClick={()=> setShow(true)}>Register</VocalButton>
+        </div>
       {/* Backend / Frontend authentication error */}
           <Overlay target={target.current} show={show} placement="bottom">
           {({ placement, arrowProps, show: _show, popper, ...props }) => (

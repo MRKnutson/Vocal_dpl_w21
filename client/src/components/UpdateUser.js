@@ -44,7 +44,7 @@ const UpdateUser = (props) => {
           <Form.Control value = {nicknameState} onChange = {(e) => setNicknameState(e.target.value)}/>
           <Form.Label style={{color:"white", marginTop:"1rem", fontWeight:"700"}}>Email:</Form.Label>
           <Form.Control value = {emailState} onChange = {(e) => setEmailState(e.target.value)}/>
-          <Form.Label style={{color:"white"}}>Password:</Form.Label>
+          <Form.Label style={{color:"white", marginTop:"1rem", fontWeight:"700"}}>Password:</Form.Label>
           <Form.Control value = {passwordState} onChange = {(e) => setPasswordState(e.target.value)}/>
          <br/>
           <ViewButton style={{marginRight:"1rem"}} type = "submit">{id ? "Update" : "Create"}</ViewButton>

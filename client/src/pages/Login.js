@@ -22,21 +22,22 @@ const Login = () => {
   };
   
   return(
-    <div>
-    <VocalHeader style={{marginTop:"5rem", marginBottom:"2rem", marginLeft:"8rem"}}> 
+    <Container>
+    <VocalHeader style={{marginTop:"5rem", marginBottom:"2rem", marginLeft:"3rem"}}> 
       Log In
     </VocalHeader>
-    <Container>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail" onClick={()=> setShow(false)}>
-          <Form.Label style={{color:"white"}} ref={target}>Email Address:</Form.Label>
-          <Form.Control type="email" value = {email} placeholder="Enter Email" onChange = {(e)=>setEmail(e.target.value)}/>
+          <Form.Label style={{color:"white", fontWeight:"700"}} ref={target}>Email Address:</Form.Label>
+          <Form.Control style={{marginLeft:".5rem"}} type="email" value = {email} placeholder="Enter Email" onChange = {(e)=>setEmail(e.target.value)}/>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPassword" onClick={()=> setShow(false)}>
-          <Form.Label style={{color:"white"}}>Password:</Form.Label>
-          <Form.Control type="password" value={password} placeholder="Password" onChange= {(e)=>setPassword(e.target.value)}/>
+          <Form.Label style={{color:"white", fontWeight:"700"}}>Password:</Form.Label>
+          <Form.Control style={{marginLeft:".5rem"}}type="password" value={password} placeholder="Password" onChange= {(e)=>setPassword(e.target.value)}/>
         </Form.Group>
-        <VocalButton type ="submit" onClick={()=> setShow(true)}>Login</VocalButton>
+        <div style={{display:"flex", justifyContent:"center", marginTop:"2rem"}}>
+        <VocalButton style={{width:"7rem"}} type ="submit" onClick={()=> setShow(true)}>Login</VocalButton>
+        </div>
       </Form>
 
       {/* Front end authentication error */}
@@ -57,7 +58,6 @@ const Login = () => {
               )}
             </Overlay>
     </Container>
-    </div>
   )
 };
 

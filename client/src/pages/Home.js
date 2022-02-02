@@ -9,7 +9,7 @@ import {
   VocalButton,
   ViewButton,
 } from "../components/Styles.js";
-import soundwaves from "../images/soundwaves.png";
+import soundwaves from "../images/soundwavesBlue.jpeg";
 
 const Home = (props) => {
   const { recording } = props;
@@ -34,6 +34,7 @@ const Home = (props) => {
           textAlign: "center",
           alignItems: "center",
           marginTop: "5rem",
+          transform: "translate(0px, -25px)",
         }}
       >
         <img

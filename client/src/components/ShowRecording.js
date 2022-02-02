@@ -246,15 +246,14 @@ const ShowRecording = (props) => {
             <div style={{ margin: "auto" }}>
               <div style={{display:"flex", flexWrap:"wrap"}}>
               <h6 style={{fontWeight:"700"}}>Length: </h6> &nbsp; &nbsp;
-              <p style={{ color: "white" }}>
-                {/* <b>Duration:{" "}</b> */}
-                {recording.duration > 60 && Math.floor(recording.duration / 60)
-                  .toString()
-                  .substring(0, recording.duration.toString().indexOf("."))} minute{Math.floor(recording.duration / 60) > 1 && "s"}
-                {" " + (recording.duration % 60)
-                  .toString()
-                  .substring(0, 2)} second{recording.duration % 60 > 1 && "s"}
-              </p>{" "}
+               <p style={{ color: "white" }}>
+                  {recording.duration > 60 && Math.floor(recording.duration / 60)
+                    .toString()
+                    .substring(0, recording.duration.toString().indexOf(".")) + " minute"}{Math.floor(recording.duration / 60) > 1 && "s"}
+                  {" " + (recording.duration % 60)
+                    .toString()
+                    .substring(0, (recording.duration % 60).toString().indexOf("."))} second{recording.duration % 60 > 1 && "s"}
+                </p>
               </div>
               <div style={{display:"flex", flexWrap:"wrap"}}>
               <h6 style={{fontWeight:"700"}}>Date: </h6> &nbsp; &nbsp;

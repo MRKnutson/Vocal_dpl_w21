@@ -9,6 +9,7 @@ import {
   VocalButton,
   ViewButton,
   HoverImage,
+  CancelButton,
 } from "../components/Styles.js";
 import axios from "axios";
 import ShowImage from "../components/ShowImage";
@@ -265,11 +266,12 @@ const ShowRecording = (props) => {
           {!showEdit && <h6 style={{fontWeight:"700"}}>Mood: </h6>}
           {!showEdit && <p style={{ marginLeft: "20px" }}>{moodImage()}</p>}
           {images && renderImages()}
+          {showEdit && <ViewButton style={{marginBottom:"2rem"}} onClick={toggleEdit}>Cancel</ViewButton>}
           <br />
           <audio
             src={recording.pointer}
             controls
-            style={{ height: "35px", margin: "auto" }}
+            style={{ height: "35px", marginBottom:"1rem", display:"flex", alignContent:"center"}}
           />
           {showUpload && (
             <RecordingImage
@@ -327,7 +329,6 @@ const ShowRecording = (props) => {
             />
           </div>
         </div>
-        {showEdit && <ViewButton onClick={toggleEdit}>Cancel</ViewButton>}
       </Modal.Body>
     </Modal>
   );

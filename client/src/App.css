@@ -16,6 +16,8 @@
 /* this is all navbar styling */
 .navbar-nav .dropdown-menu {
   background-color: #3e619b;
+  border: none;
+  outline: none;
 }
 .navbar-nav .dropdown-menu a:hover {
   background-color: #ef4b4c;

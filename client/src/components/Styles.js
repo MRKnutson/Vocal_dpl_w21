@@ -50,7 +50,21 @@ font-weight:700;
 }
 `;
 
+export const CancelButton = styled.button`
+color:white;
+background-color: lightgrey;
+border:none;
+border-radius:.2rem;
+padding:.5rem;
+font-weight:700;
+&:hover {
+  background-color: grey;
+}
+`;
+
 export const SmallButton = styled.button`
+margin-top:.5rem;
+height:2.5rem;
 color:white;
 background-color: ${ActionColor};
 border:none;

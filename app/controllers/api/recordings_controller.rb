@@ -6,7 +6,7 @@ class Api::RecordingsController < ApplicationController
   before_action :set_one_recording, only: [:update, :destroy]
 
   def index
-    render json: @recording.all
+    render json: @recording.ordered
   end
 
   def create
@@ -92,7 +92,6 @@ class Api::RecordingsController < ApplicationController
   def destroy_image
     render json: @photo.destroy
   end
-
 
   def clear_tags
     rTags = RecordingTag.where(recording_id: params[:id])

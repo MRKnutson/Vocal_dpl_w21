@@ -14,9 +14,9 @@ const programmers = [
     name: "Asher Bay",
     image:
       AsherPic,
-    GitHub: "https://github.com/MRKnutson/",
-    LinkedIn: "www.linkedin.com/in/michaelrknutson",
-    email: "mrknutson44@gmail.com",
+    GitHub: "https://github.com/asherbay/",
+    LinkedIn: "https://www.linkedin.com/in/asherbay/",
+    email: "asherbay@gmail.com",
     blurb: "Some stuff about Asher and how great he is at Coding!",
   },
   {

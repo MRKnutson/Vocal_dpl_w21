@@ -90,14 +90,17 @@ const Recording = (props) => {
     >
       <h2 style={{color:"white", marginBottom:"2rem", fontWeight:"700"}}>{recording.title}</h2>
       <p style={{ color: "white" }}>
-        <b>Duration:{" "}</b>
-        {recording.duration
+        {/* <b>Duration:{" "}</b> */}
+        {recording.duration > 60 && Math.floor(recording.duration / 60)
           .toString()
-          .substring(0, recording.duration.toString().indexOf(".") + 3)} seconds
+          .substring(0, recording.duration.toString().indexOf(".")) + " minute"}{Math.floor(recording.duration / 60) > 1 && "s"}
+         {" " + (recording.duration % 60)
+          .toString()
+          .substring(0, (recording.duration % 60).toString().indexOf("."))} second{recording.duration % 60 > 1 && "s"}
       </p>{" "}
       {/*limiting to 2 decimal digits */}
       <p style={{ color: "white" }}>
-        <b>Date:{" "}</b>
+        {/* <b>Date:{" "}</b> */}
         {recording.created_at.substring(0, recording.created_at.indexOf("T"))}
       </p>
       {tags.length > 0 && <p style={{ color: "white" }}>

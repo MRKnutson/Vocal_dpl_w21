@@ -17,7 +17,7 @@ recordings = ["https://res.cloudinary.com/djhlv2nfc/video/upload/v1643821441/voc
     pointer: recordings.sample,
     notes: Faker::Lorem.paragraph(sentence_count: rand(2..4), supplemental: true),
     mood: rand(1..5),
-    user_id: 3,
+    user_id: 1,
     duration: Faker::Number.within(range: 1.0..304.0),
     created_at: Faker::Time.between(from: DateTime.now - 31, to: DateTime.now + 205),
   )

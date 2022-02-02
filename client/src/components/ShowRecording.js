@@ -246,7 +246,15 @@ const ShowRecording = (props) => {
             <div style={{ margin: "auto" }}>
               <div style={{display:"flex", flexWrap:"wrap"}}>
               <h6 style={{fontWeight:"700"}}>Length: </h6> &nbsp; &nbsp;
-              <p>{recording.duration} seconds</p>
+              <p style={{ color: "white" }}>
+                {/* <b>Duration:{" "}</b> */}
+                {recording.duration > 60 && Math.floor(recording.duration / 60)
+                  .toString()
+                  .substring(0, recording.duration.toString().indexOf("."))} minute{Math.floor(recording.duration / 60) > 1 && "s"}
+                {" " + (recording.duration % 60)
+                  .toString()
+                  .substring(0, 2)} second{recording.duration % 60 > 1 && "s"}
+              </p>{" "}
               </div>
               <div style={{display:"flex", flexWrap:"wrap"}}>
               <h6 style={{fontWeight:"700"}}>Date: </h6> &nbsp; &nbsp;
@@ -254,13 +262,13 @@ const ShowRecording = (props) => {
               </div>
               <div style={{display:"flex", flexWrap:"wrap"}}>
               <h6 style={{fontWeight:"700"}}>Time: </h6> &nbsp; &nbsp;
-              <p>{formatTime(recording.created_at)} seconds</p>
+              <p>{formatTime(recording.created_at)}</p>
               </div>
             </div>
           )}
           {!showEdit && <h6 style={{fontWeight:"700"}}>Notes: </h6>}
           {!showEdit && <p style={{ marginLeft: "20px" }}>{recording.notes}</p>}
-          {!showEdit && (
+          {!showEdit && props.tags.length>0 && (
             <h6 style={{fontWeight:"700"}}>Tags: {props.tags.map((t) => t.tag_text).join(", ")}</h6>
           )}
           {!showEdit && <h6 style={{fontWeight:"700"}}>Mood: </h6>}

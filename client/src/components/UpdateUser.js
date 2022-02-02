@@ -10,7 +10,7 @@ const UpdateUser = (props) => {
     const [nicknameState, setNicknameState] = useState(initialNickname ? initialNickname : "");
     const [emailState, setEmailState] = useState(initialEmail ? initialEmail: "");
     const [passwordState, setPasswordState] = useState(initialPassword ? initialPassword : "");
-git c    const [passwordCheckState, setPasswordCheckState] = useState("");
+    const [passwordCheckState, setPasswordCheckState] = useState("");
   
     const handlePasswordChange = async () => {
       let newPass = {password: passwordState, password_confirmation: passwordState};

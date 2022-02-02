@@ -5,12 +5,11 @@ import {Form, Modal} from 'react-bootstrap'
 import { SecondaryColor, ViewButton } from "../components/Styles";
 
 const UpdateUser = (props) => {
-    const {newestUser, id, handleUpdateUser, email:initialEmail, password:initialPassword, toggleForm, nickname:initialNickname} = props
+    const {newestUser, id, handleUpdateUser, email:initialEmail, password:initialPassword, toggleForm, nickname: initialNickname} = props
 
-    const [nicknameState, setNicknameState] = useState(initialNickname ? initialNickname : "");
+    const [nicknameState, setNicknameState] = useState(initialNickname ? initialNickname : "Add a Nickname");
     const [emailState, setEmailState] = useState(initialEmail ? initialEmail: "");
-    const [passwordState, setPasswordState] = useState(initialPassword ? initialPassword : "");
-    const [passwordCheckState, setPasswordCheckState] = useState("");
+    const [passwordState, setPasswordState] = useState("New Password");
   
     const handlePasswordChange = async () => {
       let newPass = {password: passwordState, password_confirmation: passwordState};

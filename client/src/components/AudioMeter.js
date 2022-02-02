@@ -26,14 +26,15 @@ const AudioMeter = () => {
   }, []);
 
   return (
-    <div style={{ display: "block", marginBottom: "50px" }}>
+    <div style={{ display: "block", marginTop: "10px" }}>
       {/* <LinearProgress sx={{ height: "50px", transform: "rotate(270deg) translate(320px, 225px)" }} variant="determinate" value={Math.pow(level, 0.2) * 120}/> */}
       <ProgressBar
         completed={Math.pow(level, 0.2) * 120}
         isLabelVisible={false}
         transitionDuration={"0.05s"}
-        baseBgColor={"white"}
-        bgColor={"lightGrey"}
+        baseBgColor={"#2a3950"}
+        bgColor={"white"}
+        
         //you can name these classes and put css on them if you want
         // className="wrapper"
         // barContainerClassName="container"

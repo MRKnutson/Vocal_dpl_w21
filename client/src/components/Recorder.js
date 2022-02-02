@@ -136,7 +136,12 @@ function Recorder() {
                     }} disabled={!isRecording}>
                     <img className="record-button" src={stop} style={{height:"5rem", borderRadius:"2.5rem"}}/>
                     </button>
+                     
+                     <br/>
                     <AudioMeter />
+                    <br/>
+                    <br/>
+                    <br/>
                     <div style={{display:"flex", transform: "translate(0px, -50px)"}}>
                     <VocalHeader style={{}}>Recording...</VocalHeader>
                     

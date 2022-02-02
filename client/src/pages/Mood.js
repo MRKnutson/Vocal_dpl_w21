@@ -153,7 +153,7 @@ export default function Mood() {
           </>
         )}
         {recordings.length > 0 && (<><VocalHeader style={{ marginTop: "3rem", marginLeft: "3rem" }}>Track Your Mood</VocalHeader><div style={{ display: "flex", justifyContent: "right" }}>
-          <DropdownButton id="dropdown_moods" title="Filter" onSelect={handleSelection}>
+          <DropdownButton id="dropdown_moods" title="Most Recent" onSelect={handleSelection}>
             <Dropdown.Item eventKey="5"> 5 </Dropdown.Item>
             <Dropdown.Item eventKey="10"> 10 </Dropdown.Item>
             <Dropdown.Item eventKey="15"> 15 </Dropdown.Item>
@@ -182,7 +182,7 @@ export default function Mood() {
             </ResponsiveContainer>
           </div></>)}
       </Container>
-      <h2 style={{color:"white", marginTop:"6.5rem", display:"flex", justifyContent:"center"}}>Not happy with your mood recently? Check out these resouces.</h2>
+      <h2 style={{color:"white", marginTop:"5.5rem", display:"flex", justifyContent:"center"}}>Not happy with your mood recently? Check out these resouces.</h2>
       <div style={{display:"flex", justifyContent:"space-around"}}>
       <a className="happy-link" href="https://www.happybrainscience.com/resources/">Happy Brain Science</a>
       <a className="happy-link" href="https://www.helpguide.org/articles/mental-health/cultivating-happiness.htm">Cultivating Happiness</a>

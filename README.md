@@ -1,4 +1,4 @@
-![Logo](https://res.cloudinary.com/djhlv2nfc/image/upload/v1643670482/Vocal/Images/3_r6af1m.png)
+![Logo](https://res.cloudinary.com/djhlv2nfc/image/upload/v1643757279/Vocal/Images/6_e44mfu.png)
 
 # Vocal Audio Journal
 

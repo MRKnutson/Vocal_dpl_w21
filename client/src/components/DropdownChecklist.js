@@ -21,13 +21,13 @@ const DropdownChecklist = (props) => {
     >
       <InputLabel
         id='demo-multiple-checkbox-label'
-        style={{ color: "#FFFFFF" }}
+        style={{ color: "#FFFFFF", fontWeight:"700", fontSize:"1rem", display:"flex", alignContent:"center" }}
       >
-        Select Tag(s)
+        Select Tags
       </InputLabel>
       <RedSelect
         labelId='demo-multiple-checkbox-label'
-        label='Select Tag(s)'
+        label='Select Tags'
         // style={{height:"3rem"}}
         id='demo-multiple-checkbox'
         multiple

@@ -14,11 +14,11 @@ import axios from "axios";
 import ShowImage from "../components/ShowImage";
 import EditRecordingForm from "./EditRecodingForm";
 import DeleteRecordingModal from "./DeleteRecordingModal";
-import one from "../images/1smiley.png"
-import two from "../images/2smiley.png"
-import three from "../images/3smiley.png"
-import four from "../images/4smiley.png"
-import five from "../images/5smiley.png"
+import one from "../images/1smiley.png";
+import two from "../images/2smiley.png";
+import three from "../images/3smiley.png";
+import four from "../images/4smiley.png";
+import five from "../images/5smiley.png";
 
 const ShowRecording = (props) => {
   const {
@@ -93,12 +93,12 @@ const ShowRecording = (props) => {
   }
 
   const handleDeleteRecording = async (id, e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
       let response = await axios.delete(`/api/recordings/${id}`);
       let filteredRecordings = recordings.filter((r) => r.id !== id);
       setRecordings(filteredRecordings);
-      getData()
+      getData();
       handleClose();
     } catch (err) {
       alert("error deleting recording");
@@ -146,23 +146,70 @@ const ShowRecording = (props) => {
 
   const handleShowDelete = () => {
     setShowDeleteModal(true);
-    
   };
 
-  const moodImage=()=> {
-    if (recording.mood==1){
-      return <img style={{height:"2.8rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={one}/>
-    } if (recording.mood==2) {
-      return <img style={{height:"2.8rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={two}/>
-    } if (recording.mood==3) {
-      return <img style={{height:"2.8rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={three}/>
-    } if (recording.mood==4) {
-      return <img style={{height:"2.8rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={four}/>
-    } if (recording.mood==5) {
-      return <img style={{height:"2.8rem", borderRadius:"1.5rem", marginRight:".5rem"}} src={five}/>
+  const moodImage = () => {
+    if (recording.mood == 1) {
+      return (
+        <img
+          style={{
+            height: "2.8rem",
+            borderRadius: "1.5rem",
+            marginRight: ".5rem",
+          }}
+          src={one}
+        />
+      );
+    }
+    if (recording.mood == 2) {
+      return (
+        <img
+          style={{
+            height: "2.8rem",
+            borderRadius: "1.5rem",
+            marginRight: ".5rem",
+          }}
+          src={two}
+        />
+      );
+    }
+    if (recording.mood == 3) {
+      return (
+        <img
+          style={{
+            height: "2.8rem",
+            borderRadius: "1.5rem",
+            marginRight: ".5rem",
+          }}
+          src={three}
+        />
+      );
+    }
+    if (recording.mood == 4) {
+      return (
+        <img
+          style={{
+            height: "2.8rem",
+            borderRadius: "1.5rem",
+            marginRight: ".5rem",
+          }}
+          src={four}
+        />
+      );
+    }
+    if (recording.mood == 5) {
+      return (
+        <img
+          style={{
+            height: "2.8rem",
+            borderRadius: "1.5rem",
+            marginRight: ".5rem",
+          }}
+          src={five}
+        />
+      );
     }
   };
-
 
   return (
     <Modal
@@ -178,7 +225,7 @@ const ShowRecording = (props) => {
           backgroundColor: `${SecondaryColor}`,
           color: "white",
           padding: "2rem",
-          borderRadius: "1.5rem"
+          borderRadius: "1.5rem",
         }}
       >
         {!showEdit && <ViewButton onClick={handleClose}>Close</ViewButton>}
@@ -196,17 +243,26 @@ const ShowRecording = (props) => {
         <div>
           {!showEdit && (
             <div style={{ margin: "auto" }}>
-              <h6>Length: {recording.duration} seconds</h6>
-              <h6>Date: {formatDate(recording.created_at)}</h6>
-              <h6>Time: {formatTime(recording.created_at)}</h6>
+              <div style={{display:"flex", flexWrap:"wrap"}}>
+              <h5 style={{fontWeight:"700"}}>Length: </h5> &nbsp; &nbsp;
+              <p>{recording.duration} seconds</p>
+              </div>
+              <div style={{display:"flex", flexWrap:"wrap"}}>
+              <h5 style={{fontWeight:"700"}}>Date: </h5> &nbsp; &nbsp;
+              <p>{formatDate(recording.created_at)}</p>
+              </div>
+              <div style={{display:"flex", flexWrap:"wrap"}}>
+              <h5 style={{fontWeight:"700"}}>Time: </h5> &nbsp; &nbsp;
+              <p>{formatTime(recording.created_at)} seconds</p>
+              </div>
             </div>
           )}
-          {!showEdit && <h6>Notes: </h6>}
+          {!showEdit && <h5 style={{fontWeight:"700"}}>Notes: </h5>}
           {!showEdit && <p style={{ marginLeft: "20px" }}>{recording.notes}</p>}
           {!showEdit && (
-            <p>Tags: {props.tags.map((t) => t.tag_text).join(", ")}</p>
+            <h5 style={{fontWeight:"700"}}>Tags: {props.tags.map((t) => t.tag_text).join(", ")}</h5>
           )}
-          {!showEdit && <h6>Mood: </h6>}
+          {!showEdit && <h5 style={{fontWeight:"700"}}>Mood: </h5>}
           {!showEdit && <p style={{ marginLeft: "20px" }}>{moodImage()}</p>}
           {images && renderImages()}
           <br />
@@ -245,7 +301,7 @@ const ShowRecording = (props) => {
               justifyContent: "center",
             }}
           >
-            {!showUpload && (
+            {!showUpload && !showEdit && (
               <ViewButton
                 style={{ marginRight: "1rem" }}
                 onClick={toggleUpload}

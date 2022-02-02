@@ -2,12 +2,7 @@ import { Select } from "@mui/material";
 import {
   Card,
   Navbar,
-  Button,
-  Container,
-  Form,
-  DropdownButton,
 } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 //here are our theme colors for the app
@@ -49,7 +44,7 @@ background-color: ${ActionColor};
 border:none;
 border-radius:.2rem;
 padding:.5rem;
-marginL.5rem;
+font-weight:700;
 &:hover {
   background-color: ${SecondaryColor}
 }
@@ -59,6 +54,7 @@ export const SmallButton = styled.button`
 color:white;
 background-color: ${ActionColor};
 border:none;
+font-weight:700;
 border-radius:.2rem;
 &:hover {
   background-color: ${SecondaryColor}
@@ -71,7 +67,7 @@ background-color: #ebebeb;
 border:none;
 border-radius:.2rem;
 padding:.5rem;
-marginL.5rem;
+font-weight:700;
 &:hover {
   background-color: #dedede;
 }
@@ -83,7 +79,7 @@ background-color: ${ActionColor};
 border:none;
 border-radius:.2rem;
 padding:.5rem;
-marginL.5rem;
+font-weight:700;
 &:hover {
   background-color: ${PrimaryColor}
 }
@@ -91,6 +87,7 @@ marginL.5rem;
 
 export const VocalHeader = styled.h1`
   color: white;
+  font-weight:700;
 `;
 
 export const HoverImage = styled.img`
@@ -119,3 +116,4 @@ export const RedSelect = styled(Select)`
     outline: none !important;
 }
 `;
+

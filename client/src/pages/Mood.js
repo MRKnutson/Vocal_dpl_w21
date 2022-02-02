@@ -2,18 +2,16 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import '../StylesFolder/Styles_Mood.css';
 import { DateTime } from "luxon";
-import { DropdownButton, Dropdown } from "react-bootstrap";
+import { Container, Dropdown, DropdownButton } from "react-bootstrap";
 import {
   BarChart,
   Bar,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
   ResponsiveContainer,
   Label
 } from "recharts";
+import { VocalHeader, FilterButton } from "../components/Styles";
 
 // export default here
 export default function Mood() {
@@ -117,17 +115,18 @@ export default function Mood() {
 
       // this is the return
     return (
-        <div>
-        <h3>Todays Date: {DateTime.now().toLocaleString()} </h3>
-
+        <Container>
+        <VocalHeader style={{marginTop:"3rem", marginLeft:"3rem"}}>Track Your Mood</VocalHeader>
+          <div style={{display:"flex", justifyContent:"right"}}>
               <DropdownButton id="dropdown_moods" title="Filter" onSelect={handleSelection}>
                   <Dropdown.Item eventKey="1"> Day </Dropdown.Item>
                   <Dropdown.Item eventKey="7"> Week </Dropdown.Item>
                   <Dropdown.Item eventKey="30"> Month </Dropdown.Item>
                   <Dropdown.Item eventKey="All"> All </Dropdown.Item>
               </DropdownButton>
+          </div>
+              {/* <h2 style={{color:"white", fontSize:"1.2rem"}}>Today's Date: {DateTime.now().toLocaleString()} </h2> */}
         <div id="moods_container">
-              <h2>Moods</h2>
               <ResponsiveContainer width="100%" height={400}>
               <BarChart    data={renderDataForGraph()} barSize={60}>
                   <YAxis stroke="white" /> 
@@ -135,13 +134,13 @@ export default function Mood() {
                   {/* <Tooltip /> */}
                 <Bar dataKey="uv" 
                   fill="#ef4b4c"
-                  label dataKey='mood'
+                  // label dataKey='mood'
                   radius={10}
                   />
                 <Label value="mood" dataKey="mood" position="insideRight" />
               </BarChart>
               </ResponsiveContainer>
           </div>
-      </div>
+      </Container>
   );
 }

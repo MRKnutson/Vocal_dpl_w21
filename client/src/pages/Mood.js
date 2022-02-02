@@ -160,7 +160,7 @@ export default function Mood() {
             <Dropdown.Item eventKey="20"> 20 </Dropdown.Item>
           </DropdownButton>
         </div><div id="moods_container">
-                  <img style={{height:"5rem", float:"right", marginBottom:"-5rem"}} src = {label} alt="label"/>
+                  <img style={{height:"5rem", float:"right", marginBottom:"-5rem", marginTop:"-4rem", marginRight:"-1rem"}} src = {label} alt="label"/>
             <ResponsiveContainer width="100%" height={500}>
               <BarChart data={renderDataForGraph()} barSize={60}>
                 <YAxis stroke="white" type="number" domain={[0, 5]} ticks={[1, 2, 3, 4, 5]}>

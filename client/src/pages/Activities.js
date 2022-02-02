@@ -33,6 +33,9 @@ import ClockActivity from "../images/ClockActivity.png";
 import Stopwatch from "../images/Stopwatch.png";
 import Lightbulb from "../images/Lightbulb.png";
 import DailyLogModal from "../components/DailyLogModal.js";
+import lightbulb2 from "../images/lightbulb2.png";
+import stopwatch3 from "../images/stopwatch3.png";
+import clock2 from "../images/clock2.png";
 
 const Activities = () => {
   const [useCanvas, setUseCanvas] = useState(false);
@@ -467,7 +470,7 @@ const Activities = () => {
             <StatCard>
               <Card.Img
                 variant='top'
-                src={Lightbulb}
+                src={lightbulb2}
                 style={{
                   display: "block",
                   maxWidth: "7rem",
@@ -489,7 +492,7 @@ const Activities = () => {
             >
               <Card.Img
                 variant='top'
-                src={Stopwatch}
+                src={stopwatch3}
                 style={{
                   display: "block",
                   maxWidth: "7rem",
@@ -497,7 +500,7 @@ const Activities = () => {
                   width: "auto",
                   marginTop: "4rem",
                   marginBottom: "4rem",
-                  marginLeft: "2rem",
+                  marginLeft: "2.5rem",
                 }}
               />
               <StatText as='h3' style={{ margin: "1rem" }}>
@@ -511,7 +514,7 @@ const Activities = () => {
             >
               <Card.Img
                 variant='top'
-                src={ClockActivity}
+                src={clock2}
                 style={{
                   display: "block",
                   maxWidth: "7rem",

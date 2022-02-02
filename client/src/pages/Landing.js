@@ -1,18 +1,16 @@
 import { VocalButton, VocalHeader } from '../components/Styles.js'
 import { Link } from 'react-router-dom';
-import macbook from "../images/macbook.png";
+import { Container } from 'react-bootstrap';
+import macbook2 from "../images/macbook2.png";
 
 const Landing = () => {
   return (
-    <>
-    <img style={{ height: "32rem", marginTop: "5rem" }} src={macbook} alt="record" /><div id="landingBody">
-      <VocalHeader>Your Audio Journal App</VocalHeader>
-      <VocalHeader>built by DevPoint Labs </VocalHeader>
-      <Link to="/register" id="signUpButton">
-        <VocalButton>Sign Up </VocalButton>
-      </Link>
+    <div className="landing-div">
+        <img className="landing-image" src={macbook2} alt="record"/>
+        <Link to="/register" id="signUpButton">
+          <VocalButton className="landing-button">Sign Up </VocalButton>
+        </Link>
     </div>
-    </>
   )
 }
 

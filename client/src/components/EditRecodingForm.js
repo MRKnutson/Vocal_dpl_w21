@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Form } from "react-bootstrap";
-import { VocalButton } from "./Styles";
+import { ViewButton } from "./Styles";
 import EditTags from "./EditTags";
 import ShowImage from "./ShowImage.js";
 import one from "../images/1smiley.png";
@@ -253,7 +253,7 @@ const EditRecordingForm = (props) => {
         <br />
       </Form.Group>
       <EditTags selectTags={setTags} chosenTags={tags} />
-      <VocalButton type='submit'>Submit Changes</VocalButton>
+      <ViewButton style={{display:"flex", margin:"auto",marginTop:".5rem", marginBottom:"-2rem"}} type='submit'>Submit Changes</ViewButton>
     </Form>
   );
 };

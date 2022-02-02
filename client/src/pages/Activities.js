@@ -595,7 +595,7 @@ const Activities = () => {
                         src={one}
                       />
                     ),
-                    color: "#4287f5",
+                    // color: "#4287f5",
                   },
                   {
                     title: (
@@ -609,7 +609,7 @@ const Activities = () => {
                         src={two}
                       />
                     ),
-                    color: "#40de50",
+                    // color: "#40de50",
                   },
                   {
                     title: (

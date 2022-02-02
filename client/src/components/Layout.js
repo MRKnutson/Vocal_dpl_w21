@@ -26,8 +26,8 @@ const Layout = () => {
             </Nav>
           </Container>
           <Nav>
-           {image && <img src={image} alt="User Avatar" style={{height:"2.8rem",width:"2.8rem", borderRadius:"1.4rem", border:".13rem solid #FFFF"}}/>}
-           {!image && <img src={avatar} alt="User Avatar" style={{height:"2.8rem", width:"2.8rem", borderRadius:"1.4rem", border:".13rem solid #FFFF"}}/>}
+           {image && <img src={image} alt="User Avatar" style={{height:"2.8rem",width:"2.8rem", borderRadius:"1.4rem", border:".13rem solid #FFFF", objectFit:"cover"}}/>}
+           {!image && <img src={avatar} alt="User Avatar" style={{height:"2.8rem", width:"2.8rem", borderRadius:"1.4rem", border:".13rem solid #FFFF", objectFit:"cover"}}/>}
           {nickname && <NavDropdown onSelect = {handleSelect} style={{marginRight:"1.5rem"}} id = "navdropdown-arrow" title = {<span className="navdropdown-title">{nickname}</span>}>
               <NavDropdown.Item eventKey = "/profile">Profile</NavDropdown.Item>
               <NavDropdown.Item onClick={()=>handleLogout(navigate)}>Logout</NavDropdown.Item>
@@ -41,7 +41,7 @@ const Layout = () => {
       )
     } else {
       return(
-            <Container style ={{display: "flex", justifyContent: "right"}} onSelect = {handleSelect}>
+            <Container style ={{display: "flex", justifyContent: "right", alignContent:"center"}} onSelect = {handleSelect}>
               <VocalButton style={{backgroundColor:"transparent"}}><Nav.Link style={{color:"white"}} href = "/login">Log In</Nav.Link></VocalButton>
               <SmallButton><Nav.Link style={{color:"white"}} href = "/register">Sign Up</Nav.Link></SmallButton>
             </Container>

@@ -153,7 +153,7 @@ export default function Mood() {
           </>
         )}
         {recordings.length > 0 && (<><VocalHeader style={{ marginTop: "3rem", marginLeft: "3rem" }}>Track Your Mood</VocalHeader><div style={{ display: "flex", justifyContent: "right" }}>
-          <DropdownButton id="dropdown_moods" title="Filter" onSelect={handleSelection}>
+          <DropdownButton id="dropdown_moods" title="Most Recent" onSelect={handleSelection}>
             <Dropdown.Item eventKey="5"> 5 </Dropdown.Item>
             <Dropdown.Item eventKey="10"> 10 </Dropdown.Item>
             <Dropdown.Item eventKey="15"> 15 </Dropdown.Item>

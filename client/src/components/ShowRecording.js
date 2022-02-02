@@ -244,25 +244,25 @@ const ShowRecording = (props) => {
           {!showEdit && (
             <div style={{ margin: "auto" }}>
               <div style={{display:"flex", flexWrap:"wrap"}}>
-              <h5 style={{fontWeight:"700"}}>Length: </h5> &nbsp; &nbsp;
+              <h6 style={{fontWeight:"700"}}>Length: </h6> &nbsp; &nbsp;
               <p>{recording.duration} seconds</p>
               </div>
               <div style={{display:"flex", flexWrap:"wrap"}}>
-              <h5 style={{fontWeight:"700"}}>Date: </h5> &nbsp; &nbsp;
+              <h6 style={{fontWeight:"700"}}>Date: </h6> &nbsp; &nbsp;
               <p>{formatDate(recording.created_at)}</p>
               </div>
               <div style={{display:"flex", flexWrap:"wrap"}}>
-              <h5 style={{fontWeight:"700"}}>Time: </h5> &nbsp; &nbsp;
+              <h6 style={{fontWeight:"700"}}>Time: </h6> &nbsp; &nbsp;
               <p>{formatTime(recording.created_at)} seconds</p>
               </div>
             </div>
           )}
-          {!showEdit && <h5 style={{fontWeight:"700"}}>Notes: </h5>}
+          {!showEdit && <h6 style={{fontWeight:"700"}}>Notes: </h6>}
           {!showEdit && <p style={{ marginLeft: "20px" }}>{recording.notes}</p>}
           {!showEdit && (
-            <h5 style={{fontWeight:"700"}}>Tags: {props.tags.map((t) => t.tag_text).join(", ")}</h5>
+            <h6 style={{fontWeight:"700"}}>Tags: {props.tags.map((t) => t.tag_text).join(", ")}</h6>
           )}
-          {!showEdit && <h5 style={{fontWeight:"700"}}>Mood: </h5>}
+          {!showEdit && <h6 style={{fontWeight:"700"}}>Mood: </h6>}
           {!showEdit && <p style={{ marginLeft: "20px" }}>{moodImage()}</p>}
           {images && renderImages()}
           <br />

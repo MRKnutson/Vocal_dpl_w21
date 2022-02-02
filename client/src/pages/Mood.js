@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import '../StylesFolder/Styles_Mood.css';
-import { DateTime } from "luxon";
 import { Container, Dropdown, DropdownButton } from "react-bootstrap";
 import {
   BarChart,
@@ -11,7 +10,8 @@ import {
   ResponsiveContainer,
   Label
 } from "recharts";
-import { VocalHeader, FilterButton } from "../components/Styles";
+import { VocalHeader, VocalButton } from "../components/Styles";
+import { Link } from "react-router-dom";
 
 // export default here
 export default function Mood() {
@@ -79,10 +79,22 @@ export default function Mood() {
           let returnRecs = []
           let validRecs = recordings.filter((r)=> formatDate(r.created_at) > formatDate(d))
           validRecs.map((r)=>{
+            let color = ""
+            if (r.mood==1){
+              color =  "#0089FC"
+            } if (r.mood==2) {
+              color = "#15FA14"
+            } if (r.mood==3) {
+              color = "#FAF503"
+            } if (r.mood==4) {
+              color = "#FB9D00"
+            } if (r.mood==5) {
+              color = "#FC0889"
+            }
             let dateAndTime = formatDate(r.created_at) + " " + formatTime(r.created_at);
             returnRecs.push({
               title: r.title,
-              uv: r.mood,
+              fill: color,
               mood: r.mood,
               date: dateAndTime
             }); 
@@ -98,16 +110,31 @@ export default function Mood() {
           // if False, Normal data here
           let normalizedData = [] 
               recordings.map((r)=> {
+                let color = ""
+                if (r.mood==1){
+                  color =  "#0089FC"
+                } if (r.mood==2) {
+                  color = "#15FA14"
+                } if (r.mood==3) {
+                  color = "#FAF503"
+                } if (r.mood==4) {
+                  color = "#FB9D00"
+                } if (r.mood==5) {
+                  color = "#FC0889"
+                }
+                console.log(color)
               let dateAndTime = formatDate(r.created_at) + " " + formatTime(r.created_at);
                 normalizedData.push({
                   title: r.title,
-                  uv: r.mood,
+                  fill: color,
                   mood: r.mood,
                   date: dateAndTime
             }); 
           });
+          console.log(normalizedData)
           return normalizedData;
       }
+
 
       const handleSelection = (e) => {
         setTimeChoice(e)
@@ -116,31 +143,44 @@ export default function Mood() {
       // this is the return
     return (
         <Container>
-        <VocalHeader style={{marginTop:"3rem", marginLeft:"3rem"}}>Track Your Mood</VocalHeader>
-          <div style={{display:"flex", justifyContent:"right"}}>
-              <DropdownButton id="dropdown_moods" title="Filter" onSelect={handleSelection}>
-                  <Dropdown.Item eventKey="1"> Day </Dropdown.Item>
-                  <Dropdown.Item eventKey="7"> Week </Dropdown.Item>
-                  <Dropdown.Item eventKey="30"> Month </Dropdown.Item>
-                  <Dropdown.Item eventKey="All"> All </Dropdown.Item>
-              </DropdownButton>
-          </div>
-              {/* <h2 style={{color:"white", fontSize:"1.2rem"}}>Today's Date: {DateTime.now().toLocaleString()} </h2> */}
-        <div id="moods_container">
-              <ResponsiveContainer width="100%" height={400}>
-              <BarChart    data={renderDataForGraph()} barSize={60}>
-                  <YAxis stroke="white" /> 
-                  <XAxis dataKey="date" stroke="white" /> 
-                  {/* <Tooltip /> */}
-                <Bar dataKey="uv" 
-                  fill="#ef4b4c"
+          {!recordings.length > 0 && (
+          <>
+          <Container style={{display:"flex", justifyContent:"center", marginTop:"10rem"}}>
+          <h3 style={{color:"white"}}>No Recordings Yet....</h3>
+          </Container>
+          <Container style={{display:"flex", justifyContent:"center"}}>
+          <VocalButton><Link style={{color:"white",textDecoration:"none"}} to='/'>Go to Recorder</Link></VocalButton>
+          </Container>
+          </>
+        )}
+        {recordings.length > 0 && (<><VocalHeader style={{ marginTop: "3rem", marginLeft: "3rem" }}>Track Your Mood</VocalHeader><div style={{ display: "flex", justifyContent: "right" }}>
+          <DropdownButton id="dropdown_moods" title="Filter" onSelect={handleSelection}>
+            <Dropdown.Item eventKey="1"> Day </Dropdown.Item>
+            <Dropdown.Item eventKey="7"> Week </Dropdown.Item>
+            <Dropdown.Item eventKey="30"> Month </Dropdown.Item>
+            <Dropdown.Item eventKey="All"> All </Dropdown.Item>
+          </DropdownButton>
+        </div><div id="moods_container">
+            <ResponsiveContainer width="100%" height={500}>
+              <BarChart data={renderDataForGraph()} barSize={60}>
+                <YAxis stroke="white" type="number" domain={[0, 5]} ticks={[1, 2, 3, 4, 5]}>
+                  <Label angle={270} position='left' stroke="#FFFF" style={{ textAnchor: 'middle' }}>
+                    Mood
+                  </Label>
+                </YAxis>
+                <XAxis dataKey="date" stroke="white">
+                  {/* <Label angle={0} position='outsideBottom' stroke="#FFFF" style={{ textAnchor: 'center'}}>
+        Date/Time
+      </Label> */}
+                </XAxis>
+                <Bar dataKey="mood"
+                  fill="uv"
                   // label dataKey='mood'
-                  radius={10}
-                  />
+                  radius={10} />
                 <Label value="mood" dataKey="mood" position="insideRight" />
               </BarChart>
-              </ResponsiveContainer>
-          </div>
+            </ResponsiveContainer>
+          </div></>)}
       </Container>
   );
 }

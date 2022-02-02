@@ -88,23 +88,23 @@ const Recording = (props) => {
         padding: "2rem",
       }}
     >
-      <h2 style={{color:"white", marginBottom:"2rem"}}>{recording.title}</h2>
+      <h2 style={{color:"white", marginBottom:"2rem", fontWeight:"700"}}>{recording.title}</h2>
       <p style={{ color: "white" }}>
-        Duration:{" "}
+        <b>Duration:{" "}</b>
         {recording.duration
           .toString()
           .substring(0, recording.duration.toString().indexOf(".") + 3)} seconds
       </p>{" "}
       {/*limiting to 2 decimal digits */}
       <p style={{ color: "white" }}>
-        Date:{" "}
+        <b>Date:{" "}</b>
         {recording.created_at.substring(0, recording.created_at.indexOf("T"))}
       </p>
       {tags.length > 0 && <p style={{ color: "white" }}>
-        Tags: {tags.map((t) => t.tag_text).join(", ")}
+        <b>Tags: </b>{tags.map((t) => t.tag_text).join(", ")}
       </p>} 
       {recording.mood>0 && <p style={{ color: "white" }}>
-        Mood: {moodImage()}
+        <b>Mood: </b>{moodImage()}
       </p>}
       {images && images.length > 0 && renderImages()}
       <br />

@@ -83,7 +83,7 @@ const AboutUs = () => {
                     style={{ height: "2rem" }}
                   />
                 </Card.Link>
-                <Card.Title>{developer.name}</Card.Title>
+                <Card.Title style={{fontWeight:"700"}}>{developer.name}</Card.Title>
                 <Card.Text>{developer.blurb}</Card.Text>
               </Card.Body>
             </Card>

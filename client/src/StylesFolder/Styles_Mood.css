@@ -1,7 +1,7 @@
 #moods_container {
   background-color: #3e619b;
   border-radius: 1.5rem;
-  padding: 2rem;
+  padding: 3rem;
   margin-top: 1rem;
 }
 #moods_header {
@@ -15,4 +15,8 @@
   background-color: #ef4b4c;
   outline: none;
   border: none;
+}
+
+.recharts-surface {
+  padding: 1rem;
 }

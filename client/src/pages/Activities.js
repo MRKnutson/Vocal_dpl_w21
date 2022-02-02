@@ -24,6 +24,7 @@ import {
   FlexibleWidthXYPlot,
 } from "react-vis";
 import { Chrono } from "react-chrono";
+import label from "../images/label.png";
 import one from "../images/1smiley.png";
 import two from "../images/2smiley.png";
 import three from "../images/3smiley.png";
@@ -598,18 +599,29 @@ const Activities = () => {
         <GraphCard style={{ paddingBottom: "75px" }}>
           <h2 style={{ margin: "3rem" }}>Entries by Mood</h2>
           <div style={{ marginRight: "5rem" }}>
+            <img
+              style={{
+                width: "20%",
+                // minWidth: "15rem",
+                height: "auto",
+                borderRadius: "1.5rem",
+                marginLeft: "80%",
+                marginBottom: "-5rem",
+              }}
+              src={label}
+            />
             <FlexibleWidthXYPlot
               yDomain={[0, 32]}
-              style={{ margin: "3.5rem" }}
+              style={{ margin: "3.5rem", marginTop: "0rem" }}
               height={600}
               stackBy='y'
               xType='ordinal'
             >
-              <DiscreteColorLegend
+              {/* <DiscreteColorLegend
                 style={{
                   // position: "relative",
-                  marginLeft: "90%",
-                  marginTop: "-40rem",
+                  marginLeft: "70%",
+                  marginTop: "-50rem",
                 }}
                 width={100}
                 height={100}
@@ -619,74 +631,20 @@ const Activities = () => {
                     title: (
                       <img
                         style={{
-                          height: "3rem",
+                          width: "100%",
+                          minWidth: "15rem",
+                          height: "auto",
                           borderRadius: "1.5rem",
-                          marginRight: ".5rem",
+                          marginRight: "10%",
                           marginBottom: "0.25rem",
                         }}
-                        src={one}
-                      />
-                    ),
-                    color: `${SecondaryColor}`,
-                  },
-                  {
-                    title: (
-                      <img
-                        style={{
-                          height: "3rem",
-                          borderRadius: "1.5rem",
-                          marginRight: ".5rem",
-                          marginBottom: "0.25rem",
-                        }}
-                        src={two}
-                      />
-                    ),
-                    color: `${SecondaryColor}`,
-                  },
-                  {
-                    title: (
-                      <img
-                        style={{
-                          height: "3rem",
-                          borderRadius: "1.5rem",
-                          marginRight: ".5rem",
-                          marginBottom: "0.25rem",
-                        }}
-                        src={three}
-                      />
-                    ),
-                    color: `${SecondaryColor}`,
-                  },
-                  {
-                    title: (
-                      <img
-                        style={{
-                          height: "3rem",
-                          borderRadius: "1.5rem",
-                          marginRight: ".5rem",
-                          marginBottom: "0.25rem",
-                        }}
-                        src={four}
-                      />
-                    ),
-                    color: `${SecondaryColor}`,
-                  },
-                  {
-                    title: (
-                      <img
-                        style={{
-                          height: "3rem",
-                          borderRadius: "1.5rem",
-                          marginRight: ".5rem",
-                          marginBottom: "0.25rem",
-                        }}
-                        src={five}
+                        src={label}
                       />
                     ),
                     color: `${SecondaryColor}`,
                   },
                 ]}
-              />
+              /> */}
               <VerticalGridLines />
               <HorizontalGridLines />
               <XAxis

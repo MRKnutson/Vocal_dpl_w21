@@ -62,7 +62,6 @@ export default function Mood() {
           return time;
         }
       }
-
       //  Formats date for the UI/UX
       const formatDate = (date) => {
         var d = new Date(date),
@@ -73,6 +72,8 @@ export default function Mood() {
           if (day.length < 2) day = "0" + day;
         return (`${month}/${day}/${year}`);
       }
+
+
       // Function to render only selected data
       const renderSelectedDate = () => {
         let renderFormatedRecs = []
@@ -96,7 +97,7 @@ export default function Mood() {
            fill: color,
            mood: r.mood,
            date: dateAndTime
-         })
+          });
         });
         return renderFormatedRecs
       }

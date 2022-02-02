@@ -7,9 +7,9 @@ import { SecondaryColor, ViewButton } from "../components/Styles";
 const UpdateUser = (props) => {
     const {newestUser, id, handleUpdateUser, email:initialEmail, password:initialPassword, toggleForm, nickname: initialNickname} = props
 
-    const [nicknameState, setNicknameState] = useState(initialNickname ? initialNickname : "Add a Nickname");
+    const [nicknameState, setNicknameState] = useState(initialNickname ? initialNickname : "");
     const [emailState, setEmailState] = useState(initialEmail ? initialEmail: "");
-    const [passwordState, setPasswordState] = useState("New Password");
+    const [passwordState, setPasswordState] = useState(initialPassword ? initialPassword : "" );
   
     const handlePasswordChange = async () => {
       let newPass = {password: passwordState, password_confirmation: passwordState};
@@ -43,7 +43,7 @@ const UpdateUser = (props) => {
           <Form.Control value = {nicknameState} onChange = {(e) => setNicknameState(e.target.value)}/>
           <Form.Label style={{color:"white", marginTop:"1rem", fontWeight:"700"}}>Email:</Form.Label>
           <Form.Control value = {emailState} onChange = {(e) => setEmailState(e.target.value)}/>
-          <Form.Label style={{color:"white", marginTop:"1rem", fontWeight:"700"}}>Password:</Form.Label>
+          <Form.Label placeholder="New Password" style={{color:"white", marginTop:"1rem", fontWeight:"700"}}>New Password:</Form.Label>
           <Form.Control value = {passwordState} onChange = {(e) => setPasswordState(e.target.value)}/>
          <br/>
           <ViewButton style={{marginRight:"1rem"}} type = "submit">{id ? "Update" : "Create"}</ViewButton>

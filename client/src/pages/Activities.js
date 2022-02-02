@@ -196,25 +196,25 @@ const Activities = () => {
         January.y = January.y + 1;
       } else if (recording.month == 2 && recording.mood == mood) {
         February.y = February.y + 1;
-      } else if (recording.month == 2 && recording.mood == mood) {
+      } else if (recording.month == 3 && recording.mood == mood) {
         March.y = March.y + 1;
-      } else if (recording.month == 2 && recording.mood == mood) {
+      } else if (recording.month == 4 && recording.mood == mood) {
         April.y = April.y + 1;
-      } else if (recording.month == 2 && recording.mood == mood) {
+      } else if (recording.month == 5 && recording.mood == mood) {
         May.y = May.y + 1;
-      } else if (recording.month == 2 && recording.mood == mood) {
+      } else if (recording.month == 6 && recording.mood == mood) {
         June.y = June.y + 1;
-      } else if (recording.month == 2 && recording.mood == mood) {
+      } else if (recording.month == 7 && recording.mood == mood) {
         July.y = July.y + 1;
-      } else if (recording.month == 2 && recording.mood == mood) {
+      } else if (recording.month == 8 && recording.mood == mood) {
         August.y = August.y + 1;
-      } else if (recording.month == 2 && recording.mood == mood) {
+      } else if (recording.month == 9 && recording.mood == mood) {
         September.y = September.y + 1;
-      } else if (recording.month == 2 && recording.mood == mood) {
+      } else if (recording.month == 10 && recording.mood == mood) {
         October.y = October.y + 1;
-      } else if (recording.month == 2 && recording.mood == mood) {
+      } else if (recording.month == 11 && recording.mood == mood) {
         November.y = November.y + 1;
-      } else if (recording.month == 2 && recording.mood == mood) {
+      } else if (recording.month == 12 && recording.mood == mood) {
         December.y = December.y + 1;
       }
     });
@@ -263,9 +263,18 @@ const Activities = () => {
             return (
               <div>
                 <h3>{recording.title}</h3>
-                <p><b>Length: </b>{length} minutes</p>
-                <p><b>Mood: </b>{moodImage(recording.mood)}</p>
-                <p><b>Notes: </b>{recording.notes}</p>
+                <p>
+                  <b>Length: </b>
+                  {length} minutes
+                </p>
+                <p>
+                  <b>Mood: </b>
+                  {moodImage(recording.mood)}
+                </p>
+                <p>
+                  <b>Notes: </b>
+                  {recording.notes}
+                </p>
                 <br />
                 {renderPhotos}
                 <br />
@@ -595,7 +604,7 @@ const Activities = () => {
                         src={one}
                       />
                     ),
-                    // color: "#4287f5",
+                    color: `${SecondaryColor}`,
                   },
                   {
                     title: (
@@ -609,7 +618,7 @@ const Activities = () => {
                         src={two}
                       />
                     ),
-                    // color: "#40de50",
+                    color: `${SecondaryColor}`,
                   },
                   {
                     title: (
@@ -623,7 +632,7 @@ const Activities = () => {
                         src={three}
                       />
                     ),
-                    color: "#d9de40",
+                    color: `${SecondaryColor}`,
                   },
                   {
                     title: (
@@ -637,7 +646,7 @@ const Activities = () => {
                         src={four}
                       />
                     ),
-                    color: "#ffad33",
+                    color: `${SecondaryColor}`,
                   },
                   {
                     title: (
@@ -651,7 +660,7 @@ const Activities = () => {
                         src={five}
                       />
                     ),
-                    color: "#ff3399",
+                    color: `${SecondaryColor}`,
                   },
                 ]}
               />

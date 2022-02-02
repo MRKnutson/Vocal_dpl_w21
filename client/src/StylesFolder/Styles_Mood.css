@@ -18,6 +18,10 @@
   border: none;
 }
 
+.dropdown-item:hover {
+  background-color: #ef4b4c !important;
+}
+
 .recharts-surface {
   padding: 1rem;
 }

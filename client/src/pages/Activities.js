@@ -482,7 +482,7 @@ const Activities = () => {
                   marginLeft: "2rem",
                 }}
               />
-              <StatText as='h3' style={{ margin: "1rem" }}>
+              <StatText as='h3' style={{ margin: "auto", display:"flex", textAlign:"center" }}>
                 Entries Saved: {recordings.length}
               </StatText>
             </StatCard>
@@ -504,7 +504,7 @@ const Activities = () => {
                   marginLeft: "2.5rem",
                 }}
               />
-              <StatText as='h3' style={{ margin: "1rem" }}>
+              <StatText as='h3' style={{ margin:"auto", display:"flex", textAlign:"center"}}>
                 Total time recorded: {totalTime()} minutes
               </StatText>
             </StatCard>
@@ -526,7 +526,7 @@ const Activities = () => {
                   marginLeft: "2rem",
                 }}
               />
-              <StatText as='h3' style={{ margin: "1rem" }}>
+              <StatText as='h3' style={{ margin: "auto", display:"flex", textAlign:"center" }}>
                 Longest entry: {longestRecording()} minutes
               </StatText>
             </StatCard>

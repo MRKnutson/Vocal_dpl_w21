@@ -20,21 +20,20 @@ export default function Mood() {
   const [recordings, setRecordings] = useState([]);
   const [timeChoice, setTimeChoice] = useState(null);
   const [rDate, setRDate] = useState([]);
-  // let todayDate = new Date();
-  // console.log(todayDate)
 
       useEffect(() => {
-        console.log("recordings mounted");
+        // console.log("recordings mounted");
         getRecordings();
       },[])
     
       const getRecordings = async () => {
         try { 
           let response = await axios.get("/api/recordings");
+          console.log(response.data)
           let gotRecordings = response.data.reverse();
           let get20 = gotRecordings.splice(20, gotRecordings.length);
-          console.log(gotRecordings)
-          setRecordings(gotRecordings.reverse()) 
+          // console.log(gotRecordings)
+          setRecordings(gotRecordings.reverse()) ;
         } catch (error){
           alert ("error at getRecordings")
         }

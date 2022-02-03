@@ -7,17 +7,17 @@ import {
   ActionColor,
   VocalHeader,
 } from "../components/Styles.js";
-import AsherPic from '../images/AsherPic.jpg'
+import AsherPic from "../images/AsherPic.jpg";
 
 const programmers = [
   {
     name: "Asher Bay",
-    image:
-      AsherPic,
+    image: AsherPic,
     GitHub: "https://github.com/asherbay/",
     LinkedIn: "https://www.linkedin.com/in/asherbay/",
     email: "asherbay@gmail.com",
-    blurb: "Some stuff about Asher and how great he is at Coding!",
+    blurb:
+      "I’m a web developer based in Salt Lake City. I love tinkering with code and solving interesting problems. After studying electronic music composition in college I found a passion for building systems that led me to pursue a career in programming.",
   },
   {
     name: "Michael Knutson",
@@ -83,7 +83,9 @@ const AboutUs = () => {
                     style={{ height: "2rem" }}
                   />
                 </Card.Link>
-                <Card.Title style={{fontWeight:"700"}}>{developer.name}</Card.Title>
+                <Card.Title style={{ fontWeight: "700" }}>
+                  {developer.name}
+                </Card.Title>
                 <Card.Text>{developer.blurb}</Card.Text>
               </Card.Body>
             </Card>

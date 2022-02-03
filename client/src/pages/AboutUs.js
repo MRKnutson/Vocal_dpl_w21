@@ -37,7 +37,7 @@ const programmers = [
     LinkedIn: "www.linkedin.com/in/dennis-plank-4b5547224",
     email: "DennyMouzon@gmail.com",
     blurb:
-      "Growing up in the Bay Area, I was always surounded by Tech. Whether it was driving through Facebook HQ in Palo Alto, Google HQ in Mountain View, or any number of the 1000's of Bay Area startups, Big Tech was everywhere. It was impossible to ignore; the problem solving and day to day life (ok lets face it, the money) were to hard to resist, and in 2021 I started Web Development and loved it, eager to grow and learn more. Here I am.  ",
+      "Growing up in the Bay Area, I was always surrounded by Tech. Whether it was driving through Facebook HQ in Palo Alto, Google HQ in Mountain View, or any number of the 1000's of Bay Area startups, Big Tech was everywhere. It was impossible to ignore; the problem solving and day to day life (ok lets face it, the money) were to hard to resist, and in 2021 I started Web Development and loved it, eager to grow and learn more. Here I am.  ",
   },
   {
     name: "Ruby Reed",

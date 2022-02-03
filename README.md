@@ -2,7 +2,7 @@
 
 # Vocal Audio Journal
 
-Vocal is a voice journaling app that allows users to easily record thooughts in an audible format and add associated metadata including overall mood, notes about journal entry, tags, and pictures.
+Vocal is a voice journaling app that allows users to easily record thoughts in an audible format and add associated metadata including overall mood, notes about journal entry, tags, and pictures.
 
 ## Authors
 

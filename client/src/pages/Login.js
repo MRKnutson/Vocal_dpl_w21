@@ -1,5 +1,5 @@
 import React, { useContext, useState, useRef } from 'react'
-import { Button, Container, Form, Overlay } from 'react-bootstrap';
+import { Spinner, Container, Form, Overlay } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
 import '../StylesFolder/Styles_Login.css';
@@ -11,10 +11,18 @@ const Login = () => {
   const {handleLogin} = useContext(AuthContext);
   const [email, setEmail]=useState("")
   const [password, setPassword]=useState()
+  const [spinner, setSpinner]=useState(false)
   const navigate = useNavigate();
 
   const auth = useContext(AuthContext)
   const errors = auth.errors
+
+  const loadingSpinner = () => {
+    console.log("spinner hit")
+    return (
+      <Spinner animation="border" />
+    )
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,6 +33,7 @@ const Login = () => {
     <Container>
     <VocalHeader style={{marginTop:"5rem", marginBottom:"2rem", marginLeft:"3rem"}}> 
       Log In
+      {spinner && loadingSpinner()}
     </VocalHeader>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail" onClick={()=> setShow(false)}>
@@ -36,7 +45,7 @@ const Login = () => {
           <Form.Control style={{marginLeft:".5rem"}}type="password" value={password} placeholder="Password" onChange= {(e)=>setPassword(e.target.value)}/>
         </Form.Group>
         <div style={{display:"flex", justifyContent:"center", marginTop:"2rem"}}>
-        <VocalButton style={{width:"7rem"}} type ="submit" onClick={()=> setShow(true)}>Login</VocalButton>
+        <VocalButton style={{width:"7rem"}} type ="submit" onClick={()=> (setShow(true) & setSpinner(true))}>Login</VocalButton>
         </div>
       </Form>
 

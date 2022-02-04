@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef } from 'react'
+import React, { useContext, useState, useRef, useEffect } from 'react'
 import { Spinner, Container, Form, Overlay } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
@@ -12,13 +12,13 @@ const Login = () => {
   const [email, setEmail]=useState("")
   const [password, setPassword]=useState()
   const [spinner, setSpinner]=useState(false)
+  const [errorState, setErrorState]=useState(false)
   const navigate = useNavigate();
 
   const auth = useContext(AuthContext)
   const errors = auth.errors
 
   const loadingSpinner = () => {
-    console.log("spinner hit")
     return (
       <Spinner animation="border" />
     )
@@ -28,6 +28,7 @@ const Login = () => {
     e.preventDefault();
     handleLogin({email, password}, navigate)
   };
+
   
   return(
     <Container>
@@ -36,11 +37,11 @@ const Login = () => {
       {spinner && loadingSpinner()}
     </VocalHeader>
       <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="formBasicEmail" onClick={()=> setShow(false)}>
+        <Form.Group className="mb-3" controlId="formBasicEmail" onClick={()=> (setShow(false) & setSpinner(false))}>
           <Form.Label style={{color:"white", fontWeight:"700"}} ref={target}>Email Address:</Form.Label>
           <Form.Control style={{marginLeft:".5rem"}} type="email" value = {email} placeholder="Enter Email" onChange = {(e)=>setEmail(e.target.value)}/>
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword" onClick={()=> setShow(false)}>
+        <Form.Group className="mb-3" controlId="formBasicPassword" onClick={()=> (setShow(false) & setSpinner(false))}>
           <Form.Label style={{color:"white", fontWeight:"700"}}>Password:</Form.Label>
           <Form.Control style={{marginLeft:".5rem"}}type="password" value={password} placeholder="Password" onChange= {(e)=>setPassword(e.target.value)}/>
         </Form.Group>

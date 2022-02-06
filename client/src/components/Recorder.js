@@ -143,7 +143,7 @@ function Recorder() {
                     <br/>
                     <br/>
                     <div style={{display:"flex", transform: "translate(0px, -50px)"}}>
-                    <VocalHeader style={{}}>Recording...</VocalHeader>
+                    <VocalHeader>Recording...</VocalHeader>
                     
                     <br/>
                     
